@@ -205,8 +205,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Leader
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = " "
+let g:mapleader = " "
 
 imap jk <Esc>
 
