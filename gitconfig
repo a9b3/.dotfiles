@@ -56,7 +56,7 @@
     go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
     # clean
-    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | rxargs -r git branch -d; }; f"
+    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | gxargs -r git branch -d; }; f"
     bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 [diff]
 	tool = vimdiff
