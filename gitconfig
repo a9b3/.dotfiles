@@ -1,0 +1,71 @@
+[user]
+	email = sam.suifai.lau@gmail.com
+	name = Sam Lau
+[color]
+	ui = always
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan		
+[core]
+	editor = vim 
+[alias]
+	co = checkout
+	st = status
+
+	# commit
+	c = commit
+	ca = commit -am
+	cm = !git add -A && git commit -m
+
+	# branch
+	b = branch -v
+
+    # log
+    l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative 
+	log = log --graph --date=short
+
+    # add
+    a = add
+
+	# push
+    ps = push
+
+    # remote
+    r = remote -v
+	d = difftool
+
+    # wip
+    up = !git pull --rebase --prune $@
+    save = !git add -A && git commit -m 'SAVEPOINT'
+    undo = reset HEAD~1 --mixed
+    amend = commit -a --amend
+
+    # clean
+    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs -r git branch -d; }; f"
+    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[push]
+	default = simple
+[credential]
+	helper = osxkeychain
