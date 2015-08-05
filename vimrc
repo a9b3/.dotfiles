@@ -23,6 +23,9 @@ filetype indent on
 " File type
 au BufNewFile,BufRead *.ejs set filetype=html
 
+" Clear trailing spaces on save
+autocmd BufWritePre * :%s/\s\+$//e
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -96,8 +99,8 @@ syntax enable
 
 colorscheme Tomorrow-Night-Eighties
 
-hi Normal ctermbg=none
-highlight NonText ctermbg=none
+" hi Normal ctermbg=none
+" highlight NonText ctermbg=none
 
 " Set extra options when running in GUI mode
 if has("gui_running")
