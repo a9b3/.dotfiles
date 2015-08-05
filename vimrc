@@ -205,8 +205,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Leader
-let mapleader = " "
-let g:mapleader = " "
+let mapleader = ","
+let g:mapleader = ","
 
 imap jk <Esc>
 
@@ -227,8 +227,8 @@ nnoremap N Nzzzv
 " capitol movement keys will do sensible corresponding movement
 noremap H ^
 noremap L g_
-noremap J <S-}>j
-noremap K <S-{><S-{>j
+noremap J <S-}>
+noremap K <S-{>
 
 " control a/e will go back and front of line
 nmap <C-a> ^
