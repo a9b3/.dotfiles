@@ -1,16 +1,26 @@
-snippet init
-'use strict';
+################################################
+#					General					   #
+################################################
+
+snippet require
+var $1 = require('$1');
 endsnippet
+
+
 
 snippet print
 console.log($1);
 endsnippet
+
+
 
 snippet func
 function ${1:name}(${2:args}) {
 	${3:body}
 }
 endsnippet
+
+
 
 snippet ifun
 ;(function() {
@@ -21,46 +31,23 @@ $1
 }());
 endsnippet
 
-snippet .attr
-.attr('$1', '$2')
-endsnippet
 
-snippet directive
-.directive('$1', [function () {
-	return {
-		restrict: 'E$2',
-		link: linkFunc
-	}
-}]);
-
-function linkFunc(scope, elem, attrs) {
-
-}
-endsnippet
-
-snippet factory
-.factory('${1:name}', [
-	${1:name}Factory
-])
-
-function ${1:name}Factory() {
-	$0
-}
-endsnippet
 
 snippet for
-var i;
-for (i = 0; i<$1; i++) {
+for (var i = 0; i<$1; i++) {
 	$2
 }
 endsnippet
 
+
+
 snippet forin
-var key;
-for (key in $2) {
+for (var $1 in $2) {
 	$3
 }
 endsnippet
+
+
 
 snippet iife
 (function() {
@@ -68,28 +55,68 @@ snippet iife
 })();
 endsnippet
 
+
+
+################################################
+#					Angular					   #
+################################################
+
 snippet controller
 angular.module('$1')
-.controller('$2', [
-	'$3',
+	.controller('$2', [
+		'$3',
+		$2Ctrl
+	]);
+
+function $2Ctrl($3) {
 	$4
-]);
-
-function $5($6) {
-
 }
 endsnippet
 
+
+
 snippet filter
 angular.module('$1')
-.filter('$2', [
-	'$3',
-	$4
-]);
+	.filter('$2', [
+		'$3',
+		$2Filter
+	]);
 
-function $5($6) {
-	return function($7) {
-
+function $2Filter($3) {
+	return function($3) {
+		$4
 	}
+}
+endsnippet
+
+
+
+snippet directive
+angular.module('$1')
+	.directive('$2', [
+		function () {
+			return {
+				restrict: 'E',
+				link: linkFunc
+			}
+		}
+	]);
+
+function linkFunc(scope, elem, attrs) {
+	$3
+}
+endsnippet
+
+
+
+snippet factory
+angular.module('$1')
+	.factory('$2', [
+		'$3',
+		$2Factory
+	]);
+
+function $2Factory($3) {
+	$0
 }
 endsnippet

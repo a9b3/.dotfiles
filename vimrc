@@ -30,7 +30,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 set autoread
 
 " Show incomplete cmds down the bottom
-set showcmd    
+set showcmd
 
 set tags=./tags
 
@@ -40,10 +40,10 @@ set tags=./tags
 " Highlight current line & column
 au WinLeave * set nocursorline
 au WinEnter * set cursorline
-set cursorline 
+set cursorline
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7 
+set so=7
 
 " Turn on the WiLd menu
 set wildmenu
@@ -99,8 +99,8 @@ syntax enable
 
 colorscheme Tomorrow-Night-Eighties
 
-" hi Normal ctermbg=none
-" highlight NonText ctermbg=none
+hi Normal ctermbg=none
+highlight NonText ctermbg=none
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -164,7 +164,7 @@ let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Pathogen, plugin stuff 
+" => Pathogen, plugin stuff
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Nerd tree
 map <C-n> :NERDTreeToggle<CR>
