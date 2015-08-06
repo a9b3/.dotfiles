@@ -178,7 +178,7 @@ let g:multi_cursor_quit_key='<Esc>'
 let delimitMate_expand_cr=1
 
 " ctrlp
-let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache'
+let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist'
 
 " GitGutter
 set updatetime=200
