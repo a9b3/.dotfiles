@@ -24,9 +24,9 @@ endsnippet
 
 snippet ifun
 ;(function() {
-'use strict';
+	'use strict';
 
-$1
+	$1
 
 }());
 endsnippet
@@ -68,6 +68,25 @@ endsnippet
 ################################################
 #					Angular					   #
 ################################################
+
+snippet module
+angular.module('$1', [$2]);
+endsnippet
+
+
+
+snippet config
+angular.module('$1')
+	.config([
+		$2Config
+	]);
+
+function $2Config() {
+	$0
+}
+endsnippet
+
+
 
 snippet controller
 angular.module('$1')
@@ -127,4 +146,23 @@ angular.module('$1')
 function $2Factory($3) {
 	$0
 }
+endsnippet
+
+
+
+################################################
+#					Node					   #
+################################################
+
+
+snippet init
+'use strict';
+
+// Dependencies
+var path = require('path');
+// App Dependencies
+var config = rootRequire('config')
+	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname));
+
+$0
 endsnippet
