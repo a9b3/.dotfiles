@@ -65,12 +65,32 @@ endsnippet
 
 
 
+snippet extend
+$1.prototype = Object.create($2.prototype);
+$1.prototype.constructor = $1;
+endsnippet
+
+
+
 ################################################
 #					Angular					   #
 ################################################
 
 snippet module
 angular.module('$1', [$2]);
+endsnippet
+
+
+
+snippet run
+angular.module('$1')
+	.run([
+		$2Run
+	]);
+
+function $2Run() {
+	$0
+}
 endsnippet
 
 
