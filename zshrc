@@ -37,7 +37,7 @@ bindkey "^E" end-of-line
 export NVM_DIR=$HOME/.nvm
 source $NVM_DIR/nvm.sh
 [ -s $HOME/.nvm/nvm.sh ]&& . $HOME/.nvm/nvm.sh
-export PATH="$PATH:$HOME/.node/bin"
+export PATH="$PATH:$HOME/npm/bin"
 
 # Go Paths
 export GOPATH=$HOME/go
