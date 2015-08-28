@@ -50,6 +50,8 @@ export PATH=$PATH:/Users/samlau/bin
 # Misc android
 export PATH=/Applications/Android\ Studio.app/sdk/tools:/Applications/Android\ Studio.app/sdk/platform-tools:$PATH
 
+# use private/env to store private env vars
+source ~/.dotfiles/private/env
 
 # RVM
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
