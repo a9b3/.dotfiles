@@ -60,3 +60,5 @@ alias cddesktop='cd ~/Desktop'
 alias nwjs='~/nwjs-v0.12.2-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 alias brewup='brew update && brew upgrade --all && brew cleanup'
+
+alias dockerup='eval "$(docker-machine env default)"'

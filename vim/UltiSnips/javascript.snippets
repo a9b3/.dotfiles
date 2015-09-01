@@ -3,7 +3,7 @@
 ################################################
 
 snippet require
-var $1 = require('$1');
+, $1 = require('$1')
 endsnippet
 
 
@@ -188,7 +188,8 @@ snippet init
 var path = require('path');
 // App Dependencies
 var config = rootRequire('config')
-	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname));
+	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname) + ':'
+								+ path.basename(__filename));
 
 $0
 endsnippet
@@ -204,7 +205,8 @@ var path = require('path')
     , express = require('express');
 // App Dependencies
 var config = rootRequire('config')
-    , debug = require('debug')(config.debugTag + ':' + path.basename(__dirname));
+	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname)
+								+ ':' + path.basename(__filename));
 
 module.exports = function() {
 
