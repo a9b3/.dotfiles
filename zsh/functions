@@ -8,7 +8,7 @@ mkc () {
 # cd and list
 cdd () { cd ${1} ; ls ; }
 alias cd='cdd'
- 
+
 
 convertMusicTo() {
     for file in *.$1
@@ -33,7 +33,7 @@ javarun() {
 cpprun() {
     file=$1
     suffix=cpp
-    g++ $1 -o ${file%.$suffix}.out && ./${file%.$suffix}.out
+    clang++ -std=c++11 -stdlib=libc++ $1 -o ${file%.$suffix}.out && ./${file%.$suffix}.out
 }
 
 findreplace() {
