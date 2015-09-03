@@ -4,15 +4,21 @@ for i:=0; i<$1; i++ {
 }
 endsnippet
 
+
+
 snippet forrange
 for i, $1 := range $2 {
 	$3
 }
 endsnippet
 
+
+
 snippet print
 fmt.Println($1)
 endsnippet
+
+
 
 snippet init
 package main
@@ -26,9 +32,10 @@ func main() {
 }
 endsnippet
 
+
+
 snippet func
-func $1($2) $3 {
+func ${1:name}(${2:args}) ${3:ret} {
 	$4
-	return
 }
 endsnippet
