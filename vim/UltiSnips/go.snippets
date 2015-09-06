@@ -7,8 +7,8 @@ endsnippet
 
 
 snippet forrange
-for i, $1 := range $2 {
-	$3
+for ${1:_}, ${2:c} := range $3 {
+	$0
 }
 endsnippet
 
@@ -35,7 +35,7 @@ endsnippet
 
 
 snippet func
-func ${1:name}(${2:args}) ${3:ret} {
+func ${1:name}(${2:args}) (${3:ret}) {
 	$4
 }
 endsnippet
