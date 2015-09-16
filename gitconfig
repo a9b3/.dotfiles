@@ -1,5 +1,5 @@
 [user]
-	email = samlau@appformix.com
+	email = esayemm@gmail.com
 	name = Sam Lau
 [color]
 	ui = always
@@ -19,9 +19,9 @@
 [color "status"]
 	added = yellow
 	changed = green
-	untracked = cyan		
+	untracked = cyan
 [core]
-	editor = vim 
+	editor = vim
 [alias]
 	co = checkout
 	st = status
@@ -35,7 +35,7 @@
 	b = branch -v
 
     # log
-    l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative 
+    l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
 	log = log --graph --date=short
 
     # add
@@ -72,7 +72,7 @@
 	helper = osxkeychain
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
