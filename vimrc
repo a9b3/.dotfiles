@@ -204,6 +204,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:syntastic_check_on_wq = 0
 " let g:syntastic_javascript_checkers = ['eslint']
 
+let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,react,flux,jquery'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
