@@ -29,8 +29,8 @@ bindkey "^E" end-of-line
 
 # Programs
 # init z   https://github.com/rupa/z
-# . ~/code/z/z.sh
-. /usr/local/etc/profile.d/z.sh
+. ~/code/z/z.sh
+# . /usr/local/etc/profile.d/z.sh
 
 # User config
 # NVM
@@ -48,7 +48,8 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=$PATH:/Users/samlau/bin
 
 # Misc android
-export PATH=/Applications/Android\ Studio.app/sdk/tools:/Applications/Android\ Studio.app/sdk/platform-tools:$PATH
+# export PATH=/Applications/Android\ Studio.app/Contents/sdk/tools:/Applications/Android\ Studio.app/sdk/platform-tools:$PATH
+export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH
 
 # use private/env to store private env vars
 source ~/.dotfiles/private/env

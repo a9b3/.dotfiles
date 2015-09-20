@@ -64,3 +64,5 @@ alias brewup='brew update && brew upgrade --all && brew cleanup'
 alias dockerup='eval "$(docker-machine env default)"'
 
 alias edithosts='sudo vim /etc/hosts'
+
+alias mou='open -a /Applications/Mou.app/Contents/MacOS/Mou'

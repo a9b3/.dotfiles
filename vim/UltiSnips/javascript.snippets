@@ -78,6 +78,14 @@ endsnippet
 
 
 
+snippet =
+($1) => {
+	$0
+}
+endsnippet
+
+
+
 ################################################
 #					Angular					   #
 ################################################
@@ -228,6 +236,25 @@ fs.readdirSync(path.resolve($1)).forEach(function(file) {
 
 	var childpath = path.resolve($1, file);
 	$0
+});
+endsnippet
+
+
+
+
+################################################
+#					React					   #
+################################################
+
+
+
+snippet rclass
+var $1 = React.createClass({
+	render() {
+		return (
+			$0
+		);
+	}
 });
 endsnippet
 
