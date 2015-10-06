@@ -115,8 +115,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-set textwidth=100
-set colorcolumn=100
+set textwidth=80
+set colorcolumn=80
 
 set number
 set numberwidth=2
@@ -178,7 +178,7 @@ let g:multi_cursor_quit_key='<Esc>'
 let delimitMate_expand_cr=1
 
 " ctrlp
-let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist'
+let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
 
 " GitGutter
 set updatetime=200
@@ -205,6 +205,8 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " let g:syntastic_javascript_checkers = ['eslint']
 
 let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,react,flux,jquery'
+
+let g:user_emmet_leader_key='<C-Z>'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings

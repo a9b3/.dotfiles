@@ -19,15 +19,29 @@ endsnippet
 
 
 
-snippet div
-<div $1>
-	$2
-</div
+snippet ionview
+<ion-view title="$1">
+	<ion-content padding="true">
+		$0
+	</ion-content>
+</ion-view>
 endsnippet
 
 
-snippet <
-<$1 class="$2">
-	$0
-</$1>
+
+snippet ionsidemenus
+<ion-side-menus>
+	<ion-side-menu side="$1">
+	</ion-side-menu>
+
+	<ion-side-menu-content>
+		$0
+	</ion-side-menu-content>
+</ion-side-menus>
+endsnippet
+
+
+
+snippet color
+style="background-color: $1;"
 endsnippet

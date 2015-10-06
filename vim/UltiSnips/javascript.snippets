@@ -40,7 +40,7 @@ endsnippet
 
 
 snippet for
-for (var ${1:i} = 0; ${1:i}<$2; ${1:i}++) {
+for (let i = 0; i<$1; i++) {
 	$0
 }
 endsnippet
@@ -48,7 +48,7 @@ endsnippet
 
 
 snippet forin
-for (var $1 in $2) {
+for (let $1 in $2) {
 	$3
 }
 endsnippet
@@ -260,6 +260,24 @@ endsnippet
 
 
 
+snippet reactinit
+'use strict';
+
+const React = require('react');
+
+const $1 = React.createClass({
+	render() {
+		return (
+
+		);
+	}
+});
+
+module.exports = $1;
+endsnippet
+
+
+
 ################################################
 #					Misc					   #
 ################################################
@@ -273,4 +291,40 @@ function $1() {
 }
 
 console.log($1());
+endsnippet
+
+
+
+snippet commentblock
+/***********************************************
+*					$0					   *
+***********************************************/
+endsnippet
+
+
+
+snippet gulptask
+gulp.task('$1', function(done) {
+	$0
+});
+endsnippet
+
+
+
+
+################################################
+#					Parse					   #
+################################################
+
+
+
+snippet callbackobject
+{
+	success: function(res) {
+		$1
+	},
+	error: function(res, error) {
+		if (error) $0;
+	}
+}
 endsnippet

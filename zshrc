@@ -59,3 +59,6 @@ source ~/.dotfiles/private/env
 # export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 dockerup
+
+# automatically add none default keys
+ssh-add ~/.ssh/github_rsa;
