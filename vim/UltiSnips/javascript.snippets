@@ -20,6 +20,12 @@ endsnippet
 
 
 
+snippet alog
+console.log.apply(console, $1.map($2 => $3));
+endsnippet
+
+
+
 snippet func
 function ${1:name}(${2:args}) {
 	${3:body}

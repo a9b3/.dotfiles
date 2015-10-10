@@ -9,7 +9,7 @@ execute pathogen#infect()
 " for vimdiff
 set noro
 
-" Sets ruler
+" Sets ruler show current line
 set ruler laststatus=2 number title nohlsearch
 
 " Sets how many lines of history VIM has to remember
@@ -32,7 +32,10 @@ set autoread
 " Show incomplete cmds down the bottom
 set showcmd
 
-set tags=./tags
+set foldenable
+set foldlevelstart=0
+set foldnestmax=10
+set foldmethod=syntax
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -42,17 +45,15 @@ au WinLeave * set nocursorline
 au WinEnter * set cursorline
 set cursorline
 
-" Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" Set 999 lines to the cursor - when moving vertically using j/k
+" keeps cursor in the middle of the page
+set so=999
 
 " Turn on the WiLd menu
 set wildmenu
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
-
-"Always show current position
-set ruler
 
 " Height of the command bar
 set cmdheight=1
@@ -142,9 +143,9 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Linebreak on 500 characters
+" set line break to 80
 set lbr
-set tw=500
+set tw=80
 
 set ai "Auto indent
 set si "Smart indent
@@ -179,6 +180,8 @@ let delimitMate_expand_cr=1
 
 " ctrlp
 let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
+" use ag to search, ignores custom ignores, use .agignore
+let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 
 " GitGutter
 set updatetime=200
@@ -215,12 +218,15 @@ let g:user_emmet_leader_key='<C-Z>'
 let mapleader = ","
 let g:mapleader = ","
 
+" jk to escape from insert mode
 imap jk <Esc>
 
-map <C-c> <esc>
-map - dd
+" save and quit
 map <leader>w :w!<cr>
 map <leader>q :q<cr>
+
+" save session
+nnoremap <leader>s :mksession<cr>
 
 " tab shortcuts
 nmap <leader>[ :bprevious<CR>
@@ -228,8 +234,14 @@ nmap <leader>] :bnext<CR>
 nmap <leader>d :bdelete<CR>
 
 " next search will center screen
-nnoremap n nzzzv
-nnoremap N Nzzzv
+" not needed because of so=999, but if I decide I don't ALWAYS want
+" screen to be centered reactivate this
+" nnoremap n nzzzv
+" nnoremap N Nzzzv
+
+" move up and down wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " capitol movement keys will do sensible corresponding movement
 noremap H ^
@@ -243,15 +255,25 @@ nmap <C-e> g_
 inoremap <C-a> <esc>I
 inoremap <C-e> <esc>A
 
+" quit edit vimrc
 map <leader>ve :vsp $MYVIMRC<cr>
 map <leader>vs :source $MYVIMRC<cr>
-nnoremap <F3> :nohl<cr>
+
+" clear search highlight
+nnoremap <leader><space> :nohlsearch<cr>
+
+" open close folds
+nnoremap <space> za
 
 " set foldmethod=syntax
-autocmd Syntax c,cpp,vim,xml,html,xhtml,java setlocal foldmethod=syntax
-autocmd Syntax c,cpp,vim,xml,html,xhtml,perl,java normal zR
+" autocmd Syntax c,cpp,vim,xml,html,xhtml,java setlocal foldmethod=syntax
+" autocmd Syntax c,cpp,vim,xml,html,xhtml,perl,java normal zR
 
+" do not allow arrow key movement
 map <up> <NOP>
 map <down> <NOP>
 map <left> <NOP>
 map <right> <NOP>
+
+" shortcut to silver searcher
+nnoremap <leader>a :Ag
