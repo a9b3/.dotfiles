@@ -13,10 +13,6 @@ alias simpleHTTPServer='python -m SimpleHTTPServer'
 alias getimage='wget -P . '
 alias reloadZsh='source ~/.zshrc && echo reloading zshrc...'
 
-# APPS
-alias psd='open -a /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app'
-alias chrome='open -a "Google Chrome"'
-
 # Detect which `ls` flavor is in use
 # if ls --color > /dev/null 2>&1; then # GNU `ls`
 	colorflag="--color"
@@ -53,10 +49,6 @@ alias du='du -h'
 # replace rm with trash
 alias rm='trash'
 
-alias cddotfiles='cd ~/.dotfiles'
-alias cdprojects='cd ~/Projects'
-alias cddesktop='cd ~/Desktop'
-
 alias nwjs='~/nwjs-v0.12.2-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 alias brewup='brew update && brew upgrade --all && brew cleanup'
@@ -66,3 +58,5 @@ alias dockerup='eval "$(docker-machine env default)"'
 alias edithosts='sudo vim /etc/hosts'
 
 alias mou='open -a /Applications/Mou.app/Contents/MacOS/Mou'
+
+alias ag='ag --path-to-agignore=~/.agignore'

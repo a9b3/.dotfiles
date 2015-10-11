@@ -4,3 +4,4 @@ bower_components/
 .tmp
 all.js
 lib.js
+*.bundle*
