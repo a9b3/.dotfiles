@@ -60,3 +60,7 @@ alias edithosts='sudo vim /etc/hosts'
 alias mou='open -a /Applications/Mou.app/Contents/MacOS/Mou'
 
 alias ag='ag --path-to-agignore=~/.agignore'
+
+# for ghost blog, ghost must be running on port 2368 and buster must have
+# already been set up with github
+alias buster-push='buster generate --domain=http://localhost:2368 && buster deploy'
