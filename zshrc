@@ -30,25 +30,19 @@ bindkey "^E" end-of-line
 # Programs
 # init z   https://github.com/rupa/z
 . ~/code/z/z.sh
-# . /usr/local/etc/profile.d/z.sh
 
 # User config
 # NVM
 export NVM_DIR=$HOME/.nvm
 source $NVM_DIR/nvm.sh
 [ -s $HOME/.nvm/nvm.sh ]&& . $HOME/.nvm/nvm.sh
-export PATH="$PATH:$HOME/npm/bin"
 
 # Go Paths
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-# local bin
-export PATH=$PATH:/Users/samlau/bin
-
 # Misc android
-# export PATH=/Applications/Android\ Studio.app/Contents/sdk/tools:/Applications/Android\ Studio.app/sdk/platform-tools:$PATH
 export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH
 
 # use private/env to store private env vars

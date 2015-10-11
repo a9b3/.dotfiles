@@ -7,7 +7,7 @@ set nocompatible
 execute pathogen#infect()
 
 " for vimdiff
-set noro
+set noreadonly
 
 " Sets ruler show current line
 set ruler laststatus=2 number title nohlsearch
@@ -32,8 +32,10 @@ set autoread
 " Show incomplete cmds down the bottom
 set showcmd
 
+" vim code folding
 set foldenable
-set foldlevelstart=0
+" start with most things not folded
+set foldlevelstart=10
 set foldnestmax=10
 set foldmethod=syntax
 
