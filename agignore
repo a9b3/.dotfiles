@@ -5,3 +5,4 @@ bower_components/
 all.js
 lib.js
 *.bundle*
+production/

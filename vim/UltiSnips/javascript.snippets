@@ -102,6 +102,29 @@ endsnippet
 
 
 
+snippet copy
+/*
+ * Copyright (c) 2015-2016, Sam Lau
+ * All rights reserved.
+ */
+endsnippet
+
+
+
+snippet then
+.then($1 => {
+	$0
+})
+endsnippet
+
+
+
+snippet exports
+module.exports = $1;
+endsnippet
+
+
+
 ################################################
 #					Angular					   #
 ################################################
@@ -264,29 +287,55 @@ endsnippet
 
 
 
-snippet rclass
-var $1 = React.createClass({
+snippet reactclass
+const $1 = React.createClass({
+
+	getInitialState() {
+		return {};
+	},
+
+	componentDidMount() {
+
+	},
+
+	componentWillUnmount() {
+
+	},
+
 	render() {
 		return (
 			$0
 		);
-	}
+	},
+
 });
 endsnippet
 
 
 
 snippet reactinit
-'use strict';
-
 const React = require('react');
 
 const $1 = React.createClass({
+
+	getInitialState() {
+		return {};
+	},
+
+	componentDidMount() {
+
+	},
+
+	componentWillUnmount() {
+
+	},
+
 	render() {
 		return (
-
+			$0
 		);
-	}
+	},
+
 });
 
 module.exports = $1;

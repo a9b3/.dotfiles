@@ -33,11 +33,11 @@ set autoread
 set showcmd
 
 " vim code folding
-set foldenable
+" set foldenable
 " start with most things not folded
-set foldlevelstart=10
-set foldnestmax=10
-set foldmethod=syntax
+" set foldlevelstart=10
+" set foldnestmax=10
+" set foldmethod=syntax
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -118,8 +118,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-set textwidth=80
-set colorcolumn=80
+set textwidth=120
+set colorcolumn=120
 
 set number
 set numberwidth=2
@@ -145,9 +145,9 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" set line break to 80
+" set line break to 120
 set lbr
-set tw=80
+set tw=120
 
 set ai "Auto indent
 set si "Smart indent
