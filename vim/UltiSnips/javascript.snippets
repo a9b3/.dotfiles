@@ -8,6 +8,12 @@ endsnippet
 
 
 
+snippet import
+import { $1 } from '$2';
+endsnippet
+
+
+
 snippet print
 console.log($1);
 endsnippet
@@ -163,14 +169,9 @@ endsnippet
 
 snippet controller
 angular.module('$1')
-	.controller('$2', [
-		'$3',
-		$2Ctrl
-	]);
-
-function $2Ctrl($3) {
-	$4
-}
+.controller('$2', function($3) {
+	$0
+});
 endsnippet
 
 
@@ -193,32 +194,23 @@ endsnippet
 
 snippet directive
 angular.module('$1')
-	.directive('$2', [
-		function () {
-			return {
-				restrict: 'E',
-				link: linkFunc
-			}
-		}
-	]);
+.directive('$2', function () {
+	return {
+		restrict: 'E',
+		link: function($scope) {
 
-function linkFunc(scope, elem, attrs) {
-	$3
-}
+		}
+	}
+});
 endsnippet
 
 
 
 snippet factory
 angular.module('$1')
-	.factory('$2', [
-		'$3',
-		$2Factory
-	]);
+.factory('$2', function($3) {
 
-function $2Factory($3) {
-	$0
-}
+});
 endsnippet
 
 

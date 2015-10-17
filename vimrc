@@ -32,6 +32,9 @@ set autoread
 " Show incomplete cmds down the bottom
 set showcmd
 
+" use system clipboard, vim must have +clipboard
+set clipboard=unnamed
+
 " vim code folding
 " set foldenable
 " start with most things not folded
@@ -47,9 +50,9 @@ au WinLeave * set nocursorline
 au WinEnter * set cursorline
 set cursorline
 
-" Set 999 lines to the cursor - when moving vertically using j/k
+" Set lines to the cursor - when moving vertically using j/k
 " keeps cursor in the middle of the page
-set so=999
+set so=30
 
 " Turn on the WiLd menu
 set wildmenu
@@ -197,6 +200,9 @@ let g:airline_theme='simple'
 " buffer as tabs on top
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
+
+" vim-jsx enable for .js files as well
+let g:jsx_ext_required = 0
 
 " Syntastic
 " set statusline+=%#warningmsg#
