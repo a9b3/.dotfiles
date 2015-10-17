@@ -29,7 +29,8 @@ bindkey "^E" end-of-line
 
 # Programs
 # init z   https://github.com/rupa/z
-. ~/code/z/z.sh
+# . ~/code/z/z.sh
+eval "$(fasd --init auto)"
 
 # User config
 # NVM
