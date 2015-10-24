@@ -1,10 +1,3 @@
---languages=-javascript
---langdef=js
---langmap=js:.js
---langmap=js:+.jsx
-
---recurse=yes
---tag-relative=yes
 --exclude=.git
 --exclude=log
 --exclude=tmp
@@ -15,5 +8,13 @@
 --exclude=production
 --exclude=public
 --exclude=lib
+
+--languages=-javascript
+--langdef=js
+--langmap=js:.js
+--langmap=js:+.jsx
+
+--recurse=yes
+--tag-relative=yes
 --extra=+f
 --append

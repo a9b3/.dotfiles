@@ -35,6 +35,9 @@ set showcmd
 " use system clipboard, vim must have +clipboard
 set clipboard=unnamed
 
+" keep looking up until tags is found
+set tags=./tags,tags;/
+
 " vim code folding
 " set foldenable
 " start with most things not folded
@@ -121,8 +124,8 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-set textwidth=120
-set colorcolumn=120
+set textwidth=80
+set colorcolumn=80
 
 set number
 set numberwidth=2
@@ -144,13 +147,13 @@ set expandtab
 " Be smart when using tabs ;)
 set smarttab
 
-" 1 tab == 2 spaces
+" tab space
 set shiftwidth=4
 set tabstop=4
 
-" set line break to 120
+" set line break to 80
 set lbr
-set tw=120
+set tw=80
 
 set ai "Auto indent
 set si "Smart indent

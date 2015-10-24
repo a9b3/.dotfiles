@@ -143,6 +143,14 @@ endsnippet
 
 
 
+snippet forEach
+$1.forEach(($2) => {
+	$0
+});
+endsnippet
+
+
+
 ################################################
 #					Angular					   #
 ################################################
@@ -181,7 +189,7 @@ endsnippet
 
 snippet controller
 angular.module('$1')
-.controller('$2', function($3) {
+.controller('$2', ($3) => {
 	$0
 });
 endsnippet
@@ -206,10 +214,10 @@ endsnippet
 
 snippet directive
 angular.module('$1')
-.directive('$2', function () {
+.directive('$2', () => {
 	return {
 		restrict: 'E',
-		link: function($scope) {
+		link: ($scope) => {
 
 		}
 	}
