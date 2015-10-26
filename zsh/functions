@@ -6,7 +6,7 @@ mkc () {
 }
 
 # cd and list
-cdd () { cd ${1} ; l ; }
+cdd () { cd ${1} ; ls ; }
 alias cd='cdd'
 
 convertMusicTo() {
