@@ -143,10 +143,32 @@ endsnippet
 
 
 
+snippet case
+case $1:
+	$0
+	return;
+endsnippet
+
+
+
 snippet forEach
 $1.forEach(($2) => {
 	$0
 });
+endsnippet
+
+
+
+snippet assign
+Object.assign({}, $1, $2);
+endsnippet
+
+
+
+snippet timeout
+setTimeout(() => {
+	$0
+}, $1);
 endsnippet
 
 
@@ -351,6 +373,25 @@ const $1 = React.createClass({
 });
 
 module.exports = $1;
+endsnippet
+
+
+
+
+################################################
+#					Redux					   #
+################################################
+
+
+
+snippet reducer
+function $1(state$2, action) {
+	switch(action.type) {
+		$0
+		default:
+			return state;
+	}
+}
 endsnippet
 
 

@@ -245,10 +245,8 @@ nmap <leader>] :bnext<CR>
 nmap <leader>d :bdelete<CR>
 
 " next search will center screen
-" not needed because of so=999, but if I decide I don't ALWAYS want
-" screen to be centered reactivate this
-" nnoremap n nzzzv
-" nnoremap N Nzzzv
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 " move up and down wrapped lines
 nnoremap j gj
@@ -288,3 +286,9 @@ map <right> <NOP>
 
 " shortcut to silver searcher
 nnoremap <leader>a :Ag
+
+" shortcut Gblame
+nnoremap <leader>g :Gblame<cr>
+
+" shortcut to put vim into background, fg to bring back to foreground
+nnoremap <leader>z <C-z>
