@@ -71,3 +71,6 @@ alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl';
 
 # mistake open vi use vim
 alias vi='vim'
+
+# go to project root
+alias root='cd $(git rev-parse --show-cdup)'
