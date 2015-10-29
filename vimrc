@@ -307,3 +307,6 @@ nnoremap <leader>g :Gblame<cr>
 
 " shortcut to put vim into background, fg to bring back to foreground
 nnoremap <leader>z <C-z>
+
+" shortcut for visual mode sort
+vnoremap <leader>s :sort
