@@ -191,6 +191,21 @@ let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache
 " use ag to search, ignores custom ignores, use .agignore
 let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 
+" ctrlP auto cache clearing, rescan for new files on save for ctrlp
+" http://stackoverflow.com/questions/8663829/vim-ctrlp-vim-plugin-how-to-rescan-files
+function! SetupCtrlP()
+    if exists("g:loaded_ctrlp") && g:loaded_ctrlp
+        augroup CtrlPExtension
+            autocmd!
+            autocmd FocusGained * CtrlPClearCache
+            autocmd BufWritePost * CtrlPClearCache
+        augroup END
+    endif
+endfunction
+if has("autocmd")
+    autocmd VimEnter * :call SetupCtrlP()
+endif
+
 " GitGutter
 set updatetime=200
 let g:gitgutter_realtime=1
