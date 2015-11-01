@@ -173,6 +173,14 @@ endsnippet
 
 
 
+
+snippet lorem
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend
+velit id turpis fringilla volutpat. Nulla tristique sem ex, ac dignissim odio
+volutpat sit amet.
+endsnippet
+
+
 ################################################
 #					Angular					   #
 ################################################
@@ -348,7 +356,8 @@ endsnippet
 
 
 snippet reactinit
-const React = require('react');
+import React, { PropTypes } from 'react';
+import { findDOMNode } from 'react-dom';
 
 const $1 = React.createClass({
 
@@ -372,7 +381,11 @@ const $1 = React.createClass({
 
 });
 
-module.exports = $1;
+$1.propTypes = {
+	$0
+}
+
+export default $1;
 endsnippet
 
 
