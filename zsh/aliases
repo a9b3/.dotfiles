@@ -74,3 +74,7 @@ alias vi='vim'
 
 # go to project root
 alias r='cd $(git rev-parse --show-toplevel)'
+
+# npm shortcuts
+alias npmi='npm install'
+alias npmu='npm uninstall'

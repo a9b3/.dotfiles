@@ -86,7 +86,7 @@ endsnippet
 
 
 snippet pfn
-$1.prototype.$2 = function($3) {
+$1.prototype.$2 = ($3) => {
 	$0
 };
 endsnippet
@@ -118,7 +118,15 @@ endsnippet
 
 
 snippet then
-.then($1 => {
+.then(($1) => {
+	$0
+})
+endsnippet
+
+
+
+snippet catch
+.catch(($1) => {
 	$0
 })
 endsnippet
@@ -174,10 +182,25 @@ endsnippet
 
 
 
+snippet interval
+setInterval(() => {
+	$0
+}, $1);
+endsnippet
+
+
+
+
 snippet lorem
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend
 velit id turpis fringilla volutpat. Nulla tristique sem ex, ac dignissim odio
 volutpat sit amet.
+endsnippet
+
+
+
+snippet param
+@param {$1} $2 - $3
 endsnippet
 
 
@@ -458,4 +481,10 @@ snippet callbackobject
 		if (error) $0;
 	}
 }
+endsnippet
+
+
+
+snippet flex
+flex: '${1:flex-grow} ${2:flex-shrink} ${3:flex-basis,auto,initial,inherit}'
 endsnippet
