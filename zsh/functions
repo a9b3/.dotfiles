@@ -41,6 +41,15 @@ cpprun() {
     rm ./${file%.$suffix}.out
 }
 
+# compile and run c files
+crun() {
+    file=$1
+    suffix=c
+    gcc ${file} -o ${file}.out
+    ./${file}.out
+    rm ./${file}.out
+}
+
 # find and replace
 # findreplace [original] [replacement]
 findreplace() {
