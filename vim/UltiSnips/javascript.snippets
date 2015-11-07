@@ -86,7 +86,7 @@ endsnippet
 
 
 snippet pfn
-$1.prototype.$2 = ($3) => {
+$1.prototype.$2 = function($3) {
 	$0
 };
 endsnippet
@@ -202,6 +202,32 @@ endsnippet
 snippet param
 @param {$1} $2 - $3
 endsnippet
+
+
+
+snippet constructor
+function $1($2) {
+	if (!(this instanceof $1)) return new $1($2);
+	$0
+}
+endsnippet
+
+
+
+################################################
+#					JsDoc					   #
+################################################
+
+
+snippet typedef
+/**
+ * $3
+ *
+ * @typedef {$1} $2
+ * @property {}
+ */
+endsnippet
+
 
 
 ################################################
