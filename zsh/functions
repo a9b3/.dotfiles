@@ -49,10 +49,3 @@ crun() {
     ./${file}.out
     rm ./${file}.out
 }
-
-# find and replace
-# findreplace [original] [replacement]
-findreplace() {
-    substring=$1
-    find . -type f -name '*' -exec sed -i '' ${substring} {} +
-}
