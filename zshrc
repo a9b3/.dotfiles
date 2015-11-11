@@ -28,8 +28,7 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 # Programs
-# init z   https://github.com/rupa/z
-# . ~/code/z/z.sh
+# Init fasd
 eval "$(fasd --init auto)"
 
 # User config
