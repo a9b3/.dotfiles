@@ -2,6 +2,15 @@
 #					General					   #
 ################################################
 
+
+snippet cfun
+const $1 = ($2) => {
+	$0
+};
+endsnippet
+
+
+
 snippet require
 , $1 = require('$1')
 endsnippet
@@ -52,7 +61,15 @@ endsnippet
 
 
 snippet for
-for (let i = 0; i<$1; i++) {
+for (let $1 = 0; $1<$2; $1++) {
+	$0
+}
+endsnippet
+
+
+
+snippet refor
+for (let $1 = $2; $1>=0; $1--) {
 	$0
 }
 endsnippet
