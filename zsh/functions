@@ -49,3 +49,9 @@ crun() {
     ./${file}.out
     rm ./${file}.out
 }
+
+# run command in background
+norun() {
+    command=$1
+    nohup bash -c "$1 2>&1 &"
+}
