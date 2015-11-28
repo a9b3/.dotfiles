@@ -336,6 +336,13 @@ endsnippet
 ################################################
 
 
+snippet debug
+const debug = require('debug')(config.debugTag + ':'
+                               + path.basename(__dirname) + '/'
+                               + path.basename(__filename));
+endsnippet
+
+
 snippet init
 'use strict';
 
@@ -561,4 +568,26 @@ endsnippet
 
 snippet flex
 flex: '${1:flex-grow} ${2:flex-shrink} ${3:flex-basis,auto,initial,inherit}'
+endsnippet
+
+
+
+################################################
+#					Mocha					   #
+################################################
+
+
+
+snippet it
+it('$1', done => {
+	$0
+});
+endsnippet
+
+
+
+snippet describe
+describe('$1', () => {
+	$0
+});
 endsnippet

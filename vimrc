@@ -237,6 +237,8 @@ let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,rea
 
 let g:user_emmet_leader_key='<C-Z>'
 
+let g:indent_guides_start_level = 2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
