@@ -37,6 +37,8 @@ export NVM_DIR=$HOME/.nvm
 source $NVM_DIR/nvm.sh
 [ -s $HOME/.nvm/nvm.sh ]&& . $HOME/.nvm/nvm.sh
 
+source ~/npm/bin
+
 # Go Paths
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
