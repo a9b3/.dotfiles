@@ -230,6 +230,14 @@ applications ()
         printf "done installing Messenger\n"
     fi
 
+    if [ ! -e /Applications/SourceTree.app ]; then
+        printf "installing SourceTree\n"
+        wget https://www.sourcetreeapp.com/download
+        open SourceTree_2.1.dmg
+        sudo cp -r /Volumes/SourceTree/SourceTree.app /Applications/
+        printf "done installing SourceTree\n"
+    fi
+
 
     printf "done installing applications...\n"
 }
