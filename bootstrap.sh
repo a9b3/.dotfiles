@@ -33,6 +33,7 @@ homebrew ()
 homebrewApps ()
 {
     echo installing stuff through homebrew...
+    sudo chown -R $(whoami):admin /usr/local
     brew update
     brew upgrade --all
 
@@ -51,6 +52,8 @@ homebrewApps ()
         'git'
         'ctags-exuberant'
         'mongodb'
+    	'node'
+        'fasd'
     )
 
     for i in "${brewAppsToInstall[@]}"; do
@@ -127,6 +130,7 @@ vimPlugins ()
     if [ ! -e ~/.vim/colors ]; then
         cd ~/.vim
         git clone https://github.com/flazz/vim-colorschemes.git
+        cp -R ~/.vim/vim-colorschemes/colors ~/.vim
     fi
 
     cd ~
@@ -141,6 +145,7 @@ ycm ()
     if [[ ! -f "$build_file" ]]; then
         echo compiling ycm...
         cd ~/.vim/bundle/YouCompleteMe
+        git submodule update --init --recursive
         ./install.py --clang-completer
         cd ~
         echo done compiling ycm...
@@ -153,26 +158,20 @@ ohMyZsh ()
         echo installing oh-my-zsh...
         cd ~
         git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+        echo done installing oh-my-zsh...
+    fi
+
+    currShell=$(echo $SHELL)
+    if [ currShell != '/usr/local/bin/zsh' ]; then
         echo setting zsh as default shell...
-        chsh -s /bin/zsh
+        sudo echo $(which zsh) >> /etc/shells
+        chsh -s $(which zsh)
+        echo done setting zsh as default shell...
     fi
 }
 
 node ()
 {
-    printf "installing nvm...\n"
-    if [ ! -e ~/.nvm ]; then
-        git clone https://github.com/creationix/nvm.git ~/.nvm
-        cd ~/.nvm
-        git checkout `git describe --abbrev=0 --tags`
-        source ~/.nvm/nvm.sh
-    fi
-    printf "done installing nvm...\n"
-
-    printf "installing latest node version via nvm...\n"
-    nvm install node
-    printf "done installing latest node version via nvm...\n"
-
     printf "installing npm global packages...\n"
     npm install -g gulp grunt grunt-cli
     printf "done installing npm global packages...\n"
@@ -207,7 +206,39 @@ applications ()
         printf "done installing iTerm2...\n"
     fi
 
+    if [ ! -e /Applications/BetterTouchTool.app ]; then
+        printf "installing BetterTouchTools\n"
+        wget http://bettertouchtool.net/BetterTouchTool.zip
+        unzip BetterTouchTool.zip
+        sudo cp -r BetterTouchTool.app /Applications/
+        printf "done installing BetterTouchTools\n"
+    fi
+
+    if [ ! -e /Applications/HyperSwitch.app ]; then
+        printf "installing HyperSwitch\n"
+        wget https://bahoom.com/hyperswitch/download
+        unzip HyperSwitch.zip
+        sudo cp -r HyperSwitch.app /Applications/
+        printf "done installing HyperSwitch\n"
+    fi
+
+    if [ ! -e /Applications/Messenger.app ]; then
+        printf "installing Messenger\n"
+        wget https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger.dmg
+        open Messenger.dmg
+        sudo cp -r /Volumes/Messenger/Messenger.app /Applications/
+        printf "done installing Messenger\n"
+    fi
+
+
     printf "done installing applications...\n"
+}
+
+finished ()
+{
+    printf "
+        All done\n
+    \n"
 }
 
 xcode
@@ -219,3 +250,4 @@ ycm
 ohMyZsh
 node
 applications
+finished
