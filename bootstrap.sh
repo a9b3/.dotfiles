@@ -247,6 +247,28 @@ fonts ()
     fi
 }
 
+projectFolder ()
+{
+    if [ ! -e ~/Projects ]; then
+        mkdir ~/Projects
+        cd ~/Projects
+
+        if [ ! -e ~/Projects/esayemm ]; then
+            mkdir esayemm
+            cd esayemm
+            git clone https://github.com/esayemm/profile-manager-cli.git
+            cd profile-manager-cli
+            npm link
+            cd ..
+            cd ..
+        fi
+
+        if [ ! -e ~/Projects/sandbox ]; then
+            mkdir sandbox
+        fi
+    fi
+}
+
 generateKeys ()
 {
     if [ ! -e ~/.ssh/github_rsa ]; then
@@ -285,5 +307,6 @@ ohMyZsh
 node
 applications
 fonts
+projectFolder
 generateKeys
 finished
