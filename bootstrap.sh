@@ -234,9 +234,24 @@ applications ()
     printf "done installing applications...\n"
 }
 
+generateKeys ()
+{
+    printf "generating keys\n"
+    ssh-keygen -t rsa -b 4096 -C "esayemm@gmail.com"
+    printf "done generating keys\n"
+}
+
 finished ()
 {
     printf "
+
+    Remember!
+        $ pbcopy < ~/.ssh/id_rsa.pub
+        * paste into github
+
+        Test connection
+        $ ssh -T git@github.com
+
         All done\n
     \n"
 }
@@ -250,4 +265,5 @@ ycm
 ohMyZsh
 node
 applications
+generateKeys
 finished
