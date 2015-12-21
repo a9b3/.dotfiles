@@ -57,4 +57,6 @@ source ~/.dotfiles/private/env
 dockerup
 
 # automatically add none default keys
-ssh-add ~/.ssh/github_rsa;
+if [ -e ~/.ssh/github_rsa ]; then
+    ssh-add ~/.ssh/github_rsa;
+fi
