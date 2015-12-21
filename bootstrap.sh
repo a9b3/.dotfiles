@@ -234,11 +234,26 @@ applications ()
     printf "done installing applications...\n"
 }
 
+fonts ()
+{
+    cd ~/Downloads
+
+    if [ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]; then
+        printf "installing ProggyCleanSZBP font...\n"
+        wget http://www.proggyfonts.net/wp-content/download/ProggyCleanSZBP.ttf.zip
+        unzip ProggyCleanSZBP.ttf.zip
+        mv ProggyCleanSZBP.ttf /Library/Fonts/
+        printf "done installing ProggyCleanSZBP font...\n"
+    fi
+}
+
 generateKeys ()
 {
-    printf "generating keys\n"
-    ssh-keygen -t rsa -b 4096 -C "esayemm@gmail.com"
-    printf "done generating keys\n"
+    if [ ! -e ~/.ssh/github_rsa ]; then
+        printf "generating keys\n"
+        ssh-keygen -t rsa -b 4096 -C "esayemm@gmail.com"
+        printf "done generating keys\n"
+    fi
 }
 
 finished ()
@@ -251,6 +266,10 @@ finished ()
 
         Test connection
         $ ssh -T git@github.com
+
+    iTerm color schemes
+        https://github.com/mbadolato/iTerm2-Color-Schemes.git
+        import *.itermcolors files
 
         All done\n
     \n"
@@ -265,5 +284,6 @@ ycm
 ohMyZsh
 node
 applications
+fonts
 generateKeys
 finished
