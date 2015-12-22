@@ -107,7 +107,7 @@ vimPlugins ()
         'https://github.com/airblade/vim-gitgutter.git'
         'https://github.com/bling/vim-airline.git'
         'https://github.com/ctrlpvim/ctrlp.vim.git'
-        'https://github.com/mattn/emmet-vim.git'
+        'https://github.com/mattn/emmet-vim.git',
         'https://github.com/mxw/vim-jsx.git'
         'https://github.com/pangloss/vim-javascript.git'
         'https://github.com/scrooloose/nerdtree.git'
