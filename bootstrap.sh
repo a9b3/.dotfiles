@@ -238,6 +238,13 @@ applications ()
         printf "done installing SourceTree\n"
     fi
 
+    if [ ! -e /Applications/MPlayerX.app ]; then
+        printf "installing MPlayerX\n"
+        wget http://downloads.sourceforge.net/project/mplayerx-osx/MPlayerX-1.1.1.dmg?r=http%3A%2F%2Fmplayerx.org%2Fdownload.html&ts=1450765236&use_mirror=iweb
+        open MPlayerX-1.1.1.dmg
+        sudo cp -r /Volumes/MPlayerX/MPlayerX.app /Applications/
+        printf "done installing MPlayerX\n"
+    fi
 
     printf "done installing applications...\n"
 }
@@ -297,9 +304,13 @@ finished ()
         Test connection
         $ ssh -T git@github.com
 
-    iTerm color schemes
+    - iTerm color schemes
         https://github.com/mbadolato/iTerm2-Color-Schemes.git
         import *.itermcolors files
+
+    - App Settings in ~/.dotfiles/appSettings/
+        - iTerm2
+        - BetterTouchTool
 
         All done\n
     \n"
