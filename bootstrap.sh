@@ -108,8 +108,8 @@ vimPlugins ()
         'https://github.com/tpope/vim-fugitive.git'
         'https://github.com/tomtom/tcomment_vim.git'
         'https://github.com/SirVer/ultisnips.git'
-        'https://github.com/tpope/vim-surround.git'
         'https://github.com/Valloric/YouCompleteMe.git'
+        'https://github.com/Raimondi/delimitMate.git'
 
         'https://github.com/mxw/vim-jsx.git'
     )
@@ -216,7 +216,7 @@ applications ()
 
     if [ ! -e /Applications/HyperSwitch.app ]; then
         printf "installing HyperSwitch\n"
-        wget https://bahoom.com/hyperswitch/download
+        wget https://bahoom.com/hyperswitch/HyperSwitch.zip
         unzip HyperSwitch.zip
         sudo cp -r HyperSwitch.app /Applications/
         printf "done installing HyperSwitch\n"
