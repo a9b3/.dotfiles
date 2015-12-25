@@ -232,18 +232,10 @@ applications ()
 
     if [ ! -e /Applications/SourceTree.app ]; then
         printf "installing SourceTree\n"
-        wget https://www.sourcetreeapp.com/download
+        wget http://downloads.atlassian.com/software/sourcetree/SourceTree_2.1.dmg
         open SourceTree_2.1.dmg
         sudo cp -r /Volumes/SourceTree/SourceTree.app /Applications/
         printf "done installing SourceTree\n"
-    fi
-
-    if [ ! -e /Applications/MPlayerX.app ]; then
-        printf "installing MPlayerX\n"
-        wget http://downloads.sourceforge.net/project/mplayerx-osx/MPlayerX-1.1.1.dmg?r=http%3A%2F%2Fmplayerx.org%2Fdownload.html&ts=1450765236&use_mirror=iweb
-        open MPlayerX-1.1.1.dmg
-        sudo cp -r /Volumes/MPlayerX/MPlayerX.app /Applications/
-        printf "done installing MPlayerX\n"
     fi
 
     if [ ! -e /Applications/nvALT.app ]; then
