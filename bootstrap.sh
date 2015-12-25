@@ -2,9 +2,9 @@
 
 # https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 # Ask for admin upfront
-sudo -v
+# sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
-while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+# while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 xcode ()
 {
@@ -173,7 +173,7 @@ ohMyZsh ()
 node ()
 {
     printf "installing npm global packages...\n"
-    npm install -g gulp grunt grunt-cli
+    npm install -g gulp grunt grunt-cli nodemon mocha
     printf "done installing npm global packages...\n"
 }
 
@@ -294,6 +294,18 @@ generateKeys ()
     fi
 }
 
+docker ()
+{
+    cd ~/Downloads
+
+    if [ ! $(docker-machine) ]; then
+        printf "installing docker\n"
+        wget https://github.com/docker/toolbox/releases/download/v1.9.1f/DockerToolbox-1.9.1f.pkg
+        printf "done installing docker\n"
+    fi
+
+}
+
 finished ()
 {
     printf "
@@ -313,8 +325,13 @@ finished ()
         - iTerm2
         - BetterTouchTool
 
+    - Run DockerToolbox installer
+        - set docker.me in host file
+
         All done\n
     \n"
+
+    open ~/Downloads
 }
 
 xcode
@@ -329,4 +346,5 @@ applications
 fonts
 projectFolder
 generateKeys
+docker
 finished
