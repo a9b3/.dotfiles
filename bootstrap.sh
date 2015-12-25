@@ -162,10 +162,10 @@ ohMyZsh ()
     fi
 
     currShell=$(echo $SHELL)
-    if [ currShell != '/usr/local/bin/zsh' ]; then
+    if [ $currShell != '/usr/local/bin/zsh' ]; then
         echo setting zsh as default shell...
-        sudo echo $(which zsh) >> /etc/shells
-        chsh -s $(which zsh)
+        echo $(which zsh) | tee -a /etc/shells
+        sudo chsh -s $(which zsh)
         echo done setting zsh as default shell...
     fi
 }
@@ -182,7 +182,7 @@ applications ()
     printf "installing applications...\n"
     cd ~/Downloads
 
-    if [ ! -e '/Applications/Google\ Chrome.app' ]; then
+    if [ ! -e /Applications/Google\ Chrome.app ]; then
         printf "installing chrome...\n"
         wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
         open googlechrome.dmg
@@ -190,7 +190,7 @@ applications ()
         printf "done installing chrome...\n"
     fi
 
-    if [ ! -e '/Applications/Alfred\ 2.app' ]; then
+    if [ ! -e /Applications/Alfred\ 2.app ]; then
         printf "installing alfred...\n"
         wget https://cachefly.alfredapp.com/Alfred_2.8.1_425.zip
         unzip Alfred_2.8.1_425.zip
@@ -198,7 +198,7 @@ applications ()
         printf "done installing alfred...\n"
     fi
 
-    if [ ! -e '/Applications/iTerm.app' ]; then
+    if [ ! -e /Applications/iTerm.app ]; then
         printf "installing iTerm2...\n"
         wget https://iterm2.com/downloads/stable/iTerm2-2_1_4.zip
         unzip iTerm2-2_1_4.zip
@@ -206,7 +206,7 @@ applications ()
         printf "done installing iTerm2...\n"
     fi
 
-    if [ ! -e '/Applications/BetterTouchTool.app' ]; then
+    if [ ! -e /Applications/BetterTouchTool.app ]; then
         printf "installing BetterTouchTools\n"
         wget http://bettertouchtool.net/BetterTouchTool.zip
         unzip BetterTouchTool.zip
@@ -214,7 +214,7 @@ applications ()
         printf "done installing BetterTouchTools\n"
     fi
 
-    if [ ! -e '/Applications/HyperSwitch.app' ]; then
+    if [ ! -e /Applications/HyperSwitch.app ]; then
         printf "installing HyperSwitch\n"
         wget https://bahoom.com/hyperswitch/download
         unzip HyperSwitch.zip
@@ -222,7 +222,7 @@ applications ()
         printf "done installing HyperSwitch\n"
     fi
 
-    if [ ! -e '/Applications/Messenger.app' ]; then
+    if [ ! -e /Applications/Messenger.app ]; then
         printf "installing Messenger\n"
         wget https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger.dmg
         open Messenger.dmg
@@ -230,7 +230,7 @@ applications ()
         printf "done installing Messenger\n"
     fi
 
-    if [ ! -e '/Applications/SourceTree.app' ]; then
+    if [ ! -e /Applications/SourceTree.app ]; then
         printf "installing SourceTree\n"
         wget https://www.sourcetreeapp.com/download
         open SourceTree_2.1.dmg
@@ -238,12 +238,20 @@ applications ()
         printf "done installing SourceTree\n"
     fi
 
-    if [ ! -e '/Applications/MPlayerX.app' ]; then
+    if [ ! -e /Applications/MPlayerX.app ]; then
         printf "installing MPlayerX\n"
         wget http://downloads.sourceforge.net/project/mplayerx-osx/MPlayerX-1.1.1.dmg?r=http%3A%2F%2Fmplayerx.org%2Fdownload.html&ts=1450765236&use_mirror=iweb
         open MPlayerX-1.1.1.dmg
         sudo cp -r /Volumes/MPlayerX/MPlayerX.app /Applications/
         printf "done installing MPlayerX\n"
+    fi
+
+    if [ ! -e /Applications/nvALT.app ]; then
+        printf "installing nvALT\n"
+        wget http://abyss.designheresy.com/nvaltb/nvalt2.2b106.zip
+        unzip nvalt2.2b106.zip
+        sudo cp -r nvALT.app /Applications/
+        printf "done installing nvALT\n"
     fi
 
     printf "done installing applications...\n"
