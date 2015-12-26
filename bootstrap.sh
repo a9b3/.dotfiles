@@ -54,6 +54,7 @@ homebrewApps ()
         'mongodb'
     	'node'
         'fasd'
+        'ruby'
     )
 
     for i in "${brewAppsToInstall[@]}"; do
@@ -176,6 +177,15 @@ node ()
     printf "installing npm global packages...\n"
     npm install -g gulp grunt grunt-cli nodemon mocha
     printf "done installing npm global packages...\n"
+}
+
+ruby ()
+{
+    if [ ! scss-lint ]; then
+        printf "installing ruby gems...\n"
+        gem install scss-lint
+        printf "done installing ruby gems...\n"
+    fi
 }
 
 applications ()
