@@ -100,18 +100,19 @@ vimPlugins ()
     cd ~/.vim/bundle
 
     reposToClone=(
-        'https://github.com/ctrlpvim/ctrlp.vim.git'
-        'https://github.com/scrooloose/nerdtree.git'
-        'https://github.com/bling/vim-airline.git'
-        'https://github.com/terryma/vim-multiple-cursors.git'
-        'https://github.com/airblade/vim-gitgutter.git'
-        'https://github.com/tpope/vim-fugitive.git'
-        'https://github.com/tomtom/tcomment_vim.git'
+        'https://github.com/Raimondi/delimitMate.git'
         'https://github.com/SirVer/ultisnips.git'
         'https://github.com/Valloric/YouCompleteMe.git'
-        'https://github.com/Raimondi/delimitMate.git'
-
+        'https://github.com/airblade/vim-gitgutter.git'
+        'https://github.com/bling/vim-airline.git'
+        'https://github.com/ctrlpvim/ctrlp.vim.git'
+        'https://github.com/mattn/emmet-vim.git'
         'https://github.com/mxw/vim-jsx.git'
+        'https://github.com/pangloss/vim-javascript.git'
+        'https://github.com/scrooloose/nerdtree.git'
+        'https://github.com/terryma/vim-multiple-cursors.git'
+        'https://github.com/tomtom/tcomment_vim.git'
+        'https://github.com/tpope/vim-fugitive.git'
     )
 
     regex="/([^/]+)\.git$"
