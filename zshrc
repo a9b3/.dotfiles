@@ -33,11 +33,11 @@ eval "$(fasd --init auto)"
 
 # User config
 # NVM
-export NVM_DIR=$HOME/.nvm
-source $NVM_DIR/nvm.sh
-[ -s $HOME/.nvm/nvm.sh ]&& . $HOME/.nvm/nvm.sh
+# export NVM_DIR=$HOME/.nvm
+# source $NVM_DIR/nvm.sh
+# [ -s $HOME/.nvm/nvm.sh ]&& . $HOME/.nvm/nvm.sh
 
-source ~/npm/bin
+# source ~/npm/bin
 
 # Go Paths
 export GOPATH=$HOME/go
@@ -48,7 +48,7 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH
 
 # use private/env to store private env vars
-source ~/.dotfiles/private/env
+# source ~/.dotfiles/private/env
 
 # RVM
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
