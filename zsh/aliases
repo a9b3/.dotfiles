@@ -81,5 +81,3 @@ alias npmu='npm uninstall'
 
 alias home='profile-manager profile home'
 alias work='profile-manager profile work'
-
-alias parsedeploy='r && gulp build-cloud && cd parse_cloud_code && parse deploy trimian-samlau && parse log -f trimian-samlau'

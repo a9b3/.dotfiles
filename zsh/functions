@@ -55,3 +55,13 @@ norun() {
     command=$1
     nohup bash -c "$1 2>&1 &"
 }
+
+parsedeploy() {
+  dest=$1
+
+  r
+  gulp build-cloud
+  cd parse_cloud_code
+  parse deploy ${dest}
+  cd ..
+}
