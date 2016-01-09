@@ -23,6 +23,12 @@ convertScansToBlackWhite() {
     done
 }
 
+perlpie() {
+    regexp=$1
+    filetype=$2
+    perl -pi -e ${regexp} ./**/*.${filetype}
+}
+
 # compiles java file and runs it
 javarun() {
     file=$1
