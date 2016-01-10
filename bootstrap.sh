@@ -78,6 +78,7 @@ dotfiles ()
         'zshrc'
         'vim'
         'gitconfig'
+        'npmrc'
     )
 
     for i in "${filesToSymlink[@]}"; do
