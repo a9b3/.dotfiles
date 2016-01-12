@@ -589,8 +589,25 @@ endsnippet
 
 
 
+snippet testinit
+'use strict';
+
+// Global access to Promise
+require('es6-promise').polyfill();
+
+process.env.NODE_ENV = 'test';
+
+import should from 'should';
+
+describe('$1', () => {
+	$0
+});
+endsnippet
+
+
+
 snippet it
-it('$1', done => {
+it('$1', () => {
 	$0
 });
 endsnippet
