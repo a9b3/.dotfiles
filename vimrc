@@ -149,8 +149,8 @@ set expandtab
 set smarttab
 
 " tab space
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " set line break to 80
 set lbr
@@ -234,7 +234,7 @@ let g:jsx_ext_required = 0
 " let g:syntastic_check_on_wq = 0
 " let g:syntastic_javascript_checkers = ['eslint']
 
-let g:used_javascript_libs = 'underscore,angularjs,angularui,angularuirouter,react,flux,jquery'
+let g:used_javascript_libs = 'react,flux'
 
 let g:user_emmet_leader_key='<C-Z>'
 
@@ -313,3 +313,5 @@ nnoremap <leader>z <C-z>
 
 " shortcut for visual mode sort
 vnoremap <leader>s :sort
+
+let g:javascript_conceal_function   = "ƒ"
