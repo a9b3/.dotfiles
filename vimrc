@@ -22,6 +22,7 @@ filetype indent on
 
 " File type
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
 
 " Clear trailing spaces on save
