@@ -1,6 +1,6 @@
 snippet bl
 /*******************************
- *          $1
+ $1
  *******************************/
 endsnippet
 
@@ -41,12 +41,17 @@ flex-flow: ${1:row} ${2:wrap};
 endsnippet
 
 
+snippet animation
+animation: ${1:name} ${2:duration} $3;
+endsnippet
 
-snippet bcomment
-/*
 
-$0
---------------------------------------
---------------------------------------
-*/
+
+snippet timingfunc
+transition-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
+endsnippet
+
+
+snippet ext
+@extend %$1;
 endsnippet
