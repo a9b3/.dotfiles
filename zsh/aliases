@@ -41,7 +41,7 @@ alias week='date +%V'
 alias htop='sudo htop'
 
 # Youtube-dl
-alias youtube-dl='youtube-dl -o %(title)s.%(ext)s '
+# alias youtube-dl='youtube-dl -o %(title)s.%(ext)s '
 
 # du
 alias du='du -h'
