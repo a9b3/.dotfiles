@@ -3,6 +3,13 @@
 ################################################
 
 
+snippet while
+while($1) {
+	$0
+}
+endsnippet
+
+
 snippet cfun
 const $1 = ($2) => {
 	$0
@@ -378,24 +385,22 @@ endsnippet
 snippet router
 'use strict';
 
-// Dependencies
-var path = require('path')
-    , fs = require('fs')
-    , express = require('express');
-// App Dependencies
-var config = rootRequire('config')
-	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname)
-								+ ':' + path.basename(__filename));
+import express from 'express';
+import * as middlewares from 'services/middlewares.js';
 
-module.exports = function() {
+const router = new express.Router();
 
-    var router = express.Router();
-
+function $1(req, res, next) {
 	$0
-
-    return router;
-
 }
+
+router.post(
+  '/$1',
+  middlewares.checkBody([]),
+  $1,
+);
+
+export default router;
 endsnippet
 
 
@@ -521,10 +526,15 @@ endsnippet
 
 
 
-snippet impcomp
+snippet impcom
 import $1Component from 'components/$1/$1.component.js'
 endsnippet
 
+
+
+snippet impcon
+import $1Container from 'containers/$1/$1.container.js'
+endsnippet
 
 
 
