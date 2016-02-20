@@ -49,7 +49,8 @@ alias du='du -h'
 # replace rm with trash
 alias rm='trash'
 
-alias nwjs='~/nwjs-v0.12.2-osx-x64/nwjs.app/Contents/MacOS/nwjs'
+# alias nwjs='/Applications/nwjs.app/Contents/MacOS/nwjs'
+alias nwjs='~/Downloads/nwjs-v0.12.3-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 alias brewup='brew update && brew upgrade --all && brew cleanup'
 

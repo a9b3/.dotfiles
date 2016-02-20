@@ -24,6 +24,7 @@ filetype indent on
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
+au BufRead,BufNewFile *.scss set filetype=scss.css
 
 " Clear trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -173,6 +174,8 @@ let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Pathogen, plugin stuff
