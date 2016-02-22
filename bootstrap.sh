@@ -214,8 +214,8 @@ applications ()
 
     if [ ! -e /Applications/iTerm.app ]; then
         printf "installing iTerm2...\n"
-        wget https://iterm2.com/downloads/stable/iTerm2-2_1_4.zip
-        unzip iTerm2-2_1_4.zip
+        wget https://iterm2.com/downloads/beta/iTerm2-2_9_20160206.zip
+        unzip iTerm2-2_9_20160206.zip
         sudo cp -r iTerm.app /Applications/
         printf "done installing iTerm2...\n"
     fi
