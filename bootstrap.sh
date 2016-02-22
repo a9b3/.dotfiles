@@ -52,7 +52,7 @@ homebrewApps ()
         'git'
         'ctags-exuberant'
         'mongodb'
-    	'node'
+        'node'
         'fasd'
         'ruby'
     )
