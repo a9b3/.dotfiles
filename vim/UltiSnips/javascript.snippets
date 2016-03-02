@@ -1,7 +1,11 @@
-################################################
-#					General					   #
-################################################
-
+# GENERAL
+snippet class
+class $1 {
+	constuctor() {
+		$0
+	}
+}
+endsnippet
 
 snippet while
 while($1) {
@@ -9,14 +13,11 @@ while($1) {
 }
 endsnippet
 
-
 snippet cfun
 const $1 = ($2) => {
 	$0
 };
 endsnippet
-
-
 
 snippet pro
 new Promise((resolve, reject) => {
@@ -24,37 +25,25 @@ new Promise((resolve, reject) => {
 });
 endsnippet
 
-
-
 snippet require
 , $1 = require('$1')
 endsnippet
-
-
 
 snippet imp
 import { $1 } from '$2';
 endsnippet
 
-
-
 snippet print
 console.log('$1');
 endsnippet
-
-
 
 snippet nprint
 console.log('\n\n', $1, '\n\n');
 endsnippet
 
-
-
 snippet alog
 console.log.apply(console, $1.map($2 => $3));
 endsnippet
-
-
 
 snippet func
 function ${1:name}(${2:args}) {
@@ -62,26 +51,11 @@ function ${1:name}(${2:args}) {
 }
 endsnippet
 
-
-
-snippet ifun
-;(function() {
-	'use strict';
-
-	$1
-
-}());
-endsnippet
-
-
-
 snippet for
 for (let $1 = 0; $1 < $2; $1++) {
 	$0
 }
 endsnippet
-
-
 
 snippet refor
 for (let $1 = $2; $1 >= 0; $1--) {
@@ -89,23 +63,17 @@ for (let $1 = $2; $1 >= 0; $1--) {
 }
 endsnippet
 
-
-
 snippet forin
 for (let $1 in $2) {
 	$3
 }
 endsnippet
 
-
-
 snippet iife
 (function() {
 	$1
 })();
 endsnippet
-
-
 
 snippet try
 try {
@@ -115,39 +83,16 @@ try {
 }
 endsnippet
 
-
-
 snippet pfn
 $1.prototype.$2 = function($3) {
 	$0
 };
 endsnippet
 
-
-
 snippet extend
 $1.prototype = Object.create($2.prototype);
 $1.prototype.constructor = $1;
 endsnippet
-
-
-
-snippet =
-($1) => {
-	$0
-}
-endsnippet
-
-
-
-snippet copy
-/*
- * Copyright (c) 2015-2016, Sam Lau
- * All rights reserved.
- */
-endsnippet
-
-
 
 snippet then
 .then(($1) => {
@@ -155,41 +100,29 @@ snippet then
 })
 endsnippet
 
-
-
 snippet catch
 .catch(($1) => {
 	$0
 })
 endsnippet
 
-
-
 snippet exports
 module.exports = $1;
 endsnippet
 
-
-
 snippet switch
 switch($1) {
-case $2:
 	$0
-	return;
-default:
-	return;
+	default:
+		return;
 }
 endsnippet
-
-
 
 snippet case
 case $1:
 	$0
-	return;
+	break;
 endsnippet
-
-
 
 snippet forEach
 $1.forEach(($2) => {
@@ -197,13 +130,9 @@ $1.forEach(($2) => {
 });
 endsnippet
 
-
-
 snippet assign
 Object.assign({}, $1, $2);
 endsnippet
-
-
 
 snippet timeout
 setTimeout(() => {
@@ -211,17 +140,11 @@ setTimeout(() => {
 }, $1);
 endsnippet
 
-
-
-
 snippet arrow
-() => {
+($1) => {
 	$0
-};
+}
 endsnippet
-
-
-
 
 snippet interval
 setInterval(() => {
@@ -229,31 +152,15 @@ setInterval(() => {
 }, $1);
 endsnippet
 
-
-
-
 snippet lorem
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend
 velit id turpis fringilla volutpat. Nulla tristique sem ex, ac dignissim odio
 volutpat sit amet.
 endsnippet
 
-
-
 snippet param
 @param {$1} $2 - $3
 endsnippet
-
-
-
-snippet constructor
-function $1($2) {
-	if (!(this instanceof $1)) return new $1($2);
-	$0
-}
-endsnippet
-
-
 
 snippet fcom
 /**
@@ -261,13 +168,7 @@ snippet fcom
  */
 endsnippet
 
-
-
-################################################
-#					JsDoc					   #
-################################################
-
-
+# JSDOC
 snippet typedef
 /**
  * $3
@@ -277,17 +178,10 @@ snippet typedef
  */
 endsnippet
 
-
-
-################################################
-#					Angular					   #
-################################################
-
+# Angular
 snippet module
 angular.module('$1', [$2]);
 endsnippet
-
-
 
 snippet run
 angular.module('$1')
@@ -300,29 +194,12 @@ function $2Run() {
 }
 endsnippet
 
-
-
-snippet config
-angular.module('$1')
-	.config([
-		$2Config
-	]);
-
-function $2Config() {
-	$0
-}
-endsnippet
-
-
-
 snippet controller
 angular.module('$1')
 .controller('$2', ($3) => {
 	$0
 });
 endsnippet
-
-
 
 snippet filter
 angular.module('$1')
@@ -338,8 +215,6 @@ function $2Filter($3) {
 }
 endsnippet
 
-
-
 snippet directive
 angular.module('$1')
 .directive('$2', () => {
@@ -352,8 +227,6 @@ angular.module('$1')
 });
 endsnippet
 
-
-
 snippet factory
 angular.module('$1')
 .factory('$2', function($3) {
@@ -361,204 +234,32 @@ angular.module('$1')
 });
 endsnippet
 
-
-
-################################################
-#					Node					   #
-################################################
-
-
-snippet debug
-const debug = require('debug')(config.debugTag + ':'
-                               + path.basename(__dirname) + '/'
-                               + path.basename(__filename));
-endsnippet
-
-
-snippet init
-'use strict';
-
-// Dependencies
-var path = require('path');
-// App Dependencies
-var config = rootRequire('config')
-	, debug = require('debug')(config.debugTag + ':' + path.basename(__dirname) + ':'
-								+ path.basename(__filename));
-
-$0
-endsnippet
-
-
-
-snippet router
-'use strict';
-
-import express from 'express';
-import * as middlewares from 'services/middlewares.js';
-
-const router = new express.Router();
-
-function $1(req, res, next) {
-	$0
-}
-
-router.post(
-  '/$1',
-  middlewares.checkBody([]),
-  $1,
-);
-
-export default router;
-endsnippet
-
-
-
-snippet fs
-fs.readdirSync(path.resolve($1)).forEach(function(file) {
-	var excludes = /^(\.)/;
-	if (excludes.test(file)) return;
-
-	var childpath = path.resolve($1, file);
-	$0
-});
-endsnippet
-
-
-
-
-################################################
-#					React					   #
-################################################
-
-
-
-snippet reactclass
-const $1 = React.createClass({
-
-	getInitialState() {
-		return {};
-	},
-
-	componentDidMount() {
-
-	},
-
-	componentWillUnmount() {
-
-	},
-
-	render() {
-		return (
-			$0
-		);
-	},
-
-});
-endsnippet
-
-
-
-snippet reactinit
-'use strict';
-
-import React, { PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
-
-const $1 = React.createClass({
-
-	getInitialState() {
-		return {};
-	},
-
-	componentDidMount() {
-
-	},
-
-	componentWillUnmount() {
-
-	},
-
-	render() {
-		return (
-			<div>
-				$0
-			</div>
-		);
-	},
-
-});
-
-export default $1;
-endsnippet
-
-
-
+# React
 snippet iifejsx
 {(() => {
 	$0
 })()}
 endsnippet
 
-
-
-
 snippet cl
 className="$1"
 endsnippet
 
-
-
-
-snippet cardsection
-{/* section */}
-<div className="row">
-	<div className="col self-center grid50 m-pad">
-		{/* description */}
-		<div className="m-pad">
-		</div>
-
-		{/* example */}
-		<div>
-		</div>
-	</div>
-
-	<div className="item grid50 m-pad">
-		<div className="grow1">
-			{/* example code */}
-			<pre><code className="html">
-			</code></pre>
-		</div>
-	</div>
-</div>
+snippet link
+import { Link } from 'react-router';
 endsnippet
 
-
-
-snippet impcom
-import $1Component from 'components/$1/$1.component.js'
+snippet Motion
+<Motion style={$1}>
+	{interpolatingStyle => {
+		return (
+			$0
+		);
+	}}
+</Motion>
 endsnippet
 
-
-
-snippet impcon
-import $1Container from 'containers/$1/$1.container.js'
-endsnippet
-
-
-
-snippet prop
-React.PropTypes.$1
-endsnippet
-
-
-
-
-################################################
-#					Redux					   #
-################################################
-
-
-
+# Redux
 snippet reducer
 function $1(state$2, action) {
 	switch(action.type) {
@@ -569,97 +270,19 @@ function $1(state$2, action) {
 }
 endsnippet
 
-
-
-################################################
-#					Misc					   #
-################################################
-
-
-snippet leetcode
-'use strict';
-
-function $1() {
-
-}
-
-console.log($1());
-endsnippet
-
-
-
-snippet bl
-/******************************
-		$0
-******************************/
-endsnippet
-
-
-
+# Misc
 snippet gulptask
 gulp.task('$1', function(done) {
 	$0
 });
 endsnippet
 
-
-
-
-################################################
-#					Parse					   #
-################################################
-
-
-
-snippet callbackobject
-{
-	success: function(res) {
-		$1
-	},
-	error: function(res, error) {
-		if (error) $0;
-	}
-}
-endsnippet
-
-
-
-snippet flex
-flex: '${1:flex-grow} ${2:flex-shrink} ${3:flex-basis,auto,initial,inherit}'
-endsnippet
-
-
-
-################################################
-#					Mocha					   #
-################################################
-
-
-
-snippet testinit
-'use strict';
-
-// Global access to Promise
-require('es6-promise').polyfill();
-
-process.env.NODE_ENV = 'test';
-
-import should from 'should';
-
-describe('$1', () => {
-	$0
-});
-endsnippet
-
-
-
+# Mocha
 snippet it
 it('$1', () => {
 	$0
 });
 endsnippet
-
-
 
 snippet describe
 describe('$1', () => {
