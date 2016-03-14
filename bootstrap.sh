@@ -6,6 +6,20 @@
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 # while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+####################
+# Util functions
+####################
+exists ()
+{
+  program=$1
+
+  if hash $program >/dev/null 2>&1; then
+    return 0
+  else
+    return 1
+  fi
+}
+
 xcode ()
 {
     echo installing xcode...
@@ -22,10 +36,10 @@ xcode ()
 homebrew ()
 {
     echo "installing homebrew..."
-    if [[ $(brew) ]]; then
-        echo "brew already installed"
+    if exists brew; then
+      echo brew already installed
     else
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+      ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
     echo "done installing homebrew..."
 }
