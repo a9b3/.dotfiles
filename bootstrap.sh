@@ -122,7 +122,7 @@ vimPlugins ()
   'https://github.com/SirVer/ultisnips.git'
   'https://github.com/Valloric/YouCompleteMe.git'
   'https://github.com/airblade/vim-gitgutter.git'
-  'https://github.com/bling/vim-airline.git'
+  'https://github.com/bling/vim-airline-themes.git'
   'https://github.com/ctrlpvim/ctrlp.vim.git'
   'https://github.com/mattn/emmet-vim.git'
   'https://github.com/mxw/vim-jsx.git'
