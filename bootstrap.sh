@@ -20,6 +20,9 @@ exists ()
   fi
 }
 
+####################
+# Init functions
+####################
 xcode ()
 {
   echo installing xcode...
@@ -40,6 +43,7 @@ homebrew ()
     echo brew already installed
   else
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew cask
   fi
   echo "done installing homebrew..."
 }
@@ -363,6 +367,9 @@ finished ()
   open ~/Downloads
 }
 
+####################
+# Immediately Invoke
+####################
 xcode
 homebrew
 homebrewApps
