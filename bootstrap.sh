@@ -103,7 +103,6 @@ homebrewCaskApps ()
   'messenger'
   'sourcetree'
   'nvalt'
-  'dockertoolbox'
   )
 
   for i in "${caskAppsToInstall[@]}"; do
@@ -218,7 +217,7 @@ ohMyZsh ()
   currShell=$(echo $SHELL)
   if [ $currShell != '/usr/local/bin/zsh' ]; then
     echo setting zsh as default shell...
-    echo $(which zsh) | tee -a /etc/shells
+    sudo echo $(which zsh) | tee -a /etc/shells
     sudo chsh -s $(which zsh)
     echo done setting zsh as default shell...
   fi
@@ -250,28 +249,6 @@ fonts ()
     unzip ProggyCleanSZBP.ttf.zip
     mv ProggyCleanSZBP.ttf /Library/Fonts/
     printf "done installing ProggyCleanSZBP font...\n"
-  fi
-}
-
-projectFolder ()
-{
-  if [ ! -e ~/Projects ]; then
-    mkdir ~/Projects
-    cd ~/Projects
-
-    if [ ! -e ~/Projects/esayemm ]; then
-      mkdir esayemm
-      cd esayemm
-      git clone https://github.com/esayemm/profile-manager-cli.git
-      cd profile-manager-cli
-      npm link
-      cd ..
-      cd ..
-    fi
-
-    if [ ! -e ~/Projects/sandbox ]; then
-      mkdir sandbox
-    fi
   fi
 }
 
@@ -338,7 +315,6 @@ ycm
 ohMyZsh
 node
 fonts
-projectFolder
 generateKeys
 docker
 finished
