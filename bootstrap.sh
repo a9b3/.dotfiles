@@ -166,7 +166,7 @@ ycm ()
     echo compiling ycm...
     cd ~/.vim/bundle/YouCompleteMe
     git submodule update --init --recursive
-    ./install.py --clang-completer
+    ./install.py --clang-completer --tern-completer
     cd ~
     echo done compiling ycm...
   fi
