@@ -82,3 +82,5 @@ alias npmu='npm uninstall'
 
 alias home='profile-manager profile home'
 alias work='profile-manager profile work'
+
+alias ustart='virtualenv venv; source venv/bin/activate'
