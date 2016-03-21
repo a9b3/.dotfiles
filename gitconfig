@@ -1,12 +1,12 @@
 [user]
-    email = esayemm@gmail.com
-	name = Sam Lau
+  email = esayemm@gmail.com
+  name = Sam Lau
 [color]
 	ui = always
-    branch = auto
-    diff = auto
-    interactive = auto
-    status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
 [color "branch"]
 	current = yellow reverse
 	local = yellow
@@ -32,33 +32,33 @@
 	ca = commit -am
 	cm = !git add -A && git commit -m
 
-	# branch
-	b = branch -v
+  # branch
+  b = branch -v
 
-    # log
-    l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-	log = log --graph --date=short
+  # log
+  l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+  log = log --graph --date=short
 
-    # add
-    a = add
+  # add
+  a = add
 
 	# push
-    ps = push
+  ps = push
 
-    # remote
-    r = remote -v
+  # remote
+  r = remote -v
 	d = difftool
 
-    # wip
-    up = !git pull --rebase --prune $@
-    save = !git add -A && git commit -m 'SAVEPOINT'
-    undo = reset HEAD~1 --mixed
-    amend = commit -a --amend
-    go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  # wip
+  up = !git pull --rebase --prune $@
+  save = !git add -A && git commit -m 'SAVEPOINT'
+  undo = reset HEAD~1 --mixed
+  amend = commit -a --amend
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
 
-    # clean
-    bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | gxargs -r git branch -d; }; f"
-    bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+  # clean
+  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | gxargs -r git branch -d; }; f"
+  bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 [diff]
 	tool = vimdiff
 [difftool]
