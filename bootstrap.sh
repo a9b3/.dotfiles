@@ -39,13 +39,16 @@ xcode ()
 homebrew ()
 {
   echo "installing homebrew..."
+
   if exists brew; then
     echo brew already installed
   else
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew cask
     brew tap caskroom/versions
+    brew tap caskroom/fonts
   fi
+
   echo "done installing homebrew..."
 }
 
@@ -100,6 +103,7 @@ homebrewCaskApps ()
   'messenger'
   'sourcetree'
   'nvalt'
+  'dockertoolbox'
   )
 
   for i in "${caskAppsToInstall[@]}"; do
@@ -148,7 +152,6 @@ vimPlugins ()
 
   reposToClone=(
   'https://github.com/Raimondi/delimitMate.git'
-  'https://github.com/othree/javascript-libraries-syntax.vim.git',
   'https://github.com/SirVer/ultisnips.git'
   'https://github.com/Valloric/YouCompleteMe.git'
   'https://github.com/airblade/vim-gitgutter.git'
@@ -156,6 +159,7 @@ vimPlugins ()
   'https://github.com/ctrlpvim/ctrlp.vim.git'
   'https://github.com/mattn/emmet-vim.git'
   'https://github.com/mxw/vim-jsx.git'
+  'https://github.com/othree/javascript-libraries-syntax.vim.git',
   'https://github.com/pangloss/vim-javascript.git'
   'https://github.com/scrooloose/nerdtree.git'
   'https://github.com/terryma/vim-multiple-cursors.git'
@@ -229,83 +233,11 @@ node ()
 
 ruby ()
 {
-  if [ ! scss-lint ]; then
+  if exists scss-lint; then
     printf "installing ruby gems...\n"
     gem install scss-lint
     printf "done installing ruby gems...\n"
   fi
-}
-
-applications ()
-{
-  printf "installing applications...\n"
-  cd ~/Downloads
-
-  if [ ! -e /Applications/Google\ Chrome.app ]; then
-    printf "installing chrome...\n"
-    wget https://dl.google.com/chrome/mac/stable/GGRO/googlechrome.dmg
-    open googlechrome.dmg
-    sudo cp -r /Volumes/Google\ Chrome/Google\ Chrome.app /Applications/
-    printf "done installing chrome...\n"
-  fi
-
-  if [ ! -e /Applications/Alfred\ 2.app ]; then
-    printf "installing alfred...\n"
-    wget https://cachefly.alfredapp.com/Alfred_2.8.1_425.zip
-    unzip Alfred_2.8.1_425.zip
-    sudo cp -r Alfred\ 2.app /Applications/
-    printf "done installing alfred...\n"
-  fi
-
-  if [ ! -e /Applications/iTerm.app ]; then
-    printf "installing iTerm2...\n"
-    wget https://iterm2.com/downloads/beta/iTerm2-2_9_20160206.zip
-    unzip iTerm2-2_9_20160206.zip
-    sudo cp -r iTerm.app /Applications/
-    printf "done installing iTerm2...\n"
-  fi
-
-  if [ ! -e /Applications/BetterTouchTool.app ]; then
-    printf "installing BetterTouchTools\n"
-    wget http://bettertouchtool.net/BetterTouchTool.zip
-    unzip BetterTouchTool.zip
-    sudo cp -r BetterTouchTool.app /Applications/
-    printf "done installing BetterTouchTools\n"
-  fi
-
-  if [ ! -e /Applications/HyperSwitch.app ]; then
-    printf "installing HyperSwitch\n"
-    wget https://bahoom.com/hyperswitch/HyperSwitch.zip
-    unzip HyperSwitch.zip
-    sudo cp -r HyperSwitch.app /Applications/
-    printf "done installing HyperSwitch\n"
-  fi
-
-  if [ ! -e /Applications/Messenger.app ]; then
-    printf "installing Messenger\n"
-    wget https://github.com/Aluxian/Facebook-Messenger-Desktop/releases/download/v1.4.3/Messenger.dmg
-    open Messenger.dmg
-    sudo cp -r /Volumes/Messenger/Messenger.app /Applications/
-    printf "done installing Messenger\n"
-  fi
-
-  if [ ! -e /Applications/SourceTree.app ]; then
-    printf "installing SourceTree\n"
-    wget http://downloads.atlassian.com/software/sourcetree/SourceTree_2.1.dmg
-    open SourceTree_2.1.dmg
-    sudo cp -r /Volumes/SourceTree/SourceTree.app /Applications/
-    printf "done installing SourceTree\n"
-  fi
-
-  if [ ! -e /Applications/nvALT.app ]; then
-    printf "installing nvALT\n"
-    wget http://abyss.designheresy.com/nvaltb/nvalt2.2b106.zip
-    unzip nvalt2.2b106.zip
-    sudo cp -r nvALT.app /Applications/
-    printf "done installing nvALT\n"
-  fi
-
-  printf "done installing applications...\n"
 }
 
 fonts ()
@@ -399,12 +331,12 @@ finished ()
 xcode
 homebrew
 homebrewApps
+homebrewCaskApps
 dotfiles
 vimPlugins
 ycm
 ohMyZsh
 node
-applications
 fonts
 projectFolder
 generateKeys
