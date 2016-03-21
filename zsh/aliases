@@ -40,9 +40,6 @@ alias week='date +%V'
 # Htop in sudo
 alias htop='sudo htop'
 
-# Youtube-dl
-# alias youtube-dl='youtube-dl -o %(title)s.%(ext)s '
-
 # du
 alias du='du -h'
 
@@ -58,29 +55,16 @@ alias dockerup='eval "$(docker-machine env default)"'
 
 alias edithosts='sudo vim /etc/hosts'
 
-alias mou='open -a /Applications/Mou.app/Contents/MacOS/Mou'
-
 alias ag='ag --path-to-agignore=~/.agignore'
 
 # for ghost blog, ghost must be running on port 2368 and buster must have
 # already been set up with github
 alias buster-push='buster generate --domain=http://localhost:2368 && buster deploy'
 
-alias ionrun='ionic run ios & ionic run android'
-
-alias subl='/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl';
-
 # mistake open vi use vim
 alias vi='vim'
 
 # go to project root
 alias r='cd $(git rev-parse --show-toplevel)'
-
-# npm shortcuts
-alias npmi='npm install'
-alias npmu='npm uninstall'
-
-alias home='profile-manager profile home'
-alias work='profile-manager profile work'
 
 alias ustart='virtualenv venv; source venv/bin/activate'
