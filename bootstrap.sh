@@ -226,7 +226,7 @@ ohMyZsh ()
 node ()
 {
   printf "installing npm global packages...\n"
-  npm install -g gulp grunt grunt-cli nodemon mocha
+  npm install -g gulp grunt grunt-cli nodemon mocha webpack
   printf "done installing npm global packages...\n"
 }
 
