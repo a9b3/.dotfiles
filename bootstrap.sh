@@ -186,13 +186,6 @@ vimPlugins ()
     cp -R ~/.vim/vim-colorschemes/colors ~/.vim
   fi
 
-  cd ~
-
-  echo done installing vim plugins...
-}
-
-ycm ()
-{
   build_file=~/.vim/bundle/YouCompleteMe/third_party/ycmd/build.py
 
   if [[ ! -f "$build_file" ]]; then
@@ -203,6 +196,10 @@ ycm ()
     cd ~
     echo done compiling ycm...
   fi
+
+  cd ~
+
+  echo done installing vim plugins...
 }
 
 ohMyZsh ()
@@ -311,7 +308,6 @@ homebrewApps
 homebrewCaskApps
 dotfiles
 vimPlugins
-ycm
 ohMyZsh
 node
 fonts
