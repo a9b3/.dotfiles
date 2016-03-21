@@ -44,6 +44,7 @@ homebrew ()
   else
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew cask
+    brew tap caskroom/versions
   fi
   echo "done installing homebrew..."
 }
@@ -82,6 +83,31 @@ homebrewApps ()
 
   brew cleanup
   echo done installing stuff through homebrew...
+}
+
+homebrewCaskApps ()
+{
+  echo installing homebrew cask apps...
+
+  brew update
+
+  caskAppsToInstall=(
+  'google-chrome'
+  'bettertouchtool'
+  'hyperswitch'
+  'alfred'
+  'iterm2-beta'
+  'messenger'
+  'sourcetree'
+  'nvalt'
+  )
+
+  for i in "${caskAppsToInstall[@]}"; do
+    brew cask install $i
+  done
+
+  brew cleanup
+  echo done installing homebrew cask apps...
 }
 
 dotfiles ()
