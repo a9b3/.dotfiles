@@ -30,11 +30,11 @@ snippet require
 endsnippet
 
 snippet imp
-import { $1 } from '$2';
+import { $1 } from '$2'
 endsnippet
 
 snippet print
-console.log('$1');
+console.log('$1')
 endsnippet
 
 snippet nprint
@@ -261,7 +261,7 @@ endsnippet
 
 # Redux
 snippet reducer
-function $1(state$2, action) {
+function reducer(state$1, action) {
 	switch(action.type) {
 		$0
 		default:
@@ -294,4 +294,18 @@ snippet disablelint
 /*eslint-disable*/
 $0
 /*eslint-enable*/
+endsnippet
+
+snippet inv
+invariant($1, '$2')
+endsnippet
+
+snippet co
+const {
+	$1
+} = $2
+endsnippet
+
+snippet bindthis
+this.$1 = this.$1.bind(this)
 endsnippet
