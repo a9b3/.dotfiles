@@ -3,20 +3,18 @@ def ${1:name}(${2:args}):
 	$0
 endsnippet
 
-
-
 snippet print
 print "$0"
 endsnippet
 
-
+snippet log
+print "$0%s" % $1
+endsnippet
 
 snippet for
 for $1 in range(0, $2):
 	$0
 endsnippet
-
-
 
 snippet if
 if ($1):
@@ -26,4 +24,8 @@ endsnippet
 snippet while
 while ($1):
 	$0
+endsnippet
+
+snippet imp
+import $0
 endsnippet
