@@ -1,7 +1,7 @@
 # GENERAL
 snippet class
 class $1 {
-	constuctor() {
+	constructor() {
 		$0
 	}
 }
@@ -21,8 +21,16 @@ endsnippet
 
 snippet pro
 new Promise((resolve, reject) => {
-	$0
-});
+	return $1($2, (e) => {
+		if (e) {
+			return reject(e)
+		}
+
+		$0
+
+		resolve()
+	})
+})
 endsnippet
 
 snippet require
@@ -104,10 +112,6 @@ snippet catch
 .catch(($1) => {
 	$0
 })
-endsnippet
-
-snippet exports
-module.exports = $1;
 endsnippet
 
 snippet switch
@@ -308,4 +312,8 @@ endsnippet
 
 snippet bindthis
 this.$1 = this.$1.bind(this)
+endsnippet
+
+snippet exp
+export default $0
 endsnippet
