@@ -109,7 +109,8 @@ set t_Co=256
 
 syntax enable
 
-colorscheme Tomorrow-Night-Eighties
+" colorscheme Tomorrow-Night-Eighties
+colorscheme Molokai
 
 hi Normal ctermbg=none
 highlight NonText ctermbg=none
@@ -217,8 +218,14 @@ let g:gitgutter_realtime=1
 let g:gitgutter_sign_column_always=1
 
 " vim-airline
+function! MyOverride(...)
+  call a:1.add_section('Tag', ' %{strftime("%r")} ')
+endfunction
+call airline#add_statusline_func('MyOverride')
 let g:airline_powerline_fonts=0
 let g:airline_theme='simple'
+let g:airline_right_sep=''
+let g:airline_left_sep=''
 
 " buffer as tabs on top
 let g:airline#extensions#tabline#enabled = 1
