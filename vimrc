@@ -251,6 +251,12 @@ let g:user_emmet_leader_key='<C-Z>'
 
 let g:indent_guides_start_level = 2
 
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -282,14 +288,14 @@ nnoremap j gj
 nnoremap k gk
 
 " capitol movement keys will do sensible corresponding movement
-noremap H ^
-noremap L g_
-noremap J <S-}>
-noremap K <S-{>
+" noremap H ^
+" noremap L g_
+" noremap J <S-}>
+" noremap K <S-{>
 
 " control a/e will go back and front of line
-nmap <C-a> ^
-nmap <C-e> g_
+" nmap <C-a> ^
+" nmap <C-e> g_
 inoremap <C-a> <esc>I
 inoremap <C-e> <esc>A
 
