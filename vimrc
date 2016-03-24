@@ -295,10 +295,10 @@ nnoremap j gj
 nnoremap k gk
 
 " capitol movement keys will do sensible corresponding movement
-" noremap H ^
-" noremap L g_
-" noremap J <S-}>
-" noremap K <S-{>
+noremap H ^
+noremap L g_
+noremap J <S-}>
+noremap K <S-{>
 
 " control a/e will go back and front of line
 " nmap <C-a> ^
