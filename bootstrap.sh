@@ -127,6 +127,7 @@ dotfiles ()
   'vim'
   'gitconfig'
   'npmrc'
+  'tmux.conf'
   )
 
   for i in "${filesToSymlink[@]}"; do
