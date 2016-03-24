@@ -186,7 +186,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " Multiple Cursor
 let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-d>'
+let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_quit_key='<Esc>'
 
 " delimitMate
@@ -256,6 +256,13 @@ nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+
+noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
+noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
+noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
+noremap <silent> <c-y> :call smooth_scroll#up(&scroll/4, 0, 2)<CR>
+noremap <silent> <c-e> :call smooth_scroll#down(&scroll/4, 0, 2)<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Key bindings
