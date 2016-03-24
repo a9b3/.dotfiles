@@ -165,6 +165,7 @@ vimPlugins ()
   'https://github.com/tomtom/tcomment_vim.git'
   'https://github.com/tpope/vim-fugitive.git'
   'https://github.com/tpope/vim-surround'
+  'https://github.com/easymotion/vim-easymotion.git'
   )
 
   regex="/([^/]+)\.git$"
