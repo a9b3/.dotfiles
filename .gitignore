@@ -6,3 +6,4 @@ extras/
 private/
 vim-colorschemes/
 tmux/plugins/
+tmux/resurrect/
