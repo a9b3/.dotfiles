@@ -251,12 +251,14 @@ let g:user_emmet_leader_key='<C-Z>'
 
 let g:indent_guides_start_level = 2
 
+" easy motion trigger with 's'
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 
+" vim smooth scroll use for default page nav
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
 noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
 noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
@@ -278,10 +280,7 @@ imap jk <Esc>
 map <leader>w :w!<cr>
 map <leader>q :q<cr>
 
-" save session
-nnoremap <leader>s :mksession<cr>
-
-" tab shortcuts
+" tab buffer shortcuts
 nmap <leader>[ :bprevious<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>d :bdelete<CR>
@@ -301,14 +300,8 @@ noremap J <S-}>
 noremap K <S-{>
 
 " control a/e will go back and front of line
-" nmap <C-a> ^
-" nmap <C-e> g_
 inoremap <C-a> <esc>I
 inoremap <C-e> <esc>A
-
-" quit edit vimrc
-map <leader>ve :vsp $MYVIMRC<cr>
-map <leader>vs :source $MYVIMRC<cr>
 
 " clear search highlight
 nnoremap <leader><space> :nohlsearch<cr>
