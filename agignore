@@ -6,3 +6,5 @@ all.js
 lib.js
 *.bundle*
 production/
+build/
+public/
