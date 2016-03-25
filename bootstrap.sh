@@ -170,6 +170,7 @@ vimPlugins ()
   'https://github.com/tpope/vim-surround'
   'https://github.com/easymotion/vim-easymotion.git'
   'https://github.com/terryma/vim-smooth-scroll.git'
+  'https://github.com/rking/ag.vim.git'
   )
 
   regex="/([^/]+)\.git$"
