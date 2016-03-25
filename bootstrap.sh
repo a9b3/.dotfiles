@@ -128,6 +128,8 @@ dotfiles ()
   'gitconfig'
   'npmrc'
   'tmux.conf'
+  'tmux'
+  'agignore'
   )
 
   for i in "${filesToSymlink[@]}"; do
