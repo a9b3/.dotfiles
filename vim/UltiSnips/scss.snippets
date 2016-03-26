@@ -4,60 +4,54 @@ snippet bl
  *******************************/
 endsnippet
 
-
-
 snippet box-shadow
 box-shadow: ${1:offset-x} ${2:offset-y} ${3:blur-radius} ${4:color};
 endsnippet
-
-
 
 snippet gradient
 background: linear-gradient(${1:color} 10%, ${2:color} 100%);
 endsnippet
 
-
-
 snippet import
 @import url(https://fonts.googleapis.com/css?family=$1:100,200,300,400,500,600,700,800);
 endsnippet
-
-
 
 snippet transition
 transition: $1 0.2s;
 endsnippet
 
-
-
 snippet flex
 flex: ${1:grow} ${2:shrink} ${3:auto};
 endsnippet
-
-
 
 snippet flexflow
 flex-flow: ${1:row} ${2:wrap};
 endsnippet
 
-
 snippet animation
 animation: ${1:name} ${2:duration} $3;
 endsnippet
-
-
 
 snippet timingfunc
 transition-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
 endsnippet
 
-
 snippet ext
 @extend %$1;
 endsnippet
 
-
-
 snippet cubic
 animation-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
+endsnippet
+
+snippet key
+@keyframes :global($1) {
+	$0
+	0% {
+
+	}
+	100% {
+
+	}
+}
 endsnippet
