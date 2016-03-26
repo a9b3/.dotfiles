@@ -320,7 +320,7 @@ map <left> <NOP>
 map <right> <NOP>
 
 " shortcut to silver searcher
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ag<space>
 
 " shortcut Gblame
 nnoremap <leader>g :Gblame<cr>
