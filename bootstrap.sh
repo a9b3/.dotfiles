@@ -78,6 +78,7 @@ homebrewApps ()
   'node'
   'fasd'
   'ruby'
+  'tmux'
   )
 
   for i in "${brewAppsToInstall[@]}"; do
@@ -96,6 +97,7 @@ homebrewCaskApps ()
 
   caskAppsToInstall=(
   'google-chrome'
+  'google-chrome-canary'
   'bettertouchtool'
   'hyperswitch'
   'alfred'
