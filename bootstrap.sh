@@ -79,6 +79,7 @@ homebrewApps ()
   'fasd'
   'ruby'
   'tmux'
+  'go --cross-compile-common'
   )
 
   for i in "${brewAppsToInstall[@]}"; do
@@ -244,6 +245,11 @@ ruby ()
   fi
 }
 
+go ()
+{
+  mkdir ~/go
+}
+
 fonts ()
 {
   cd ~/Downloads
@@ -318,6 +324,7 @@ dotfiles
 vimPlugins
 ohMyZsh
 node
+go
 fonts
 generateKeys
 docker
