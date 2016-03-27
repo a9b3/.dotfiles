@@ -58,7 +58,7 @@ set cursorline
 
 " Set lines to the cursor - when moving vertically using j/k
 " keeps cursor in the middle of the page
-set so=30
+" set so=30
 
 " Turn on the WiLd menu
 set wildmenu
