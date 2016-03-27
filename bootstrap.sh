@@ -248,6 +248,11 @@ ruby ()
 go ()
 {
   mkdir ~/go
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+  go get golang.org/x/tools/cmd/godoc
+  go get golang.org/x/tools/cmd/vet
+  go get github.com/golang/lint/golint
 }
 
 fonts ()
