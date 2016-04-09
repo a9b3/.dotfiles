@@ -133,6 +133,7 @@ set colorcolumn=80
 
 set number
 set numberwidth=2
+set relativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
