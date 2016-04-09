@@ -7,3 +7,4 @@ private/
 vim-colorschemes/
 tmux/plugins/
 tmux/resurrect/
+secrets
