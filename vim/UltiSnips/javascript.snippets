@@ -59,6 +59,12 @@ function ${1:name}(${2:args}) {
 }
 endsnippet
 
+snippet as
+async function ${1:name}(${2:args}) {
+	${3:body}
+}
+endsnippet
+
 snippet for
 for (let $1 = 0; $1 < $2; $1++) {
 	$0
@@ -287,15 +293,15 @@ endsnippet
 
 # Mocha
 snippet it
-it('$1', () => {
+it('$1', async () => {
 	$0
-});
+})
 endsnippet
 
 snippet describe
 describe('$1', () => {
 	$0
-});
+})
 endsnippet
 
 snippet disablelint
