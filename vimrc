@@ -177,7 +177,8 @@ let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" ctrl+x ctrl+o
+autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Pathogen, plugin stuff
