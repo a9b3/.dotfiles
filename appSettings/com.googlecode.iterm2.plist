@@ -31082,13 +31082,13 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>928 1111 445 405 0 0 3008 1669 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>563 1199 606 456 0 0 3008 1669 </string>
+	<string>563 1205 606 456 0 0 3008 1669 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>155 593 592 584 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 3008 1692 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 1326 490 327 0 0 3008 1669 </string>
+	<string>1036 496 570 352 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>1 750 650 424 0 0 1920 1177 </string>
 	<key>New Bookmarks</key>
@@ -31685,7 +31685,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>ProggyCleanTTSZBP 18</string>
+			<string>ProggyCleanTTSZBP 16</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -33417,7 +33417,7 @@
 		</dict>
 	</array>
 	<key>NoSyncLastTipTime</key>
-	<real>481838941.21327502</real>
+	<real>482822940.70173299</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -33446,6 +33446,12 @@
 		<string>0012</string>
 		<string>0013</string>
 		<string>0014</string>
+		<string>0015</string>
+		<string>0016</string>
+		<string>0017</string>
+		<string>0018</string>
+		<string>0019</string>
+		<string>0020</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<true/>
