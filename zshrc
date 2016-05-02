@@ -20,7 +20,7 @@ do
 done
 unset file
 
-source ".dotfiles/secrets/env"
+source "~/.dotfiles/secrets/env"
 
 # Allow special keys
 stty -ixon -ixoff
