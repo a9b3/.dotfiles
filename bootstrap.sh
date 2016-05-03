@@ -106,6 +106,7 @@ homebrewCaskApps ()
   'messenger'
   'sourcetree'
   'nvalt'
+  'the-unarchiver'
   )
 
   for i in "${caskAppsToInstall[@]}"; do
