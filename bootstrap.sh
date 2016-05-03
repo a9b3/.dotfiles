@@ -107,6 +107,7 @@ homebrewCaskApps ()
   'sourcetree'
   'nvalt'
   'the-unarchiver'
+  'f-lux'
   )
 
   for i in "${caskAppsToInstall[@]}"; do
