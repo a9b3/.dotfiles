@@ -19,7 +19,8 @@ done
 unset file
 
 # source secrets/env if it exists
-[ -r "~/.dotfiles/secrets/env" ] && source "~/.dotfiles/secrets/env"
+# source "~/.dotfiles/secrets/env"
+[ -r ~/.dotfiles/secrets/env ] && source ~/.dotfiles/secrets/env || echo "no secret envs"
 
 # Allow special keys
 stty -ixon -ixoff
