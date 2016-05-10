@@ -53,6 +53,10 @@ snippet alog
 console.log.apply(console, $1.map($2 => $3));
 endsnippet
 
+snippet log
+console.log('[sam]', $0)
+endsnippet
+
 snippet func
 function ${1:name}(${2:args}) {
 	${3:body}
@@ -252,11 +256,11 @@ snippet iifejsx
 endsnippet
 
 snippet cl
-className="$1"
+className='$1'
 endsnippet
 
 snippet st
-styleName="$1"
+styleName='$1'
 endsnippet
 
 snippet link
@@ -348,4 +352,20 @@ snippet mdcode
 \\\`\\\`\\\`
 $0
 \\\`\\\`\\\`
+endsnippet
+
+snippet inst
+$1 = ($2) => {
+	$0
+}
+endsnippet
+
+snippet clf
+$1($2) {
+	$0
+}
+endsnippet
+
+snippet printvar
+console.log('[sam]', '$1', $1)
 endsnippet
