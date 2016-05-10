@@ -7,9 +7,10 @@ ZSH_THEME="arrow"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew zsh-syntax-highlighting)
 
-source $ZSH/oh-my-zsh.sh
+# Allow special keys
+stty -ixon -ixoff
 
-export MANPATH="/usr/local/man:$MANPATH"
+source $ZSH/oh-my-zsh.sh
 
 # Load everything in zsh folder
 for file in ~/.dotfiles/zsh/*
@@ -22,9 +23,6 @@ unset file
 # source "~/.dotfiles/secrets/env"
 [ -r ~/.dotfiles/secrets/env ] && source ~/.dotfiles/secrets/env || echo "no secret envs"
 
-# Allow special keys
-stty -ixon -ixoff
-
 # Key Binding
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
@@ -32,14 +30,6 @@ bindkey "^E" end-of-line
 # Programs
 # Init fasd
 eval "$(fasd --init auto)"
-
-# Go Paths
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-
-# Misc android
-export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH
 
 # Uses special alias to setup docker env
 dockerup
