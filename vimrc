@@ -25,6 +25,7 @@ au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
 au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.service set filetype=yaml
 
 " Clear trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
