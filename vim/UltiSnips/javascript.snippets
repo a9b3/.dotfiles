@@ -42,7 +42,7 @@ import { $1 } from '$2'
 endsnippet
 
 snippet print
-console.log('$1')
+console.log(\`$1\`)
 endsnippet
 
 snippet nprint
@@ -97,7 +97,7 @@ snippet try
 try {
 	$0
 } catch (e) {
-
+	console.log('ERROR', e)
 }
 endsnippet
 

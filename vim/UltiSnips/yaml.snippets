@@ -1,0 +1,12 @@
+snippet service
+[Unit]
+Description=Foo
+After=foo.service
+Wants=foo.service
+
+[Service]
+ExecStart=
+
+[Install]
+WantedBy=multi-user.target
+endsnippet
