@@ -35,8 +35,7 @@ do
 done
 unset file
 
-# Won't be commited to source control
-# source "~/.dotfiles/secrets/*"
+# source "~/.dotfiles/secrets/env"
 for file in ~/.dotfiles/secrets/*
 do
   [ -r "$file" ] && source "$file"
