@@ -51,6 +51,7 @@ fi
 # hub alias for -s instructions
 if which hub >/dev/null; then
   eval "$(hub alias -s)"
+  alias git='hub'
 fi
 
 # To make docker work need env variables
