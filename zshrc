@@ -1,3 +1,7 @@
+##############################################################################
+# oh-my-zsh
+##############################################################################
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="arrow"
@@ -7,10 +11,22 @@ ZSH_THEME="arrow"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git brew zsh-syntax-highlighting)
 
+source $ZSH/oh-my-zsh.sh
+
+##############################################################################
+# key bindings
+##############################################################################
+
 # Allow special keys
 stty -ixon -ixoff
 
-source $ZSH/oh-my-zsh.sh
+# Key Binding
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+
+##############################################################################
+# source files
+##############################################################################
 
 # Load everything in zsh folder
 for file in ~/.dotfiles/zsh/*
@@ -19,24 +35,33 @@ do
 done
 unset file
 
-# source secrets/env if it exists
-# source "~/.dotfiles/secrets/env"
-[ -r ~/.dotfiles/secrets/env ] && source ~/.dotfiles/secrets/env || echo "no secret envs"
-
-# Key Binding
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
+# Won't be commited to source control
+# source "~/.dotfiles/secrets/*"
+for file in ~/.dotfiles/secrets/*
+do
+  [ -r "$file" ] && source "$file"
+done
+unset file
 
 # Programs
 # Init fasd
-eval "$(fasd --init auto)"
+if which fasd >/dev/null; then
+  eval "$(fasd --init auto)"
+fi
 
-# Uses special alias to setup docker env
-dockerup
+# hub alias for -s instructions
+if which hub >/dev/null; then
+  eval "$(hub alias -s)"
+fi
+
+# To make docker work need env variables
+if which docker-machine >/dev/null; then
+  eval "$(docker-machine env default)"
+fi
 
 # automatically add non default keys
 if [ -e ~/.ssh/github_rsa ]; then
-    ssh-add ~/.ssh/github_rsa;
+  ssh-add ~/.ssh/github_rsa;
 fi
 
 # The next line updates PATH for the Google Cloud SDK.

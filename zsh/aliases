@@ -54,8 +54,6 @@ alias nwjs='~/Downloads/nwjs-v0.12.3-osx-x64/nwjs.app/Contents/MacOS/nwjs'
 
 alias brewup='brew update && brew upgrade --all && brew cleanup'
 
-alias dockerup='eval "$(docker-machine env default)"'
-
 alias edithosts='sudo vim /etc/hosts'
 
 alias ag='ag --path-to-agignore=~/.agignore'
