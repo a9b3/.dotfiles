@@ -10,3 +10,28 @@ ExecStart=
 [Install]
 WantedBy=multi-user.target
 endsnippet
+
+snippet pod
+apiVersion: v1
+kind: Pod
+metadata:
+	name: $1
+	labels:
+		app: $1
+spec:
+	containers:
+		- name: $1
+		  image: $2
+			args:
+				- "-http=0.0.0.0:80"
+				- "-health=0.0.0.0:81"
+		  ports:
+				- name: http
+					containerPort: 80
+				- name: health
+					containerPort: 81
+			resources:
+				limits:
+					cpu: 0.2
+					memory: "10Mi"
+endsnippet

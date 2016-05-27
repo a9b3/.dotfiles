@@ -31068,7 +31068,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>322</string>
+		<string>307</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -31082,11 +31082,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>647 291 669 527 0 0 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>269 717 606 456 0 0 1920 1177 </string>
+	<string>442 961 606 456 0 0 2560 1417 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>155 593 592 584 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 2560 1440 0 0 2560 1417 </string>
+	<string>0 0 1920 1200 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>1036 496 570 352 0 0 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -31841,7 +31841,7 @@
 			<key>Thin Strokes</key>
 			<integer>2</integer>
 			<key>Transparency</key>
-			<real>0.20005778968334198</real>
+			<real>0.23698224852071006</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
