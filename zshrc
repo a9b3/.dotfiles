@@ -25,6 +25,14 @@ bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
 ##############################################################################
+# path stuff
+##############################################################################
+
+export PATH=$PATH:~/opt/terraform
+export PATH=$PATH:~/opt/packer
+
+
+##############################################################################
 # source files
 ##############################################################################
 
@@ -64,8 +72,8 @@ if [ -e ~/.ssh/github_rsa ]; then
   ssh-add ~/.ssh/github_rsa;
 fi
 
-# The next line updates PATH for the Google Cloud SDK.
-source '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc'
-
-# The next line enables shell command completion for gcloud.
-source '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc'
+# # The next line updates PATH for the Google Cloud SDK.
+# source '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc'
+#
+# # The next line enables shell command completion for gcloud.
+# source '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc'
