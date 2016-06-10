@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""s
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
@@ -57,7 +57,7 @@ set cursorline
 
 " Set lines to the cursor - when moving vertically using j/k
 " keeps cursor in the middle of the page
-set so=30
+" set so=30
 
 " Turn on the WiLd menu
 set wildmenu
@@ -265,6 +265,7 @@ map <Leader>k <Plug>(easymotion-k)
 " override default search /
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
+let g:EasyMotion_user_smartsign_us = 1
 
 " vim smooth scroll use for default page nav
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
@@ -315,8 +316,8 @@ inoremap <C-e> <esc>A
 nnoremap <leader><space> :nohlsearch<cr>
 
 " open close folds
-nnoremap <space>o za
-nnoremap <space>O zA
+nnoremap <space> za
+nnoremap <space>o zA
 
 " do not allow arrow key movement
 map <up> <NOP>
@@ -336,4 +337,16 @@ nnoremap <leader>z <C-z>
 " shortcut for visual mode sort
 vnoremap <leader>s :sort
 
-let g:javascript_conceal_function   = "ƒ"
+" conceal characters for javascript
+" set conceallevel=1
+" set concealcursor=nvic
+" let g:javascript_conceal_function       = "ƒ"
+" let g:javascript_conceal_null           = "ø"
+" let g:javascript_conceal_this           = "@"
+" let g:javascript_conceal_return         = "⇚"
+" let g:javascript_conceal_undefined      = "¿"
+" let g:javascript_conceal_NaN            = "ℕ"
+" let g:javascript_conceal_prototype      = "¶"
+" let g:javascript_conceal_static         = "•"
+" let g:javascript_conceal_super          = "Ω"
+" let g:javascript_conceal_arrow_function = "⇒"
