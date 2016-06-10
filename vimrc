@@ -20,9 +20,9 @@ filetype on
 filetype plugin on
 filetype indent on
 
-" File type
-au BufNewFile,BufRead *.ejs set filetype=html
-au BufNewFile,BufRead *.handlebars set filetype=html
+" File types
+au BufRead,BufNewFile *.ejs set filetype=html
+au BufRead,BufNewFile *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
 au BufRead,BufNewFile *.scss set filetype=scss.css
 au BufRead,BufNewFile *.service set filetype=yaml
@@ -43,11 +43,9 @@ set clipboard=unnamed
 set tags=./tags,tags;/
 
 " vim code folding
-" set foldenable
-" start with most things not folded
-" set foldlevelstart=10
-" set foldnestmax=10
-" set foldmethod=syntax
+set foldmethod=syntax
+" open files and default to fold level 1
+set foldlevelstart=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -59,7 +57,7 @@ set cursorline
 
 " Set lines to the cursor - when moving vertically using j/k
 " keeps cursor in the middle of the page
-" set so=30
+set so=30
 
 " Turn on the WiLd menu
 set wildmenu
@@ -188,6 +186,7 @@ autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
 map <C-n> :NERDTreeToggle<CR>
 
 " Multiple Cursor
+" ctrl + m to select multiple instances of word under cursor
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_quit_key='<Esc>'
@@ -203,16 +202,16 @@ let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
 " ctrlP auto cache clearing, rescan for new files on save for ctrlp
 " http://stackoverflow.com/questions/8663829/vim-ctrlp-vim-plugin-how-to-rescan-files
 function! SetupCtrlP()
-    if exists("g:loaded_ctrlp") && g:loaded_ctrlp
-        augroup CtrlPExtension
-            autocmd!
-            autocmd FocusGained * CtrlPClearCache
-            autocmd BufWritePost * CtrlPClearCache
-        augroup END
-    endif
+  if exists("g:loaded_ctrlp") && g:loaded_ctrlp
+    augroup CtrlPExtension
+      autocmd!
+      autocmd FocusGained * CtrlPClearCache
+      autocmd BufWritePost * CtrlPClearCache
+    augroup END
+  endif
 endfunction
 if has("autocmd")
-    autocmd VimEnter * :call SetupCtrlP()
+  autocmd VimEnter * :call SetupCtrlP()
 endif
 
 " GitGutter
@@ -237,6 +236,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " vim-jsx enable for .js files as well
 let g:jsx_ext_required = 0
 
+" vim-javascript
+let g:javascript_enable_domhtmlcss = 1
+
 " Syntastic
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
@@ -260,6 +262,9 @@ nmap s <Plug>(easymotion-overwin-f2)
 let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+" override default search /
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
 
 " vim smooth scroll use for default page nav
 noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
@@ -310,11 +315,8 @@ inoremap <C-e> <esc>A
 nnoremap <leader><space> :nohlsearch<cr>
 
 " open close folds
-nnoremap <space> za
-
-" set foldmethod=syntax
-" autocmd Syntax c,cpp,vim,xml,html,xhtml,java setlocal foldmethod=syntax
-" autocmd Syntax c,cpp,vim,xml,html,xhtml,perl,java normal zR
+nnoremap <space>o za
+nnoremap <space>O zA
 
 " do not allow arrow key movement
 map <up> <NOP>
