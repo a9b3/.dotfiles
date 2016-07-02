@@ -21,3 +21,10 @@ do
 	$0
 done
 endsnippet
+
+snippet until
+until $1 >/dev/null 2>&1; do
+  $2
+  sleep 5
+done
+endsnippet

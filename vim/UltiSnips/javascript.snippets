@@ -128,14 +128,14 @@ snippet switch
 switch($1) {
 	$0
 	default:
-		return;
+		return
 }
 endsnippet
 
 snippet case
 case $1:
 	$0
-	break;
+	break
 endsnippet
 
 snippet forEach
@@ -283,8 +283,10 @@ function reducer(state$1, action) {
 	switch(action.type) {
 		$0
 		default:
-			return state;
+			break
 	}
+
+	return state
 }
 endsnippet
 
