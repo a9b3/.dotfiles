@@ -30,7 +30,8 @@ bindkey "^E" end-of-line
 
 export PATH=$PATH:~/opt/terraform
 export PATH=$PATH:~/opt/packer
-
+export PATH=$PATH:~/opt/kubectl
+export PATH=$PATH:~/opt/
 
 ##############################################################################
 # source files

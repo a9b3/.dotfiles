@@ -61,6 +61,10 @@
   bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | gxargs -r git branch -d; }; f"
   bdone = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
 
+  # show stash, apply stash by name
+  sshow = "!f() { git stash show stash^{/$*} -p; }; f"
+  sapply = "!f() { git stash apply stash^{/$*}; }; f"
+
   # ignored
   ignored = !git ls-files -v | grep "^[[:lower:]]"
   untrack = !git update-index --assume-unchanged

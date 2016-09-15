@@ -13,6 +13,30 @@ while($1) {
 }
 endsnippet
 
+snippet map
+$1.map(($2) => {
+	$0
+})
+endsnippet
+
+snippet forEach
+$1.forEach(($2) => {
+	$0
+})
+endsnippet
+
+snippet iter
+$1.$2(($3) => {
+	$0
+})
+endsnippet
+
+snippet do
+do {
+	$0
+} while($1)
+endsnippet
+
 snippet cfun
 const $1 = ($2) => {
 	$0
@@ -66,6 +90,24 @@ endsnippet
 snippet as
 async function ${1:name}(${2:args}) {
 	${3:body}
+}
+endsnippet
+
+snippet if
+if ($1) {
+	$0
+}
+endsnippet
+
+snippet else
+else {
+	$0
+}
+endsnippet
+
+snippet elseif
+else if ($1) {
+	$0
 }
 endsnippet
 
@@ -151,7 +193,7 @@ endsnippet
 snippet timeout
 setTimeout(() => {
 	$0
-}, $1);
+}, $1)
 endsnippet
 
 snippet arrow
@@ -163,7 +205,11 @@ endsnippet
 snippet interval
 setInterval(() => {
 	$0
-}, $1);
+}, $1)
+endsnippet
+
+snippet raf
+window.requestAnimationFrame($1)
 endsnippet
 
 snippet lorem
@@ -249,6 +295,14 @@ angular.module('$1')
 endsnippet
 
 # React
+snippet higherOrderComponent
+(ComposedComponent) => class extends Component {
+	render() {
+		return <ComposedComponent />
+	}
+}
+endsnippet
+
 snippet iifejsx
 {(() => {
 	$0
@@ -265,6 +319,20 @@ endsnippet
 
 snippet link
 import { Link } from 'react-router';
+endsnippet
+
+snippet connect
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state, ownProps) => ({
+	...state,
+})
+
+const mapDispatchToProps = {
+
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 endsnippet
 
 snippet Motion
@@ -308,6 +376,10 @@ snippet describe
 describe('$1', () => {
 	$0
 })
+endsnippet
+
+snippet ex
+expect($1).$2
 endsnippet
 
 snippet disablelint

@@ -43,9 +43,9 @@ set clipboard=unnamed
 set tags=./tags,tags;/
 
 " vim code folding
-set foldmethod=syntax
+" set foldmethod=syntax
 " open files and default to fold level 1
-set foldlevelstart=1
+" set foldlevelstart=5
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -111,6 +111,7 @@ syntax enable
 " colorscheme Tomorrow-Night-Eighties
 colorscheme Molokai
 
+" Background color
 hi Normal ctermbg=none
 highlight NonText ctermbg=none
 
@@ -178,6 +179,7 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " ctrl+x ctrl+o
 autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Pathogen, plugin stuff
@@ -220,6 +222,7 @@ let g:gitgutter_realtime=1
 let g:gitgutter_sign_column_always=1
 
 " vim-airline
+" show time on bottom left
 function! MyOverride(...)
   call a:1.add_section('Tag', ' %{strftime("%r")} ')
 endfunction
@@ -239,19 +242,10 @@ let g:jsx_ext_required = 0
 " vim-javascript
 let g:javascript_enable_domhtmlcss = 1
 
-" Syntastic
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-"
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 0
-" let g:syntastic_check_on_wq = 0
-" let g:syntastic_javascript_checkers = ['eslint']
+" javascript-libraries-syntax
+let g:used_javascript_libs = 'react,jasmine,chai'
 
-let g:used_javascript_libs = 'react,flux'
-
+" emmet-vim
 let g:user_emmet_leader_key='<C-Z>'
 
 let g:indent_guides_start_level = 2
@@ -287,7 +281,7 @@ imap jk <Esc>
 
 " save and quit
 map <leader>w :w!<cr>
-map <leader>q :q<cr>
+map <leader>q :qa<cr>
 
 " tab buffer shortcuts
 nmap <leader>[ :bprevious<CR>
@@ -316,8 +310,8 @@ inoremap <C-e> <esc>A
 nnoremap <leader><space> :nohlsearch<cr>
 
 " open close folds
-nnoremap <space> za
-nnoremap <space>o zA
+" nnoremap <space> za
+" nnoremap <space>o zA
 
 " do not allow arrow key movement
 map <up> <NOP>
@@ -336,6 +330,10 @@ nnoremap <leader>z <C-z>
 
 " shortcut for visual mode sort
 vnoremap <leader>s :sort
+
+" override behavior when cutting and deleting copying into register
+" do not override register when pasting
+xnoremap p pgvy
 
 " conceal characters for javascript
 " set conceallevel=1
