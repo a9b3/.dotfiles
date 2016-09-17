@@ -8,3 +8,4 @@ vim-colorschemes/
 tmux/plugins/
 tmux/resurrect/
 secrets/
+plugged/
