@@ -188,36 +188,7 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" " if !exists('g:neocomplete#sources#omni#input_patterns')
-" "   let g:neocomplete#sources#omni#input_patterns = {}
-" " endif
-"
-" "Full syntax completion - super slow, like syntaxcomplete
-" "Plug 'Shougo/neco-syntax', { 'for': ['scss'] }
-"
-" " Mixed-filetype completion for Shougo complete, e.g. highlight JS within
-" " Markdown fenced code blocks.
-" Plug 'Shougo/context_filetype.vim'
-"
-" " Include completion
-" Plug 'Shougo/neoinclude.vim'
-"
-" Plug 'Shougo/neosnippet'
-"       \| Plug 'honza/vim-snippets'
-"       \| Plug 'Shougo/neosnippet-snippets'
-"
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" " Syntax completion
-" Plug '1995eaton/vim-better-javascript-completion'
-"
-" let g:neocomplete#sources#vim#complete_functions = {
-"         \     'Tern': 'tern#Complete',
-"         \     'JS': 'javascriptcomplete#CompleteJS',
-"         \ }
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 set completeopt-=preview
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -237,9 +208,6 @@ let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-
-" creates dir if new file in new dir
-Plug 'dockyard/vim-easydir'
 
 Plug 'ctrlpvim/ctrlp.vim'
 " ctrlp
@@ -269,7 +237,7 @@ let g:multi_cursor_quit_key='<Esc>'
 
 " visual indent guides
 Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_enable_on_vim_startup=0
 let g:indent_guides_start_level=1
 let g:indent_guides_guide_size=2
 
@@ -282,9 +250,6 @@ let g:mta_filetypes={
 " ds{ , delete {
 " cs"', change double quotes to single quotes
 Plug 'tpope/vim-surround'
-
-Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr=1
 
 " gS to split and gJ to join use on first line
 Plug 'AndrewRadev/splitjoin.vim'
@@ -320,6 +285,10 @@ let g:gitgutter_sign_column_always=1
 Plug 'tpope/vim-fugitive'
 " shortcut Gblame
 nnoremap <leader>g :Gblame<cr>
+
+Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr=1
+au FileType mail let b:delimitMate_expand_cr = 1
 
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
