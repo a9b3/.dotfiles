@@ -1,13 +1,12 @@
 # vim: filetype=sh
-# Functions
 
 # make dir and enter it
-mkc () {
+mkc() {
   mkdir -p "$@" && cd "$@"
 }
 
 # cd and list
-cdd () { cd ${1} ; ls ; }
+cdd() { cd ${1} ; ls ; }
 alias cd='cdd'
 
 convertMusicTo() {

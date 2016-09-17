@@ -8,17 +8,11 @@ alias -- -="cd -"
 
 # Shortcuts
 alias showPath='echo "${PATH//:/\n}"'
-alias g++3W='g++ -Wall -W -Werror'
 alias simpleHTTPServer='python -m SimpleHTTPServer'
 alias getimage='wget -P . '
 alias reloadZsh='source ~/.zshrc && echo reloading zshrc...'
 
-# Detect which `ls` flavor is in use
-# if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-# else # OS X `ls`
-# 	colorflag="-G"
-# fi
+colorflag="--color"
 
 # List all files colorized in long format
 alias l="ls -lhF ${colorflag}"
@@ -49,26 +43,15 @@ alias du='du -h'
 # replace rm with trash
 alias rm='trash'
 
-# alias nwjs='/Applications/nwjs.app/Contents/MacOS/nwjs'
-alias nwjs='~/Downloads/nwjs-v0.12.3-osx-x64/nwjs.app/Contents/MacOS/nwjs'
-
-alias brewup='brew update && brew upgrade --all && brew cleanup'
-
 alias edithosts='sudo vim /etc/hosts'
 
 alias ag='ag --path-to-agignore=~/.agignore'
-
-# for ghost blog, ghost must be running on port 2368 and buster must have
-# already been set up with github
-alias buster-push='buster generate --domain=http://localhost:2368 && buster deploy'
 
 # mistake open vi use vim
 alias vi='vim'
 
 # go to project root
 alias r='cd $(git rev-parse --show-toplevel)'
-
-alias ustart='virtualenv venv; source venv/bin/activate'
 
 # tmux aliases
 alias ta='tmux attach'
