@@ -1,19 +1,13 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""s
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ============================================================================
+" General
+" ============================================================================
+
+set encoding=utf8
 set nocompatible
 
-" for pathogen
-execute pathogen#infect()
-
-" for vimdiff
-set noreadonly
-
-" Sets ruler show current line
-set ruler laststatus=2 number title nohlsearch
-
-" Sets how many lines of history VIM has to remember
-set history=1000
+set clipboard=unnamed " use system clipboard, vim must have +clipboard
+set noreadonly        " for vimdiff
+set history=1000      " Sets how many lines of history VIM has to remember
 
 " Enable filetype plugins
 filetype on
@@ -24,92 +18,22 @@ filetype indent on
 au BufRead,BufNewFile *.ejs set filetype=html
 au BufRead,BufNewFile *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
-au BufRead,BufNewFile *.scss set filetype=scss.css
+au BufRead,BufNewFile *.scss set filetype=scss
 au BufRead,BufNewFile *.service set filetype=yaml
 
-" Clear trailing spaces on save
-autocmd BufWritePre * :%s/\s\+$//e
+set lazyredraw                              " Don't redraw while executing macros
+set autoread                                " update when a file is changed from the outside
+set showcmd                                 " Show incomplete cmds down the bottom
+set hidden                                  " A buffer becomes hidden when it is abandoned
+set ignorecase smartcase hlsearch incsearch " Search settings
+set nobackup nowb noswapfile                " No vim backup files
 
-" Set to auto read when a file is changed from the outside
-set autoread
+" ============================================================================
+" UI
+" ============================================================================
 
-" Show incomplete cmds down the bottom
-set showcmd
-
-" use system clipboard, vim must have +clipboard
-set clipboard=unnamed
-
-" keep looking up until tags is found
-set tags=./tags,tags;/
-
-" vim code folding
-" set foldmethod=syntax
-" open files and default to fold level 1
-" set foldlevelstart=5
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Highlight current line & column
-au WinLeave * set nocursorline
-au WinEnter * set cursorline
-set cursorline
-
-" Set lines to the cursor - when moving vertically using j/k
-" keeps cursor in the middle of the page
-" set so=30
-
-" Turn on the WiLd menu
-set wildmenu
-
-" Ignore compiled files
-set wildignore=*.o,*~,*.pyc
-
-" Height of the command bar
-set cmdheight=1
-
-" A buffer becomes hidden when it is abandoned
-set hid
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-" Search settings
-set ignorecase
-set smartcase
-set hlsearch
-set incsearch
-
-" Don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" For regular expressions turn magic on
-set magic
-
-" Show matching brackets when text indicator is over them
-set showmatch
-" How many tenths of a second to blink when matching brackets
-set mat=2
-
-" No annoying sound on errors
-set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
-
-" Resize
-au VimResized * exe "normal! \<c-w>="
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set t_Co=256
-
 syntax enable
-
-" colorscheme Tomorrow-Night-Eighties
-colorscheme Molokai
 
 " Background color
 hi Normal ctermbg=none
@@ -119,159 +43,62 @@ highlight NonText ctermbg=none
 if has("gui_running")
     set guioptions-=T
     set guioptions+=e
-    set t_Co=256
     set guitablabel=%M\ %t
 endif
 
-set encoding=utf8
+" set line break to 80
+set textwidth=80 colorcolumn=80 lbr tw=80
+set number numberwidth=2 relativenumber
 
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
+" Highlight current line & column
+" au WinLeave * set nocursorline
+" au WinEnter * set cursorline
+set cursorline
+set ruler laststatus=2 title " Sets ruler show current line
 
-set textwidth=80
-set colorcolumn=80
+" vim code folding
+" set foldmethod=syntax foldlevelstart=99
 
-set number
-set numberwidth=2
-set relativenumber
+set wildmenu                   " Turn on the WiLd menu
+set wildmode=list:longest,full
+set wildignorecase
+set wildignore=*.o,*~,*.pyc    " Ignore compiled files
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
+set cmdheight=1 " Height of the command bar
+set magic       " For regular expressions turn magic on
+set showmatch   " Show matching brackets when text indicator is over them
+set mat=2       " How many tenths of a second to blink when matching brackets
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use spaces instead of tabs
-set expandtab
+" Resize
+au VimResized * exe "normal! \<c-w>="
 
-" Be smart when using tabs ;)
-set smarttab
+" ============================================================================
+" BEHAVIOR
+" ============================================================================
+
+set ffs=unix,dos,mac                       " Use Unix as the standard file type
+autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
+set noerrorbells novisualbell t_vb= tm=500 " No annoying sound on errors
+set tags=./tags,tags;/                     " keep looking up until tags is found
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" ============================================================================
+" INDENT
+" ============================================================================
 
 " tab space
-set shiftwidth=2
-set tabstop=2
+set shiftwidth=2 tabstop=2 expandtab smarttab
+set ai   " Auto indent
+set si   " Smart indent
+set wrap " Wrap lines
 
-" set line break to 80
-set lbr
-set tw=80
+" ============================================================================
+" KEYBINDINGS
+" ============================================================================
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Autocomplete, Snippets
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_add_preview_to_completeopt=0
-let g:ycm_confirm_extra_conf=0
-set completeopt-=preview
-
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-
-" ctrl+x ctrl+o
-autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Pathogen, plugin stuff
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Nerd tree
-map <C-n> :NERDTreeToggle<CR>
-
-" Multiple Cursor
-" ctrl + m to select multiple instances of word under cursor
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-m>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" delimitMate
-let delimitMate_expand_cr=1
-
-" ctrlp
-let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
-" use ag to search, ignores custom ignores, use .agignore
-let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
-
-" ctrlP auto cache clearing, rescan for new files on save for ctrlp
-" http://stackoverflow.com/questions/8663829/vim-ctrlp-vim-plugin-how-to-rescan-files
-function! SetupCtrlP()
-  if exists("g:loaded_ctrlp") && g:loaded_ctrlp
-    augroup CtrlPExtension
-      autocmd!
-      autocmd FocusGained * CtrlPClearCache
-      autocmd BufWritePost * CtrlPClearCache
-    augroup END
-  endif
-endfunction
-if has("autocmd")
-  autocmd VimEnter * :call SetupCtrlP()
-endif
-
-" GitGutter
-set updatetime=200
-let g:gitgutter_realtime=1
-let g:gitgutter_sign_column_always=1
-
-" vim-airline
-" show time on bottom left
-function! MyOverride(...)
-  call a:1.add_section('Tag', ' %{strftime("%r")} ')
-endfunction
-call airline#add_statusline_func('MyOverride')
-let g:airline_powerline_fonts=0
-let g:airline_theme='simple'
-let g:airline_right_sep=''
-let g:airline_left_sep=''
-
-" buffer as tabs on top
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-" vim-jsx enable for .js files as well
-let g:jsx_ext_required = 0
-
-" vim-javascript
-let g:javascript_enable_domhtmlcss = 1
-
-" javascript-libraries-syntax
-let g:used_javascript_libs = 'react,jasmine,chai'
-
-" emmet-vim
-let g:user_emmet_leader_key='<C-Z>'
-
-let g:indent_guides_start_level = 2
-
-" easy motion trigger with 's'
-let g:EasyMotion_do_mapping = 0
-nmap s <Plug>(easymotion-overwin-f2)
-let g:EasyMotion_smartcase = 1
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" override default search /
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
-let g:EasyMotion_user_smartsign_us = 1
-
-" vim smooth scroll use for default page nav
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <c-b> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-f> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-noremap <silent> <c-y> :call smooth_scroll#up(&scroll/4, 0, 2)<CR>
-noremap <silent> <c-e> :call smooth_scroll#down(&scroll/4, 0, 2)<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Key bindings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set Leader
 let mapleader = ","
 let g:mapleader = ","
@@ -310,20 +137,14 @@ inoremap <C-e> <esc>A
 nnoremap <leader><space> :nohlsearch<cr>
 
 " open close folds
-" nnoremap <space> za
-" nnoremap <space>o zA
+nnoremap <space> za
+nnoremap <space>o zA
 
 " do not allow arrow key movement
 map <up> <NOP>
 map <down> <NOP>
 map <left> <NOP>
 map <right> <NOP>
-
-" shortcut to silver searcher
-nnoremap <leader>a :Ag<space>
-
-" shortcut Gblame
-nnoremap <leader>g :Gblame<cr>
 
 " shortcut to put vim into background, fg to bring back to foreground
 nnoremap <leader>z <C-z>
@@ -335,16 +156,197 @@ vnoremap <leader>s :sort
 " do not override register when pasting
 xnoremap p pgvy
 
-" conceal characters for javascript
-" set conceallevel=1
-" set concealcursor=nvic
-" let g:javascript_conceal_function       = "ƒ"
-" let g:javascript_conceal_null           = "ø"
-" let g:javascript_conceal_this           = "@"
-" let g:javascript_conceal_return         = "⇚"
-" let g:javascript_conceal_undefined      = "¿"
-" let g:javascript_conceal_NaN            = "ℕ"
-" let g:javascript_conceal_prototype      = "¶"
-" let g:javascript_conceal_static         = "•"
-" let g:javascript_conceal_super          = "Ω"
-" let g:javascript_conceal_arrow_function = "⇒"
+
+" ============================================================================
+" VIM PLUG
+" ============================================================================
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+map <C-n> :NERDTreeToggle<CR>
+
+Plug 'ap/vim-buftabline'
+Plug 'chriskempson/base16-vim'
+
+" ----------------------------------------------------------------------------
+"  AUTOCOMPLETE
+" ----------------------------------------------------------------------------
+
+Plug 'Shougo/neocomplete.vim'
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" " if !exists('g:neocomplete#sources#omni#input_patterns')
+" "   let g:neocomplete#sources#omni#input_patterns = {}
+" " endif
+"
+" "Full syntax completion - super slow, like syntaxcomplete
+" "Plug 'Shougo/neco-syntax', { 'for': ['scss'] }
+"
+" " Mixed-filetype completion for Shougo complete, e.g. highlight JS within
+" " Markdown fenced code blocks.
+" Plug 'Shougo/context_filetype.vim'
+"
+" " Include completion
+" Plug 'Shougo/neoinclude.vim'
+"
+" Plug 'Shougo/neosnippet'
+"       \| Plug 'honza/vim-snippets'
+"       \| Plug 'Shougo/neosnippet-snippets'
+"
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+" " Syntax completion
+" Plug '1995eaton/vim-better-javascript-completion'
+"
+" let g:neocomplete#sources#vim#complete_functions = {
+"         \     'Tern': 'tern#Complete',
+"         \     'JS': 'javascriptcomplete#CompleteJS',
+"         \ }
+
+set completeopt-=preview
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" ----------------------------------------------------------------------------
+"  END AUTOCOMPLETE
+" ----------------------------------------------------------------------------
+
+Plug 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+
+" creates dir if new file in new dir
+Plug 'dockyard/vim-easydir'
+
+Plug 'ctrlpvim/ctrlp.vim'
+" ctrlp
+let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
+" use ag to search, ignores custom ignores, use .agignore
+let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+" ctrlP auto cache clearing, rescan for new files on save for ctrlp
+" http://stackoverflow.com/questions/8663829/vim-ctrlp-vim-plugin-how-to-rescan-files
+function! SetupCtrlP()
+  if exists("g:loaded_ctrlp") && g:loaded_ctrlp
+    augroup CtrlPExtension
+      autocmd!
+      autocmd FocusGained * CtrlPClearCache
+      autocmd BufWritePost * CtrlPClearCache
+    augroup END
+  endif
+endfunction
+if has("autocmd")
+  autocmd VimEnter * :call SetupCtrlP()
+endif
+
+Plug 'terryma/vim-multiple-cursors'
+" ctrl + m to select multiple instances of word under cursor
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-m>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" visual indent guides
+Plug 'nathanaelkane/vim-indent-guides'
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_start_level=1
+let g:indent_guides_guide_size=2
+
+Plug 'Valloric/MatchTagAlways'
+" enable html tag matching in jsx
+let g:mta_filetypes={
+      \ 'javascript.jsx' : 1,
+      \}
+
+" ds{ , delete {
+" cs"', change double quotes to single quotes
+Plug 'tpope/vim-surround'
+
+Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr=1
+
+" gS to split and gJ to join use on first line
+Plug 'AndrewRadev/splitjoin.vim'
+
+" align based on delimiter
+Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
+vmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>af :Tabularize /from<CR>
+
+Plug 'easymotion/vim-easymotion'
+" easy motion trigger with 's'
+let g:EasyMotion_do_mapping = 0
+nmap s <Plug>(easymotion-overwin-f2)
+let g:EasyMotion_smartcase = 1
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+" override default search /
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+let g:EasyMotion_user_smartsign_us = 1
+
+" ctrl + // to toggle comment
+Plug 'tomtom/tcomment_vim'
+
+" show diff in own split when editing a COMMIT_EDITMSG
+Plug 'rhysd/committia.vim'
+
+Plug 'airblade/vim-gitgutter'
+set updatetime=2000
+let g:gitgutter_realtime=1
+let g:gitgutter_sign_column_always=1
+
+Plug 'tpope/vim-fugitive'
+" shortcut Gblame
+nnoremap <leader>g :Gblame<cr>
+
+Plug 'mattn/emmet-vim'
+let g:user_emmet_leader_key='<C-Z>'
+
+Plug 'othree/html5.vim'
+Plug 'mustache/vim-mustache-handlebars'
+
+Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+let g:javascript_enable_domhtmlcss = 1
+Plug 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'react,jasmine,chai'
+
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+Plug 'heavenshell/vim-jsdoc'
+Plug 'moll/vim-node'
+" TODO fix this
+" Plug 'othree/jspc.vim'
+
+Plug 'JulesWang/css.vim'
+      \| Plug 'hail2u/vim-css3-syntax'
+      \| Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
+
+Plug 'othree/csscomplete.vim'
+
+call plug#end()
+
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-tomorrow-night
