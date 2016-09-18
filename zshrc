@@ -13,7 +13,6 @@ antigen use oh-my-zsh
 antigen theme robbyrussell/oh-my-zsh themes/arrow.zsh-theme
 
 # zsh-users/zsh-history-substring-search
-# junegunn/fzf
 
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
@@ -85,3 +84,5 @@ fi
 
 BASE16_SHELL=$HOME/.config/base16-shell
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
