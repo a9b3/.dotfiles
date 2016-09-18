@@ -175,12 +175,6 @@ setupBase16Shell() {
   echo ************************************************************************
 }
 
-setupNodeEnv() {
-  echo installing npm global packages...
-  npm install -g gulp nodemon webpack
-  echo done installing npm global packages...
-}
-
 fonts() {
   if [ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]; then
     cd ~/Downloads
@@ -194,8 +188,23 @@ fonts() {
 
 setupShell() {
   setupBase16Shell
-  setupNodeEnv
   fonts
+}
+
+###############################################################################
+###############################################################################
+# LANGUAGES
+###############################################################################
+###############################################################################
+
+setupNodeEnv() {
+  echo installing npm global packages...
+  npm install -g gulp nodemon webpack
+  echo done installing npm global packages...
+}
+
+setupLanguages() {
+  setupNodeEnv
 }
 
 ###############################################################################
@@ -228,6 +237,7 @@ main() {
   installPrograms
   dotfiles
   setupShell
+  setupLanguages
   vimSetup
 }
 
