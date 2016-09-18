@@ -70,6 +70,7 @@ brewInstall() {
   'ruby'
   'luajit'
   'vim --override-system-vi --with-luajit'
+  'fzf'
   )
 
   echo installing brew apps...
@@ -248,6 +249,9 @@ printf "
     run command for your choice of color scheme
 
     base16 [tab complete]
+
+  - fzf
+    run /usr/local/opt/fzf/install
 
   All done!
 "
