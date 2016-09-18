@@ -1,0 +1,27 @@
+# vi: ft=zsh
+
+# Init fasd
+if which fasd >/dev/null; then
+  eval "$(fasd --init auto)"
+fi
+
+# hub alias for -s instructions
+if which hub >/dev/null; then
+  eval "$(hub alias -s)"
+  alias git='hub'
+fi
+
+# To make docker work need env variables
+if which docker-machine >/dev/null; then
+  eval "$(docker-machine env default)"
+fi
+
+# automatically add non default keys
+if [ -e ~/.ssh/github_rsa ]; then
+  ssh-add ~/.ssh/github_rsa;
+fi
+
+BASE16_SHELL=$HOME/.config/base16-shell
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

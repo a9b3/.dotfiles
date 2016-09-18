@@ -1,4 +1,4 @@
-# vim: filetype=sh
+# vim: filetype=zsh
 
 # make dir and enter it
 mkc() {
