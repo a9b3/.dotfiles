@@ -1,17 +1,27 @@
 ##############################################################################
-# oh-my-zsh
+# ANTIGEN
 ##############################################################################
 
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-ZSH_THEME="arrow"
+# something in antigen uses gnu-sed, gsed is from brew install gnu-sed, doesn't
+# hurt to have this as a default anyway
+alias sed=gsed
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git brew zsh-syntax-highlighting)
+[[ ! -d ~/.antigen ]] && git clone https://github.com/zsh-users/antigen.git ~/.antigen
+source ~/.antigen/antigen.zsh
 
-source $ZSH/oh-my-zsh.sh
+antigen use oh-my-zsh
+antigen theme robbyrussell/oh-my-zsh themes/arrow.zsh-theme
+
+# zsh-users/zsh-history-substring-search
+# junegunn/fzf
+
+antigen bundles <<EOBUNDLES
+  zsh-users/zsh-syntax-highlighting
+  zsh-users/zsh-autosuggestions
+  jimhester/per-directory-history
+EOBUNDLES
+
+antigen apply
 
 ##############################################################################
 # key bindings
