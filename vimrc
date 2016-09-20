@@ -294,15 +294,19 @@ au FileType mail let b:delimitMate_expand_cr = 1
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
-Plug 'othree/html5.vim'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'othree/html5.vim'
+
+Plug 'elzr/vim-json'
 
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
-Plug 'elzr/vim-json'
+
 Plug 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
+
 Plug 'othree/yajs.vim'
+
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
 
