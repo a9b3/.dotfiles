@@ -20,6 +20,7 @@ au BufRead,BufNewFile *.handlebars set filetype=html
 au BufRead,BufNewFile *.css set filetype=scss.css
 au BufRead,BufNewFile *.scss set filetype=scss
 au BufRead,BufNewFile *.service set filetype=yaml
+au BufRead,BufNewFile *.js set filetype=javascript
 
 set lazyredraw                              " Don't redraw while executing macros
 set autoread                                " update when a file is changed from the outside
@@ -296,14 +297,15 @@ let g:user_emmet_leader_key='<C-Z>'
 Plug 'othree/html5.vim'
 Plug 'mustache/vim-mustache-handlebars'
 
+Plug 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 Plug 'elzr/vim-json'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
+Plug 'othree/yajs.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
 
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
 Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
 " TODO fix this
