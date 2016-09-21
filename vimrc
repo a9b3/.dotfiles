@@ -22,6 +22,8 @@ au BufRead,BufNewFile *.scss set filetype=scss
 au BufRead,BufNewFile *.service set filetype=yaml
 au BufRead,BufNewFile *.js set filetype=javascript
 
+set ttyfast                                 " send more characters for faster redraws
+set mouse=a                                 " enable mouse use in all modes
 set lazyredraw                              " Don't redraw while executing macros
 set autoread                                " update when a file is changed from the outside
 set showcmd                                 " Show incomplete cmds down the bottom
@@ -127,8 +129,10 @@ nnoremap k gk
 " capitol movement keys will do sensible corresponding movement
 noremap H ^
 noremap L g_
-noremap J <S-}>
-noremap K <S-{>
+" noremap J <S-}>
+" noremap K <S-{>
+noremap J 6j
+noremap K 6k
 
 " control a/e will go back and front of line
 inoremap <C-a> <esc>I
