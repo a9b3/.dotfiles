@@ -42,3 +42,11 @@ crun() {
   ./${file}.out
   rm ./${file}.out
 }
+
+rmcp() {
+  folder=$1
+  dest=$2
+
+  rm -rf $dest
+  cp -r $folder $dest
+}

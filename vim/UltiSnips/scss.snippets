@@ -12,8 +12,12 @@ snippet gradient
 background: linear-gradient(${1:color} 10%, ${2:color} 100%);
 endsnippet
 
-snippet import
+snippet importfont
 @import url(https://fonts.googleapis.com/css?family=$1:100,200,300,400,500,600,700,800);
+endsnippet
+
+snippet imp
+@import '$1';
 endsnippet
 
 snippet transition
@@ -46,9 +50,8 @@ endsnippet
 
 snippet key
 @keyframes :global($1) {
-	$0
 	0% {
-
+		$0
 	}
 	100% {
 
@@ -64,5 +67,11 @@ snippet font-face
 @font-face {
 	font-family: '$1';
 	src: url($2);
+}
+endsnippet
+
+snippet mq
+@include mq($until: tablet) {
+	$0
 }
 endsnippet
