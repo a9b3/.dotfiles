@@ -19,6 +19,10 @@ $1.map(($2) => {
 })
 endsnippet
 
+snippet last
+$1[$1.length - 1]
+endsnippet
+
 snippet forEach
 $1.forEach(($2) => {
 	$0
@@ -140,6 +144,12 @@ try {
 	$0
 } catch (e) {
 	console.log('ERROR', e)
+}
+endsnippet
+
+snippet fn
+$1($2) {
+	$0
 }
 endsnippet
 

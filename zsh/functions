@@ -50,3 +50,7 @@ rmcp() {
   rm -rf $dest
   cp -r $folder $dest
 }
+
+babel-nodemon() {
+  nodemon --exec babel-node --presets=es2015,stage-0 -- $1
+}

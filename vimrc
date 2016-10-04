@@ -325,6 +325,8 @@ Plug 'JulesWang/css.vim'
 
 Plug 'othree/csscomplete.vim'
 
+Plug 'hashivim/vim-terraform'
+
 call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
