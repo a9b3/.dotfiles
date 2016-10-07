@@ -11,6 +11,7 @@ export PATH=$PATH:~/opt/terraform
 export PATH=$PATH:~/opt/packer
 export PATH=$PATH:~/opt/kubectl
 export PATH=$PATH:~/opt/
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # Misc android
 export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH

@@ -326,6 +326,7 @@ Plug 'JulesWang/css.vim'
 Plug 'othree/csscomplete.vim'
 
 Plug 'hashivim/vim-terraform'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
 
