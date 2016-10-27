@@ -17,7 +17,6 @@ antigen theme robbyrussell/oh-my-zsh themes/arrow.zsh-theme
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
-  jimhester/per-directory-history
 EOBUNDLES
 
 antigen apply
