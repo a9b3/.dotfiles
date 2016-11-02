@@ -309,6 +309,8 @@ let g:jsx_ext_required = 0
 Plug 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
 
+Plug 'leafgarland/typescript-vim'
+
 Plug 'othree/yajs.vim'
 
 Plug 'othree/javascript-libraries-syntax.vim'

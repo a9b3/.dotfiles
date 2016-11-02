@@ -67344,19 +67344,21 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1007 497 669 393 0 0 1680 1027 </string>
+	<string>1246 520 669 393 0 0 1920 1080 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>9 486 606 456 0 0 1680 1027 </string>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>662 1189 735 382 0 0 3008 1692 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>528 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>648 281 796 473 0 0 1680 1050 </string>
+	<string>676 331 796 473 0 0 3840 2160 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>282 1085 592 584 0 0 3008 1669 </string>
+	<string>280 1086 592 584 0 0 3008 1670 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 3008 1692 0 0 3008 1669 </string>
+	<string>0 0 3840 2160 0 0 3840 2138 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 1267 650 402 0 0 3008 1669 </string>
+	<string>0 1634 730 504 0 0 3840 2138 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>1 750 650 424 0 0 1920 1177 </string>
 	<key>New Bookmarks</key>
@@ -67995,7 +67997,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>ProggyCleanTTSZBP 18</string>
+			<string>Inconsolata 18</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -69875,7 +69877,7 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1474359296</real>
+	<real>1477812992</real>
 	<key>URLHandlersByGuid</key>
 	<dict/>
 	<key>UseBorder</key>

@@ -71,6 +71,7 @@ brewInstall() {
   'luajit'
   'vim --override-system-vi --with-luajit'
   'fzf'
+  'curl --with-openssl'
   )
 
   echo installing brew apps...
