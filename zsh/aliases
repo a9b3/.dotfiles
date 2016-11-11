@@ -44,7 +44,8 @@ alias htop='sudo htop'
 alias du='du -h'
 
 # replace rm with trash
-alias rm='trash'
+# doesn't work with sierra
+# alias rm='trash'
 
 alias edithosts='sudo vim /etc/hosts'
 

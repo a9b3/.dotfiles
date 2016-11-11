@@ -12,9 +12,12 @@ if which hub >/dev/null; then
 fi
 
 # To make docker work need env variables
-if which docker-machine >/dev/null; then
-  eval "$(docker-machine env default)"
-fi
+#
+# Use mac os native docker instead
+#
+# if which docker-machine >/dev/null; then
+#   eval "$(docker-machine env default)"
+# fi
 
 # automatically add non default keys
 if [ -e ~/.ssh/github_rsa ]; then
