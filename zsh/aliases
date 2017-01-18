@@ -49,7 +49,7 @@ alias du='du -h'
 
 alias edithosts='sudo vim /etc/hosts'
 
-alias ag='ag --path-to-agignore=~/.agignore'
+# alias ag='ag --path-to-agignore=~/.agignore'
 
 # mistake open vi use vim
 alias vi='vim'

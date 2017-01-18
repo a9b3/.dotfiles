@@ -234,12 +234,6 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
-Plug 'terryma/vim-multiple-cursors'
-" ctrl + m to select multiple instances of word under cursor
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-m>'
-let g:multi_cursor_quit_key='<Esc>'
-
 " visual indent guides
 Plug 'nathanaelkane/vim-indent-guides'
 let g:indent_guides_enable_on_vim_startup=0
@@ -306,12 +300,8 @@ Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
-Plug 'pangloss/vim-javascript'
-let g:javascript_enable_domhtmlcss = 1
-
-Plug 'leafgarland/typescript-vim'
-
 Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'

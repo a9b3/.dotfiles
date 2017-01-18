@@ -67332,7 +67332,7 @@
 		BAtzdHJlYW10eXBlZIHoA4QBQISEhAhOU1N0cmluZwGEhAhOU09iamVjdACF
 		hAErATGG
 		</data>
-		<string>307</string>
+		<string>322</string>
 	</array>
 	<key>NSTableView Hidden Columns KeyBingingTable</key>
 	<array/>
@@ -67348,15 +67348,15 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>9 486 606 456 0 0 1680 1027 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
-	<string>662 1657 735 382 0 0 3840 2138 </string>
+	<string>662 1756 735 382 0 0 3840 2138 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>528 476 620 392 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>569 245 796 473 0 0 3008 1692 </string>
+	<string>414 112 1016 502 0 0 1920 1178 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>280 1086 592 584 0 0 3008 1670 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 3840 2160 0 0 3840 2138 </string>
+	<string>0 0 1920 1200 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 1634 730 504 0 0 3840 2138 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -67546,6 +67546,8 @@
 				<key>Red Component</key>
 				<real>0.97647058823529409</real>
 			</dict>
+			<key>Application Keypad Allowed</key>
+			<true/>
 			<key>Automatically Log</key>
 			<false/>
 			<key>BM Growl</key>
@@ -68003,7 +68005,7 @@
 			<key>Prompt Before Closing 2</key>
 			<integer>0</integer>
 			<key>Right Option Key Sends</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
