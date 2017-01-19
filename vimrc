@@ -302,6 +302,7 @@ let g:jsx_ext_required = 0
 
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
+Plug 'jason0x43/vim-js-indent'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
