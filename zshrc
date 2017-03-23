@@ -49,3 +49,5 @@ do
   [ -r "$file" ] && source "$file"
 done
 unset file
+
+export PATH="$HOME/.yarn/bin:$PATH"

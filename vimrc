@@ -257,6 +257,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
 vmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>af :Tabularize /from<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a= :Tabularize /=<CR>
 
 Plug 'easymotion/vim-easymotion'
 " easy motion trigger with 's'
@@ -269,6 +271,18 @@ map <Leader>k <Plug>(easymotion-k)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
+
+function! Multiple_cursors_before()
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
+endfunction
+
+function! Multiple_cursors_after()
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
+endfunction
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_next_key='<C-k>'
 
 " ctrl + // to toggle comment
 Plug 'tomtom/tcomment_vim'

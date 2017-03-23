@@ -56,6 +56,7 @@ alias vi='vim'
 
 # go to project root
 alias r='cd $(git rev-parse --show-toplevel)'
+alias ap='cd $(git rev-parse --show-toplevel)/src/app'
 
 # tmux aliases
 alias ta='tmux attach'
