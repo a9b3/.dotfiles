@@ -457,3 +457,16 @@ endsnippet
 snippet invar
 invariant($1, \`'$1' must be provided$0\`)
 endsnippet
+
+snippet decorator
+function $1(target, key, descriptor) {
+	const fn = descriptor.value
+	const newFn = async(...args) => {
+		const res = await fn.call(target, ...args)
+		return res
+	}
+
+	descriptor.value = newFn
+	return descriptor
+}
+endsnippet
