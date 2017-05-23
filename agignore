@@ -8,3 +8,4 @@ lib.js
 production/
 build/
 public/
+es/
