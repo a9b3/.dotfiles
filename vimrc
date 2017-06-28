@@ -10,9 +10,7 @@ set noreadonly        " for vimdiff
 set history=1000      " Sets how many lines of history VIM has to remember
 
 " Enable filetype plugins
-filetype on
-filetype plugin on
-filetype indent on
+filetype plugin indent on
 
 " File types
 au BufRead,BufNewFile *.ejs set filetype=html
@@ -189,6 +187,12 @@ let g:neocomplete#enable_smart_case = 1
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
+" https://github.com/Shougo/neocomplete.vim/issues/418
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
+
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
@@ -196,6 +200,7 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 
 set completeopt-=preview
+set completeopt+=menuone
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -334,6 +339,12 @@ Plug 'othree/csscomplete.vim'
 
 Plug 'hashivim/vim-terraform'
 Plug 'Glench/Vim-Jinja2-Syntax'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TYPESCRIPT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'leafgarland/typescript-vim'
+Plug 'Quramy/tsuquyomi'
 
 call plug#end()
 
