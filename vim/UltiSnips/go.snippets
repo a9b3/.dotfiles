@@ -1,24 +1,41 @@
 snippet for
-for i:=0; i<$1; i++ {
-	$2
-}
-endsnippet
-
-
-
-snippet forrange
-for ${1:_}, ${2:c} := range $3 {
+for $1:=0; $1<$2; $1++ {
 	$0
 }
 endsnippet
 
+snippet range
+for ${1:_, val} := range $2 {
+	$0
+}
+endsnippet
 
+snippet switch
+switch $1 {
+
+}
+endsnippet
+
+snippet case
+case $1:
+	$0
+endsnippet
+
+snippet if
+if $1 {
+	$0
+}
+endsnippet
+
+snippet struct
+type $1 struct {
+	$0
+}
+endsnippet
 
 snippet print
 fmt.Println($1)
 endsnippet
-
-
 
 snippet init
 package main
@@ -32,10 +49,14 @@ func main() {
 }
 endsnippet
 
-
-
 snippet func
 func ${1:name}(${2:args}) (${3:ret}) {
 	$4
 }
+endsnippet
+
+snippet imp
+import (
+	$1
+)
 endsnippet
