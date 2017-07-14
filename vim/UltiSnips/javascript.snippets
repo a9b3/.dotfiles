@@ -204,7 +204,7 @@ $1.forEach(($2) => {
 endsnippet
 
 snippet assign
-Object.assign({}, $1, $2);
+Object.assign({}, $1, $2)
 endsnippet
 
 snippet timeout
@@ -312,6 +312,29 @@ angular.module('$1')
 endsnippet
 
 # React
+snippet component
+class $1 extends React.Component {
+	static propTypes = {
+
+	}
+
+	static defaultProps = {
+
+	}
+
+	render() {
+		const {
+			...restProps,
+		} = this.props
+
+		return <div
+			{...restProps}
+		>
+		</div>
+	}
+}
+endsnippet
+
 snippet higherOrderComponent
 (ComposedComponent) => class extends Component {
 	render() {
