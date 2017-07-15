@@ -318,6 +318,7 @@ Plug 'elzr/vim-json'
 
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
+Plug 'chemzqm/vim-jsx-improve'
 
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -351,7 +352,14 @@ let g:go_doc_keywordprg_enabled = 0
 " TYPESCRIPT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/tsuquyomi'
+
+" https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support#vim
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 call plug#end()
 
