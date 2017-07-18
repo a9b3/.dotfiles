@@ -10,8 +10,7 @@ alias sed=gsed
 source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
-# antigen theme robbyrussell/oh-my-zsh themes/arrow.zsh-theme
-antigen theme robbyrussell/oh-my-zsh themes/minimal.zsh-theme
+antigen theme robbyrussell/oh-my-zsh themes/minimal
 
 # zsh-users/zsh-history-substring-search
 
