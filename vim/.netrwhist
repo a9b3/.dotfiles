@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/admin/Projects/Android/Abide/.metadata/.plugins/org.eclipse.core.resources/.projects'
 let g:netrw_dirhist_2='/Users/admin/.bash'
 let g:netrw_dirhist_3='/Users/admin/.vim'
 let g:netrw_dirhist_4='/Users/admin/.dotfiles/zsh'
 let g:netrw_dirhist_5='/Users/admin/.dotfiles/.git'
 let g:netrw_dirhist_6='/Users/admin/.dotfiles/zsh'
+let g:netrw_dirhist_7='/Users/samlau/.tmux'
