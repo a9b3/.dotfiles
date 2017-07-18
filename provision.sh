@@ -51,12 +51,15 @@ installHomebrew() {
 brewInstall() {
   brewAppsToInstall=(
   'coreutils'
+  'gnu-ed'
   'wget --with-iri'
   'youtube-dl'
   'zsh'
   'trash'
   'fasd'
   'tmux'
+  # used by tmux
+  'reattach-to-user-namespace'
   'tree'
   'the_silver_searcher'
   'findutils'
@@ -67,6 +70,7 @@ brewInstall() {
   'cmake'
   'ctags-exuberant'
   'node'
+  'yarn'
   'ruby'
   'luajit'
   'vim --override-system-vi --with-luajit'
@@ -95,11 +99,8 @@ brewCaskInstall() {
   'hyperswitch'
   'alfred'
   'iterm2-beta'
-  'messenger'
-  'sourcetree'
   'nvalt'
   'the-unarchiver'
-  'f-lux'
   )
 
   echo installing homebrew cask apps...
@@ -227,6 +228,16 @@ vimPlug() {
 
 vimSetup() {
   vimPlug
+}
+
+###############################################################################
+###############################################################################
+# TMUX
+###############################################################################
+###############################################################################
+
+tmuxSetup() {
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 ###############################################################################
