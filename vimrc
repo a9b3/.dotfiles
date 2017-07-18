@@ -314,6 +314,10 @@ let g:user_emmet_leader_key='<C-Z>'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'othree/html5.vim'
 
+" ----------------------------------------------------------------------------
+" Javascript
+" ----------------------------------------------------------------------------
+
 Plug 'elzr/vim-json'
 
 Plug 'mxw/vim-jsx'
@@ -342,15 +346,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'Glench/Vim-Jinja2-Syntax'
 
 " ----------------------------------------------------------------------------
-" Golang
+" Typescript
 " ----------------------------------------------------------------------------
-
-Plug 'fatih/vim-go'
-let g:go_doc_keywordprg_enabled = 0
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TYPESCRIPT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/tsuquyomi'
@@ -360,6 +357,14 @@ if !exists("g:ycm_semantic_triggers")
   let g:ycm_semantic_triggers = {}
 endif
 let g:ycm_semantic_triggers['typescript'] = ['.']
+
+
+" ----------------------------------------------------------------------------
+" Golang
+" ----------------------------------------------------------------------------
+
+Plug 'fatih/vim-go'
+let g:go_doc_keywordprg_enabled = 0
 
 call plug#end()
 
