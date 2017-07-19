@@ -241,7 +241,7 @@ endif
 
 " visual indent guides
 Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup=0
+let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=1
 let g:indent_guides_guide_size=2
 
@@ -265,6 +265,7 @@ vmap <Leader>af :Tabularize /from<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a= :Tabularize /=<CR>
 
+" vim easymotion
 Plug 'easymotion/vim-easymotion'
 " easy motion trigger with 's'
 let g:EasyMotion_do_mapping = 0
@@ -277,6 +278,7 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
 
+" Multiple Cursors
 function! Multiple_cursors_before()
     exe 'NeoCompleteLock'
     echo 'Disabled autocomplete'
@@ -288,6 +290,31 @@ function! Multiple_cursors_after()
 endfunction
 Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_next_key='<C-k>'
+
+" ----------------------------------------------------------------------------
+" Linter
+" ----------------------------------------------------------------------------
+
+" ale async lint engine
+Plug 'w0rp/ale'
+" Write this in your vimrc file
+let g:ale_lint_on_text_changed = 'never'
+" You can disable this option too
+" if you don't want linters to run on opening a file
+let g:ale_lint_on_enter = 1
+let g:ale_fix_on_save = 1
+" already running eslint --fix on save no need to lint again
+let g:ale_lint_on_save = 0
+" use faster version
+let g:ale_javascript_eslint_executable='eslint_d'
+let g:ale_sign_column_always = 1
+" eslint is a command that will automatically run eslint --fix
+" https://github.com/w0rp/ale/issues/541
+let g:ale_fixers = {
+\   'javascript': [
+\       'eslint',
+\   ],
+\}
 
 " ctrl + // to toggle comment
 Plug 'tomtom/tcomment_vim'
@@ -308,6 +335,9 @@ Plug 'Raimondi/delimitMate'
 let delimitMate_expand_cr=1
 au FileType mail let b:delimitMate_expand_cr = 1
 
+Plug 'hashivim/vim-terraform'
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
@@ -322,11 +352,9 @@ Plug 'elzr/vim-json'
 
 Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
-Plug 'chemzqm/vim-jsx-improve'
 
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
-Plug 'jason0x43/vim-js-indent'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
@@ -341,9 +369,6 @@ Plug 'JulesWang/css.vim'
       \| Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
 
 Plug 'othree/csscomplete.vim'
-
-Plug 'hashivim/vim-terraform'
-Plug 'Glench/Vim-Jinja2-Syntax'
 
 " ----------------------------------------------------------------------------
 " Typescript
