@@ -51,3 +51,5 @@ done
 unset file
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
