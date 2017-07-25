@@ -240,10 +240,10 @@ if has("autocmd")
 endif
 
 " visual indent guides
-Plug 'nathanaelkane/vim-indent-guides'
-let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=1
-let g:indent_guides_guide_size=2
+" Plug 'nathanaelkane/vim-indent-guides'
+" let g:indent_guides_enable_on_vim_startup=1
+" let g:indent_guides_start_level=1
+" let g:indent_guides_guide_size=2
 
 Plug 'Valloric/MatchTagAlways'
 " enable html tag matching in jsx
@@ -301,7 +301,7 @@ Plug 'w0rp/ale'
 let g:ale_lint_on_text_changed = 'never'
 " You can disable this option too
 " if you don't want linters to run on opening a file
-let g:ale_lint_on_enter = 1
+" let g:ale_lint_on_enter = 1
 let g:ale_fix_on_save = 1
 " already running eslint --fix on save no need to lint again
 let g:ale_lint_on_save = 0
@@ -312,6 +312,9 @@ let g:ale_sign_column_always = 1
 " https://github.com/w0rp/ale/issues/541
 let g:ale_fixers = {
 \   'javascript': [
+\       'eslint',
+\   ],
+\   'typescript': [
 \       'eslint',
 \   ],
 \}
@@ -376,6 +379,7 @@ Plug 'othree/csscomplete.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'Quramy/tsuquyomi'
+let g:tsuquyomi_completion_detail=1
 
 " https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support#vim
 if !exists("g:ycm_semantic_triggers")
