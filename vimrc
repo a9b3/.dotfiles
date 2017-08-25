@@ -328,7 +328,7 @@ Plug 'rhysd/committia.vim'
 Plug 'airblade/vim-gitgutter'
 set updatetime=2000
 let g:gitgutter_realtime=1
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 
 Plug 'tpope/vim-fugitive'
 " shortcut Gblame
@@ -394,6 +394,7 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 
 Plug 'fatih/vim-go'
 let g:go_doc_keywordprg_enabled = 0
+let g:go_fmt_command = "goimports"
 
 call plug#end()
 
