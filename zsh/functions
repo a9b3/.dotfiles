@@ -54,3 +54,35 @@ rmcp() {
 babel-nodemon() {
   nodemon --exec babel-node --presets=es2015,stage-0 -- $1
 }
+
+# tm - create new tmux session, or switch to existing one. Works from within tmux too. (@bag-man)
+# `tm` will allow you to select your tmux session via fzf.
+# `tm irc` will attach to the irc session (if it exists), else it will create it.
+
+tm() {
+  [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
+
+  if [ $1 ]; then
+    tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
+  fi
+  session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
+}
+
+# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
+z() {
+  [ $# -gt 0 ] && fasd_cd -d "$*" && return
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+acd() {
+  root=$(git rev-parse --show-toplevel)
+  folder=$(git ls-files $root --full-name | xargs -n 1 dirname | uniq | fzf --exit-0)
+  cd $root/$folder
+}
+
+v() {
+  root=$(git rev-parse --show-toplevel)
+  file=$(git ls-files $root --full-name | fzf --exit-0)
+  vim $root/$file
+}

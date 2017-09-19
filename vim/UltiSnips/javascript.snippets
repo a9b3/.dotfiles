@@ -309,19 +309,10 @@ endsnippet
 
 # React
 snippet container
-import styles    from './index.scss'
-import PropTypes from 'prop-types'
+import styles from './styles.scss'
+import cx     from 'classnames'
 
-@cssModule(styles)
 export default class $1 extends React.Component {
-	static propTypes = {
-
-	}
-
-	static defaultProps = {
-
-	}
-
 	render() {
 		const {
 			...rest,
@@ -329,6 +320,7 @@ export default class $1 extends React.Component {
 
 		return <div
 			{...rest}
+			className={cx(styles.container, rest.className)}
 		>
 		</div>
 	}
@@ -344,27 +336,20 @@ snippet higherOrderComponent
 endsnippet
 
 snippet component
-import styles     from './index.scss'
-import PropTypes  from 'prop-types'
+import styles from './styles.scss'
+import cx     from 'classnames'
 
 function $1({
 	...rest,
 }) {
 	return <div
 		{...rest}
+	className={cx(styles.container, rest.className)}
 	>
 	</div>
 }
 
-$1.propTypes = {
-
-}
-
-$1.defaultProps = {
-
-}
-
-export default cssModule($1, styles, {allowMultiple: true})
+export default $1
 endsnippet
 
 snippet iifejsx
@@ -374,7 +359,7 @@ snippet iifejsx
 endsnippet
 
 snippet cl
-className='$1'
+className={cx($1)}
 endsnippet
 
 snippet st

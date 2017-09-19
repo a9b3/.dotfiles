@@ -36,13 +36,6 @@ bindkey "^E" end-of-line
 # source files
 ##############################################################################
 
-# Load everything in zsh folder
-for file in ~/.dotfiles/zsh/*
-do
-  [ -r "$file" ] && source "$file"
-done
-unset file
-
 # source "~/.dotfiles/secrets/env"
 for file in ~/.dotfiles/secrets/*
 do
@@ -53,3 +46,10 @@ unset file
 export PATH="$HOME/.yarn/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Load everything in zsh folder
+for file in ~/.dotfiles/zsh/*
+do
+  [ -r "$file" ] && source "$file"
+done
+unset file

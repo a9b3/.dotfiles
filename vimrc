@@ -247,9 +247,9 @@ endif
 
 Plug 'Valloric/MatchTagAlways'
 " enable html tag matching in jsx
-let g:mta_filetypes={
-      \ 'javascript.jsx' : 1,
-      \}
+" let g:mta_filetypes={
+"       \ 'javascript.jsx' : 1,
+"       \}
 
 " ds{ , delete {
 " cs"', change double quotes to single quotes

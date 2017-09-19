@@ -1,9 +1,9 @@
 # vi: ft=zsh
 
 # Init fasd
-if which fasd >/dev/null; then
-  eval "$(fasd --init auto)"
-fi
+# if which fasd >/dev/null; then
+#   eval "$(fasd --init auto)"
+# fi
 
 # hub alias for -s instructions
 if which hub >/dev/null; then
