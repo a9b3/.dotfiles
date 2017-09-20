@@ -20,9 +20,7 @@ fileExists() {
 }
 
 ###############################################################################
-###############################################################################
 # INSTALL PROGRAMS
-###############################################################################
 ###############################################################################
 
 xcode() {
@@ -51,7 +49,7 @@ installHomebrew() {
 brewInstall() {
   brewAppsToInstall=(
   'coreutils'
-  'gnu-ed'
+  'gnu-sed'
   'wget --with-iri'
   'youtube-dl'
   'zsh'
@@ -76,6 +74,8 @@ brewInstall() {
   'vim --override-system-vi --with-luajit'
   'fzf'
   'curl --with-openssl'
+  'python'
+  'python3'
   )
 
   echo installing brew apps...
@@ -84,20 +84,30 @@ brewInstall() {
   brew upgrade --all
 
   for i in "${brewAppsToInstall[@]}"; do
-    brew install $i
+    if brew list $i > /dev/null; then
+      echo $i already installed
+    else
+      brew install $i
+
+      if [ "$i" == "fzf" ]; then
+        /usr/local/opt/fzf/install
+      fi
+    fi
   done
 
   brew cleanup
+
+
+
   echo done install brew apps...
 }
 
 brewCaskInstall() {
   caskAppsToInstall=(
   'google-chrome'
-  'google-chrome-canary'
   'bettertouchtool'
   'hyperswitch'
-  'alfred'
+  'alfred2'
   'iterm2-beta'
   'nvalt'
   'the-unarchiver'
@@ -107,7 +117,11 @@ brewCaskInstall() {
   brew update
 
   for i in "${caskAppsToInstall[@]}"; do
-    brew cask install $i
+    if brew cask list $i > /dev/null; then
+      echo $i already installed
+    else
+      brew cask install $i
+    fi
   done
 
   brew cleanup
@@ -122,9 +136,7 @@ installPrograms() {
 }
 
 ###############################################################################
-###############################################################################
 # DOTFILES
-###############################################################################
 ###############################################################################
 
 dotfiles() {
@@ -158,9 +170,7 @@ dotfiles() {
 }
 
 ###############################################################################
-###############################################################################
 # SHELL
-###############################################################################
 ###############################################################################
 
 setupBase16Shell() {
@@ -195,14 +205,23 @@ setupShell() {
 }
 
 ###############################################################################
-###############################################################################
 # LANGUAGES
-###############################################################################
 ###############################################################################
 
 setupNodeEnv() {
   echo installing npm global packages...
-  npm install -g gulp nodemon webpack
+  packages=(
+  'nodemon'
+  'webpack'
+  'n'
+  )
+
+  for i in "${packages[@]}"; do
+    if !commandExists $i; then
+      npm install -g $i
+    fi
+  done
+
   echo done installing npm global packages...
 }
 
@@ -211,9 +230,7 @@ setupLanguages() {
 }
 
 ###############################################################################
-###############################################################################
 # VIM
-###############################################################################
 ###############################################################################
 
 vimPlug() {
@@ -231,20 +248,27 @@ vimSetup() {
 }
 
 ###############################################################################
-###############################################################################
 # TMUX
-###############################################################################
 ###############################################################################
 
 tmuxSetup() {
+  if directoryExists ~/.tmux/plugins/tpm; then
+    echo tpm already installed
+    return
+  fi
+
   git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 }
 
 ###############################################################################
-###############################################################################
 # MAIN
 ###############################################################################
-###############################################################################
+
+checkDefaultShell() {
+  if [ "$SHELL" != "/usr/local/bin/zsh" ]; then
+    chsh -s /usr/local/bin/zsh
+  fi
+}
 
 main() {
   installPrograms
@@ -252,6 +276,7 @@ main() {
   setupShell
   setupLanguages
   vimSetup
+  checkDefaultShell
 }
 
 main
@@ -261,9 +286,6 @@ printf "
     run command for your choice of color scheme
 
     base16 [tab complete]
-
-  - fzf
-    run /usr/local/opt/fzf/install
 
   All done!
 "
