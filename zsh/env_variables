@@ -16,3 +16,5 @@ export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 # Misc android
 export PATH=~/Library/Android/sdk/tools:~/Library/Android/sdk/platform-tools:$PATH
+
+export EDITOR=$(which vim)
