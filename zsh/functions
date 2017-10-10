@@ -86,3 +86,11 @@ v() {
   file=$(git ls-files $root --full-name | fzf --exit-0)
   vim $root/$file
 }
+
+mm() {
+  echo $(pwd) > ~/.tmp/mm.tmp
+}
+
+m() {
+   cd $(cat ~/.tmp/mm.tmp)
+}
