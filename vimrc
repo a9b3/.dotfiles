@@ -19,6 +19,7 @@ au BufRead,BufNewFile *.css set filetype=scss.css
 au BufRead,BufNewFile *.scss set filetype=scss
 au BufRead,BufNewFile *.service set filetype=yaml
 au BufRead,BufNewFile *.js set filetype=javascript
+au BufRead,BufNewFile *.conf set filetype=nginx
 
 set ttyfast                                 " send more characters for faster redraws
 set mouse=a                                 " enable mouse use in all modes
@@ -168,9 +169,13 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=60
 
 Plug 'ap/vim-buftabline'
 Plug 'chriskempson/base16-vim'
+
+" NGINX conf file synxtax
+Plug 'chr4/nginx.vim'
 
 " ----------------------------------------------------------------------------
 "  AUTOCOMPLETE
