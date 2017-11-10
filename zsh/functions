@@ -87,10 +87,19 @@ v() {
   vim $root/$file
 }
 
+# mm will bookmark the cwd for later use.
+# ex.
+# mm a
 mm() {
-  echo $(pwd) > ~/.tmp/mm.tmp
+  if [ $1 ]; then
+    echo $(pwd) > ~/.tmp/mm/$1
+  fi
 }
-
+# use in conjuction with mm to go back to previously bookmarked location
+# ex.
+# m a
 m() {
-   cd $(cat ~/.tmp/mm.tmp)
+  if [ $1 ]; then
+    cd $(cat ~/.tmp/mm/$1)
+  fi
 }
