@@ -1,23 +1,10 @@
 # vi: ft=zsh
 
-# Init fasd
-# if which fasd >/dev/null; then
-#   eval "$(fasd --init auto)"
-# fi
-
 # hub alias for -s instructions
 if which hub >/dev/null; then
   eval "$(hub alias -s)"
   alias git='hub'
 fi
-
-# To make docker work need env variables
-#
-# Use mac os native docker instead
-#
-# if which docker-machine >/dev/null; then
-#   eval "$(docker-machine env default)"
-# fi
 
 # automatically add non default keys
 if [ -e ~/.ssh/github_rsa ]; then
