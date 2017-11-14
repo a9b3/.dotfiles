@@ -12,8 +12,6 @@ source ~/.antigen/antigen.zsh
 antigen use oh-my-zsh
 antigen theme robbyrussell/oh-my-zsh themes/minimal
 
-# zsh-users/zsh-history-substring-search
-
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
@@ -36,7 +34,6 @@ bindkey "^E" end-of-line
 # source files
 ##############################################################################
 
-# source "~/.dotfiles/secrets/env"
 for file in ~/.dotfiles/secrets/*
 do
   [ -r "$file" ] && source "$file"
