@@ -36,3 +36,5 @@ alias r='cd $(git rev-parse --show-toplevel)'
 alias ta='tmux attach'
 alias tls='tmux ls'
 alias tks='tmux kill-session'
+
+alias g='git'
