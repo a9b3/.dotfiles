@@ -70,6 +70,8 @@ set cmdheight=1 " Height of the command bar
 set magic       " For regular expressions turn magic on
 set showmatch   " Show matching brackets when text indicator is over them
 set mat=2       " How many tenths of a second to blink when matching brackets
+" Scroll padding
+set scrolloff=999
 
 " Resize
 au VimResized * exe "normal! \<c-w>="
