@@ -76,6 +76,8 @@ v() {
 mm() {
   if [ $1 ]; then
     echo $(pwd) > ~/.tmp/mm/$1
+  else
+    echo no marker entered
   fi
 }
 # use in conjuction with mm to go back to previously bookmarked location
@@ -84,5 +86,7 @@ mm() {
 m() {
   if [ $1 ]; then
     cd $(cat ~/.tmp/mm/$1)
+  else
+    echo no marker entered
   fi
 }
