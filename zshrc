@@ -10,7 +10,8 @@ alias sed=gsed
 source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
-antigen theme robbyrussell/oh-my-zsh themes/minimal
+# antigen theme robbyrussell/oh-my-zsh themes/minimal
+antigen theme arrow
 
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
