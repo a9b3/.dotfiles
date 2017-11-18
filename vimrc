@@ -271,6 +271,7 @@ vmap <Leader>a: :Tabularize /:<CR>
 vmap <Leader>af :Tabularize /from<CR>
 vmap <Leader>a, :Tabularize /,<CR>
 vmap <Leader>a= :Tabularize /=<CR>
+vmap <Leader>a- :Tabularize /-<CR>
 
 " vim easymotion
 Plug 'easymotion/vim-easymotion'
