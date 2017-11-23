@@ -45,6 +45,8 @@ export PATH="$HOME/.yarn/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+eval "$(fasd --init auto)"
+
 # Load everything in zsh folder
 for file in ~/.dotfiles/zsh/*
 do
