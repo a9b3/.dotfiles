@@ -77,6 +77,7 @@ mm() {
     echo $(pwd) > ~/.tmp/mm/$1
   else
     echo no marker entered
+    ls ~/.tmp/mm
   fi
 }
 # use in conjuction with mm to go back to previously bookmarked location
@@ -87,5 +88,6 @@ m() {
     cd $(cat ~/.tmp/mm/$1)
   else
     echo no marker entered
+    ls ~/.tmp/mm
   fi
 }
