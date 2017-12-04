@@ -162,6 +162,12 @@ vnoremap <leader>s :sort
 " do not override register when pasting
 xnoremap p pgvy
 
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
 
 " ============================================================================
 " VIM_PLUG
