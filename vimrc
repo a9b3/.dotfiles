@@ -169,6 +169,10 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
+" Move lines up and down
+vmap <C-down> :m '>+1<CR>gv=gv
+vmap <C-up> :m '<-2<CR>gv=gv
+
 " ============================================================================
 " VIM_PLUG
 " ============================================================================
