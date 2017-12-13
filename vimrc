@@ -30,6 +30,8 @@ set hidden                                  " A buffer becomes hidden when it is
 set ignorecase smartcase hlsearch incsearch " Search settings
 set nobackup nowb noswapfile                " No vim backup files
 
+set exrc
+
 " ============================================================================
 " UI
 " ============================================================================
@@ -418,3 +420,5 @@ call plug#end()
 
 let base16colorspace=256  " Access colors present in 256 colorspace
 colorscheme base16-tomorrow-night
+
+set secure
