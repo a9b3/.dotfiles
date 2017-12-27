@@ -308,55 +308,45 @@ angular.module('$1')
 endsnippet
 
 # React
-snippet container
-import styles    from './styles.css'
-
-import cx        from 'classnames'
-import React     from 'react'
-import PropTypes from 'prop-types'
-
-export default class $1 extends React.Component {
-	static propTypes = {}
-
-	render() {
-		const {
-			...rest,
-		} = this.props
-
-		return <div
-			{...rest}
-			className={cx(rest.className)}
-		>
-		</div>
-	}
-}
-endsnippet
-
-snippet higherOrderComponent
-(ComposedComponent) => class extends Component {
-	render() {
-		return <ComposedComponent />
-	}
-}
-endsnippet
-
 snippet component
-import styles    from './styles.css'
+export default class $1 extends React.Component {
+	static propTypes = {$2}
 
-import cx        from 'classnames'
-import React     from 'react'
-import PropTypes from 'prop-types'
-
-export default function $1({
-	...rest,
-}) {
-	return <div
-		{...rest}
-		className={cx(styles.container, rest.className)}
-	>
-	</div>
+	render() {
+		return (
+			<div>
+				hi
+			</div>
+		)
+	}
 }
-$1.propTypes = {}
+endsnippet
+
+snippet hoc
+function $1(WrappedComponent) {
+  class Wrapper extends React.Component {
+    static displayName = \`$1(${WrappedComponent.displayName || WrappedComponent.name})\`
+
+    static propTypes = {}
+
+    render() {
+      return <WrappedComponent {...this.props} />
+    }
+  }
+
+  return hoistNonReactStatics(Wrapper, WrappedComponent)
+}
+endsnippet
+
+snippet fcomponent
+export default function $1() {
+	return (
+		<div>
+			hi
+		</div>
+	)
+}
+$1.propTypes = {$2}
 endsnippet
 
 snippet iifejsx
