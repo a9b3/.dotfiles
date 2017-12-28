@@ -506,3 +506,16 @@ function $1(target, key, descriptor) {
 	return descriptor
 }
 endsnippet
+
+snippet story
+import {withKnobs, text} from '@storybook/addon-knobs'
+import {storiesOf}       from '@storybook/react'
+
+import $1                from './index.js'
+
+storiesOf('$1', module)
+  .addDecorator(withKnobs)
+  .add('default', () => {
+    return <$1 />
+  })
+endsnippet
