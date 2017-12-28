@@ -79,17 +79,17 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>1061 191 514 209 0 0 1680 1050 </string>
+	<string>1061 172 514 94 0 0 1680 1028 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
-	<string>396 421 735 382 0 0 1920 1200 </string>
+	<string>396 421 735 382 0 0 1680 1028 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 477 620 392 0 0 1680 1028 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 139 606 456 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>703 418 796 473 0 0 3008 1670 </string>
+	<string>703 555 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1504 0 1504 1670 0 0 3008 1670 </string>
+	<string>0 0 1680 1050 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -665,7 +665,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.24669702292899406</real>
+			<real>0.1506543464467005</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -691,7 +691,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>4FE684E8-A241-4308-B27D-6F34BDECB3BB</string>
 	<key>NoSyncLastTipTime</key>
-	<real>532852270.94173598</real>
+	<real>532941865.04352599</real>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -774,6 +774,7 @@
 		<string>0068</string>
 		<string>0069</string>
 		<string>0070</string>
+		<string>0071</string>
 	</array>
 	<key>PointerActions</key>
 	<dict>
@@ -833,15 +834,17 @@
 	<key>TabViewType</key>
 	<integer>1</integer>
 	<key>TerminalMargin</key>
-	<integer>20</integer>
+	<integer>50</integer>
 	<key>TerminalVMargin</key>
 	<integer>20</integer>
 	<key>UseLionStyleFullscreen</key>
 	<false/>
 	<key>WordCharacters</key>
-	<string>/-+\~_.</string>
+	<string>k</string>
 	<key>findIgnoreCase_iTerm</key>
 	<true/>
+	<key>findMode_iTerm</key>
+	<integer>0</integer>
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
