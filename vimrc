@@ -330,11 +330,15 @@ let g:ale_javascript_eslint_executable='eslint_d'
 let g:ale_sign_column_always = 1
 " eslint is a command that will automatically run eslint --fix
 " https://github.com/w0rp/ale/issues/541
+let g:ale_javascript_prettier_options = '--single-quote --trailing-comma es5 --no-semi'
+let g:ale_javascript_prettier_use_local_config = 1
 let g:ale_fixers = {
 \   'javascript': [
+\       'prettier',
 \       'eslint',
 \   ],
 \   'typescript': [
+\       'prettier',
 \       'eslint',
 \   ],
 \}
