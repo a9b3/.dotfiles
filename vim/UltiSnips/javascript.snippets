@@ -523,7 +523,20 @@ endsnippet
 snippet test
 import expect from 'expect'
 
+import $1 from './index.js'
+
 describe('$1', () => {
-	$0
+	const testCases = [
+		{
+			testCase: [],
+			result: '',
+		}
+	]
+
+	testCases.forEach(({testCase, result}) => {
+		it(\\\`${testCase} => ${result}\\\`, () => {
+			expect($1(...testCase)).toBe(result)
+		})
+	})
 })
 endsnippet
