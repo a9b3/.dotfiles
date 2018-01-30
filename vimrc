@@ -264,12 +264,6 @@ endif
 " let g:indent_guides_start_level=1
 " let g:indent_guides_guide_size=2
 
-Plug 'Valloric/MatchTagAlways'
-" enable html tag matching in jsx
-" let g:mta_filetypes={
-"       \ 'javascript.jsx' : 1,
-"       \}
-
 " ds{ , delete {
 " cs"', change double quotes to single quotes
 Plug 'tpope/vim-surround'
