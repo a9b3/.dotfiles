@@ -9,3 +9,4 @@ tmux/plugins/
 tmux/resurrect/
 secrets/
 plugged/
+autoload/
