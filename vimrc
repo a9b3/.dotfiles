@@ -52,12 +52,12 @@ endif
 
 " set line break to 80
 set textwidth=80 colorcolumn=80 lbr tw=80
-set number numberwidth=2 relativenumber
+set number numberwidth=2
 
 " Highlight current line & column
 " au WinLeave * set nocursorline
 " au WinEnter * set cursorline
-set cursorline
+set cursorline!
 set ruler laststatus=2 title " Sets ruler show current line
 
 " vim code folding
