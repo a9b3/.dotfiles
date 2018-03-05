@@ -55,7 +55,7 @@ func main() {
 }
 endsnippet
 
-snippet func
+snippet fun
 func ${2:name}(${3:args}) (${4:ret}) {
 	$0
 }
@@ -71,4 +71,10 @@ snippet imp
 import (
 	$1
 )
+endsnippet
+
+snippet handler
+func$1(w http.ResponseWriter, r *http.Request) {
+	$0
+}
 endsnippet
