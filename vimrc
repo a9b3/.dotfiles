@@ -220,7 +220,6 @@ inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 
 set completeopt-=preview
 set completeopt+=menuone
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
