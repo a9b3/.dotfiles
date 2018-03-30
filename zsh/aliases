@@ -38,3 +38,6 @@ alias tls='tmux ls'
 alias tks='tmux kill-session'
 
 alias g='git'
+
+# default to show above/below 3 lines
+alias ag='ag -A 3 -B 3'
