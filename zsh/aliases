@@ -20,9 +20,6 @@ alias du='du -h'
 # default tree
 alias t='tree --dirsfirst -L 2'
 
-# Get week number
-alias week='date +%V'
-
 # replace rm with trash
 alias rm='trash'
 
@@ -34,7 +31,6 @@ alias r='cd $(git rev-parse --show-toplevel)'
 
 # tmux aliases
 alias ta='tmux attach'
-alias tls='tmux ls'
 alias tks='tmux kill-session'
 
 alias g='git'
