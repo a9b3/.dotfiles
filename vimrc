@@ -315,11 +315,8 @@ Plug 'othree/html5.vim'
 
 Plug 'elzr/vim-json'
 
+Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
-
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
