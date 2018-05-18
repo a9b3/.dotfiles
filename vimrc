@@ -60,9 +60,6 @@ set number numberwidth=2
 set cursorline!
 set ruler laststatus=2 title " Sets ruler show current line
 
-" vim code folding
-" set foldmethod=syntax foldlevelstart=99
-
 set wildmenu                   " Turn on the WiLd menu
 set wildmode=list:longest,full
 set wildignorecase
@@ -72,11 +69,15 @@ set cmdheight=1 " Height of the command bar
 set magic       " For regular expressions turn magic on
 set showmatch   " Show matching brackets when text indicator is over them
 set mat=2       " How many tenths of a second to blink when matching brackets
-" Scroll padding
-" set scrolloff=999
 
 " Resize
 au VimResized * exe "normal! \<c-w>="
+
+" tab space
+set shiftwidth=2 tabstop=2 expandtab smarttab
+set ai   " Auto indent
+set si   " Smart indent
+set wrap " Wrap lines
 
 " ============================================================================
 " BEHAVIOR
@@ -92,16 +93,6 @@ set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " ============================================================================
-" INDENT
-" ============================================================================
-
-" tab space
-set shiftwidth=2 tabstop=2 expandtab smarttab
-set ai   " Auto indent
-set si   " Smart indent
-set wrap " Wrap lines
-
-" ============================================================================
 " KEYBINDINGS
 " ============================================================================
 
@@ -109,12 +100,16 @@ set wrap " Wrap lines
 let mapleader = ","
 let g:mapleader = ","
 
-" jk to escape from insert mode
-imap jk <Esc>
-
 " save and quit
 map <leader>w :w!<cr>
 map <leader>q :qa<cr>
+
+" jk to escape from insert mode
+imap jk <Esc>
+
+" control a/e will go back and front of line
+inoremap <C-a> <esc>I
+inoremap <C-e> <esc>A
 
 " tab buffer shortcuts
 nmap <leader>[ :bprevious<CR>
@@ -132,30 +127,11 @@ nnoremap k gk
 " capitol movement keys will do sensible corresponding movement
 noremap H ^
 noremap L g_
-" noremap J <S-}>
-" noremap K <S-{>
 noremap J 6j
 noremap K 6k
 
-" control a/e will go back and front of line
-inoremap <C-a> <esc>I
-inoremap <C-e> <esc>A
-
 " clear search highlight
 nnoremap <leader><space> :nohlsearch<cr>
-
-" open close folds
-nnoremap <space> za
-nnoremap <space>o zA
-
-" do not allow arrow key movement
-map <up> <NOP>
-map <down> <NOP>
-map <left> <NOP>
-map <right> <NOP>
-
-" shortcut to put vim into background, fg to bring back to foreground
-nnoremap <leader>z <C-z>
 
 " shortcut for visual mode sort
 vnoremap <leader>s :sort
@@ -164,16 +140,12 @@ vnoremap <leader>s :sort
 " do not override register when pasting
 xnoremap p pgvy
 
+" execute macro on every line of visual selection
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
-
-" Move lines up and down
-vmap <C-down> :m '>+1<CR>gv=gv
-vmap <C-up> :m '<-2<CR>gv=gv
 
 " ============================================================================
 " VIM_PLUG
@@ -181,15 +153,15 @@ vmap <C-up> :m '<-2<CR>gv=gv
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=60
-
 Plug 'ap/vim-buftabline'
 Plug 'chriskempson/base16-vim'
 
 " NGINX conf file synxtax
 Plug 'chr4/nginx.vim'
+
+Plug 'scrooloose/nerdtree'
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=60
 
 " ----------------------------------------------------------------------------
 "  VIM_PLUG.AUTOCOMPLETE
@@ -257,26 +229,12 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
-" visual indent guides
-" Plug 'nathanaelkane/vim-indent-guides'
-" let g:indent_guides_enable_on_vim_startup=1
-" let g:indent_guides_start_level=1
-" let g:indent_guides_guide_size=2
-
 " ds{ , delete {
 " cs"', change double quotes to single quotes
 Plug 'tpope/vim-surround'
 
 " gS to split and gJ to join use on first line
 Plug 'AndrewRadev/splitjoin.vim'
-
-" align based on delimiter
-Plug 'godlygeek/tabular', { 'on': ['Tabularize'] }
-vmap <Leader>a: :Tabularize /:<CR>
-vmap <Leader>af :Tabularize /from<CR>
-vmap <Leader>a, :Tabularize /,<CR>
-vmap <Leader>a= :Tabularize /=<CR>
-vmap <Leader>a- :Tabularize /-<CR>
 
 " vim easymotion
 Plug 'easymotion/vim-easymotion'
@@ -290,19 +248,6 @@ map <Leader>k <Plug>(easymotion-k)
 map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
-
-" Multiple Cursors
-function! Multiple_cursors_before()
-    exe 'NeoCompleteLock'
-    echo 'Disabled autocomplete'
-endfunction
-
-function! Multiple_cursors_after()
-    exe 'NeoCompleteUnlock'
-    echo 'Enabled autocomplete'
-endfunction
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_next_key='<C-k>'
 
 " ----------------------------------------------------------------------------
 " VIM_PLUG.LINTER
@@ -379,10 +324,7 @@ Plug 'othree/es.next.syntax.vim'
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
 
-Plug 'heavenshell/vim-jsdoc'
 Plug 'moll/vim-node'
-" TODO fix this
-" Plug 'othree/jspc.vim'
 
 Plug 'JulesWang/css.vim'
       \| Plug 'hail2u/vim-css3-syntax'
