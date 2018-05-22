@@ -32,6 +32,16 @@ set nobackup nowb noswapfile                " No vim backup files
 
 set exrc
 
+set ffs=unix,dos,mac                       " Use Unix as the standard file type
+set noerrorbells novisualbell t_vb= tm=500 " No annoying sound on errors
+set tags=./tags,tags;/                     " keep looking up until tags is found
+
+" Configure backspace so it acts as it should act
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
+
 " ============================================================================
 " UI
 " ============================================================================
@@ -43,20 +53,10 @@ syntax enable
 hi Normal ctermbg=none
 highlight NonText ctermbg=none
 
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
-    set guitablabel=%M\ %t
-endif
-
 " set line break to 80
 set textwidth=80 colorcolumn=80 lbr tw=80
 set number numberwidth=2
 
-" Highlight current line & column
-" au WinLeave * set nocursorline
-" au WinEnter * set cursorline
 set cursorline!
 set ruler laststatus=2 title " Sets ruler show current line
 
@@ -65,7 +65,6 @@ set wildmode=list:longest,full
 set wildignorecase
 set wildignore=*.o,*~,*.pyc    " Ignore compiled files
 
-set cmdheight=1 " Height of the command bar
 set magic       " For regular expressions turn magic on
 set showmatch   " Show matching brackets when text indicator is over them
 set mat=2       " How many tenths of a second to blink when matching brackets
@@ -78,19 +77,6 @@ set shiftwidth=2 tabstop=2 expandtab smarttab
 set ai   " Auto indent
 set si   " Smart indent
 set wrap " Wrap lines
-
-" ============================================================================
-" BEHAVIOR
-" ============================================================================
-
-set ffs=unix,dos,mac                       " Use Unix as the standard file type
-autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
-set noerrorbells novisualbell t_vb= tm=500 " No annoying sound on errors
-set tags=./tags,tags;/                     " keep looking up until tags is found
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
 
 " ============================================================================
 " KEYBINDINGS
@@ -119,6 +105,9 @@ nmap <leader>d :bdelete<CR>
 " next search will center screen
 nnoremap n nzzzv
 nnoremap N Nzzzv
+
+" replace word under cursor
+nnoremap <leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " move up and down wrapped lines
 nnoremap j gj
@@ -162,6 +151,29 @@ Plug 'chr4/nginx.vim'
 Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=60
+
+Plug 'terryma/vim-multiple-cursors'
+function! Multiple_cursors_before()
+  if exists(':NeoCompleteLock')==2
+    exe 'NeoCompleteLock'
+  endif
+endfunction
+
+function! Multiple_cursors_after()
+  if exists(':NeoCompleteUnlock')==2
+    exe 'NeoCompleteUnlock'
+  endif
+endfunction
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-k>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-k>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-k>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
 
 " ----------------------------------------------------------------------------
 "  VIM_PLUG.AUTOCOMPLETE
@@ -210,7 +222,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 Plug 'ctrlpvim/ctrlp.vim'
-" ctrlp
 let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
 " use ag to search, ignores custom ignores, use .agignore
 let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
@@ -229,14 +240,8 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
-" ds{ , delete {
-" cs"', change double quotes to single quotes
 Plug 'tpope/vim-surround'
-
-" gS to split and gJ to join use on first line
 Plug 'AndrewRadev/splitjoin.vim'
-
-" vim easymotion
 Plug 'easymotion/vim-easymotion'
 " easy motion trigger with 's'
 let g:EasyMotion_do_mapping = 0
@@ -249,11 +254,6 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
 
-" ----------------------------------------------------------------------------
-" VIM_PLUG.LINTER
-" ----------------------------------------------------------------------------
-
-" ale async lint engine
 Plug 'w0rp/ale'
 " Write this in your vimrc file
 let g:ale_lint_on_text_changed = 'never'
@@ -281,10 +281,7 @@ let g:ale_fixers = {
 \   ],
 \}
 
-" ctrl + // to toggle comment
 Plug 'tomtom/tcomment_vim'
-
-" show diff in own split when editing a COMMIT_EDITMSG
 Plug 'rhysd/committia.vim'
 
 Plug 'airblade/vim-gitgutter'
@@ -308,16 +305,9 @@ let g:user_emmet_leader_key='<C-Z>'
 
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'othree/html5.vim'
-
-" ----------------------------------------------------------------------------
-" VIM_PLUG.JAVASCRIPT
-" ----------------------------------------------------------------------------
-
 Plug 'elzr/vim-json'
-
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
 
@@ -328,25 +318,6 @@ Plug 'JulesWang/css.vim'
       \| Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
 
 Plug 'othree/csscomplete.vim'
-
-" ----------------------------------------------------------------------------
-" VIM_PLUG.TYPESCRIPT
-" ----------------------------------------------------------------------------
-Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
-Plug 'Quramy/tsuquyomi'
-let g:tsuquyomi_completion_detail=1
-
-" https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support#vim
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-
-
-" ----------------------------------------------------------------------------
-" VIM_PLUG.GOLANG
-" ----------------------------------------------------------------------------
 
 Plug 'fatih/vim-go'
 let g:go_doc_keywordprg_enabled = 0
