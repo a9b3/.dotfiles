@@ -22,13 +22,11 @@ stty -ixon -ixoff
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 
-export PATH="$HOME/.yarn/bin:$PATH"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 eval "$(fasd --init auto)"
 
 # Load everything in secrets and zsh folder
 for file in ~/.dotfiles/{secrets,zsh}/*; do
-  [ -r "$file" ] && source "$file"
+  [[ -r "$file" ]] && source "$file"
 done
 unset file
