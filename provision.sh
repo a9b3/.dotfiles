@@ -1,52 +1,41 @@
-commandExists() {
-  if hash $1 >/dev/null 2>&1; then
+#!/bin/bash
+
+function commandExists() {
+  which "$1" > /dev/null
+}
+
+function directoryExists() {
+  if [[ -d "$1" ]]; then
     return 0
+  else
+    return 1
   fi
-  return 1
 }
 
-directoryExists() {
-  if [ -d "$1" ]; then
+function fileExists() {
+  if [[ -f "$1" ]]; then
     return 0
+  else
+    return 1
   fi
-  return 1
 }
 
-fileExists() {
-  if [ -f "$1" ]; then
-    return 0
+function xcode() {
+  if ! commandExists xcode-select; then
+    xcode-select --install
   fi
-  return 1
 }
 
-###############################################################################
-# INSTALL PROGRAMS
-###############################################################################
-
-xcode() {
-  if commandExists xcode-select; then
-    echo xcode already installed
-    return
+function installHomebrew() {
+  if ! commandExists brew; then
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew cask
+    brew tap caskroom/versions
+    brew tap caskroom/fonts
   fi
-  echo installing xcode...
-  xcode-select --install
-  echo done installing xcode...
 }
 
-installHomebrew() {
-  if commandExists brew; then
-    echo brew already installed
-    return
-  fi
-  echo installing homebrew...
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  brew cask
-  brew tap caskroom/versions
-  brew tap caskroom/fonts
-  echo done installing homebrew...
-}
-
-brewInstall() {
+function brewInstall() {
   brewAppsToInstall=(
   'coreutils'
   'gnu-sed'
@@ -78,42 +67,33 @@ brewInstall() {
   'python3'
   )
 
-  echo installing brew apps...
   sudo chown -R $(whoami):admin /usr/local
   brew update
   brew upgrade --all
 
   for i in "${brewAppsToInstall[@]}"; do
     if brew list $i > /dev/null; then
-      echo $i already installed
+      echo "$i already installed"
     else
       brew install $i
-
-      if [ "$i" == "fzf" ]; then
+      if [[ "$i" = "fzf" ]]; then
         /usr/local/opt/fzf/install
       fi
     fi
   done
 
   brew cleanup
-
-
-
-  echo done install brew apps...
 }
 
-brewCaskInstall() {
+function brewCaskInstall() {
   caskAppsToInstall=(
   'google-chrome'
-  'bettertouchtool'
-  'hyperswitch'
   'alfred2'
   'iterm2-beta'
   'nvalt'
   'the-unarchiver'
   )
 
-  echo installing homebrew cask apps...
   brew update
 
   for i in "${caskAppsToInstall[@]}"; do
@@ -128,88 +108,65 @@ brewCaskInstall() {
   echo done installing homebrew cask apps...
 }
 
-installPrograms() {
-  xcode
-  installHomebrew
-  brewInstall
-  brewCaskInstall
-}
+function dotfiles() {
+  if ! directoryExists ~/.dotfiles; then
+    git clone https://github.com/esayemm/.files.git ~/.dotfiles
 
-###############################################################################
-# DOTFILES
-###############################################################################
+    filesToSymlink=(
+    'vimrc'
+    'zshrc'
+    'vim'
+    'gitconfig'
+    'npmrc'
+    'tmux.conf'
+    'tmux'
+    'agignore'
+    )
 
-dotfiles() {
-  if directoryExists ~/.dotfiles; then
-    echo .dotfiles already setup...
-    return
+    for i in "${filesToSymlink[@]}"; do
+      if [[ ! -e ~/.$i ]]; then
+        ln -s ~/.dotfiles/$i ~/.$i
+      fi
+    done
   fi
-
-  echo copy my dotfiles...
-  git clone https://github.com/esayemm/.files.git ~/.dotfiles
-
-  filesToSymlink=(
-  'vimrc'
-  'zshrc'
-  'vim'
-  'gitconfig'
-  'npmrc'
-  'tmux.conf'
-  'tmux'
-  'agignore'
-  )
-
-  for i in "${filesToSymlink[@]}"; do
-    if [ ! -e ~/.$i ]; then
-      echo symlinking $i...
-      ln -s ~/.dotfiles/$i ~/.$i
-    fi
-  done
-
-  echo done symlinking dotfiles...
 }
 
-###############################################################################
-# SHELL
-###############################################################################
-
-setupBase16Shell() {
-  if directoryExists ~/.config/base16-shell; then
-    echo base16-shell already setup...
-    return
+function setupBase16Shell() {
+  if ! directoryExists ~/.config/base16-shell; then
+    git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
   fi
-
-  echo setting up base16-shell...
-  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-
-  echo done setting up base16-shell...
-  echo ************************************************************************
-  echo Still need to download base16 color schemes and use in iterm
-  echo ************************************************************************
 }
 
-fonts() {
-  if [ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]; then
+function fonts() {
+  # install my favorite font
+  if [[ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]]; then
     cd ~/Downloads
-    echo installing ProggyCleanSZBP font ...
     wget http://www.proggyfonts.net/wp-content/download/ProggyCleanSZBP.ttf.zip
     unzip ProggyCleanSZBP.ttf.zip
     mv ProggyCleanSZBP.ttf /Library/Fonts/
-    echo done installing ProggyCleanSZBP font ...
   fi
 }
 
-setupShell() {
-  setupBase16Shell
-  fonts
+function vimPlug() {
+  if ! fileExists ~/.vim/autoload/plug.vim; then
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  fi
 }
 
-###############################################################################
-# LANGUAGES
-###############################################################################
+function tmuxSetup() {
+  if ! directoryExists ~/.tmux/plugins/tpm; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+}
 
-setupNodeEnv() {
-  echo installing npm global packages...
+function checkDefaultShell() {
+  if [[ "$SHELL" != "/usr/local/bin/zsh" ]]; then
+    chsh -s /usr/local/bin/zsh
+  fi
+}
+
+function setupNodeEnv() {
   packages=(
   'nodemon'
   'webpack'
@@ -221,71 +178,14 @@ setupNodeEnv() {
       npm install -g $i
     fi
   done
-
-  echo done installing npm global packages...
 }
 
-setupLanguages() {
-  setupNodeEnv
-}
-
-###############################################################################
-# VIM
-###############################################################################
-
-vimPlug() {
-  if fileExists ~/.vim/autoload/plug.vim; then
-    echo plug.vim already installed
-    return
-  fi
-
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
-vimSetup() {
-  vimPlug
-}
-
-###############################################################################
-# TMUX
-###############################################################################
-
-tmuxSetup() {
-  if directoryExists ~/.tmux/plugins/tpm; then
-    echo tpm already installed
-    return
-  fi
-
-  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-}
-
-###############################################################################
-# MAIN
-###############################################################################
-
-checkDefaultShell() {
-  if [ "$SHELL" != "/usr/local/bin/zsh" ]; then
-    chsh -s /usr/local/bin/zsh
-  fi
-}
-
-main() {
-  installPrograms
-  dotfiles
-  setupShell
-  setupLanguages
-  vimSetup
-  checkDefaultShell
-}
-
-main
-
-printf "
-  - Base 16 Color
-    run command for your choice of color scheme
-
-    base16 [tab complete]
-
-  All done!
-"
+installHomebrew
+brewInstall
+brewCaskInstall
+dotfiles
+setupBase16Shell
+fonts
+setupNodeEnv
+vimPlug
+checkDefaultShell
