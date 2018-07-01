@@ -1,16 +1,16 @@
 # vim: filetype=zsh
 
 # make dir and enter it
-mkc() {
+function mkc() {
   mkdir -p "$@" && cd "$@"
 }
 
 # cd and list
-cdd() { cd ${1} ; ll ; }
+function cdd() { cd ${1} ; ll ; }
 alias cd='cdd'
 
 # compiles java file and runs it
-javarun() {
+function javarun() {
   file=$1
   suffix=java
   javac ${file}
@@ -19,7 +19,7 @@ javarun() {
 }
 
 # compiles and runs cpp files
-cpprun() {
+function cpprun() {
   file=$1
   suffix=cpp
   clang++ -std=c++11 -stdlib=libc++ $1 -o ${file%.$suffix}.out
@@ -28,7 +28,7 @@ cpprun() {
 }
 
 # compile and run c files
-crun() {
+function crun() {
   file=$1
   suffix=c
   gcc ${file} -o ${file}.out
@@ -40,30 +40,30 @@ crun() {
 # `tm` will allow you to select your tmux session via fzf.
 # `tm irc` will attach to the irc session (if it exists), else it will create it.
 
-tm() {
+function tm() {
   [[ -n "$TMUX" ]] && change="switch-client" || change="attach-session"
 
-  if [ $1 ]; then
+  if [[ "$1" ]]; then
     tmux $change -t "$1" 2>/dev/null || (tmux new-session -d -s $1 && tmux $change -t "$1"); return
   fi
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) &&  tmux $change -t "$session" || echo "No sessions found."
 }
 
 # fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
-z() {
+function z() {
   local dir
   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
 
 # jump to project directories using fzf
-acd() {
+function acd() {
   root=$(git rev-parse --show-toplevel)
   folder=$(git ls-files $root --full-name | xargs -n 1 dirname | uniq | fzf --exit-0)
   cd $root/$folder
 }
 
 # open vim file using fzf to search within project directory
-v() {
+function v() {
   root=$(git rev-parse --show-toplevel)
   file=$(git ls-files $root --full-name | fzf --exit-0)
   vim $root/$file
@@ -72,22 +72,22 @@ v() {
 # mm will bookmark the cwd for later use.
 # ex.
 # mm a
-mm() {
-  if [ $1 ]; then
-    echo $(pwd) > ~/.tmp/mm/$1
+function mm() {
+  if [[ "$1" ]]; then
+    echo "$(pwd) > ~/.tmp/mm/$1"
   else
-    echo no marker entered
+    echo "no marker entered"
     ls ~/.tmp/mm
   fi
 }
 # use in conjuction with mm to go back to previously bookmarked location
 # ex.
 # m a
-m() {
-  if [ $1 ]; then
+function m() {
+  if [[ "$1" ]]; then
     cd $(cat ~/.tmp/mm/$1)
   else
-    echo no marker entered
+    echo "no marker entered"
     ls ~/.tmp/mm
   fi
 }
