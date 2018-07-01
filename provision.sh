@@ -129,28 +129,12 @@ function setupEnv() {
     done
   fi
 
-  # setup base16-shell for color themes
-  if ! directoryExists ~/.config/base16-shell; then
-    git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
-  fi
-
   # install my favorite font
   if [[ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]]; then
     cd ~/Downloads
     wget http://www.proggyfonts.net/wp-content/download/ProggyCleanSZBP.ttf.zip
     unzip ProggyCleanSZBP.ttf.zip
     mv ProggyCleanSZBP.ttf /Library/Fonts/
-  fi
-
-  # setup vim-plug (vim plugin manager)
-  if ! fileExists ~/.vim/autoload/plug.vim; then
-    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  fi
-
-  # setup tpm (tmux plugin manager)
-  if ! directoryExists ~/.tmux/plugins/tpm; then
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
 
   # ensure zsh is the default shell

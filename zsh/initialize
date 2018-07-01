@@ -7,9 +7,21 @@ eval "$(fasd --init auto)"
 # automatically add non default ssh keys
 [[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa
 
-# use base16 colors
+# setup base16-shell for color themes
+if [[ ! -d ~/.config/base16-shell ]]; then
+  git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
+fi
 BASE16_SHELL=$HOME/.config/base16-shell
 [[ -n "$PS1" ]] && [[ -s $BASE16_SHELL/profile_helper.sh ]] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+# setup tpm (tmux plugin manager)
+[[ ! -d ~/.tmux/plugins/tpm ]] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 [[ ! -d ~/.bin/tmuxinator ]] && git clone git@github.com:tmuxinator/tmuxinator.git ~/.bin/tmuxinator
 source ~/.bin/tmuxinator/completion/tmuxinator.zsh
+
+# setup vim-plug (vim plugin manager)
+if [[ ! -f ~/.vim/autoload/plug.vim ]]; then
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
