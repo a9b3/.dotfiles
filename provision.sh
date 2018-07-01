@@ -66,10 +66,6 @@ function brewInstall() {
   'python3'
   )
 
-  sudo chown -R $(whoami):admin /usr/local
-  brew update
-  brew upgrade --all
-
   for i in "${brewAppsToInstall[@]}"; do
     if brew list $i > /dev/null; then
       echo "$i already installed"
@@ -80,8 +76,6 @@ function brewInstall() {
       fi
     fi
   done
-
-  brew cleanup
 }
 
 function brewCaskInstall() {
@@ -93,8 +87,6 @@ function brewCaskInstall() {
   'the-unarchiver'
   )
 
-  brew update
-
   for i in "${caskAppsToInstall[@]}"; do
     if brew cask list $i > /dev/null; then
       echo $i already installed
@@ -102,9 +94,6 @@ function brewCaskInstall() {
       brew cask install $i
     fi
   done
-
-  brew cleanup
-  echo done installing homebrew cask apps...
 }
 
 function setupEnv() {
@@ -138,7 +127,7 @@ function setupEnv() {
   fi
 
   # ensure zsh is the default shell
-  if [[ "$SHELL" != "/usr/local/bin/zsh" ]]; then
+  if [[ "$SHELL" != "/bin/zsh" ]]; then
     chsh -s /usr/local/bin/zsh
   fi
 }
@@ -159,7 +148,9 @@ function setupNodeEnv() {
 
 xcode
 installHomebrew
+brew update
 brewInstall
 brewCaskInstall
+brew cleanup
 setupEnv
 setupNodeEnv
