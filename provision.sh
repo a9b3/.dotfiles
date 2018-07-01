@@ -107,7 +107,8 @@ function brewCaskInstall() {
   echo done installing homebrew cask apps...
 }
 
-function dotfiles() {
+function setupEnv() {
+  # clone my dotfiles and symlink the config files
   if ! directoryExists ~/.dotfiles; then
     git clone https://github.com/esayemm/.files.git ~/.dotfiles
 
@@ -127,15 +128,12 @@ function dotfiles() {
       fi
     done
   fi
-}
 
-function setupBase16Shell() {
+  # setup base16-shell for color themes
   if ! directoryExists ~/.config/base16-shell; then
     git clone https://github.com/chriskempson/base16-shell.git ~/.config/base16-shell
   fi
-}
 
-function fonts() {
   # install my favorite font
   if [[ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]]; then
     cd ~/Downloads
@@ -143,22 +141,19 @@ function fonts() {
     unzip ProggyCleanSZBP.ttf.zip
     mv ProggyCleanSZBP.ttf /Library/Fonts/
   fi
-}
 
-function vimPlug() {
+  # setup vim-plug (vim plugin manager)
   if ! fileExists ~/.vim/autoload/plug.vim; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
-}
 
-function tmuxSetup() {
+  # setup tpm (tmux plugin manager)
   if ! directoryExists ~/.tmux/plugins/tpm; then
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
   fi
-}
 
-function checkDefaultShell() {
+  # ensure zsh is the default shell
   if [[ "$SHELL" != "/usr/local/bin/zsh" ]]; then
     chsh -s /usr/local/bin/zsh
   fi
@@ -178,12 +173,9 @@ function setupNodeEnv() {
   done
 }
 
+xcode
 installHomebrew
 brewInstall
 brewCaskInstall
-dotfiles
-setupBase16Shell
-fonts
+setupEnv
 setupNodeEnv
-vimPlug
-checkDefaultShell
