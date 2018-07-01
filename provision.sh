@@ -117,7 +117,6 @@ function dotfiles() {
     'zshrc'
     'vim'
     'gitconfig'
-    'npmrc'
     'tmux.conf'
     'tmux'
     'agignore'
