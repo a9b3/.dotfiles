@@ -15,10 +15,6 @@ EOBUNDLES
 
 antigen apply
 
-# Key Binding
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 eval "$(fasd --init auto)"
 
