@@ -15,9 +15,6 @@ EOBUNDLES
 
 antigen apply
 
-# Allow special keys
-stty -ixon -ixoff
-
 # Key Binding
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
