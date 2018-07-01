@@ -1,20 +1,16 @@
 # vi: ft=zsh
 
 # hub alias for -s instructions
-if which hub >/dev/null; then
+if which hub > /dev/null; then
   eval "$(hub alias -s)"
   alias git='hub'
 fi
 
 # automatically add non default keys
-if [ -e ~/.ssh/github_rsa ]; then
-  ssh-add ~/.ssh/github_rsa;
-fi
+[[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa
 
 BASE16_SHELL=$HOME/.config/base16-shell
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-if [ ! -d ~/.bin/tmuxinator ]; then
-  git clone git@github.com:tmuxinator/tmuxinator.git ~/.bin/tmuxinator
-fi
+[[ ! -d ~/.bin/tmuxinator ]] && git clone git@github.com:tmuxinator/tmuxinator.git ~/.bin/tmuxinator
 source ~/.bin/tmuxinator/completion/tmuxinator.zsh
