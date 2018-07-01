@@ -1,7 +1,3 @@
-# something in antigen uses gnu-sed, gsed is from brew install gnu-sed, doesn't
-# hurt to have this as a default anyway
-alias sed=gsed
-
 [[ ! -d ~/.antigen ]] && git clone https://github.com/zsh-users/antigen.git ~/.antigen
 source ~/.antigen/antigen.zsh
 
@@ -15,7 +11,7 @@ EOBUNDLES
 
 antigen apply
 
-# Load everything in secrets and zsh folder
+# load everything in secrets and zsh folder
 for file in ~/.dotfiles/{secrets,zsh}/*; do
   [[ -r "$file" ]] && source "$file"
 done
