@@ -1,6 +1,10 @@
 # vi: ft=zsh
 
-# automatically add non default keys
+# initialize fzf and fasd
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+eval "$(fasd --init auto)"
+
+# automatically add non default ssh keys
 [[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa
 
 BASE16_SHELL=$HOME/.config/base16-shell
