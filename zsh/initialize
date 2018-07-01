@@ -1,11 +1,5 @@
 # vi: ft=zsh
 
-# hub alias for -s instructions
-if which hub > /dev/null; then
-  eval "$(hub alias -s)"
-  alias git='hub'
-fi
-
 # automatically add non default keys
 [[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa
 

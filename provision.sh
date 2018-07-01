@@ -52,7 +52,6 @@ function brewInstall() {
   'findutils'
   'imagemagick'
   'git'
-  'hub'
   'go --cross-compile-common'
   'cmake'
   'ctags-exuberant'
