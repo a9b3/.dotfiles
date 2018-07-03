@@ -85,11 +85,13 @@ function brewCaskInstall() {
   'iterm2-beta'
   'nvalt'
   'the-unarchiver'
+  # postgres gui
+  'tableplus'
   )
 
   for i in "${caskAppsToInstall[@]}"; do
     if brew cask list $i > /dev/null; then
-      echo $i already installed
+      echo "$i already installed"
     else
       brew cask install $i
     fi
