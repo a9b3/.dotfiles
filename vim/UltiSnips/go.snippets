@@ -39,8 +39,12 @@ type $1 interface {
 }
 endsnippet
 
-snippet print
+snippet println
 fmt.Println("$1")
+endsnippet
+
+snippet print
+fmt.Printf("$1", $2)
 endsnippet
 
 snippet init
