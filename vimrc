@@ -150,7 +150,7 @@ Plug 'chr4/nginx.vim'
 
 Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=60
+let g:NERDTreeWinSize=45
 
 Plug 'terryma/vim-multiple-cursors'
 function! Multiple_cursors_before()
