@@ -240,6 +240,14 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
+Plug 'mileszs/ack.vim'
+" use ag instead of the default ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+cnoreabbrev Ack Ack!
+nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
+
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'easymotion/vim-easymotion'
