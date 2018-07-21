@@ -142,6 +142,7 @@ endfunction
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'airblade/vim-rooter'
 Plug 'ap/vim-buftabline'
 Plug 'chriskempson/base16-vim'
 
@@ -151,6 +152,7 @@ Plug 'chr4/nginx.vim'
 Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=45
+let g:NERDTreeIgnore = ['node_modules']
 
 Plug 'terryma/vim-multiple-cursors'
 function! Multiple_cursors_before()
