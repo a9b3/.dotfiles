@@ -10,3 +10,4 @@ tmux/resurrect/
 secrets/
 plugged/
 autoload/
+vim/.netrwhist
