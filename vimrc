@@ -49,6 +49,8 @@ autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
 set t_Co=256
 syntax enable
 
+set relativenumber
+
 " Background color
 hi Normal ctermbg=none
 highlight NonText ctermbg=none
