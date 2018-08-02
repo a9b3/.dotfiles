@@ -252,6 +252,23 @@ endif
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
 
+Plug 'flowtype/vim-flow', {
+      \ 'autoload': {
+      \   'filetypes': 'javascript'
+      \ },
+      \ 'build': {
+      \   'mac': 'npm install -g flow-bin'
+      \ }}
+"Use locally installed flow
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
+let g:flow#autoclose = 1
+
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'easymotion/vim-easymotion'
@@ -292,6 +309,10 @@ let g:ale_fixers = {
 \       'eslint',
 \   ],
 \}
+let g:ale_sign_error = '🌚'
+let g:ale_sign_warning = '?'
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
 
 Plug 'tomtom/tcomment_vim'
 Plug 'rhysd/committia.vim'
