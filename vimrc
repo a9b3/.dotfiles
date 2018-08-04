@@ -309,8 +309,6 @@ let g:ale_fixers = {
 \       'eslint',
 \   ],
 \}
-let g:ale_sign_error = '🌚'
-let g:ale_sign_warning = '?'
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
