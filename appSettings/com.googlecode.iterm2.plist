@@ -97,13 +97,13 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>269 178 606 456 0 0 1680 1028 </string>
 	<key>NSWindow Frame ProfilesPanel</key>
-	<string>1105 448 735 382 0 0 1920 1178 </string>
+	<string>1105 448 735 382 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 493 620 392 0 0 1680 1028 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>571 365 796 473 0 0 1920 1178 </string>
+	<string>934 146 796 473 0 0 1920 1178 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1920 1200 0 0 1920 1178 </string>
+	<string>1504 11 1498 1659 0 0 3008 1670 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 91 560 372 0 0 1920 1178 </string>
 	<key>New Bookmarks</key>
@@ -856,7 +856,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<false/>
 	<key>SmartPlacement</key>
