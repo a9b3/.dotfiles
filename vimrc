@@ -268,6 +268,7 @@ if executable(local_flow)
   let g:flow#flowpath = local_flow
 endif
 let g:flow#autoclose = 1
+let g:flow#showquickfix = 0
 
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -284,6 +285,9 @@ omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
 
 Plug 'w0rp/ale'
+let g:ale_linters = {
+\  'javascript': ['flow', 'eslint']
+\}
 " Write this in your vimrc file
 let g:ale_lint_on_text_changed = 'never'
 " You can disable this option too
