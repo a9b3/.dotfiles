@@ -35,3 +35,12 @@ case "$1" in
 		;;
 esac
 endsnippet
+
+snippet flags
+# colon after a character indicates it's required
+while getopts 'c:' flag; do
+  case "${flag}" in
+    c) config="${OPTARG}" ;;
+  esac
+done
+endsnippet

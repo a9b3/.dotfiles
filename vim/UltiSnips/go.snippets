@@ -79,7 +79,7 @@ endsnippet
 
 snippet err
 if err != nil {
-	$0
+	panic(fmt.Errorf("fatal error $1: %s", err))
 }
 endsnippet
 
