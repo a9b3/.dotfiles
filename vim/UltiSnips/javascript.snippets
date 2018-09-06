@@ -553,3 +553,9 @@ describe('$1', () => {
 	})
 })
 endsnippet
+
+snippet flowHoc
+<WrappedProps: any>(
+  Component: React.ComponentType<WrappedProps>
+) => React.ComponentType<$Diff<WrappedProps, $1>>
+endsnippet
