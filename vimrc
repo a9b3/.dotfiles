@@ -138,6 +138,8 @@ function! ExecuteMacroOverVisualRange()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
 
+map <leader>e :Explore<CR>
+
 " ============================================================================
 " VIM_PLUG
 " ============================================================================
