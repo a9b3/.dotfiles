@@ -315,17 +315,12 @@ endsnippet
 
 # React
 snippet component
-import React from 'react'
-import PropTypes from 'prop-types'
-
-export default class $1 extends React.PureComponent {
+class $1 extends React.PureComponent {
 	static propTypes = {$2}
 
 	render() {
 		return (
-			<div>
-				hi
-			</div>
+			$0
 		)
 	}
 }
