@@ -159,17 +159,6 @@ let g:NERDTreeWinSize=45
 let g:NERDTreeIgnore = ['node_modules']
 
 Plug 'terryma/vim-multiple-cursors'
-function! Multiple_cursors_before()
-  if exists(':NeoCompleteLock')==2
-    exe 'NeoCompleteLock'
-  endif
-endfunction
-
-function! Multiple_cursors_after()
-  if exists(':NeoCompleteUnlock')==2
-    exe 'NeoCompleteUnlock'
-  endif
-endfunction
 let g:multi_cursor_use_default_mapping=0
 " Default mapping
 let g:multi_cursor_start_word_key      = '<C-k>'
@@ -185,28 +174,16 @@ let g:multi_cursor_quit_key            = '<Esc>'
 "  VIM_PLUG.AUTOCOMPLETE
 " ----------------------------------------------------------------------------
 
-Plug 'Shougo/neocomplete.vim'
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" https://github.com/Shougo/neocomplete.vim/issues/418
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.typescript = '[^. *\t]\.\w*\|\h\w*::'
-
-" <TAB>: completion.
+let g:python3_host_prog = '/usr/local/bin/python3'
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+let g:pyxversion=3
 
 set completeopt-=preview
 set completeopt+=menuone
@@ -271,6 +248,8 @@ if executable(local_flow)
 endif
 let g:flow#autoclose = 1
 let g:flow#showquickfix = 0
+
+map <leader>z :FlowJumpToDef<CR>
 
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
