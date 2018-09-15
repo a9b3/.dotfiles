@@ -528,29 +528,21 @@ storiesOf('$1', module)
   })
 endsnippet
 
-snippet test
-import expect from 'expect'
-
-import $1 from './index.js'
-
-describe('$1', () => {
-	const testCases = [
-		{
-			testCase: [],
-			result: '',
-		}
-	]
-
-	testCases.forEach(({testCase, result}) => {
-		it(\\\`${testCase} => ${result}\\\`, () => {
-			expect($1(...testCase)).toBe(result)
-		})
-	})
-})
-endsnippet
-
 snippet flowHoc
 <WrappedProps: any>(
   Component: React.ComponentType<WrappedProps>
 ) => React.ComponentType<$Diff<WrappedProps, $1>>
+endsnippet
+
+snippet test
+// @flow
+
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+
+describe('$1', () => {
+	it('$2', () => {
+		$0
+	})
+})
 endsnippet
