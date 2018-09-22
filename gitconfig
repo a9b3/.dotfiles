@@ -35,7 +35,7 @@
 	cm = !git add -A && git commit -m
 
   # branch
-  b = branch -va
+  b = branch -v
 
   # log
   l = log --graph --pretty=format:'%Cred%h %Cblue%an:%Creset %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
