@@ -529,9 +529,11 @@ storiesOf('$1', module)
 endsnippet
 
 snippet flowHoc
-<WrappedProps: any>(
-  Component: React.ComponentType<WrappedProps>
-) => React.ComponentType<$Diff<WrappedProps, $1>>
+<WrappedComponent: React$ComponentType<*>>(
+  Component: WrappedComponent,
+) => React$ComponentType<
+  $Diff<React$ElementConfig<WrappedComponent> & EnhancedProps, EnhancedProps>,
+>
 endsnippet
 
 snippet test
