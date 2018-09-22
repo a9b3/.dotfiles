@@ -185,6 +185,8 @@ inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 let g:pyxversion=3
 
+Plug 'wokalski/autocomplete-flow'
+
 set completeopt-=preview
 set completeopt+=menuone
 autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
@@ -230,26 +232,6 @@ if executable('ag')
 endif
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
-
-Plug 'flowtype/vim-flow', {
-      \ 'autoload': {
-      \   'filetypes': 'javascript'
-      \ },
-      \ 'build': {
-      \   'mac': 'npm install -g flow-bin'
-      \ }}
-"Use locally installed flow
-let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
-if matchstr(local_flow, "^\/\\w") == ''
-    let local_flow= getcwd() . "/" . local_flow
-endif
-if executable(local_flow)
-  let g:flow#flowpath = local_flow
-endif
-let g:flow#autoclose = 1
-let g:flow#showquickfix = 0
-
-map <leader>z :FlowJumpToDef<CR>
 
 Plug 'tpope/vim-surround'
 Plug 'AndrewRadev/splitjoin.vim'
@@ -323,9 +305,29 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
+let g:javascript_plugin_flow = 1
 Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'react,jasmine,chai'
+
+Plug 'flowtype/vim-flow', {
+      \ 'autoload': {
+      \   'filetypes': 'javascript'
+      \ },
+      \ 'build': {
+      \   'mac': 'npm install -g flow-bin'
+      \ }}
+"Use locally installed flow
+let local_flow = finddir('node_modules', '.;') . '/.bin/flow'
+if matchstr(local_flow, "^\/\\w") == ''
+    let local_flow= getcwd() . "/" . local_flow
+endif
+if executable(local_flow)
+  let g:flow#flowpath = local_flow
+endif
+let g:flow#autoclose = 1
+let g:flow#showquickfix = 0
+map <leader>z :FlowJumpToDef<CR>
 
 Plug 'moll/vim-node'
 
