@@ -208,8 +208,8 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
-" use ag to search, ignores custom ignores, use .agignore
-let g:ctrlp_user_command='ag %s -l --nocolor -g ""'
+" use rg to search, ignores custom ignores
+let g:ctrlp_user_command='rg %s --files --color=never --glob ""'
 " ctrlP auto cache clearing, rescan for new files on save for ctrlp
 " http://stackoverflow.com/questions/8663829/vim-ctrlp-vim-plugin-how-to-rescan-files
 function! SetupCtrlP()
@@ -226,9 +226,9 @@ if has("autocmd")
 endif
 
 Plug 'mileszs/ack.vim'
-" use ag instead of the default ack
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
+" use rg instead of the default ack
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
 endif
 cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
