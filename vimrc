@@ -42,6 +42,20 @@ set whichwrap+=<,>,h,l
 
 autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
 
+" vimdiff, ignore whitespace
+if &diff
+  " diff mode
+  set diffopt+=iwhite
+  map gs :call IwhiteToggle()<CR>
+  function! IwhiteToggle()
+    if &diffopt =~ 'iwhite'
+      set diffopt-=iwhite
+    else
+      set diffopt+=iwhite
+    endif
+  endfunction
+endif
+
 " ============================================================================
 " UI
 " ============================================================================
