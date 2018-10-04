@@ -316,8 +316,6 @@ endsnippet
 # React
 snippet component
 class $1 extends React.PureComponent {
-	static propTypes = {$2}
-
 	render() {
 		return (
 			$0
@@ -547,4 +545,30 @@ describe('$1', () => {
 		$0
 	})
 })
+endsnippet
+
+snippet bp
+// @flow
+
+type Props = {}
+
+export default class $1 extends React.PureComponent<Props> {
+  render() {
+    return (
+      $0
+    )
+  }
+}
+endsnippet
+
+snippet componentDidMount
+componentDidMount() {
+	$0
+}
+endsnippet
+
+snippet componentDidUpdate
+componentDidUpdate() {
+	$0
+}
 endsnippet
