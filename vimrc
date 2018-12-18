@@ -2,15 +2,9 @@
 " GENERAL
 " ============================================================================
 
-set encoding=utf8
-set nocompatible
-
-set clipboard=unnamed " use system clipboard, vim must have +clipboard
-set noreadonly        " for vimdiff
-set history=1000      " Sets how many lines of history VIM has to remember
-
 " Enable filetype plugins
 filetype plugin indent on
+syntax enable
 
 " File types
 au BufRead,BufNewFile *.ejs set filetype=html
@@ -20,27 +14,45 @@ au BufRead,BufNewFile *.scss set filetype=scss
 au BufRead,BufNewFile *.service set filetype=yaml
 au BufRead,BufNewFile *.js set filetype=javascript
 au BufRead,BufNewFile *.conf set filetype=nginx
+au BufRead,BufNewFile *.sls set filetype=yaml
+au BufRead,BufNewFile *.ts set filetype=typescript
 
-set ttyfast                                 " send more characters for faster redraws
-set mouse=a                                 " enable mouse use in all modes
-set lazyredraw                              " Don't redraw while executing macros
-set autoread                                " update when a file is changed from the outside
-set showcmd                                 " Show incomplete cmds down the bottom
-set hidden                                  " A buffer becomes hidden when it is abandoned
-set ignorecase smartcase hlsearch incsearch " Search settings
-set nobackup nowb noswapfile                " No vim backup files
+set encoding=utf8
+set nocompatible
+set clipboard=unnamed                         " use system clipboard, vim must have +clipboard
+set noreadonly                                " for vimdiff
+set history=1000                              " Sets how many lines of history VIM has to remember
+set ttyfast                                   " send more characters for faster redraws
+set lazyredraw                                " Don't redraw while executing macros
+set autoread                                  " update when a file is changed from the outside
+set showcmd                                   " Show incomplete cmds down the bottom
+set hidden                                    " A buffer becomes hidden when it is abandoned
+set ignorecase smartcase hlsearch incsearch   " Search settings
+set nobackup nowb noswapfile                  " No vim backup files
+set ffs=unix,dos,mac                          " Use Unix as the standard file type
+set noerrorbells novisualbell t_vb= tm=500    " No annoying sound on errors
+set tags=./tags,tags;/                        " keep looking up until tags is found
+set backspace=eol,start,indent                " Configure backspace so it acts as it should act
+set whichwrap+=<,>,h,l                        " automatically wrap left and right
+set relativenumber                            " show relative number from curent line
+set t_Co=256                                  " 256 colors in vim
+set textwidth=80 colorcolumn=80 lbr tw=80     " set line break to 80
+set number numberwidth=2                      " show line number in left margin
+" set cursorline!                               " highlight current cursor's line
+set ruler laststatus=2 title                  " Sets ruler show current line
+set magic                                     " For regular expressions turn magic on
+set showmatch                                 " Show matching brackets when text indicator is over them
+set mat=2                                     " How many tenths of a second to blink when matching brackets
+set wildmenu                                  " Turn on the WiLd menu
+set wildmode=list:longest,full
+set wildignorecase
+set wildignore=*.o,*~,*.pyc                   " Ignore compiled files
+set shiftwidth=2 tabstop=2 expandtab smarttab " tab space
+set ai                                        " Auto indent
+set si                                        " Smart indent
+set wrap                                      " Wrap lines
 
-set exrc
-
-set ffs=unix,dos,mac                       " Use Unix as the standard file type
-set noerrorbells novisualbell t_vb= tm=500 " No annoying sound on errors
-set tags=./tags,tags;/                     " keep looking up until tags is found
-
-" Configure backspace so it acts as it should act
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
-
-autocmd BufWritePre * :%s/\s\+$//e         " Clear trailing spaces on save
+autocmd BufWritePre * :%s/\s\+$//e          " Clear trailing spaces on save
 
 " vimdiff, ignore whitespace
 if &diff
@@ -57,61 +69,22 @@ if &diff
 endif
 
 " ============================================================================
-" UI
-" ============================================================================
-
-set t_Co=256
-syntax enable
-
-set relativenumber
-
-" Background color
-hi Normal ctermbg=none
-highlight NonText ctermbg=none
-
-" set line break to 80
-set textwidth=80 colorcolumn=80 lbr tw=80
-set number numberwidth=2
-
-set cursorline!
-set ruler laststatus=2 title " Sets ruler show current line
-
-set wildmenu                   " Turn on the WiLd menu
-set wildmode=list:longest,full
-set wildignorecase
-set wildignore=*.o,*~,*.pyc    " Ignore compiled files
-
-set magic       " For regular expressions turn magic on
-set showmatch   " Show matching brackets when text indicator is over them
-set mat=2       " How many tenths of a second to blink when matching brackets
-
-" Resize
-au VimResized * exe "normal! \<c-w>="
-
-" tab space
-set shiftwidth=2 tabstop=2 expandtab smarttab
-set ai   " Auto indent
-set si   " Smart indent
-set wrap " Wrap lines
-
-" ============================================================================
 " KEYBINDINGS
 " ============================================================================
 
 " Set Leader
-let mapleader = ","
 let g:mapleader = ","
 
 " save and quit
 map <leader>w :w!<cr>
 map <leader>q :qa<cr>
 
-" jk to escape from insert mode
+" jk to escape from all modes
 imap jk <Esc>
 
 " control a/e will go back and front of line
-inoremap <C-a> <esc>I
-inoremap <C-e> <esc>A
+imap <C-a> <esc>I
+imap <C-e> <esc>A
 
 " tab buffer shortcuts
 nmap <leader>[ :bprevious<CR>
@@ -141,7 +114,6 @@ nnoremap <leader><space> :nohlsearch<cr>
 " shortcut for visual mode sort
 vnoremap <leader>s :sort
 
-" override behavior when cutting and deleting copying into register
 " do not override register when pasting
 xnoremap p pgvy
 
@@ -160,8 +132,20 @@ map <leader>e :Explore<CR>
 
 call plug#begin('~/.vim/plugged')
 
+" Jump to github line
+" blob view <leader>gh
+" blame view <leader>gb
+Plug 'ruanyl/vim-gh-line'
+let g:gh_user_canonical = 0 " Use branch name when possible
+
+" Set vim's project root to the closest ancestor directory containing the
+" rooter_patterns
 Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['package.json', '.git/']
+
 Plug 'ap/vim-buftabline'
+
+" Use base16 color theme
 Plug 'chriskempson/base16-vim'
 
 " NGINX conf file synxtax
@@ -171,18 +155,6 @@ Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=45
 let g:NERDTreeIgnore = ['node_modules']
-
-Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_use_default_mapping=0
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-k>'
-let g:multi_cursor_select_all_word_key = '<A-n>'
-let g:multi_cursor_start_key           = 'g<C-k>'
-let g:multi_cursor_select_all_key      = 'g<A-n>'
-let g:multi_cursor_next_key            = '<C-k>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
 
 " ----------------------------------------------------------------------------
 "  VIM_PLUG.AUTOCOMPLETE
@@ -212,6 +184,34 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " ----------------------------------------------------------------------------
 "  END AUTOCOMPLETE
 " ----------------------------------------------------------------------------
+
+Plug 'terryma/vim-multiple-cursors'
+let g:multi_cursor_use_default_mapping=0
+" Default mapping
+let g:multi_cursor_start_word_key      = '<C-k>'
+let g:multi_cursor_select_all_word_key = '<A-n>'
+let g:multi_cursor_start_key           = 'g<C-k>'
+let g:multi_cursor_select_all_key      = 'g<A-n>'
+let g:multi_cursor_next_key            = '<C-k>'
+let g:multi_cursor_prev_key            = '<C-p>'
+let g:multi_cursor_skip_key            = '<C-x>'
+let g:multi_cursor_quit_key            = '<Esc>'
+" Disable Deoplete when selecting multiple cursors starts
+function! Multiple_cursors_before()
+    if exists('*deoplete#disable')
+        exe 'call deoplete#disable()'
+    elseif exists(':NeoCompleteLock') == 2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+" Enable Deoplete when selecting multiple cursors ends
+function! Multiple_cursors_after()
+    if exists('*deoplete#toggle')
+        exe 'call deoplete#toggle()'
+    elseif exists(':NeoCompleteUnlock') == 2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction
 
 Plug 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -248,7 +248,9 @@ cnoreabbrev Ack Ack!
 nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
 
 Plug 'tpope/vim-surround'
+" gS spit single into multi line, gJ to join back into one line
 Plug 'AndrewRadev/splitjoin.vim'
+
 Plug 'easymotion/vim-easymotion'
 " easy motion trigger with 's'
 let g:EasyMotion_do_mapping = 0
@@ -275,6 +277,9 @@ let g:ale_fix_on_save = 1
 let g:ale_lint_on_save = 0
 " use faster version
 let g:ale_javascript_eslint_executable='eslint_d'
+let g:ale_pattern_options = {
+\   '.*node_modules.*': {'ale_enabled': 0},
+\}
 let g:ale_sign_column_always = 1
 " eslint is a command that will automatically run eslint --fix
 " https://github.com/w0rp/ale/issues/541
@@ -287,15 +292,18 @@ let g:ale_fixers = {
 \   ],
 \   'typescript': [
 \       'prettier',
-\       'eslint',
+\       'tslint',
 \   ],
 \}
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
+" C-// to start comment
 Plug 'tomtom/tcomment_vim'
+" Better git commit editing window
 Plug 'rhysd/committia.vim'
 
+" Disply git status per line on the right guttter
 Plug 'airblade/vim-gitgutter'
 set updatetime=2000
 let g:gitgutter_realtime=1
@@ -355,9 +363,21 @@ Plug 'fatih/vim-go'
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 
+" ----------------------------------------------------------------------------
+"  TYPESCRIPT PLUGS
+" ----------------------------------------------------------------------------
+" TSServer client
+Plug 'Quramy/tsuquyomi'
+" Typescript syntax highlighting
+Plug 'leafgarland/typescript-vim'
+" Integration with deoplete for autocomplete
+Plug 'rudism/deoplete-tsuquyomi'
+
+autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
+
 call plug#end()
 
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-tomorrow-night
+let base16colorspace=256        " Let base16 access colors present in 256 colorspace
+colorscheme base16-default-dark
 
 set secure

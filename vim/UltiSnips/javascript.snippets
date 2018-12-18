@@ -535,17 +535,11 @@ snippet flowHoc
 endsnippet
 
 snippet test
-// @flow
-
-import { describe, it } from 'mocha'
-import { expect } from 'chai'
-
-describe('$1', () => {
-	it('$2', () => {
-		$0
-	})
+test('$1', assert => {
+	$0
 })
 endsnippet
+
 
 snippet bp
 // @flow
