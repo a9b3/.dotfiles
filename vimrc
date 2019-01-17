@@ -15,7 +15,11 @@ au BufRead,BufNewFile *.service set filetype=yaml
 au BufRead,BufNewFile *.js set filetype=javascript
 au BufRead,BufNewFile *.conf set filetype=nginx
 au BufRead,BufNewFile *.sls set filetype=yaml
-au BufRead,BufNewFile *.ts set filetype=typescript
+au BufRead,BufNewFile *.ts set filetype=typescript.jsx
+au BufRead,BufNewFile *.tsx set filetype=typescript.jsx
+
+" Resize vim upon resize eg. pane sizing when resizing terminal window
+au VimResized * exe "normal! \<c-w>="
 
 set encoding=utf8
 set nocompatible
@@ -155,6 +159,8 @@ Plug 'scrooloose/nerdtree'
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=45
 let g:NERDTreeIgnore = ['node_modules']
+
+Plug 'martinda/Jenkinsfile-vim-syntax'
 
 " ----------------------------------------------------------------------------
 "  VIM_PLUG.AUTOCOMPLETE
@@ -372,6 +378,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'leafgarland/typescript-vim'
 " Integration with deoplete for autocomplete
 Plug 'rudism/deoplete-tsuquyomi'
+Plug 'peitalin/vim-jsx-typescript'
 
 autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
 

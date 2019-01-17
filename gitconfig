@@ -3,7 +3,7 @@
 	email = esayemm@gmail.com
 	name = Sam Lau
 [color]
-	ui = always
+	ui = true
   branch = auto
   diff = auto
   interactive = auto
@@ -13,10 +13,12 @@
 	local = yellow
 	remote = green
 [color "diff"]
-	meta = yellow bold
+	meta = yellow
 	frag = magenta bold
 	old = red bold
 	new = green bold
+	commit = yellow bold
+	whitespace = red reverse
 [color "status"]
 	added = yellow
 	changed = green
@@ -25,6 +27,7 @@
   ignorecase = false
 	editor = vim
 	excludesfile = ~/.gitignore_global
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
 	co = checkout
 	st = status
@@ -90,10 +93,17 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[pager]
+	branch = false
+[diff "sopsdiffer"]
+	textconv = sops -d
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-	required = true
 	process = git-lfs filter-process
-[pager]
-	branch = false
+	required = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22

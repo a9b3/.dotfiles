@@ -91,3 +91,17 @@ function m() {
     ls ~/.tmp/mm
   fi
 }
+
+function replace() {
+  if [[ ! -n "$1" ]]; then
+    echo "missing first argument"
+    return
+  fi
+
+  if [[ ! -n "$2" ]]; then
+    echo "missing second argument"
+    return
+  fi
+
+  rg "$1" -l | xargs sed -i '' -e 's/'"$1"'/'"$2"'/g'
+}

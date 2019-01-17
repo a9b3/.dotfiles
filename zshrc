@@ -7,6 +7,7 @@ antigen theme arrow
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
+  zsh-users/zsh-completions
 EOBUNDLES
 
 antigen apply
@@ -18,3 +19,9 @@ done
 unset file
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
