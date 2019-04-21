@@ -101,3 +101,28 @@ func Test$1(t *testing.T) {
 	$0
 }
 endsnippet
+
+snippet decodejson
+var result map[string]interface{}
+json.NewDecoder(${1:io.Reader}).Decode(&result)
+endsnippet
+
+snippet fatal
+if err != nil {
+	t.Fatal(err)
+}
+endsnippet
+
+snippet marshal
+jsonByte, err := json.Marshal(${1:struct})
+if err != nil {
+	panic(fmt.Errorf("fatal error: %s", err))
+}
+endsnippet
+
+snippet unmarshal
+err := json.Unmarshal(${1:[]byte}, ${2:&struct})
+if err != nil {
+	panic(fmt.Errorf("fatal error: %s", err))
+}
+endsnippet

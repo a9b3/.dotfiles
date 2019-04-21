@@ -5,10 +5,6 @@ function mkc() {
   mkdir -p "$@" && cd "$@"
 }
 
-# cd and list
-function cdd() { cd ${1} ; ll ; }
-alias cd='cdd'
-
 # compiles java file and runs it
 function javarun() {
   file=$1
