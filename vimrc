@@ -17,6 +17,10 @@ au BufRead,BufNewFile *.conf set filetype=nginx
 au BufRead,BufNewFile *.sls set filetype=yaml
 au BufRead,BufNewFile *.ts set filetype=typescript.jsx
 au BufRead,BufNewFile *.tsx set filetype=typescript.jsx
+au BufRead,BufNewFile *.groovy set filetype=Jenkinsfile
+au BufRead,BufNewFile *.{yaml,yml} set filetype=yaml
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Resize vim upon resize eg. pane sizing when resizing terminal window
 au VimResized * exe "normal! \<c-w>="
@@ -136,48 +140,23 @@ map <leader>e :Explore<CR>
 
 call plug#begin('~/.vim/plugged')
 
-" Jump to github line
-" blob view <leader>gh
-" blame view <leader>gb
-Plug 'ruanyl/vim-gh-line'
-let g:gh_user_canonical = 0 " Use branch name when possible
-
-" Set vim's project root to the closest ancestor directory containing the
-" rooter_patterns
-Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['package.json', '.git/']
-
-Plug 'ap/vim-buftabline'
-
-" Use base16 color theme
-Plug 'chriskempson/base16-vim'
-
-" NGINX conf file synxtax
-Plug 'chr4/nginx.vim'
-
-Plug 'scrooloose/nerdtree'
-map <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=45
-let g:NERDTreeIgnore = ['node_modules']
-
-Plug 'martinda/Jenkinsfile-vim-syntax'
-
-" ----------------------------------------------------------------------------
-"  VIM_PLUG.AUTOCOMPLETE
-" ----------------------------------------------------------------------------
-
+" ---------------------------------
+"  AUTOCOMPLETE
+" ---------------------------------
 let g:python3_host_prog = '/usr/local/bin/python3'
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_complete_start_length = 1
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
 let g:pyxversion=3
-
-Plug 'wokalski/autocomplete-flow'
 
 set completeopt-=preview
 set completeopt+=menuone
@@ -187,9 +166,25 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" ----------------------------------------------------------------------------
-"  END AUTOCOMPLETE
-" ----------------------------------------------------------------------------
+" ---------------------------------
+"  GENERAL
+" ---------------------------------
+" Set vim's project root to the closest ancestor directory containing the
+" rooter_patterns
+Plug 'airblade/vim-rooter'
+let g:rooter_patterns = ['package.json', '.git/']
+
+" Use base16 color theme
+Plug 'chriskempson/base16-vim'
+
+" Navigation
+Plug 'scrooloose/nerdtree'
+map <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeWinSize=45
+let g:NERDTreeIgnore = ['node_modules']
+
+" Tab bar for buffers
+Plug 'ap/vim-buftabline'
 
 Plug 'terryma/vim-multiple-cursors'
 let g:multi_cursor_use_default_mapping=0
@@ -219,6 +214,7 @@ function! Multiple_cursors_after()
     endif
 endfunction
 
+" Snippets
 Plug 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-k>"
@@ -226,6 +222,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
+" Fuzzy file search
 Plug 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_custom_ignore='node_modules\|DS_STORE\|bower_components\|.sass-cache\|dist\|plugins\|platform\|public\|production'
 " use rg to search, ignores custom ignores
@@ -245,14 +242,7 @@ if has("autocmd")
   autocmd VimEnter * :call SetupCtrlP()
 endif
 
-Plug 'mileszs/ack.vim'
-" use rg instead of the default ack
-if executable('rg')
-  let g:ackprg = 'rg --vimgrep'
-endif
-cnoreabbrev Ack Ack!
-nnoremap <Leader>a :Ack! -A 2 -B 2<Space>
-
+" change surrounding delimiters
 Plug 'tpope/vim-surround'
 " gS spit single into multi line, gJ to join back into one line
 Plug 'AndrewRadev/splitjoin.vim'
@@ -269,6 +259,72 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
 
+" C-// to start comment
+Plug 'tomtom/tcomment_vim'
+" Better git commit editing window
+Plug 'rhysd/committia.vim'
+
+" automatic closing of quotes
+Plug 'Raimondi/delimitMate'
+let delimitMate_expand_cr=1
+au FileType mail let b:delimitMate_expand_cr = 1
+
+Plug 'majutsushi/tagbar'
+let g:tagbar_type_typescript = {
+  \ 'ctagsbin' : 'tstags',
+  \ 'ctagsargs' : '-f-',
+  \ 'kinds': [
+    \ 'e:enums:0:1',
+    \ 'f:function:0:1',
+    \ 't:typealias:0:1',
+    \ 'M:Module:0:1',
+    \ 'I:import:0:1',
+    \ 'i:interface:0:1',
+    \ 'C:class:0:1',
+    \ 'm:method:0:1',
+    \ 'p:property:0:1',
+    \ 'v:variable:0:1',
+    \ 'c:const:0:1',
+  \ ],
+  \ 'sort' : 0
+\ }
+nmap <F8> :TagbarToggle<CR>
+
+" ---------------------------------
+"  GIT
+" ---------------------------------
+" Jump to github line
+" blob view <leader>gh
+" blame view <leader>gb
+Plug 'ruanyl/vim-gh-line'
+let g:gh_user_canonical = 0 " Use branch name when possible
+
+Plug 'tpope/vim-fugitive'
+" shortcut Gblame
+nnoremap <leader>g :Gblame<cr>
+
+" Disply git status per line on the right guttter
+Plug 'airblade/vim-gitgutter'
+set updatetime=2000
+let g:gitgutter_realtime=1
+set signcolumn=yes
+
+" ---------------------------------
+"  SYNTAX
+" ---------------------------------
+Plug 'martinda/Jenkinsfile-vim-syntax'
+" NGINX conf file synxtax
+Plug 'chr4/nginx.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'othree/html5.vim'
+Plug 'elzr/vim-json'
+Plug 'mustache/vim-mustache-handlebars'
+
+
+" ---------------------------------
+"  LINT
+" ---------------------------------
 Plug 'w0rp/ale'
 let g:ale_linters = {
 \  'javascript': ['flow', 'eslint']
@@ -304,40 +360,28 @@ let g:ale_fixers = {
 nnoremap <leader>an :ALENextWrap<cr>
 nnoremap <leader>ap :ALEPreviousWrap<cr>
 
-" C-// to start comment
-Plug 'tomtom/tcomment_vim'
-" Better git commit editing window
-Plug 'rhysd/committia.vim'
+" ---------------------------------
+"  GOLANG
+" ---------------------------------
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+let g:go_doc_keywordprg_enabled = 0
+let g:go_fmt_command = "goimports"
 
-" Disply git status per line on the right guttter
-Plug 'airblade/vim-gitgutter'
-set updatetime=2000
-let g:gitgutter_realtime=1
-set signcolumn=yes
-
-Plug 'tpope/vim-fugitive'
-" shortcut Gblame
-nnoremap <leader>g :Gblame<cr>
-
-Plug 'Raimondi/delimitMate'
-let delimitMate_expand_cr=1
-au FileType mail let b:delimitMate_expand_cr = 1
-
-Plug 'hashivim/vim-terraform'
-Plug 'Glench/Vim-Jinja2-Syntax'
-
+" ---------------------------------
+"  JS
+" ---------------------------------
+" html tag insert shortcuts
 Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
 
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'othree/html5.vim'
-Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 let g:javascript_plugin_flow = 1
 Plug 'mxw/vim-jsx'
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'react,jasmine,chai'
 
+" ---------------------------------
+"  JS FLOW
+" ---------------------------------
+Plug 'wokalski/autocomplete-flow'
 Plug 'flowtype/vim-flow', {
       \ 'autoload': {
       \   'filetypes': 'javascript'
@@ -357,21 +401,10 @@ let g:flow#autoclose = 1
 let g:flow#showquickfix = 0
 map <leader>z :FlowJumpToDef<CR>
 
-Plug 'moll/vim-node'
 
-Plug 'JulesWang/css.vim'
-      \| Plug 'hail2u/vim-css3-syntax'
-      \| Plug 'cakebaker/scss-syntax.vim', { 'for': ['scss'] }
-
-Plug 'othree/csscomplete.vim'
-
-Plug 'fatih/vim-go'
-let g:go_doc_keywordprg_enabled = 0
-let g:go_fmt_command = "goimports"
-
-" ----------------------------------------------------------------------------
+" ---------------------------------
 "  TYPESCRIPT PLUGS
-" ----------------------------------------------------------------------------
+" ---------------------------------
 " TSServer client
 Plug 'Quramy/tsuquyomi'
 " Typescript syntax highlighting
