@@ -562,3 +562,99 @@ componentDidUpdate() {
 	$0
 }
 endsnippet
+
+snippet Fetch
+// @flow
+
+import { Layout, Text } from '@robinhood/prefab'
+import { path } from 'ramda'
+
+import AuthenticatedFetch from 'components/AuthenticatedFetch'
+import FormikPagination from 'components/FormikPagination'
+import { OAK_API_PATH } from 'utils'
+import { extractErrorMsg } from 'utils/display/extractErrorMessage'
+import { parseCursor } from 'utils/parseCursor'
+
+export default function ${1:name}() {
+  return (
+    <AuthenticatedFetch path={\`${OAK_API_PATH}/${2:path}\`}>
+      {({ isError, isFetching, response, refresh }) => {
+        const results = path(['body', 'results'], response) || {}
+        const next = parseCursor(path(['body', 'next'], response))
+        const previous = parseCursor(path(['body', 'previous'], response))
+        const errorMsg = extractErrorMsg(
+          response,
+          'There has been an error fetching ${3:err}.'
+        )
+
+        if (isError) {
+          return (
+            <Layout paddingY={36}>
+              <Text color="red">{errorMsg}</Text>
+            </Layout>
+          )
+        }
+        if (isFetching) {
+          return (
+            <Layout paddingY={36}>
+              <Text>Loading...</Text>
+            </Layout>
+          )
+        }
+
+        return (
+          <div>
+            <FormikPagination name="cursor" next={next} previous={previous} />
+          </div>
+        )
+      }}
+    </AuthenticatedFetch>
+  )
+}
+endsnippet
+
+snippet ExpandableTable
+// @flow
+
+import { Layout, Text } from '@robinhood/prefab'
+
+import ExpandableTable from 'components/ExpandableTable'
+
+function OptionPositionsTable({
+  results,
+}: {
+  results: Array<{ [string]: any }>,
+}): React$Node {
+  if (!results || results.length === 0) {
+    return (
+      <Layout paddingY={36}>
+        <Text>No Results.</Text>
+      </Layout>
+    )
+  }
+
+  return (
+    <ExpandableTable
+      items={results}
+      renderHeading={() => (
+        <React.Fragment>
+          <th>Col1</th>
+        </React.Fragment>
+      )}
+      renderRow={({ item }) => (
+        <React.Fragment>
+          {item.isExpanded ? (
+            <React.Fragment>
+							<td>Cell</td>
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+							<td>Cell</td>
+            </React.Fragment>
+          )}
+        </React.Fragment>
+      )}
+    />
+  )
+}
+endsnippet

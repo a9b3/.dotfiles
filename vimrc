@@ -354,7 +354,7 @@ let g:ale_fixers = {
 \   ],
 \   'typescript': [
 \       'prettier',
-\       'tslint',
+\       'eslint',
 \   ],
 \}
 nnoremap <leader>an :ALENextWrap<cr>
@@ -366,6 +366,13 @@ nnoremap <leader>ap :ALEPreviousWrap<cr>
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
+let g:go_def_mode = 'godef'
+
+" ---------------------------------
+"  GOLANG
+" ---------------------------------
+Plug 'rust-lang/rust.vim'
+let g:rustfmt_autosave = 1
 
 " ---------------------------------
 "  JS
