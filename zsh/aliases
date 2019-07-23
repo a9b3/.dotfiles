@@ -18,3 +18,5 @@ alias vi='vim'
 alias r='cd $(git rev-parse --show-toplevel)'
 
 alias g='git'
+
+alias vim='nvim'

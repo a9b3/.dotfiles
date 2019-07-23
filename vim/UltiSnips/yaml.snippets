@@ -42,3 +42,18 @@ version: "3"
 services:
 	$0
 endsnippet
+
+snippet argo
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: $1-
+spec:
+  entrypoint: whalesay
+  templates:
+  - name: whalesay
+    container:
+      image: docker/whalesay
+      command: [cowsay]
+      args: ["hello world"]
+endsnippet

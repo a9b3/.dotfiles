@@ -1,0 +1,25 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "Markdown",
+    "css",
+    "jsx",
+    "javascript",
+    "javascript.jsx",
+    "javascriptreact",
+    "tsx",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact"
+  ],
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": "***",
+  // eslint
+  "eslint.filetypes": [
+    "javascript",
+    "javascript.jsx",
+    "typescript",
+    "typescript.jsx"
+  ],
+  "eslint.autoFix": true,
+  "eslint.autoFixOnSave": true
+}
