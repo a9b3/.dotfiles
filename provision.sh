@@ -36,11 +36,11 @@ function installHomebrew() {
 }
 
 function brewInstall() {
-  brew install $(< ./brewleaves)
+  brew install $(< ./brew/leaves)
 }
 
 function brewCaskInstall() {
-  brew cask install $(< ./brewcasklist)
+  brew cask install $(< ./brew/cask_list)
 }
 
 function setupEnv() {
