@@ -1,3 +1,5 @@
+DISABLE_AUTO_TITLE="true"
+
 [[ ! -d ~/.antigen ]] && git clone https://github.com/zsh-users/antigen.git ~/.antigen
 source ~/.antigen/antigen.zsh
 
