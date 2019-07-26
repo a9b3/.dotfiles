@@ -2,7 +2,7 @@
 source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
-antigen theme arrow
+antigen theme sorin
 
 antigen bundles <<EOBUNDLES
   zsh-users/zsh-syntax-highlighting
