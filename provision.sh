@@ -36,66 +36,11 @@ function installHomebrew() {
 }
 
 function brewInstall() {
-  brewAppsToInstall=(
-  'coreutils'
-  'gnu-sed'
-  'wget --with-iri'
-  'youtube-dl'
-  'zsh'
-  'trash'
-  'fasd'
-  'tmux'
-  # used by tmux
-  'reattach-to-user-namespace'
-  'tree'
-  'the_silver_searcher'
-  'findutils'
-  'imagemagick'
-  'git'
-  'go --cross-compile-common'
-  'cmake'
-  'ctags-exuberant'
-  'node'
-  'yarn'
-  'ruby'
-  'luajit'
-  'vim --override-system-vi --with-luajit'
-  'fzf'
-  'curl --with-openssl'
-  'python'
-  'python3'
-  )
-
-  for i in "${brewAppsToInstall[@]}"; do
-    if brew list $i > /dev/null; then
-      echo "$i already installed"
-    else
-      brew install $i
-      if [[ "$i" = "fzf" ]]; then
-        /usr/local/opt/fzf/install
-      fi
-    fi
-  done
+  brew install $(< ./brewleaves)
 }
 
 function brewCaskInstall() {
-  caskAppsToInstall=(
-  'google-chrome'
-  'alfred2'
-  'iterm2-beta'
-  'nvalt'
-  'the-unarchiver'
-  # postgres gui
-  'tableplus'
-  )
-
-  for i in "${caskAppsToInstall[@]}"; do
-    if brew cask list $i > /dev/null; then
-      echo "$i already installed"
-    else
-      brew cask install $i
-    fi
-  done
+  brew cask install $(< ./brewcasklist)
 }
 
 function setupEnv() {
@@ -110,7 +55,6 @@ function setupEnv() {
     'gitconfig'
     'tmux.conf'
     'tmux'
-    'agignore'
     )
 
     for i in "${filesToSymlink[@]}"; do
@@ -136,8 +80,6 @@ function setupEnv() {
 
 function setupNodeEnv() {
   packages=(
-  'nodemon'
-  'webpack'
   'n'
   )
 
