@@ -91,7 +91,7 @@
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
-	cmd = nvim -d $LOCAL $BASE
+	cmd = nvim -d $BASE $LOCAL
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
