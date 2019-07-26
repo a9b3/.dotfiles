@@ -74,6 +74,17 @@ inoremap <silent><expr> <Tab>
       \ <SID>check_back_space() ? "\<Tab>" :
       \ coc#refresh()
 
+" Use K to show documentation in preview window
+nnoremap <silent> <C-a> :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -99,6 +110,14 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -158,6 +177,10 @@ Plug 'tpope/vim-fugitive'
 " shortcut Gblame
 nnoremap <leader>g :Gblame<cr>
 
+Plug 'chrisbra/vim-diff-enhanced'
+" Better git commit editing window
+Plug 'rhysd/committia.vim'
+
 " ==================================================================== SYNTAX "
 Plug 'martinda/Jenkinsfile-vim-syntax'
 " NGINX conf file synxtax
@@ -167,6 +190,7 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'jparise/vim-graphql'
 
 " ==================================================================== GOLANG "
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }

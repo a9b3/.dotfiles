@@ -25,8 +25,8 @@
 	untracked = cyan
 [core]
   ignorecase = false
-	editor = vim
-	excludesfile = ~/.gitignore_global
+	editor = nvim
+	excludesfile = /Users/sam/.gitignore_global
 	pager = diff-so-fancy | less --tabs=4 -RFX
 [alias]
 	co = checkout
@@ -78,10 +78,6 @@
   ignored = !git ls-files -v | grep "^[[:lower:]]"
   untrack = !git update-index --assume-unchanged
   retrack = !git update-index --no-assume-unchanged
-[diff]
-	tool = vimdiff
-[difftool]
-	prompt = false
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -90,12 +86,16 @@
 	default = simple
 [credential]
 	helper = osxkeychain
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[difftool "vimdiff"]
+	cmd = nvim -d $BASE $LOCAL
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [pager]
 	branch = false
 [diff "sopsdiffer"]
@@ -110,3 +110,5 @@
 	oldHighlight = red bold 52
 	newNormal = green bold
 	newHighlight = green bold 22
+[commit]
+	template = /Users/sam/.stCommitMsg

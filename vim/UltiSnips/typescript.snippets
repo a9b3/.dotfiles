@@ -28,18 +28,6 @@ function $1({ $2 }: any) {
 }
 endsnippet
 
-snippet comp
-class $1 extends React.PureComponent<any> {
-	render() {
-		return (
-			<div>
-				$0
-			</div>
-		)
-	}
-}
-endsnippet
-
 snippet imst
 import styled from 'styled-components'
 endsnippet
@@ -79,4 +67,18 @@ snippet formik
 		)
 	}}
 </Formik>
+endsnippet
+
+snippet comp
+interface $1Props {
+
+}
+
+function $1({}: $1Props) {
+  return <div>
+    hello world
+  </div>
+}
+
+export default $1
 endsnippet
