@@ -1,8 +1,4 @@
 " =================================================================== GENERAL "
-" nvim bindings for regular vim
-" Plug 'roxma/nvim-yarp'
-" Plug 'roxma/vim-hug-neovim-rpc'
-
 " Set vim's project root to the closest ancestor directory containing the
 " rooter_patterns
 Plug 'airblade/vim-rooter'
@@ -91,8 +87,8 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 inoremap <silent><expr> <c-space> coc#refresh()
 
 " Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <C-]> <Plug>(coc-definition)
