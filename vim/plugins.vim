@@ -15,6 +15,10 @@ Plug 'ap/vim-buftabline'
 
 set rtp+=~/.fzf
 
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+
 Plug 'junegunn/fzf.vim'
 " This is the default extra key bindings
 let g:fzf_action = {
