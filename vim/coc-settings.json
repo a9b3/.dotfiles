@@ -9,7 +9,8 @@
     "tsx",
     "typescript",
     "typescript.tsx",
-    "typescriptreact"
+    "typescriptreact",
+    "python"
   ],
   "suggest.echodocSupport": true,
   "diagnostic.virtualText": false,
@@ -23,6 +24,7 @@
   ],
   "eslint.autoFix": true,
   "eslint.autoFixOnSave": true,
+  "python.formatting.provider": "yapf",
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true

@@ -212,3 +212,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" ==================================================================== PYTHON "
+" syntax highlighting
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
