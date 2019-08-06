@@ -1,5 +1,6 @@
 getantibody/tap/antibody
 argoproj/tap/argo
+bazelbuild/tap/bazel
 cmake
 coreutils
 ctags
@@ -11,6 +12,7 @@ fasd
 ffmpeg
 findutils
 fswatch
+gd
 git-lfs
 gnu-getopt
 gnu-sed
@@ -19,6 +21,7 @@ go
 htop
 hub
 hyperkit
+bazelbuild/tap/ibazel
 imagemagick
 irssi
 jemalloc
@@ -52,6 +55,7 @@ tmux
 trash
 tree
 unixodbc
+vault
 vim
 wget
 yarn
