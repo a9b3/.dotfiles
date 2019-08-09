@@ -4,7 +4,7 @@ def ${1:name}(${2:args}):
 endsnippet
 
 snippet print
-print "$0"
+print("$0")
 endsnippet
 
 snippet log
@@ -40,4 +40,14 @@ endsnippet
 
 snippet ipdb
 import ipdb; ipdb.set_trace()
+endsnippet
+
+snippet middleware
+class $1:
+	def __init__(self, get_response):
+		self.get_response = get_response
+
+	def __call__(self, request):
+		const result = self.get_response(request)
+		return result
 endsnippet

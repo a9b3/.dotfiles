@@ -191,6 +191,7 @@ Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'jparise/vim-graphql'
+Plug 'jvirtanen/vim-hcl'
 
 " ==================================================================== GOLANG "
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
