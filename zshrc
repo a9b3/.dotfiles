@@ -33,3 +33,12 @@ eval "$(fasd --init auto)"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/vault vault
+
+# Use pyenv to set the default python
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  # brew install pyenv-virtualenv
+  eval "$(pyenv virtualenv-init -)"
+fi
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
