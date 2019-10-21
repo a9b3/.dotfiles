@@ -4,6 +4,12 @@ for $1:=0; $1<$2; $1++ {
 }
 endsnippet
 
+snippet forin
+for $1, $2 := range $3 {
+	$0
+}
+endsnippet
+
 snippet range
 for ${1:_, val} := range $2 {
 	$0

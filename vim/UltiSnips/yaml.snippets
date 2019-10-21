@@ -64,3 +64,60 @@ kind: $1
 metadata:
 	$0
 endsnippet
+
+snippet kservice
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+endsnippet
+
+snippet kdeployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+	name: nginx-deployment
+	labels:
+		app: nginx
+spec:
+	replicas: 3
+	selector:
+		matchLabels:
+			app: nginx
+	template:
+		metadata:
+			labels:
+				app: nginx
+		spec:
+			containers:
+			- name: nginx
+				image: nginx:1.7.9
+				ports:
+				- containerPort: 80
+endsnippet
+
+snippet kconfig
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-grafana-datasource
+  namespace: monitoring
+  labels:
+    grafana_datasource: '1'
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      orgId: 1
+      url: http://prometheus-server.monitoring.svc.cluster.local
+endsnippet
