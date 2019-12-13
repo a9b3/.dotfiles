@@ -12,6 +12,8 @@
     "typescriptreact",
     "python"
   ],
+  "coc.preferences.hoverTarget":"float",
+  "suggest.floatEnable": true,
   "suggest.echodocSupport": true,
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "***",

@@ -101,3 +101,19 @@ function replace() {
 
   rg "$1" -l | xargs sed -i '' -e 's/'"$1"'/'"$2"'/g'
 }
+
+function landit() {
+  if [[ ! -n "$1" ]]; then
+    echo "missing first argument"
+    return
+  fi
+
+  current_branch="$(git rev-parse --abbrev-ref HEAD)"
+  commit="$1"
+
+  arc land --keep-branch "$commit"
+  git checkout master
+  git up
+  git checkout "$current_branch"
+  git rebase master
+}
