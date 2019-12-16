@@ -1,10 +1,11 @@
 #!/bin/bash
+set -e
 
-function commandExists() {
+function command_exists() {
   which "$1" > /dev/null
 }
 
-function directoryExists() {
+function dir_exists() {
   if [[ -d "$1" ]]; then
     return 0
   else
@@ -12,22 +13,15 @@ function directoryExists() {
   fi
 }
 
-function fileExists() {
-  if [[ -f "$1" ]]; then
-    return 0
-  else
-    return 1
-  fi
-}
-
 function xcode() {
-  if ! commandExists xcode-select; then
+  if ! command_exists xcode-select; then
     xcode-select --install
   fi
 }
 
-function installHomebrew() {
-  if ! commandExists brew; then
+# Install brew if it isn't installed.
+function install_homebrew() {
+  if ! command_exists brew; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew cask
     brew tap caskroom/versions
@@ -35,34 +29,45 @@ function installHomebrew() {
   fi
 }
 
-function brewInstall() {
-  brew install $(< ./brew/leaves)
+# Install brew and brew cask programs if they don't already exist.
+function brew_install() {
+  while read line; do
+    brew list "$line" || brew install "$line"
+  done < ./brew/leaves
+
+  while read line; do
+    brew cask list "$line" || brew cask install "$line"
+  done < ./brew/cask_list
 }
 
-function brewCaskInstall() {
-  brew cask install $(< ./brew/cask_list)
+# Save brew and brew cask programs into files.
+function brew_save() {
+  brew leaves > ~/.dotfiles/brew/leaves
+  brew cask list > ~/.dotfiles/brew/cask_list
 }
 
-function setupEnv() {
+function setup_env() {
   # clone my dotfiles and symlink the config files
-  if ! directoryExists ~/.dotfiles; then
+  if ! dir_exists ~/.dotfiles; then
     git clone https://github.com/esayemm/.files.git ~/.dotfiles
+  fi
 
-    filesToSymlink=(
+  files_to_symlink=(
+    'alacritty.yml'
+    'gitconfig'
+    'rgignore'
+    'tmux'
+    'tmux.conf'
+    'vim'
     'vimrc'
     'zshrc'
-    'vim'
-    'gitconfig'
-    'tmux.conf'
-    'tmux'
-    )
+  )
 
-    for i in "${filesToSymlink[@]}"; do
-      if [[ ! -e ~/.$i ]]; then
-        ln -s ~/.dotfiles/$i ~/.$i
-      fi
-    done
-  fi
+  for i in "${files_to_symlink[@]}"; do
+    if [[ ! -e ~/.$i ]]; then
+      ln -s ~/.dotfiles/$i ~/.$i
+    fi
+  done
 
   # install my favorite font
   if [[ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]]; then
@@ -78,23 +83,52 @@ function setupEnv() {
   fi
 }
 
-function setupNodeEnv() {
+function setup_node_env() {
   packages=(
-  'n'
+    'n'
   )
 
   for i in "${packages[@]}"; do
-    if !commandExists $i; then
+    if !command_exists $i; then
       npm install -g $i
     fi
   done
 }
 
-xcode
-installHomebrew
-brew update
-brewInstall
-brewCaskInstall
-brew cleanup
-setupEnv
-setupNodeEnv
+# Print the help menu
+function print_help() {
+  printf "Provide a command after this script:\n\n"
+  printf "update                      Installs dependencies\n"
+  printf "save                        Save brew deps\n"
+  printf "help                        Print help\n"
+  printf "\n"
+}
+
+COMMAND=$1
+case "$COMMAND" in
+  # All functions in this step should be idempotent.
+  update)
+    xcode
+    install_homebrew
+    brew update
+    brew_install
+    brew cleanup
+    setup_env
+    setup_node_env
+    ;;
+
+  save)
+    brew_save
+    ;;
+
+  help)
+    print_help
+    ;;
+
+  *)
+    print_help
+    if [ ! -z "$COMMAND" ] ; then
+      fail "Unknown command: $COMMAND"
+    fi
+    ;;
+esac
