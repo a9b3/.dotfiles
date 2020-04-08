@@ -13,7 +13,7 @@ function dir_exists() {
   fi
 }
 
-function xcode() {
+function install_xcode() {
   if ! command_exists xcode-select; then
     xcode-select --install
   fi
@@ -42,21 +42,15 @@ function brew_install() {
 
 # Save brew and brew cask programs into files.
 function brew_save() {
-  brew leaves > ~/.dotfiles/brew/leaves
-  brew cask list > ~/.dotfiles/brew/cask_list
+  brew leaves > ./brew/leaves
+  brew cask list > ./brew/cask_list
 }
 
 function setup_env() {
-  # clone my dotfiles and symlink the config files
-  if ! dir_exists ~/.dotfiles; then
-    git clone https://github.com/esayemm/.files.git ~/.dotfiles
-  fi
-
+  # First make sure symlinks exists
   files_to_symlink=(
-    'alacritty.yml'
     'gitconfig'
     'rgignore'
-    'tmux'
     'tmux.conf'
     'vim'
     'vimrc'
@@ -65,7 +59,7 @@ function setup_env() {
 
   for i in "${files_to_symlink[@]}"; do
     if [[ ! -e ~/.$i ]]; then
-      ln -s ~/.dotfiles/$i ~/.$i
+      ln -s ./$i ~/.$i
     fi
   done
 
@@ -83,18 +77,6 @@ function setup_env() {
   fi
 }
 
-function setup_node_env() {
-  packages=(
-    'n'
-  )
-
-  for i in "${packages[@]}"; do
-    if !command_exists $i; then
-      npm install -g $i
-    fi
-  done
-}
-
 # Print the help menu
 function print_help() {
   printf "Provide a command after this script:\n\n"
@@ -108,13 +90,10 @@ COMMAND=$1
 case "$COMMAND" in
   # All functions in this step should be idempotent.
   update)
-    xcode
+    install_xcode
     install_homebrew
-    brew update
     brew_install
-    brew cleanup
     setup_env
-    setup_node_env
     ;;
 
   save)
