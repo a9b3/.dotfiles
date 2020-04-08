@@ -5,6 +5,7 @@ cmake
 coreutils
 ctags
 curl
+deno
 diff-so-fancy
 dnsmasq
 doctl
