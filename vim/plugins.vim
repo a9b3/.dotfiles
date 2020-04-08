@@ -155,8 +155,8 @@ let g:EasyMotion_smartcase = 1
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 " override default search /
-map / <Plug>(easymotion-sn)
-omap / <Plug>(easymotion-tn)
+" map / <Plug>(easymotion-sn)
+" omap / <Plug>(easymotion-tn)
 let g:EasyMotion_user_smartsign_us = 1
 
 " C-// to start comment
@@ -186,8 +186,6 @@ Plug 'rhysd/committia.vim'
 
 " ==================================================================== SYNTAX "
 Plug 'martinda/Jenkinsfile-vim-syntax'
-" NGINX conf file synxtax
-Plug 'chr4/nginx.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'othree/html5.vim'

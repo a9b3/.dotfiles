@@ -27,7 +27,8 @@
   "eslint.autoFix": true,
   "eslint.autoFixOnSave": true,
   "python.formatting.provider": "yapf",
-  "python.linting.pylintEnabled": false,
+  "python.linting.enabled": true,
+  "python.linting.lintOnSave": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.enabled": true
+  "python.linting.pylintEnabled": false
 }

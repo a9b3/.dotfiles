@@ -58,6 +58,7 @@ au BufRead,BufNewFile *.conf set filetype=nginx
 au BufRead,BufNewFile *.sls,*.{yaml,yml},*.service set filetype=yaml
 au BufRead,BufNewFile *.ts,*.tsx set filetype=typescript.tsx
 au BufRead,BufNewFile *.groovy set filetype=Jenkinsfile
+au BufRead,BufNewFile *.Dockerfile set filetype=dockerfile
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
