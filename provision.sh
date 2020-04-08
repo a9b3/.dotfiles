@@ -13,6 +13,12 @@ function dir_exists() {
   fi
 }
 
+function print_header() {
+  printf "===============================\n"
+  printf "$1\n"
+  printf "===============================\n"
+}
+
 function install_xcode() {
   if ! command_exists xcode-select; then
     xcode-select --install
@@ -32,11 +38,23 @@ function install_homebrew() {
 # Install brew and brew cask programs if they don't already exist.
 function brew_install() {
   while read line; do
-    brew list "$line" || brew install "$line"
+    brew list "$line" >/dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+      printf "$line already exists\n"
+    else
+      printf "Installing $line\n"
+      brew install "$line"
+    fi
   done < ./brew/leaves
 
   while read line; do
-    brew cask list "$line" || brew cask install "$line"
+    brew cask list "$line" >/dev/null 2>&1
+    if [[ $? -eq 0 ]]; then
+      printf "$line already exists\n"
+    else
+      printf "Installing $line\n"
+      brew cask install "$line"
+    fi
   done < ./brew/cask_list
 }
 
@@ -59,21 +77,30 @@ function setup_env() {
 
   for i in "${files_to_symlink[@]}"; do
     if [[ ! -e ~/.$i ]]; then
+      printf "symlinking $i\n"
       ln -s ./$i ~/.$i
+    else
+      printf "$i already symlinked\n"
     fi
   done
 
   # install my favorite font
   if [[ ! -e /Library/Fonts/ProggyCleanSZBP.tff ]]; then
+    printf "Installing ProggyClean\n"
     cd ~/Downloads
     wget http://www.proggyfonts.net/wp-content/download/ProggyCleanSZBP.ttf.zip
     unzip ProggyCleanSZBP.ttf.zip
     mv ProggyCleanSZBP.ttf /Library/Fonts/
+  else
+    printf "ProggyClean already installed\n"
   fi
 
   # ensure zsh is the default shell
   if [[ "$SHELL" != "/bin/zsh" ]]; then
+    printf "making zsh default shell\n"
     chsh -s /usr/local/bin/zsh
+  else
+    printf "zsh already default shell\n"
   fi
 }
 
@@ -90,9 +117,13 @@ COMMAND=$1
 case "$COMMAND" in
   # All functions in this step should be idempotent.
   update)
+    print_header "checking if xcode exists"
     install_xcode
+    print_header "checking if brew exists"
     install_homebrew
+    print_header "installing brew packages"
     brew_install
+    print_header "setting up symlinks"
     setup_env
     ;;
 
