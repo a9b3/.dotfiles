@@ -131,6 +131,7 @@ Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
 let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
+let g:UltiSnipsSnippetsDir= $HOME.'/.vim/UltiSnips/'
 let g:UltiSnipsSnippetDirectories=["UltiSnips"]
 
 " change surrounding delimiters
