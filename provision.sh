@@ -108,6 +108,7 @@ function setup_env() {
 function print_help() {
   printf "Provide a command after this script:\n\n"
   printf "update                      Installs dependencies\n"
+  printf "symlink                     Setup symlinks for confs\n"
   printf "save                        Save brew deps\n"
   printf "help                        Print help\n"
   printf "\n"
@@ -123,6 +124,11 @@ case "$COMMAND" in
     install_homebrew
     print_header "installing brew packages"
     brew_install
+    print_header "setting up symlinks"
+    setup_env
+    ;;
+
+  symlink)
     print_header "setting up symlinks"
     setup_env
     ;;
