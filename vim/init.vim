@@ -143,7 +143,7 @@ map <leader>e :Explore<CR>
 " VIM_PLUG
 " ============================================================================
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 
 call plug#begin('~/.vim/plugged')
 
