@@ -9,8 +9,7 @@
     "tsx",
     "typescript",
     "typescript.tsx",
-    "typescriptreact",
-    "python"
+    "typescriptreact"
   ],
   "coc.preferences.hoverTarget":"float",
   "suggest.floatEnable": true,
@@ -23,12 +22,5 @@
     "javascript.jsx",
     "typescript",
     "typescript.jsx"
-  ],
-  "eslint.autoFix": true,
-  "eslint.autoFixOnSave": true,
-  "python.formatting.provider": "yapf",
-  "python.linting.enabled": true,
-  "python.linting.lintOnSave": true,
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": false
+  ]
 }

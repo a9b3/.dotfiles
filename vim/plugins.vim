@@ -177,6 +177,7 @@ let g:gh_user_canonical = 0 " Use branch name when possible
 
 " Disply git status per line on the right guttter
 Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-fugitive'
 " shortcut Gblame
 nnoremap <leader>g :Gblame<cr>
