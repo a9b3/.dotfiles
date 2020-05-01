@@ -28,7 +28,7 @@ set backspace=eol,start,indent                " Configure backspace so it acts a
 set whichwrap+=<,>,h,l                        " automatically wrap left and right
 set relativenumber                            " show relative number from curent line
 set t_Co=256                                  " 256 colors in vim
-set textwidth=80 colorcolumn=80 lbr tw=80     " set line break to 80
+set textwidth=120 colorcolumn=120 lbr tw=120  " set line break to 80
 set number numberwidth=2                      " show line number in left margin
 set cursorline!                               " highlight current cursor's line
 set ruler laststatus=2 title                  " Sets ruler show current line
