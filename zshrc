@@ -7,12 +7,11 @@
 source ~/.antigen/antigen.zsh
 
 antigen use oh-my-zsh
-antigen theme sorin
 
 antigen bundles <<EOBUNDLES
-  zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
+  zsh-users/zsh-syntax-highlighting
 EOBUNDLES
 
 antigen apply
@@ -35,6 +34,8 @@ autoload -U +X bashcompinit && bashcompinit
 # ---------------------------------------
 
 # user defined zsh functions/aliases etc.
+# git-prompt.sh is used by prompt, so source this first
+source ~/.dotfiles/zsh/git-prompt.sh
 for file in ~/.dotfiles/{secrets,zsh}/*; do
   [[ -r "$file" ]] && source "$file"
 done
@@ -47,3 +48,10 @@ if [ -f '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/s
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+source /usr/local/bin/virtualenvwrapper.sh
