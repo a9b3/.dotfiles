@@ -5,4 +5,6 @@
 #
 # %3c                 - 3 ancestors + cwd
 # $(__git_ps1)        - invoke output from ./git-prompt.sh, which should be sourced by zshrc before this file
-PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%}$(__git_ps1) %{$fg[magenta]%}>> %{$reset_color%}'
+source "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh"
+PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[magenta]%}kube%{$fg[green]%}: $ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
+$ %{$reset_color%}'

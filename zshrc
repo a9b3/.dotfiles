@@ -9,9 +9,19 @@ source ~/.antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
+  Aloxaf/fzf-tab
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
   zsh-users/zsh-syntax-highlighting
+  virtualenvwrapper
+  docker
+  docker-compose
+  git
+  brew
+  history
+  node
+  npm
+  kubectl
 EOBUNDLES
 
 antigen apply
@@ -53,5 +63,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
 fi
 source /usr/local/bin/virtualenvwrapper.sh
