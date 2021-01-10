@@ -5,6 +5,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Go Paths
 export GOPATH=$HOME/go
 
+# ubuntu go installation
+export PATH=$PATH:~/usr/local/go/bin
+# windows custom bin path
+export PATH=$PATH:~/.local/bin
 export PATH="$HOME/.yarn/bin:$PATH"
 export PATH="$HOME/n/bin:$PATH"
 export PATH=$PATH:$GOPATH/bin

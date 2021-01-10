@@ -14,3 +14,8 @@ alias vim='nvim'
 alias k='kubectl'
 
 alias cat='bat'
+
+# fd is fdfind in linux `apt install fd-find`
+if [[ `uname` == "Linux" ]]; then
+  alias fd='fdfind'
+fi
