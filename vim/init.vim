@@ -156,4 +156,16 @@ call plug#end()
 let base16colorspace=256        " Let base16 access colors present in 256 colorspace
 colorscheme base16-default-dark
 
+" ============================================================================
+" Windows WSL
+" ============================================================================
+
+" Setup yanking from vim to windows clipboard
+if system('uname -r') =~ "microsoft"
+  augroup Yank
+    autocmd!
+    autocmd TextYankPost * :call system('clip.exe ',@")")
+  augroup END
+endif
+
 set secure
