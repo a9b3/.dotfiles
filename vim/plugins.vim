@@ -2,7 +2,7 @@
 " Set vim's project root to the closest ancestor directory containing the
 " rooter_patterns
 Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['package.json', '.git/']
+let g:rooter_patterns = ['Makefile', 'package.json', '.git/']
 
 " ======================================================================== UI "
 " Use base16 color theme

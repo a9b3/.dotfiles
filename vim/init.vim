@@ -40,8 +40,6 @@ set wildmode=list:longest,full
 set wildignorecase
 set wildignore=*.o,*~,*.pyc                   " Ignore compiled files
 set shiftwidth=2 tabstop=2 expandtab smarttab " tab space
-set ai                                        " Auto indent
-set si                                        " Smart indent
 set wrap                                      " Wrap lines
 set cmdheight=2                               " Display for messages
 set updatetime=300
