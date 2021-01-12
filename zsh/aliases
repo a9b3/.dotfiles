@@ -15,7 +15,7 @@ alias k='kubectl'
 
 alias cat='bat'
 
-alias rg = "rg --hidden"
+alias rg="rg --hidden"
 
 # fd is fdfind in linux `apt install fd-find`
 if [[ `uname` == "Linux" ]]; then
