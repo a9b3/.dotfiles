@@ -217,6 +217,9 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
 Plug 'peitalin/vim-jsx-typescript'
 
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+let g:svelte_preprocessors = ['typescript']
+
 " ==================================================================== PYTHON "
 " syntax highlighting
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
