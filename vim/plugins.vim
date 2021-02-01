@@ -56,8 +56,8 @@ nmap <C-p> :Files<cr>
 nmap <leader>a :Rg<cr>
 
 Plug 'scrooloose/nerdtree'
-let g:NERDTreeShowHidden = 1
-let g:NERDTreeWinSize=60
+let g:NERDTreeShowHidden = 0
+let g:NERDTreeWinSize=30
 let g:NERDTreeMinimalUI = 1
 
 nmap <C-n> :NERDTreeToggle<CR>
