@@ -36,6 +36,7 @@ eval "$(fasd --init auto)"
 
 # https://scriptingosx.com/2019/07/moving-to-zsh-part-5-completions/
 # use bash completions
+autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 
@@ -67,3 +68,6 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 [[ -f '/usr/local/bin/virtualenvwrapper.sh' ]] && source /usr/local/bin/virtualenvwrapper.sh
+
+# temporary solution to get kubectl autocomplete
+source <(kubectl completion zsh)
