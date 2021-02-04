@@ -138,6 +138,8 @@ function! ExecuteMacroOverVisualRange()
 endfunction
 
 map <leader>e :Explore<CR>
+let g:netrw_list_hide = '^\..*'
+let g:netrw_hide = 1
 
 " ============================================================================
 " VIM_PLUG
