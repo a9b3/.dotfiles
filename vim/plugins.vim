@@ -227,3 +227,5 @@ let g:svelte_preprocessors = ['typescript']
 " ==================================================================== PYTHON "
 " syntax highlighting
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+
+Plug 'LnL7/vim-nix'

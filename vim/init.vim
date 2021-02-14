@@ -45,6 +45,7 @@ set cmdheight=2                               " Display for messages
 set updatetime=300
 set signcolumn=yes
 set copyindent                                " Paste mode
+set iskeyword+=- " treat dash as word
 
 autocmd BufWritePre * :%s/\s\+$//e            " Clear trailing spaces on save
 

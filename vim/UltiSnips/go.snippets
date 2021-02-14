@@ -85,7 +85,7 @@ endsnippet
 
 snippet err
 if err != nil {
-	panic(fmt.Errorf("fatal error $1: %s", err))
+	log.Panic(${1:err})
 }
 endsnippet
 
@@ -102,9 +102,34 @@ if err != nil {
 }
 endsnippet
 
-snippet test
+snippet testinit
+package jwt
+
+import (
+	"testing"
+)
+
 func Test$1(t *testing.T) {
-	$0
+	type input struct {
+		$2
+	}
+	type expect struct {
+		$3
+	}
+	tests := []struct {
+		label    string
+		pass     bool
+		input    input
+		expected expect
+	}{
+		{}
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.label, func(t *testing.T) {
+			// test assertions here
+		})
+	}
 }
 endsnippet
 
