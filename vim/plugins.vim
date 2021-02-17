@@ -2,7 +2,7 @@
 " Set vim's project root to the closest ancestor directory containing the
 " rooter_patterns
 Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['Makefile', 'package.json', '.git/']
+let g:rooter_patterns = ['.git/']
 
 " ======================================================================== UI "
 " Use base16 color theme
@@ -15,11 +15,25 @@ Plug 'ap/vim-buftabline'
 
 set rtp+=~/.fzf
 
-" Do not include filenames when searching with Rg.
-command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
+" preview
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>),
+  \ 1,
+  \ fzf#vim#with_preview(),
+  \ <bang>1)
 
+"
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>1)
+
+" Search from project root (.git)
+" https://github.com/junegunn/fzf.vim/issues/47#issuecomment-160237795
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
 
 
 Plug 'junegunn/fzf.vim'
@@ -52,7 +66,7 @@ let g:fzf_colors =
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
 
-nmap <C-p> :Files<cr>
+nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
 
 Plug 'scrooloose/nerdtree'
