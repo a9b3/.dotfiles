@@ -220,6 +220,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mxw/vim-jsx'
 Plug 'othree/yajs.vim'
 Plug 'peitalin/vim-jsx-typescript'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
 
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 let g:svelte_preprocessors = ['typescript']
