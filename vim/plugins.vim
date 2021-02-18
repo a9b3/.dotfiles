@@ -244,3 +244,5 @@ let g:svelte_preprocessors = ['typescript']
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 
 Plug 'LnL7/vim-nix'
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
