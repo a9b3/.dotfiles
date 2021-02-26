@@ -122,9 +122,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>525 131 1018 447 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>420 0 1500 1177 0 0 1920 1177 </string>
+	<string>1504 0 1500 1669 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 1327 560 325 0 0 3008 1669 </string>
+	<string>0 1308 660 325 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>430 210 560 325 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -662,7 +662,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>ProggyCleanTTSZBP 16</string>
+			<string>OfficeCodeProD-Regular 12</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -768,17 +768,17 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
+		<string>Office Code Pro D</string>
 		<string>ProggyCleanTTSZBP</string>
 		<string>ProggySquare</string>
 		<string>ProggySquareTTSZ</string>
-		<string>ProggyTiny</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {3008, 1692}}</string>
 		<key>topLeft</key>
-		<string>{1577, 895}</string>
+		<string>{1031, 910}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -789,7 +789,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>599364736.66526496</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>88</integer>
+	<integer>100</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1119,6 +1119,14 @@
 				<true/>
 				<key>name</key>
 				<string>style</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentTab.currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
