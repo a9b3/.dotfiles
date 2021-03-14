@@ -73,4 +73,13 @@ fi
 source <(kubectl completion zsh)
 if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then . /home/sam/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 eval "$(direnv hook zsh)"
-if [ -e /Users/sam/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/sam/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# to see the key sequence run sed then press the key sequence
+# sed -n l
+#
+# Ctrl + Backspace
+bindkey '^H' backward-kill-word
+# Ctrl + Left Arrow
+bindkey '^[[1;5D' backward-word
+# Ctrl + Right Arrow
+bindkey '^[[1;5C' forward-word
