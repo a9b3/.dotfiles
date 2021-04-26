@@ -105,6 +105,11 @@ nmap <leader>[ :bprevious<CR>
 nmap <leader>] :bnext<CR>
 nmap <leader>d :bdelete<CR>
 
+" Shorten next window command
+" see more here
+" :help <C-w>
+map <C-w> <C-w>w
+
 " next search will center screen
 nnoremap n nzzzv
 nnoremap N Nzzzv
