@@ -210,6 +210,7 @@ Plug 'fatih/vim-hclfmt'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
+let g:vim_json_syntax_conceal = 0
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'jparise/vim-graphql'
 Plug 'jvirtanen/vim-hcl'

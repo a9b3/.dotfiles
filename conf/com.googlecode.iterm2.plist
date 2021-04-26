@@ -122,7 +122,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>525 131 1018 447 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1504 0 1500 1669 0 0 3008 1669 </string>
+	<string>960 0 954 1177 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 1308 660 325 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -662,7 +662,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>OfficeCodeProD-Regular 12</string>
+			<string>FiraCode-Retina 12</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -768,17 +768,17 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
+		<string>Fira Code</string>
 		<string>Office Code Pro D</string>
 		<string>ProggyCleanTTSZBP</string>
 		<string>ProggySquare</string>
-		<string>ProggySquareTTSZ</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {3008, 1692}}</string>
 		<key>topLeft</key>
-		<string>{1031, 910}</string>
+		<string>{1759, 896}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -789,7 +789,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>599364736.66526496</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>100</integer>
+	<integer>104</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
