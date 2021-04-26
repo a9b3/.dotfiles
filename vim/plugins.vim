@@ -206,7 +206,7 @@ Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
 Plug 'fatih/vim-hclfmt'
-
+Plug 'chr4/nginx.vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'othree/html5.vim'
 Plug 'elzr/vim-json'
