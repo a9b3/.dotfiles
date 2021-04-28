@@ -1,6 +1,6 @@
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 # Plugin Manager
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 
 # Load antigen if it doesn't exist
 [[ ! -d ~/.antigen ]] && git clone https://github.com/zsh-users/antigen.git ~/.antigen
@@ -27,9 +27,9 @@ EOBUNDLES
 antigen apply
 
 
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 # Init
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(fasd --init auto)"
@@ -40,25 +40,20 @@ autoload -U +X compinit && compinit
 autoload -U +X bashcompinit && bashcompinit
 
 
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 # Misc
-# ---------------------------------------
+# -----------------------------------------------------------------------------
 
 # user defined zsh functions/aliases etc.
 # git-prompt.sh is used by prompt, so source this first
+source ~/.dotfiles/zsh/aliases
+source ~/.dotfiles/zsh/functions
+source ~/.dotfiles/zsh/exports
+source ~/.dotfiles/zsh/initialize
 source ~/.dotfiles/zsh/git-prompt.sh
-for file in ~/.dotfiles/{secrets,zsh}/*; do
-  [[ -r "$file" ]] && source "$file"
-done
-unset file
+source ~/.dotfiles/zsh/prompt
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/sam/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/sam/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
