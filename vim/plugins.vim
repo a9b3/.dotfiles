@@ -69,10 +69,16 @@ let g:fzf_buffers_jump = 1
 nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
 
-Plug 'scrooloose/nerdtree'
-let g:NERDTreeShowHidden = 0
+Plug 'qpkorr/vim-bufkill'
+Plug 'preservim/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'PhilRunninger/nerdtree-buffer-ops'
 let g:NERDTreeWinSize=30
 let g:NERDTreeMinimalUI = 1
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>

@@ -103,7 +103,7 @@ imap <C-e> <esc>A
 " tab buffer shortcuts
 nmap <leader>[ :bprevious<CR>
 nmap <leader>] :bnext<CR>
-nmap <leader>d :bdelete<CR>
+nmap <leader>d :BD<CR>
 
 " Shorten next window command
 " see more here
