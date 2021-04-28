@@ -69,10 +69,10 @@ let g:fzf_buffers_jump = 1
 nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
 
+" Does not change panes windows when closing buffers
 Plug 'qpkorr/vim-bufkill'
 Plug 'preservim/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" Highlight opened buffers in nerdtree, close buffer with 'w'
 Plug 'PhilRunninger/nerdtree-buffer-ops'
 let g:NERDTreeWinSize=30
 let g:NERDTreeMinimalUI = 1
