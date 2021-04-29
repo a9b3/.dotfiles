@@ -18,6 +18,9 @@ set history=1000                              " Sets how many lines of history V
 set ttyfast                                   " send more characters for faster redraws
 set lazyredraw                                " Don't redraw while executing macros
 set autoread                                  " update when a file is changed from the outside
+" reload buffer when moving around for file changes from outside
+" https://vi.stackexchange.com/questions/444/how-do-i-reload-the-current-file
+au FocusGained,BufEnter * :checktime
 set showcmd                                   " Show incomplete cmds down the bottom
 set hidden                                    " A buffer becomes hidden when it is abandoned
 set ignorecase smartcase hlsearch incsearch   " Search settings
