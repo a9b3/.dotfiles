@@ -122,7 +122,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>525 131 1018 447 0 0 2560 1417 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1504 4 1500 1665 0 0 3008 1669 </string>
+	<string>1504 0 1500 1669 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 1308 660 325 0 0 3008 1669 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -131,7 +131,7 @@
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
-			<false/>
+			<true/>
 			<key>ASCII Ligatures</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
@@ -791,7 +791,7 @@
 	<key>NoSyncLastTipTime</key>
 	<real>599364736.66526496</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>107</integer>
+	<integer>108</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
