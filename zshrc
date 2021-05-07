@@ -52,6 +52,7 @@ source ~/.dotfiles/zsh/exports
 source ~/.dotfiles/zsh/initialize
 source ~/.dotfiles/zsh/git-prompt.sh
 source ~/.dotfiles/zsh/prompt
+[[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
 
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
