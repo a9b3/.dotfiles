@@ -1,0 +1,13 @@
+font:
+  normal:
+    family: Fira Code
+    style: Retina
+  size: 12.0
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  # When set to `true`, selected text will be copied to the primary clipboard.
+  save_to_clipboard: true
+live_config_reload: true
+key_bindings:
+  # binds tmux prefix
+  - { key: Q, mods: Control, chars: "\x11" }
