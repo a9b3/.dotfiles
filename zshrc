@@ -2,6 +2,9 @@
 # Plugin Manager
 # -----------------------------------------------------------------------------
 
+# Disable weird pasting error
+DISABLE_MAGIC_FUNCTIONS=true
+
 # Load antigen if it doesn't exist
 [[ ! -d ~/.antigen ]] && git clone https://github.com/zsh-users/antigen.git ~/.antigen
 source ~/.antigen/antigen.zsh
@@ -25,7 +28,6 @@ antigen bundles <<EOBUNDLES
 EOBUNDLES
 
 antigen apply
-
 
 # -----------------------------------------------------------------------------
 # Init
