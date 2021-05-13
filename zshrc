@@ -81,3 +81,4 @@ bindkey '^H' backward-kill-word
 bindkey '^[[1;5D' backward-word
 # Ctrl + Right Arrow
 bindkey '^[[1;5C' forward-word
+if [ -e /Users/sam/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/sam/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
