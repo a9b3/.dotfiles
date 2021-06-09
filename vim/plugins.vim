@@ -15,15 +15,19 @@ Plug 'ap/vim-buftabline'
 
 set rtp+=~/.fzf
 
-" preview
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \ "rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>),
-  \ 1,
-  \ fzf#vim#with_preview(),
-  \ <bang>1)
+" This is to allow passing flags to RG without this flags are not passed to
+" underlying rg calls.
+" https://github.com/junegunn/fzf.vim/issues/596#issuecomment-620016183
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
 
-"
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>1)
+
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>1)
 
