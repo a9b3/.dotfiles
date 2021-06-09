@@ -11,3 +11,5 @@ live_config_reload: true
 key_bindings:
   # binds tmux prefix
   - { key: Q, mods: Control, chars: "\x11" }
+  # vim commenter
+  - { key: Slash, mods: Control, chars: "\x1f" }
