@@ -1,11 +1,11 @@
-snippet variable
+snippet var
 variable "$1" {
 	type = $2
 	description = "$3"
 }
 endsnippet
 
-snippet module
+snippet init
 # ------------------------------------------------
 # Inputs
 # ------------------------------------------------
@@ -21,4 +21,29 @@ $1
 # ------------------------------------------------
 # Outputs
 # ------------------------------------------------
+endsnippet
+
+snippet out
+output "$1" {
+  description = "$2"
+  value       = $3
+}
+endsnippet
+
+snippet re
+resource "$1" "$2" {
+	$0
+}
+endsnippet
+
+snippet mod
+module "$1" {
+	source = "$2"
+}
+endsnippet
+
+snippet dep
+dependency "$1" {
+	config_path = "$2"
+}
 endsnippet

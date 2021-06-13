@@ -42,6 +42,8 @@ let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
+" make passing in flags to fzf rg possible
+Plug 'jesseleite/vim-agriculture'
 
 " Default fzf layout
 " - down / up / left / right
@@ -82,6 +84,8 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
 
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
+
+let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf']
 
 " =================================================================== EDITING "
 
