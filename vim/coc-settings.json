@@ -10,9 +10,10 @@
     "typescript",
     "typescript.tsx",
     "typescriptreact",
-    "yaml"
+    "yaml",
+    "json"
   ],
-  "coc.preferences.hoverTarget":"float",
+  "coc.preferences.hoverTarget": "float",
   "suggest.floatEnable": true,
   "suggest.echodocSupport": true,
   "diagnostic.virtualText": false,
@@ -36,5 +37,6 @@
   },
   "yaml.schemas": {
     "kubernetes": "/*.yaml"
-  }
+  },
+  "yaml.format.enable": true
 }
