@@ -36,6 +36,7 @@ endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " This is the default extra key bindings
 let g:fzf_action = {

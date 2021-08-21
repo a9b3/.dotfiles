@@ -155,8 +155,8 @@ let g:netrw_hide = 1
 " VIM_PLUG
 " ============================================================================
 
-let python3_bin = system("which python3")
-let g:python3_host_prog=$python3_bin
+" let python3_bin = system("which python3")
+" let g:python3_host_prog=$python3_bin
 
 call plug#begin('~/.vim/plugged')
 
