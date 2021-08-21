@@ -22,7 +22,7 @@ pbcopy < ~/.ssh/id_ed25519.pub
 [Add new SSH key to github account](https://github.com/settings/ssh/new), paste
 content of public key here.
 
-2. `git clone git@github.com:esayemm/.files.git $HOME/.dotfiles`
+2. `git clone git@github.com:esayemm/.dotfiles.git $HOME/.dotfiles`
 
 3. [Install direnv](https://direnv.net/docs/installation.html#from-binary-builds)
 
