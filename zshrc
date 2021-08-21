@@ -56,10 +56,6 @@ source ~/.dotfiles/zsh/git-prompt.sh
 source ~/.dotfiles/zsh/prompt
 [[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
 
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
   eval "$(pyenv virtualenv-init -)"
@@ -69,8 +65,6 @@ fi
 
 # temporary solution to get kubectl autocomplete
 source <(kubectl completion zsh)
-if [ -e /home/sam/.nix-profile/etc/profile.d/nix.sh ]; then . /home/sam/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-eval "$(direnv hook zsh)"
 
 # to see the key sequence run sed then press the key sequence
 # sed -n l
@@ -81,4 +75,7 @@ bindkey '^H' backward-kill-word
 bindkey '^[[1;5D' backward-word
 # Ctrl + Right Arrow
 bindkey '^[[1;5C' forward-word
+
+
 if [ -e /Users/sam/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/sam/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+eval "$(direnv hook zsh)"

@@ -2,9 +2,22 @@
 
 export MANPATH="/usr/local/man:$MANPATH"
 
+export EDITOR=$(which nvim)
+
+export DOCKER_BUILDKIT=1
+
 # Go Paths
 export GOPATH=$HOME/go
 
+# export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+export GPG_TTY=$(tty)
+
+###############################
+# PATH
+###############################
 # ubuntu go installation
 export PATH=$PATH:/usr/local/go/bin
 # windows custom bin path
@@ -18,13 +31,8 @@ export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/
 # Use gnu getopts
 export PATH="/usr/local/Cellar/gnu-getopt/1.1.6/bin":$PATH
 
-export EDITOR=$(which nvim)
-
-export DOCKER_BUILDKIT=1
-
-# export FZF_DEFAULT_COMMAND="rg --files --no-ignore-vcs --hidden"
-export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-
-export PATH=$PATH:/home/sam/vendors/bazel-watcher/bazel-bin/ibazel/linux_amd64_stripped
-export GPG_TTY=$(tty)
+export PATH="$HOME/.node_modules/bin:$PATH"
+export PATH="$PATH:/home/sam/vendors/bazel-watcher/bazel-bin/ibazel/linux_amd64_stripped"
+export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
