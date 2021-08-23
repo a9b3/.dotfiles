@@ -14,14 +14,18 @@
 # mkShell creates a nix derivation consumed by nix-shell
 pkgs.mkShell {
   shellHook = ''
-  [ ! -f ~/.envrc ] && ln -s "/Users/$USER/.dotfiles/envrc" "/Users/$USER/.envrc"
-  [ ! -f ~/.rgignore ] && ln -s "/Users/$USER/.dotfiles/rgignore" "/Users/$USER/.rgignore"
-  [ ! -f ~/.gitconfig ] && ln -s "/Users/$USER/.dotfiles/gitconfig" "/Users/$USER/.gitconfig"
-  [ ! -f ~/.zshrc ] && ln -s "/Users/$USER/.dotfiles/.zshrc" "/Users/$USER/.zshrc"
-  [ ! -f ~/.tmux.conf ] && ln -s "/Users/$USER/.dotfiles/tmux.conf" "/Users/$USER/.tmux.conf"
-  [ ! -f ~/.alacritty.yml ] && ln -s "/Users/$USER/.dotfiles/conf/alacritty.yml" "/Users/$USER/.alacritty.yml"
-  [ ! -d ~/.vim ] && ln -s "/Users/$USER/.dotfiles/vim" "/Users/$USER/.vim"
-  [ ! -d ~/.config/nvim ] && ln -s "/Users/$USER/.dotfiles/vim" "/Users/$USER/.config/nvim"
+  # Symlink files to $HOME
+  [ ! -f ~/.envrc ] && ln -s "$HOME/.dotfiles/envrc" "$HOME/.envrc"
+  [ ! -f ~/.rgignore ] && ln -s "$HOME/.dotfiles/rgignore" "$HOME/.rgignore"
+  [ ! -f ~/.gitconfig ] && ln -s "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
+  [ ! -f ~/.zshrc ] && ln -s "$HOME/.dotfiles/.zshrc" "$HOME/.zshrc"
+  [ ! -f ~/.tmux.conf ] && ln -s "$HOME/.dotfiles/tmux.conf" "$HOME/.tmux.conf"
+  [ ! -f ~/.alacritty.yml ] && ln -s "$HOME/.dotfiles/conf/alacritty.yml" "$HOME/.alacritty.yml"
+  [ ! -d ~/.vim ] && ln -s "$HOME/.dotfiles/vim" "$HOME/.vim"
+  [ ! -d ~/.config/nvim ] && ln -s "$HOME/.dotfiles/vim" "$HOME/.config/nvim"
+
+  # Install setup node provider for neovim using root npm
+  [ ! -d $(npm root -g)/neovim ] && npm install -g neovim
   '';
 
   buildInputs = let
