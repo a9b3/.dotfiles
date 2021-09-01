@@ -20,7 +20,7 @@ pkgs.mkShell {
   [ ! -f ~/.gitconfig ] && ln -s "$HOME/.dotfiles/gitconfig" "$HOME/.gitconfig"
   [ ! -f ~/.zshrc ] && ln -s "$HOME/.dotfiles/.zshrc" "$HOME/.zshrc"
   [ ! -f ~/.tmux.conf ] && ln -s "$HOME/.dotfiles/tmux.conf" "$HOME/.tmux.conf"
-  [ ! -f ~/.alacritty.yml ] && ln -s "$HOME/.dotfiles/conf/alacritty.yml" "$HOME/.alacritty.yml"
+  [ ! -f ~/.alacritty.yml ] && ln -s "$HOME/.dotfiles/alacritty.yml" "$HOME/.alacritty.yml"
   [ ! -d ~/.vim ] && ln -s "$HOME/.dotfiles/vim" "$HOME/.vim"
   [ ! -d ~/.config/nvim ] && ln -s "$HOME/.dotfiles/vim" "$HOME/.config/nvim"
 
