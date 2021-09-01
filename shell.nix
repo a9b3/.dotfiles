@@ -80,6 +80,7 @@ pkgs.mkShell {
     pkgs.buildPackages.httpie
     pkgs.buildPackages.fd
     pkgs.buildPackages.diff-so-fancy
+    pkgs.buildPackages.docker
 
     # NODE
     pkgs.buildPackages.nodejs
