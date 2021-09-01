@@ -31,7 +31,6 @@ export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/
 # Use gnu getopts
 export PATH="/usr/local/Cellar/gnu-getopt/1.1.6/bin":$PATH
 
-export PATH="$HOME/.node_modules/bin:$PATH"
 export PATH="$PATH:/home/sam/vendors/bazel-watcher/bazel-bin/ibazel/linux_amd64_stripped"
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 export PYENV_ROOT="$HOME/.pyenv"

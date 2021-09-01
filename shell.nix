@@ -25,10 +25,15 @@ pkgs.mkShell {
   [ ! -d ~/.config/nvim ] && ln -s "$HOME/.dotfiles/vim" "$HOME/.config/nvim"
 
   # Install setup node provider for neovim using root npm
+  # Intentionally set this because m1 mac doesn't work with /usr/local because
+  # its protected.
+  npm config set prefix "$HOME/.node_modules"
+  export PATH="$PATH:$HOME/.node_modules/bin"
   [ ! -d $(npm root -g)/neovim ] && npm install -g neovim
   '';
 
   buildInputs = let
+    # Custom pkg for neovim using nightly
     neovimKey = with pkgs; {
       "x86_64-darwin" = {
         "key" = "macos";
@@ -57,6 +62,7 @@ pkgs.mkShell {
         chmod +x $out/bin/nvim
       '';
     };
+    # Custom python installation with global packages installed.
     my-python-packages = python-packages: with python-packages; [
       pynvim
      # other python packages you want
