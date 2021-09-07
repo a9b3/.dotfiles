@@ -24,21 +24,23 @@ content of public key here.
 
 2. `git clone git@github.com:esayemm/.dotfiles.git $HOME/.dotfiles`
 
-3. [Install direnv](https://direnv.net/docs/installation.html#from-binary-builds)
-
-```
-curl -sfL https://direnv.net/install.sh | bash
-```
-
-4. Install nix
+3. Install nix
 
 ```
 curl -L https://nixos.org/nix/install | sh
 ```
 
-5. Symlink shell.nix and envrc which will bootstrap the rest.
+4. Install home-manager
 
 ```
-ln -s $HOME/.dotfiles/envrc $HOME/.envrc
-ln -s $HOME/.dotfiles/shell.nix $HOME/shell.nix
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
+
+5. Activate home-manager
+
+```
+# inside .dotfiles/
+home-manager switch
 ```
