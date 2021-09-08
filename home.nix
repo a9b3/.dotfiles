@@ -93,7 +93,13 @@
 
     # GOLANG
     pkgs.go
+
+    # FONTS
+    pkgs.fontconfig
+    pkgs.proggyfonts
   ];
+
+  fonts.fontconfig.enable = true;
 
   programs.neovim = {
     enable = true;
