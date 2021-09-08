@@ -100,7 +100,7 @@ BASE16_SHELL=$HOME/.config/base16-shell
 # ----------------------------------------------------
 # Prompt
 # ----------------------------------------------------
-source ~/.dotfiles/zsh/git-prompt.sh
+# This is sourced in home.nix
 # zsh prompt expansions
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 #

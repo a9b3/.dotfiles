@@ -14,6 +14,7 @@
     enableAutosuggestions = true;
     history.extended = true;
     initExtra = ''
+      ${builtins.readFile ./git-prompt.sh}
       ${builtins.readFile ./zshrc}
     '';
     sessionVariables = rec {

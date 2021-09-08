@@ -162,7 +162,7 @@ function! s:find_git_root()
 endfunction
 
 command! ProjectFiles execute 'Files' s:find_git_root()
-# custom search
+" custom search
 nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
 
