@@ -270,6 +270,20 @@
           cp -r ./ $out
         '';
       };
+      vim-glaive = pkgs.vimUtils.buildVimPlugin {
+        name = "vim-glaive";
+        src = pkgs.fetchFromGitHub {
+          owner = "google";
+          repo = "vim-glaive";
+          rev = "c17bd478c1bc358dddf271a13a4a025efb30514d";
+          sha256 = "0py6wqqnblr4n1xz1nwlxp0l65qmd76448gz0bf5q9a1sf0mkh5g";
+        };
+        dontBuild = true;
+        installPhase = ''
+          mkdir -p $out
+          cp -r ./ $out
+        '';
+      };
     in
     [
       vim-rooter
@@ -320,6 +334,8 @@
       # semshi
       vim-nix
       vim-maktaba
+      vim-codefmt
+      vim-glaive
       vim-bazel
     ];
     coc = {

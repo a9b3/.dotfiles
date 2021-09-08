@@ -313,6 +313,11 @@ let g:svelte_preprocessors = ['typescript']
 let base16colorspace=256        " Let base16 access colors present in 256 colorspace
 colorscheme base16-default-dark
 
+" https://github.com/google/vim-codefmt
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+augroup END
+
 " ============================================================================
 " Windows WSL
 " ============================================================================

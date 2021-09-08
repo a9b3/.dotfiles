@@ -35,6 +35,7 @@ alias g='git'
 alias k='kubectl'
 alias cat='bat'
 alias rg="rg --hidden"
+alias yt="youtube-dl"
 
 brand="$(sysctl -n machdep.cpu.brand_string)"
 if [[ "$brand" == "Apple M1" ]]; then
@@ -89,6 +90,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 # nix HOME MANAGER
 # https://github.com/nix-community/home-manager
 export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+export DIRENV_LOG_FORMAT=""
 # ----------------------------------------------------
 # Initialize
 # ----------------------------------------------------
