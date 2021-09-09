@@ -1,38 +1,37 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [
-    "Markdown",
-    "css",
-    "js",
-    "javascript",
-    "javascript.jsx",
-    "javascriptreact",
-    "json",
-    "jsx",
-    "python",
-    "tsx",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact",
-    "yaml"
-  ],
+  "codeLens.enable": true,
+  "coc.preferences.formatOnSaveFiletypes": ["*"],
   "suggest.floatEnable": true,
+  "signature.target": "float",
+  "signature.floatConfig": {
+    "border": true
+  },
+  "suggest.floatConfig": {
+    "border": true
+  },
   "suggest.echodocSupport": true,
   "diagnostic.virtualText": false,
-  "diagnostic.virtualTextPrefix": "***",
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.separateRelatedInformationAsDiagnostics": true,
+  "diagnostic.floatConfig": {
+    "border": true
+  },
+  "hover.floatConfig": {
+    "border": true
+  },
+  "diagnostic.format": "%message [%source]",
   // python
-  "python.pythonPath": "nvim-python3",
   "python.formatting.provider": "black",
   "python.linting.flake8Enabled": true,
+  // golang
   "languageserver": {
     "golang": {
       "command": "gopls",
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["go"],
-      "initializationOptions": {
-        "usePlaceholders": true
-      }
+      "filetypes": ["go"]
     }
   },
+  // js
   "javascript.format.enabled": true,
   "yaml.schemas": {
     "kubernetes": "/*.yaml"

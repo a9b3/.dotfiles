@@ -67,6 +67,11 @@
   home.file.".alacritty.yml".source = ./alacritty.yml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".rgignore".source = ./rgignore;
+  home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
+  home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
+    sha256 = "1gpldpykvn9sgykb1ydlwz0zkiyx7y9qhf8zaknc88v1pan8n1jn";
+  };
   home.file.".config/base16-shell" = {
     recursive = true;
     source = pkgs.fetchFromGitHub {
@@ -95,6 +100,7 @@
 
     # NODE
     pkgs.nodejs
+    pkgs.yarn
 
     # GOLANG
     pkgs.go
@@ -122,11 +128,6 @@
     extraConfig = builtins.readFile ./vim/init.vim;
     extraPackages = with pkgs; [
       pkgs.fzf
-      pkgs.nodejs-16_x
-      (python3.withPackages (ps: with ps; [
-        black
-        flake8
-      ]))
     ];
     plugins = with pkgs.vimPlugins; let
       # ap/vim-buftabline
@@ -309,12 +310,6 @@
       # Does not change panes windows when closing buffers
       vim-bufkill
       nerdtree
-      coc-nvim
-      coc-prettier
-      coc-tsserver
-      coc-yaml
-      coc-pyright
-      coc-json
       ultisnips
       vim-surround
       splitjoin-vim
@@ -351,14 +346,10 @@
       # semshi
       vim-nix
       vim-maktaba
-      # vim-codefmt
-      # vim-glaive
+      vim-codefmt
+      vim-glaive
       vim-bazel
     ];
-    coc = {
-      enable = true;
-      settings = builtins.readFile ./vim/coc-settings.json;
-    };
   };
 
   programs.tmux = {
