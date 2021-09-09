@@ -100,8 +100,14 @@ export DIRENV_LOG_FORMAT=""
 BASE16_SHELL=$HOME/.config/base16-shell
 [[ -n "$PS1" ]] && [[ -s $BASE16_SHELL/profile_helper.sh ]] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
+# only use virtualenv for work
 # makes "workon" command available
-if [ ! -f /usr/local/bin/virtualenvwrapper.sh ]; then
+if [[ "$(hostname)" == "sam--C02X2FF3JG5H" ]]; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+  #pyenv virtualenvwrapper_lazy
+  export WORKON_HOME=~/.virtualenvs
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
@@ -113,7 +119,7 @@ fi
 # http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
 #
 # %3c                 - 3 ancestors + cwd
-# $(__git_ps1)        - invoke output from ./git-prompt.sh, which should be sourced by zshrc before this file
+# $(__gitrps1)        - invoke output from ./git-prompt.sh, which should be sourced by zshrc before this file
 [[ -f "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh" ]] && source "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh"
 GIT_PS1_SHOWDIRTYSTATE=true
 PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[magenta]%}kube%{$fg[green]%}: $ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
