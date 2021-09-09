@@ -34,7 +34,7 @@
   // js
   "javascript.format.enabled": true,
   "yaml.schemas": {
-    "kubernetes": "/*.yaml"
+    "kubernetes": "kubernetes/**/*.yaml"
   },
   "yaml.format.enable": true
 }
