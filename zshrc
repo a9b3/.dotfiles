@@ -99,6 +99,12 @@ export DIRENV_LOG_FORMAT=""
 # setup base16-shell for color themes
 BASE16_SHELL=$HOME/.config/base16-shell
 [[ -n "$PS1" ]] && [[ -s $BASE16_SHELL/profile_helper.sh ]] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+# makes "workon" command available
+if [ ! -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
+
 # ----------------------------------------------------
 # Prompt
 # ----------------------------------------------------
@@ -113,6 +119,7 @@ GIT_PS1_SHOWDIRTYSTATE=true
 PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[magenta]%}kube%{$fg[green]%}: $ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
 $ %{$reset_color%}'
 [[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
+
 
 # NIX HOME MANAGER
 source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
