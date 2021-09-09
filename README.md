@@ -38,9 +38,23 @@ nix-channel --update
 nix-shell '<home-manager>' -A install
 ```
 
-5. Activate home-manager
+5. Symlink home.nix
 
 ```
-# inside .dotfiles/
+rm $HOME/.config/nixpkgs/home.nix
+ln -s $HOME/.dotfiles/home.nix $HOME/.config/nixpkgs/home.nix
+```
+
+6. Activate home-manager
+
+```
 home-manager switch
+```
+
+7. Install vim plugs
+
+```
+vim
+# inside vim
+:PlugInstall
 ```
