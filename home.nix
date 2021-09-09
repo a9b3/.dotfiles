@@ -82,7 +82,26 @@
     };
   };
 
-  home.packages = [
+  # Read this for details on how to use stdenv.mkDerivation
+  # https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
+  home.packages = let
+    # Find a fix for symlinking nix-profile/Applications to ~/Applications
+    # or else this app isn't discovered by finder/spotlight/alfred.
+    # https://github.com/nix-community/home-manager/issues/1341
+    easy-move-resize = with pkgs; stdenv.mkDerivation rec {
+      pname = "easy-move-resize";
+      version = "1.4.2";
+      src = fetchzip {
+        url = "https://github.com/dmarcotte/easy-move-resize/releases/download/1.4.2/Easy.Move+Resize.app.zip";
+        sha256 = "03q7cdfihbmny6y89qb22cprgj7l8bmfgmyf3qi60lbyddsbilcy";
+      };
+      installPhase = ''
+        mkdir -p $out/Applications
+        cp -r . $out/Applications/Easy\ Move+Resize.app
+      '';
+    };
+  in
+  [
     # SYSTEM
     pkgs.htop
     pkgs.exa
@@ -108,6 +127,9 @@
     # FONTS
     pkgs.fontconfig
     pkgs.proggyfonts
+
+    # GUI
+    easy-move-resize
   ];
 
   fonts.fontconfig.enable = true;
