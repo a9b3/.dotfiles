@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  # Get overlay for neovim-nightly
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
   programs.home-manager.enable = true;
   programs.alacritty.enable = true;
   programs.fzf = {
@@ -61,7 +67,6 @@
   home.file.".alacritty.yml".source = ./alacritty.yml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".rgignore".source = ./rgignore;
-  # home.file.".zshrc".source = ./zshrc;
   home.file.".config/base16-shell" = {
     recursive = true;
     source = pkgs.fetchFromGitHub {
@@ -103,15 +108,25 @@
 
   programs.neovim = {
     enable = true;
+    package = pkgs.neovim-nightly;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
+    extraPython3Packages = (ps: with ps; [
+      black
+      flake8
+    ]);
     withRuby = true;
     extraConfig = builtins.readFile ./vim/init.vim;
     extraPackages = with pkgs; [
       pkgs.fzf
+      pkgs.nodejs-16_x
+      (python3.withPackages (ps: with ps; [
+        black
+        flake8
+      ]))
     ];
     plugins = with pkgs.vimPlugins; let
       # ap/vim-buftabline
@@ -298,6 +313,8 @@
       coc-prettier
       coc-tsserver
       coc-yaml
+      coc-pyright
+      coc-json
       ultisnips
       vim-surround
       splitjoin-vim
@@ -334,8 +351,8 @@
       # semshi
       vim-nix
       vim-maktaba
-      vim-codefmt
-      vim-glaive
+      # vim-codefmt
+      # vim-glaive
       vim-bazel
     ];
     coc = {

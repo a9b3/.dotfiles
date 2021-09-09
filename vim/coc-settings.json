@@ -2,29 +2,27 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "Markdown",
     "css",
-    "jsx",
+    "js",
     "javascript",
     "javascript.jsx",
     "javascriptreact",
+    "json",
+    "jsx",
+    "python",
     "tsx",
     "typescript",
     "typescript.tsx",
     "typescriptreact",
-    "yaml",
-    "json"
+    "yaml"
   ],
-  "coc.preferences.hoverTarget": "float",
   "suggest.floatEnable": true,
   "suggest.echodocSupport": true,
   "diagnostic.virtualText": false,
   "diagnostic.virtualTextPrefix": "***",
-  // eslint
-  "eslint.filetypes": [
-    "javascript",
-    "javascript.jsx",
-    "typescript",
-    "typescript.jsx"
-  ],
+  // python
+  "python.pythonPath": "nvim-python3",
+  "python.formatting.provider": "black",
+  "python.linting.flake8Enabled": true,
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -35,6 +33,7 @@
       }
     }
   },
+  "javascript.format.enabled": true,
   "yaml.schemas": {
     "kubernetes": "/*.yaml"
   },
