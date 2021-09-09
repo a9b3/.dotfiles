@@ -298,7 +298,7 @@ au FileType mail let b:delimitMate_expand_cr = 1
 " Plug 'ruanyl/vim-gh-line'
 let g:gh_user_canonical = 0 " Use branch name when possible
 " shortcut Gblame
-nnoremap <leader>g :Gblame<cr>
+nnoremap <leader>g :Git Blame<cr>
 " ==================================================================== SYNTAX "
 " Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
