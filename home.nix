@@ -41,6 +41,14 @@
     };
     plugins = [
       {
+        name = "fzf-tab";
+        file = "fzf-tab.plugin.zsh";
+        src = builtins.fetchGit {
+          url = "https://github.com/Aloxaf/fzf-tab";
+          rev = "220bee396dd3c2024baa54015a928d5915e4f48f";
+        };
+      }
+      {
         # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
