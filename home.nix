@@ -81,6 +81,10 @@
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".rgignore".source = ./rgignore;
   home.file.".tmux.conf".source = ./tmux.conf;
+  home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
+    url = "https://github.com/superbrothers/zsh-kubectl-prompt";
+    rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
+  };
   home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
   home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
