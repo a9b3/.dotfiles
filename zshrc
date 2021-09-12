@@ -122,7 +122,7 @@ fi
 # $(__gitrps1)        - invoke output from ./git-prompt.sh, which should be sourced by zshrc before this file
 [[ -f "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh" ]] && source "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh"
 GIT_PS1_SHOWDIRTYSTATE=true
-PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[magenta]%}kube%{$fg[green]%}: $ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
+PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[green]%}$ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
 $ %{$reset_color%}'
 [[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
 
