@@ -49,6 +49,9 @@ set updatetime=300
 set signcolumn=yes
 set copyindent                                " Paste mode
 set iskeyword+=- " treat dash as word
+" for markdown
+" https://github.com/plasticboy/vim-markdown/#options
+set conceallevel=2
 
 autocmd BufWritePre * :%s/\s\+$//e            " Clear trailing spaces on save
 
@@ -296,7 +299,7 @@ au FileType mail let b:delimitMate_expand_cr = 1
 " blob view <leader>gh
 " blame view <leader>gb
 " Plug 'ruanyl/vim-gh-line'
-let g:gh_user_canonical = 0 " Use branch name when possible
+let g:gh_user_canonical = 1 " Use branch name when possible
 " shortcut Gblame
 nnoremap <leader>g :Git Blame<cr>
 " ==================================================================== SYNTAX "
@@ -327,6 +330,8 @@ colorscheme base16-default-dark
 augroup autoformat_settings
   autocmd FileType bzl AutoFormatBuffer buildifier
 augroup END
+
+let g:vim_markdown_folding_disabled = 1
 
 call plug#end()
 

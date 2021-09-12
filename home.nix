@@ -22,6 +22,10 @@
     initExtra = ''
       ${builtins.readFile ./git-prompt.sh}
       ${builtins.readFile ./zshrc}
+
+      if [ ! -d ~/.tmux/plugins/tpm ]; then
+        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+      fi
     '';
     sessionVariables = rec {
       EDITOR = "vim";
@@ -37,6 +41,7 @@
         "node"
         "npm"
         "kubectl"
+        "bazel"
       ];
     };
     plugins = [
@@ -75,6 +80,7 @@
   home.file.".alacritty.yml".source = ./alacritty.yml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".rgignore".source = ./rgignore;
+  home.file.".tmux.conf".source = ./tmux.conf;
   home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
   home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
@@ -124,6 +130,7 @@
     pkgs.fzf
     pkgs.wget
     pkgs.bat
+    pkgs.tmux
 
     # NODE
     pkgs.nodejs
@@ -373,31 +380,13 @@
       yajs-vim
       vim-jsx-typescript
       vim-svelte
+      vim-markdown
       # semshi
       vim-nix
       vim-maktaba
       vim-codefmt
       vim-glaive
       vim-bazel
-    ];
-  };
-
-  programs.tmux = {
-    enable = true;
-    extraConfig = builtins.readFile ./tmux.conf;
-    plugins = with pkgs; [
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-boot 'on'
-          set -g @continuum-boot-options 'iterm'
-          set -g @continuum-restore 'on'
-          set -g @continuum-save-interval '5' # minutes
-        '';
-      }
-      tmuxPlugins.open
-      tmuxPlugins.sensible
-      tmuxPlugins.resurrect
     ];
   };
 }
