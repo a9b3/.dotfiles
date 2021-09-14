@@ -144,7 +144,7 @@ let g:netrw_hide = 1
 " VIM_PLUG
 " ============================================================================
 " Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['.git/']
+let g:rooter_patterns = ['Makefile', '.git/']
 " ================================================================ NAVIGATION "
 set rtp+=~/.fzf
 " preview
