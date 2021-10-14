@@ -135,6 +135,9 @@
     pkgs.wget
     pkgs.bat
     pkgs.tmux
+    pkgs.ffmpeg
+    pkgs.sops
+    pkgs.gnupg
 
     # NODE
     pkgs.nodejs

@@ -37,10 +37,10 @@ alias cat='bat'
 alias rg="rg --hidden"
 alias yt="youtube-dl"
 
-brand="$(sysctl -n machdep.cpu.brand_string)"
-if [[ "$brand" == "Apple M1" ]]; then
-  alias minikube='minikube-darwin-arm64'
-fi
+# brand="$(sysctl -n machdep.cpu.brand_string)"
+# if [[ "$brand" == "Apple M1" ]]; then
+#   alias minikube='minikube-darwin-arm64'
+# fi
 
 # fd is fdfind in linux `apt install fd-find`
 if [[ `uname` == "Linux" ]]; then

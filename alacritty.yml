@@ -1,7 +1,7 @@
 font:
   normal:
-    family: ProggyCleanTTSZ
-    style: Regular
+    family: ProggyCleanTT Nerd Font
+    style: Book
   size: 15.0
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
