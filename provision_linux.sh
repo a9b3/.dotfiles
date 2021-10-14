@@ -18,9 +18,7 @@ usermod -aG sudo $create_user
 # Move ssh keys
 rsync --archive --chown=$create_user:$create_user ~/.ssh /home/$create_user
 
-# Assume created user
-su - $create_user
-
+# Run as user
 sudo -i -u $create_user bash << EOF
 echo "Enter email"
 read create_user_email
