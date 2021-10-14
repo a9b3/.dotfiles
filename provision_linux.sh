@@ -18,8 +18,6 @@ usermod -aG sudo $create_user
 # Move ssh keys
 rsync --archive --chown=$create_user:$create_user ~/.ssh /home/$create_user
 
-sudo chsh -s $(which zsh)
-
 # Assume created user
 su - $create_user
 
@@ -49,3 +47,5 @@ rm $HOME/.config/nixpkgs/home.nix
 ln -s $HOME/.dotfiles/home.nix $HOME/.config/nixpkgs/home.nix
 
 home-manager switch
+
+sudo chsh -s $(which zsh)
