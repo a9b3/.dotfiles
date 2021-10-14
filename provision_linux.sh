@@ -4,7 +4,7 @@
 #
 # or ssh in as root and run
 #
-#   bash <(curl -s https://raw.githubusercontent.com/a9b3/.dotfiles/master/provision_linux.sh)
+#   bash <(curl -s -H "Cache-Control: no-cache" https://raw.githubusercontent.com/a9b3/.dotfiles/master/provision_linux.sh)
 #
 
 echo "Enter name"
@@ -21,6 +21,7 @@ rsync --archive --chown=$create_user:$create_user ~/.ssh /home/$create_user
 # Assume created user
 su - $create_user
 
+sudo -i -u $create_user bash << EOF
 echo "Enter email"
 read create_user_email
 
@@ -49,3 +50,4 @@ ln -s $HOME/.dotfiles/home.nix $HOME/.config/nixpkgs/home.nix
 home-manager switch
 
 sudo chsh -s $(which zsh)
+EOF
