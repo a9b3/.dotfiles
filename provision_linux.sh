@@ -63,12 +63,6 @@ set -e
 if [[ ! -d "$HOME_DIR/.dotfiles" ]]; then
   git clone git@github.com:esayemm/.dotfiles.git "$HOME_DIR/.dotfiles"
 fi
-
-if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
-  rm "$HOME_DIR/.config/nixpkgs/home.nix"
-fi
-
-ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
 EOF
 
 # home-manager
@@ -82,6 +76,12 @@ fi
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 nix-shell '<home-manager>' -A install
+
+if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
+  rm "$HOME_DIR/.config/nixpkgs/home.nix"
+fi
+
+ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
 
 home-manager switch
 
