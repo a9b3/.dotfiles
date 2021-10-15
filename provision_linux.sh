@@ -77,7 +77,9 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 nix-shell '<home-manager>' -A install
 
-rm "$HOME_DIR/.config/nixpkgs/home.nix"
+if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
+  rm "$HOME_DIR/.config/nixpkgs/home.nix"
+fi
 ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
 
 home-manager switch
