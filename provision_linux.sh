@@ -84,5 +84,10 @@ ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
 
 home-manager switch
 
+# NIX HOME MANAGER
+source "$HOME_DIR/.nix-profile/etc/profile.d/hm-session-vars.sh"
+
+if [ -e $HOME_DIR/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME_DIR/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
 sudo chsh -s $(which zsh)
 EOF
