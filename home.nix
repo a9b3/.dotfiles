@@ -138,6 +138,7 @@
     pkgs.ffmpeg
     pkgs.sops
     pkgs.gnupg
+    pkgs.direnv
 
     # NODE
     pkgs.nodejs
