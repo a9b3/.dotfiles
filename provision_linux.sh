@@ -64,34 +64,24 @@ if [[ ! -d "$HOME_DIR/.dotfiles" ]]; then
   git clone git@github.com:esayemm/.dotfiles.git "$HOME_DIR/.dotfiles"
 fi
 
-if ! which nix &> /dev/null; then
-  curl -L https://nixos.org/nix/install | sh -s -- --daemon
-fi
-EOF
-
-# install home-manager
-sudo -i -u "$create_user" bash << EOF
-set -e
-
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-export NIX_PATH="$HOME_DIR/.nix-defexpr/channels:$NIX_PATH"
-nix-shell '<home-manager>' -A install
-
 if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
   rm "$HOME_DIR/.config/nixpkgs/home.nix"
 fi
+
 ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
-
-# NIX HOME MANAGER
-source "$HOME_DIR/.nix-profile/etc/profile.d/hm-session-vars.sh"
-
-if [ -e $HOME_DIR/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME_DIR/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 EOF
 
 # home-manager
 sudo -i -u "$create_user" bash << EOF
 set -e
+
+if ! which nix &> /dev/null; then
+  curl -L https://nixos.org/nix/install | sh
+fi
+
+nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
 
 home-manager switch
 
