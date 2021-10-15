@@ -75,6 +75,7 @@ set -e
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
+export NIX_PATH="$HOME_DIR/.nix-defexpr/channels:$NIX_PATH"
 nix-shell '<home-manager>' -A install
 
 if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
@@ -86,8 +87,16 @@ ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
 source "$HOME_DIR/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 if [ -e $HOME_DIR/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME_DIR/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+EOF
+
+# home-manager
+sudo -i -u "$create_user" bash << EOF
+set -e
 
 home-manager switch
 
 sudo chsh -s $(which zsh)
 EOF
+
+echo ""
+echo "Logout and ssh back in as the newly created user"
