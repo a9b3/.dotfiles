@@ -60,3 +60,9 @@ while test $# -gt 0; do
   esac
 done
 endsnippet
+
+snippet fileexists
+if [[ -f "$1" ]]; then
+	$0
+fi
+endsnippet
