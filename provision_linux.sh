@@ -74,6 +74,7 @@ if ! which nix &> /dev/null; then
 fi
 
 . $HOME_DIR/.nix-profile/etc/profile.d/nix.sh
+export NIX_PATH=$HOME_DIR/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
