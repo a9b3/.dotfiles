@@ -19,7 +19,6 @@ read create_user
 
 echo "Enter email"
 read create_user_email
-HOME_DIR="/home/$create_user"
 
 # Create user
 if [[ -z "$(cat /etc/passwd | grep $create_user)" ]]; then
@@ -37,7 +36,7 @@ fi
 sudo -i -u "$create_user" bash << EOF
 set -e
 
-if [[ ! -f "$HOME_DIR/.ssh/id_rsa.pub" ]]; then
+if [[ ! -f "\$HOME/.ssh/id_rsa.pub" ]]; then
   ssh-keygen -t rsa -b 4096 -C "$create_user_email"
 fi
 
@@ -46,7 +45,7 @@ echo ""
 echo "Copy the public key and add to https://github.com/settings/ssh/new"
 echo ""
 echo ""
-cat "$HOME_DIR/.ssh/id_rsa.pub"
+cat "\$HOME/.ssh/id_rsa.pub"
 EOF
 
 echo ""
@@ -60,8 +59,8 @@ sudo -i -u "$create_user" bash << EOF
 set -e
 
 # Provision with dotfiles and home-manager
-if [[ ! -d "$HOME_DIR/.dotfiles" ]]; then
-  git clone git@github.com:esayemm/.dotfiles.git "$HOME_DIR/.dotfiles"
+if [[ ! -d "\$HOME/.dotfiles" ]]; then
+  git clone git@github.com:esayemm/.dotfiles.git "\$HOME/.dotfiles"
 fi
 EOF
 
@@ -73,18 +72,18 @@ if ! which nix &> /dev/null; then
   curl -L https://nixos.org/nix/install | sh
 fi
 
-. $HOME_DIR/.nix-profile/etc/profile.d/nix.sh
-export NIX_PATH=$HOME_DIR/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+. \$HOME/.nix-profile/etc/profile.d/nix.sh
+export NIX_PATH=\$HOME/.nix-defexpr/channels\${NIX_PATH:+:}\$NIX_PATH
 
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 nix-shell '<home-manager>' -A install
 
-if [[ -f "$HOME_DIR/.config/nixpkgs/home.nix" ]]; then
-  rm "$HOME_DIR/.config/nixpkgs/home.nix"
+if [[ -f "\$HOME/.config/nixpkgs/home.nix" ]]; then
+  rm "\$HOME/.config/nixpkgs/home.nix"
 fi
 
-ln -s "$HOME_DIR/.dotfiles/home.nix" "$HOME_DIR/.config/nixpkgs/home.nix"
+ln -s "\$HOME/.dotfiles/home.nix" "\$HOME/.config/nixpkgs/home.nix"
 
 home-manager switch
 
