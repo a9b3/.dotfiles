@@ -129,7 +129,7 @@
     pkgs.httpie
     pkgs.fd
     pkgs.diff-so-fancy
-    pkgs.docker
+    # pkgs.docker
     pkgs.youtube-dl
     pkgs.fzf
     pkgs.wget
@@ -139,6 +139,7 @@
     pkgs.sops
     pkgs.gnupg
     pkgs.direnv
+    pkgs.unixtools.netstat
 
     # NODE
     pkgs.nodejs
