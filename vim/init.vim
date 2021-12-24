@@ -124,6 +124,7 @@ noremap H ^
 noremap L g_
 noremap J 6j
 noremap K 6k
+noremap <leader>1 :%bd\|e#<CR>
 " clear search highlight
 nnoremap <leader><space> :nohlsearch<cr>
 " shortcut for visual mode sort
@@ -211,6 +212,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
 Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
@@ -250,7 +252,7 @@ nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <C-]> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <C-[> <Plug>(coc-references)
 " Use K to show documentation in preview window
 nnoremap <leader>m :call <SID>show_documentation()<CR>
 

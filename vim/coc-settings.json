@@ -33,6 +33,18 @@
   },
   // js
   "javascript.format.enabled": true,
+  "eslint.filetypes": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
+  "eslint.options": {
+    "env": {
+      "browser": true,
+      "node": true
+    }
+  },
   "yaml.schemas": {
     "kubernetes": "kubernetes/**/*.yaml"
   },
