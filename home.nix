@@ -134,6 +134,7 @@
     pkgs.httpie
     pkgs.fd
     pkgs.diff-so-fancy
+    pkgs.git-lfs
     # pkgs.docker
     pkgs.youtube-dl
     pkgs.fzf
