@@ -22,10 +22,6 @@
     initExtra = ''
       ${builtins.readFile ./git-prompt.sh}
       ${builtins.readFile ./zshrc}
-
-      if [ ! -d ~/.tmux/plugins/tpm ]; then
-        git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-      fi
     '';
     sessionVariables = rec {
       EDITOR = "vim";
@@ -96,6 +92,15 @@
       owner = "chriskempson";
       repo = "base16-shell";
       rev = "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1";
+      sha256 = "1yj36k64zz65lxh28bb5rb5skwlinixxz6qwkwaf845ajvm45j1q";
+    };
+  };
+  home.file.".tmux/plugins/tpm" = {
+    recursive = true;
+    source = pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
       sha256 = "1yj36k64zz65lxh28bb5rb5skwlinixxz6qwkwaf845ajvm45j1q";
     };
   };
