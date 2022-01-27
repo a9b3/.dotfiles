@@ -198,7 +198,7 @@ let g:fzf_colors =
 let g:fzf_buffers_jump = 1
 
 " Plug 'preservim/nerdtree'
-let g:NERDTreeWinSize=30
+let g:NERDTreeWinSize=50
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf']
 nmap <C-n> :NERDTreeToggle<CR>
