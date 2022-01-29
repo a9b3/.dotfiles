@@ -252,7 +252,7 @@ nmap <silent> ]d <Plug>(coc-diagnostic-next)
 nmap <C-]> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <C-[> <Plug>(coc-references)
+nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window
 nnoremap <leader>m :call <SID>show_documentation()<CR>
 
