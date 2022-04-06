@@ -1,14 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # Get overlay for neovim-nightly
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
   programs.home-manager.enable = true;
-  programs.alacritty.enable = true;
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
@@ -73,7 +66,6 @@
   # ---------------------------------------------------------
   # Managed files
   # ---------------------------------------------------------
-  home.file.".alacritty.yml".source = ./alacritty.yml;
   home.file.".gitconfig".source = ./gitconfig;
   home.file.".rgignore".source = ./rgignore;
   home.file.".tmux.conf".source = ./tmux.conf;
@@ -84,7 +76,7 @@
   home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
   home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
-    sha256 = "1gpldpykvn9sgykb1ydlwz0zkiyx7y9qhf8zaknc88v1pan8n1jn";
+    sha256 = "sha256-oE29QJTlm2P10iJQU1mPApL1f99IFqVD3b0qP9adOMU=";
   };
   home.file.".config/base16-shell" = {
     recursive = true;
@@ -92,7 +84,7 @@
       owner = "chriskempson";
       repo = "base16-shell";
       rev = "ce8e1e540367ea83cc3e01eec7b2a11783b3f9e1";
-      sha256 = "1yj36k64zz65lxh28bb5rb5skwlinixxz6qwkwaf845ajvm45j1q";
+      sha256 = "sha256-OMhC6paqEOQUnxyb33u0kfKpy8plLSRgp8X8T8w0Q/o=";
     };
   };
   home.file.".tmux/plugins/tpm" = {
@@ -101,7 +93,7 @@
       owner = "tmux-plugins";
       repo = "tpm";
       rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
-      sha256 = "1yj36k64zz65lxh28bb5rb5skwlinixxz6qwkwaf845ajvm45j1q";
+      sha256 = "sha256-aGRy5ah1Dxb+94QoIkOy0nKlmAOFq2y5xnf2B852JY0";
     };
   };
 
@@ -145,7 +137,7 @@
     pkgs.sops
     pkgs.gnupg
     pkgs.direnv
-    pkgs.unixtools.netstat
+    # pkgs.unixtools.netstat
 
     # NODE
     pkgs.nodejs
@@ -164,9 +156,8 @@
 
   fonts.fontconfig.enable = true;
 
-  programs.neovim = {
+   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
