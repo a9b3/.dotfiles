@@ -1,3 +1,11 @@
 snippet var
 variable "$1" {}
 endsnippet
+
+snippet module
+module "$1" {
+	source = "$2"
+
+	${3:var = ${4:"bar"}}
+}
+endsnippet
