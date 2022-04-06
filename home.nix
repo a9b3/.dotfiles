@@ -13,8 +13,8 @@
     enableAutosuggestions = true;
     history.extended = true;
     initExtra = ''
-      ${builtins.readFile ./git-prompt.sh}
-      ${builtins.readFile ./zshrc}
+      ${builtins.readFile ./scripts/git-prompt.sh}
+      ${builtins.readFile ./confs/zshrc}
     '';
     sessionVariables = rec {
       EDITOR = "vim";
@@ -66,9 +66,9 @@
   # ---------------------------------------------------------
   # Managed files
   # ---------------------------------------------------------
-  home.file.".gitconfig".source = ./gitconfig;
-  home.file.".rgignore".source = ./rgignore;
-  home.file.".tmux.conf".source = ./tmux.conf;
+  home.file.".gitconfig".source = ./confs/gitconfig;
+  home.file.".rgignore".source = ./confs/rgignore;
+  home.file.".tmux.conf".source = ./confs/tmux.conf;
   home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
     url = "https://github.com/superbrothers/zsh-kubectl-prompt";
     rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
