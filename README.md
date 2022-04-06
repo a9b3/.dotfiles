@@ -33,9 +33,10 @@ curl -L https://nixos.org/nix/install | sh
 4. Install home-manager
 
 ```
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
-nix-shell '<home-manager>' -A install
+NIXPKGS_ALLOW_INSECURE=1 nix-shell '<home-manager>' -A install
 ```
 
 5. Symlink home.nix
