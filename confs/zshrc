@@ -114,7 +114,10 @@ fi
 # ----------------------------------------------------
 # Completions
 # ----------------------------------------------------
-source <(kubectl completion zsh)
+
+source ~/.zsh/completion/_kubectl
+source ~/.zsh/completion/_bazel
+source ~/.zsh/completion/_minikube
 
 # ----------------------------------------------------
 # Prompt
