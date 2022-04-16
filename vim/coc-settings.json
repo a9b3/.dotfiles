@@ -45,7 +45,8 @@
       "node": true
     }
   },
+  "yaml.format.enable": false,
   "yaml.schemas": {
-    "kubernetes": "kubernetes/**/*.yaml"
+    "kubernetes": "k8s/**/*.yaml"
   }
 }
