@@ -127,6 +127,13 @@
     pkgs.fd
     pkgs.diff-so-fancy
     pkgs.git-lfs
+    pkgs.lsd
+    pkgs.delta
+    # pkgs.dust
+    pkgs.duf
+    pkgs.choose
+    pkgs.sd
+    pkgs.gtop
     # pkgs.docker
     pkgs.youtube-dl
     pkgs.fzf
