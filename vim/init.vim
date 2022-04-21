@@ -29,7 +29,6 @@ set ffs=unix,dos,mac                          " Use Unix as the standard file ty
 set noerrorbells novisualbell t_vb= tm=500    " No annoying sound on errors
 set backspace=eol,start,indent                " Configure backspace so it acts as it should act
 set whichwrap+=<,>,h,l                        " automatically wrap left and right
-set relativenumber                            " show relative number from curent line
 set t_Co=256                                  " 256 colors in vim
 set textwidth=80 colorcolumn=80 lbr tw=80     " set line break to 80
 set number numberwidth=2                      " show line number in left margin
