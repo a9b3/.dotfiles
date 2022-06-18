@@ -1,4 +1,6 @@
 # vim: filetype=sh
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
 [user]
 	email = esayemm@gmail.com
 	name = Sam Lau
