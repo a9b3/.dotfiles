@@ -1,5 +1,5 @@
 {
-  "codeLens.enable": true,
+  "codeLens.enable": false,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
   "suggest.floatEnable": true,
   "signature.target": "float",

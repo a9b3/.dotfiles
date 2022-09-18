@@ -658,3 +658,21 @@ function OptionPositionsTable({
   )
 }
 endsnippet
+
+snippet leetcode
+function $1($2) {
+	$0
+}
+
+[
+  {
+    args: [],
+    expected: null,
+  },
+].map((testCase) => {
+  const result = $1(...testCase.args);
+  if (result !== testCase.expected) {
+    console.log(\`expected ${testCase.expected} but got ${result}\`);
+  }
+});
+endsnippet
