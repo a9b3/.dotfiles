@@ -217,8 +217,8 @@ Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 Plug 'josa42/coc-docker', {'do': 'yarn install --frozen-lockfile'}
-Plug 'ryanoasis/vim-devicons'
-Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+" Plug 'ryanoasis/vim-devicons'
+" Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
