@@ -30,7 +30,7 @@ eval "$(fasd --init auto)"
 # Always use color output for `ls`
 # alias ls="exa -l --group-directories-first -s type --git"
 # alias l="exa -l --group-directories-first -s type --git"
-alias ls="lsd -l --no-symlink --date relative --group-dirs first -X --icon never --blocks name,date,user,permission,size --sort version"
+alias ls="lsd -l --no-symlink --date relative --group-dirs first -X --icon never --blocks name,date,user,permission,size --sort version -F"
 # go to project root
 alias r='cd $(git rev-parse --show-toplevel)'
 alias g='git'
