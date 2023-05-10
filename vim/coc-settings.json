@@ -1,6 +1,7 @@
 {
-  "codeLens.enable": false,
   "coc.preferences.formatOnSaveFiletypes": ["*"],
+  "coc.preferences.jumpCommand": "drop",
+  "codeLens.enable": false,
   "suggest.floatEnable": true,
   "signature.target": "float",
   "signature.floatConfig": {
@@ -13,6 +14,7 @@
   "diagnostic.virtualText": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.separateRelatedInformationAsDiagnostics": true,
+  "diagnostic.refreshOnInsertMode": true,
   "diagnostic.floatConfig": {
     "border": true
   },
@@ -33,18 +35,16 @@
   },
   // js
   "javascript.format.enabled": true,
-  "eslint.filetypes": [
+  "eslint.probe": [
     "javascript",
     "typescript",
     "typescriptreact",
-    "javascriptreact"
+    "javascriptreact",
+    "svelte"
   ],
-  "eslint.options": {
-    "env": {
-      "browser": true,
-      "node": true
-    }
-  },
+  "eslint.validate": ["svelte"],
+  "svelte.plugin.typescript.diagnostics.enable": true,
+  "svelte.ask-to-enable-ts-plugin": false,
   "yaml.format.enable": false,
   "yaml.schemas": {
     "kubernetes": "k8s/**/*.yaml"

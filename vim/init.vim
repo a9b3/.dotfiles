@@ -1,4 +1,4 @@
-" ============================================================================
+"name ============================================================================
 " GENERAL
 " ============================================================================
 
@@ -144,7 +144,7 @@ let g:netrw_hide = 1
 " VIM_PLUG
 " ============================================================================
 " Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['Makefile', '.git/']
+let g:rooter_patterns = ['Makefile', 'package.json', 'BUILD.bazel', '.git/']
 " ================================================================ NAVIGATION "
 set rtp+=~/.fzf
 " preview
@@ -160,11 +160,12 @@ command! -bang -nargs=? -complete=dir Files
 
 " Search from project root (.git)
 " https://github.com/junegunn/fzf.vim/issues/47#issuecomment-160237795
-function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
+" function! s:find_git_root()
+"   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+" endfunction
 
-command! ProjectFiles execute 'Files' s:find_git_root()
+" command! ProjectFiles execute 'Files' s:find_git_root()
+command! ProjectFiles execute 'Files'
 " custom search
 nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
@@ -199,7 +200,7 @@ let g:fzf_buffers_jump = 1
 " Plug 'preservim/nerdtree'
 let g:NERDTreeWinSize=50
 let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf']
+let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf', 'bazel-bin', 'bazel-testlogs', 'bazel-monorepo-*']
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <leader>f :NERDTreeFind<CR>
 " If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
@@ -217,9 +218,19 @@ Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
 Plug 'josa42/coc-docker', {'do': 'yarn install --frozen-lockfile'}
-Plug 'coc-extensions/coc-svelte'
+Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
+Plug 'leafOfTree/vim-svelte-plugin'
 " Plug 'ryanoasis/vim-devicons'
 " Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+
+" --------------------------------------------
+"  coc-prettier
+" --------------------------------------------
+" Prettier Settings
+" let g:prettier#quickfix_enabled = 0
+" let g:prettier#autoformat_require_pragma = 0
+" add svelte files to the default
+" au BufWritePre *.css,*.svelte,*.pcss,*.html,*.ts,*.js,*.json PrettierAsync
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort

@@ -146,6 +146,10 @@
     pkgs.direnv
     # pkgs.unixtools.netstat
 
+    pkgs.protobuf
+
+    # pkgs.bazelisk
+
     # NODE
     pkgs.nodejs
     pkgs.yarn

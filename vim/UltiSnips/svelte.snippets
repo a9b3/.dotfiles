@@ -1,11 +1,73 @@
+extends typescript
+
 snippet init
-<script>
+<script lang="ts">
+	import { onMount, onDestroy } from 'svelte'
+
+	// -------------------------------------------------------------------------
+	// Props
+	// -------------------------------------------------------------------------
+
+	// -------------------------------------------------------------------------
+	// Internal
+	// -------------------------------------------------------------------------
+
+	onMount(() => {})
+	onDestroy(() => {})
 </script>
 
-<style>
-</style>
-
-<div>
+<div class="main">
 	$0
 </div>
+
+<style>
+	.main {
+	}
+</style>
+endsnippet
+
+snippet va
+var(--$0);
+endsnippet
+
+snippet hsl
+hsl(
+	var(--$1-h),
+	var(--$1-s),
+	var(--$1-l),
+	1
+)
+endsnippet
+
+snippet mousehandlers
+function onmousemove(evt: MouseEvent) {
+
+}
+
+function onmouseup(evt: MouseEvent) {
+
+	window.removeEventListener('mousemove', onmousemove)
+	window.removeEventListener('mouseup', onmouseup)
+}
+
+function onmousedown(evt: MouseEvent) {
+
+	window.addEventListener('mousemove', onmousemove)
+	window.addEventListener('mouseup', onmouseup)
+}
+endsnippet
+
+snippet onMount
+import { onMount, onDestroy } from 'svelte'
+
+onMount(() => {
+})
+onDestroy(() => {
+})
+endsnippet
+
+snippet section
+// -------------------------------------------------------------------------
+// $0
+// -------------------------------------------------------------------------
 endsnippet
