@@ -363,3 +363,5 @@ if system('uname -r') =~ "microsoft"
 endif
 
 set secure
+
+au BufRead,BufNewFile *.json set filetype=jsonc

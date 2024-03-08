@@ -63,6 +63,9 @@
     ];
   };
 
+  home.username = "es";
+  home.homeDirectory = "/Users/es";
+  home.stateVersion = "22.05";
   # ---------------------------------------------------------
   # Managed files
   # ---------------------------------------------------------
@@ -76,7 +79,7 @@
   home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
   home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
-    sha256 = "sha256-oE29QJTlm2P10iJQU1mPApL1f99IFqVD3b0qP9adOMU=";
+    sha256 = "sha256-uXwLrsgan6PYYfxuddiYE+wrBAdZ3WFo/mUnjyxDne0=";
   };
   home.file.".config/base16-shell" = {
     recursive = true;
@@ -135,7 +138,6 @@
     pkgs.sd
     pkgs.gtop
     # pkgs.docker
-    pkgs.youtube-dl
     pkgs.fzf
     pkgs.wget
     pkgs.bat
