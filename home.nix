@@ -122,7 +122,7 @@
   [
     # SYSTEM
     pkgs.htop
-    pkgs.exa
+    pkgs.eza
     pkgs.fasd
     pkgs.ripgrep
     pkgs.jq
