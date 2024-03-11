@@ -2,11 +2,13 @@
 
 {
   programs.home-manager.enable = true;
+
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
     fileWidgetCommand = "fd --type f";
   };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -16,9 +18,7 @@
       ${builtins.readFile ./scripts/git-prompt.sh}
       ${builtins.readFile ./confs/zshrc}
     '';
-    sessionVariables = rec {
-      EDITOR = "vim";
-    };
+    sessionVariables = { EDITOR = "vim"; };
     oh-my-zsh = {
       enable = true;
       plugins = [
@@ -43,7 +43,6 @@
         };
       }
       {
-        # will source zsh-autosuggestions.plugin.zsh
         name = "zsh-autosuggestions";
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
@@ -66,9 +65,7 @@
   home.username = "es";
   home.homeDirectory = "/Users/es";
   home.stateVersion = "22.05";
-  # ---------------------------------------------------------
-  # Managed files
-  # ---------------------------------------------------------
+
   home.file.".gitconfig".source = ./confs/gitconfig;
   home.file.".rgignore".source = ./confs/rgignore;
   home.file.".tmux.conf".source = ./confs/tmux.conf;
@@ -100,12 +97,7 @@
     };
   };
 
-  # Read this for details on how to use stdenv.mkDerivation
-  # https://nixos.org/manual/nixpkgs/stable/#chap-stdenv
   home.packages = let
-    # Find a fix for symlinking nix-profile/Applications to ~/Applications
-    # or else this app isn't discovered by finder/spotlight/alfred.
-    # https://github.com/nix-community/home-manager/issues/1341
     easy-move-resize = with pkgs; stdenv.mkDerivation rec {
       pname = "easy-move-resize";
       version = "1.4.2";
@@ -118,9 +110,7 @@
         cp -r . $out/Applications/Easy\ Move+Resize.app
       '';
     };
-  in
-  [
-    # SYSTEM
+  in [
     pkgs.htop
     pkgs.eza
     pkgs.fasd
@@ -132,12 +122,10 @@
     pkgs.git-lfs
     pkgs.lsd
     pkgs.delta
-    # pkgs.dust
     pkgs.duf
     pkgs.choose
     pkgs.sd
     pkgs.gtop
-    # pkgs.docker
     pkgs.fzf
     pkgs.wget
     pkgs.bat
@@ -146,44 +134,27 @@
     pkgs.sops
     pkgs.gnupg
     pkgs.direnv
-    # pkgs.unixtools.netstat
-
     pkgs.protobuf
-
-    # pkgs.bazelisk
-
-    # NODE
     pkgs.nodejs
     pkgs.yarn
-
-    # GOLANG
     pkgs.go
-
-    # FONTS
     pkgs.fontconfig
     pkgs.proggyfonts
-
-    # GUI
     easy-move-resize
   ];
 
   fonts.fontconfig.enable = true;
 
-   programs.neovim = {
+  programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
     vimdiffAlias = true;
     withNodeJs = true;
     withPython3 = true;
-    extraPython3Packages = (ps: with ps; [
-      black
-      flake8
-    ]);
+    extraPython3Packages = ps: with ps; [ black flake8 ];
     withRuby = true;
     extraConfig = builtins.readFile ./vim/init.vim;
-    extraPackages = with pkgs; [
-      pkgs.fzf
-    ];
+    extraPackages = with pkgs; [ fzf ];
   };
 }
