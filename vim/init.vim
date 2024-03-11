@@ -169,8 +169,6 @@ nmap <leader>a :Rg<cr>
 " coc
 call plug#begin(stdpath('data') . '/plugged')
 Plug 'jesseleite/vim-agriculture'
-Plug 'ap/vim-buftabline'
-Plug 'PhilRunninger/nerdtree-buffer-ops'
 Plug 'fatih/vim-hclfmt'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'othree/html5.vim'

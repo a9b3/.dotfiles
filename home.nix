@@ -81,10 +81,10 @@
   home.file.".config/base16-shell" = {
     recursive = true;
     source = pkgs.fetchFromGitHub {
-      owner = "chriskempson";
+      owner = "tinted-theming";
       repo = "base16-shell";
-      rev = "588691ba71b47e75793ed9edfcfaa058326a6f41";
-      sha256 = "sha256-X89FsG9QICDw3jZvOCB/KsPBVOLUeE7xN3VCtf0DD3E=";
+      rev = "bcd9960803c39eb7af30a2db80b57ebd74073bd5";
+      sha256 = "sha256-d5llHMl6qczxFodhjfBAkrJVYsurRVf1X1Ks5wFYxd8=";
     };
   };
   home.file.".tmux/plugins/tpm" = {
