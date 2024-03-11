@@ -22,10 +22,8 @@
     "border": true
   },
   "diagnostic.format": "%message [%source]",
-  // python
   "python.formatting.provider": "black",
   "python.linting.flake8Enabled": true,
-  // golang
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -33,7 +31,6 @@
       "filetypes": ["go"]
     }
   },
-  // js
   "javascript.format.enabled": true,
   "eslint.probe": [
     "javascript",

@@ -1,8 +1,3 @@
-"name ============================================================================
-" GENERAL
-" ============================================================================
-
-
 " Enable filetype plugins
 filetype plugin indent on
 syntax enable
@@ -222,6 +217,7 @@ Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color 
 Plug 'josa42/coc-docker', {'do': 'yarn install --frozen-lockfile'}
 Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
 Plug 'leafOfTree/vim-svelte-plugin'
+Plug 'github/copilot.vim'
 
 " This is the default extra key bindings
 let g:fzf_action = {
