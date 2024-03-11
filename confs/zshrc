@@ -99,8 +99,15 @@ export DIRENV_LOG_FORMAT=""
 # automatically add non default ssh keys
 [[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa
 # setup base16-shell for color themes
-BASE16_SHELL=$HOME/.config/base16-shell
-[[ -n "$PS1" ]] && [[ -s $BASE16_SHELL/profile_helper.sh ]] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# Base16 Shell
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        source "$BASE16_SHELL/profile_helper.sh"
+        
+base16_default-dark
 
 # only use virtualenv for work
 # makes "workon" command available

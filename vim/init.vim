@@ -88,6 +88,8 @@ if &diff
   endfunction
 endif
 
+set diffopt+=internal,algorithm:patience
+
 " ============================================================================
 " KEYBINDINGS
 " ============================================================================
@@ -143,8 +145,6 @@ let g:netrw_hide = 1
 " ============================================================================
 " VIM_PLUG
 " ============================================================================
-" Plug 'airblade/vim-rooter'
-let g:rooter_patterns = ['Makefile', 'package.json', 'BUILD.bazel', '.git/']
 " ================================================================ NAVIGATION "
 set rtp+=~/.fzf
 " preview
@@ -170,7 +170,59 @@ command! ProjectFiles execute 'Files'
 nmap <C-p> :ProjectFiles<cr>
 nmap <leader>a :Rg<cr>
 
-" Plug 'junegunn/fzf.vim'
+
+" coc
+call plug#begin(stdpath('data') . '/plugged')
+Plug 'jesseleite/vim-agriculture'
+Plug 'ap/vim-buftabline'
+Plug 'PhilRunninger/nerdtree-buffer-ops'
+Plug 'fatih/vim-hclfmt'
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'othree/html5.vim'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'mxw/vim-jsx'
+Plug 'othree/yajs.vim'
+Plug 'evanleck/vim-svelte'
+Plug 'google/vim-glaive'
+Plug 'chriskempson/base16-vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'qpkorr/vim-bufkill'
+Plug 'preservim/nerdtree'
+Plug 'SirVer/ultisnips'
+Plug 'tpope/vim-surround'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+Plug 'easymotion/vim-easymotion'
+Plug 'tomtom/tcomment_vim'
+Plug 'Raimondi/delimitMate'
+Plug 'mhinz/vim-signify'
+Plug 'rhysd/committia.vim'
+Plug 'hashivim/vim-terraform'
+Plug 'chr4/nginx.vim'
+Plug 'elzr/vim-json'
+Plug 'jparise/vim-graphql'
+Plug 'jvirtanen/vim-hcl'
+Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
+Plug 'mattn/emmet-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'plasticboy/vim-markdown'
+Plug 'LnL7/vim-nix'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+Plug 'bazelbuild/vim-bazel'
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
+Plug 'josa42/coc-docker', {'do': 'yarn install --frozen-lockfile'}
+Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
+Plug 'leafOfTree/vim-svelte-plugin'
+
 " This is the default extra key bindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -196,33 +248,6 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 " [Buffers] Jump to the existing window if possible
 let g:fzf_buffers_jump = 1
-
-" Plug 'preservim/nerdtree'
-let g:NERDTreeWinSize=50
-let g:NERDTreeMinimalUI = 1
-let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf', 'bazel-bin', 'bazel-testlogs', 'bazel-monorepo-*']
-nmap <C-n> :NERDTreeToggle<CR>
-nmap <leader>f :NERDTreeFind<CR>
-" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
-autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
-    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
-
-" coc
-call plug#begin(stdpath('data') . '/plugged')
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-" Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'} " color highlighting
-Plug 'josa42/coc-docker', {'do': 'yarn install --frozen-lockfile'}
-Plug 'coc-extensions/coc-svelte', {'do': 'yarn install --frozen-lockfile'}
-Plug 'leafOfTree/vim-svelte-plugin'
-" Plug 'ryanoasis/vim-devicons'
-" Plug 'vwxyutarooo/nerdtree-devicons-syntax'
-
 " --------------------------------------------
 "  coc-prettier
 " --------------------------------------------
@@ -267,6 +292,17 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window
 nnoremap <leader>m :call <SID>show_documentation()<CR>
 
+" NERDTree
+let g:NERDTreeWinSize=50
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore=['node_modules', 'bazel-out', '_backend.tf', '_providers.tf', 'bazel-bin', 'bazel-testlogs', 'bazel-monorepo-*']
+nmap <C-n> :NERDTreeToggle<CR>
+nmap <leader>f :NERDTreeFind<CR>
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -279,7 +315,6 @@ augroup end
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Snippets
-" Plug 'SirVer/ultisnips'
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-k>"
@@ -287,15 +322,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-bk>"
 let g:UltiSnipsSnippetsDir = "~/.dotfiles/vim/UltiSnips"
 let g:UltiSnipsSnippetDirectories=[$HOME . '/.dotfiles/vim/UltiSnips']
 
-" Plug 'terryma/vim-multiple-cursors'
-let g:multi_cursor_use_default_mapping=0
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-k>'
-let g:multi_cursor_next_key            = '<C-k>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
+" vim-visual-multi
+let g:VM_maps = {}
+let g:VM_maps['Find Under']         = '<C-k>'           " replace C-n
+let g:VM_maps['Find Subword Under'] = '<C-k>'           " replace visual C-n
 
-" Plug 'easymotion/vim-easymotion'
 " easy motion trigger with 's'
 let g:EasyMotion_do_mapping = 0
 nmap s <Plug>(easymotion-overwin-f2)
@@ -309,37 +340,20 @@ let g:EasyMotion_user_smartsign_us = 1
 " Plug 'Raimondi/delimitMate'
 let delimitMate_expand_cr=1
 au FileType mail let b:delimitMate_expand_cr = 1
-" ======================================================================= GIT "
-" Jump to github line
-" blob view <leader>gh
-" blame view <leader>gb
-" Plug 'ruanyl/vim-gh-line'
-let g:gh_user_canonical = 1 " Use branch name when possible
-" shortcut Gblame
-nnoremap <leader>g :Git Blame<cr>
 " ==================================================================== SYNTAX "
-" Plug 'hashivim/vim-terraform'
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
-" Plug 'elzr/vim-json'
 let g:vim_json_syntax_conceal = 0
 " ==================================================================== GOLANG "
-" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 let g:go_doc_keywordprg_enabled = 0
 let g:go_fmt_command = "goimports"
 let g:go_def_mode = 'godef'
 
 " ====================================================================== RUST "
-" Plug 'rust-lang/rust.vim'
 let g:rustfmt_autosave = 1
 " ================================================================ JAVASCRIPT "
-" Plug 'mattn/emmet-vim'
 let g:user_emmet_leader_key='<C-Z>'
-" Plug 'evanleck/vim-svelte', {'branch': 'main'}
 let g:svelte_preprocessors = ['typescript']
-
-let base16colorspace=256        " Let base16 access colors present in 256 colorspace
-colorscheme base16-default-dark
 
 " https://github.com/google/vim-codefmt
 augroup autoformat_settings
@@ -365,3 +379,6 @@ endif
 set secure
 
 au BufRead,BufNewFile *.json set filetype=jsonc
+
+let base16colorspace=256        " Let base16 access colors present in 256 colorspace
+colorscheme base16-default-dark
