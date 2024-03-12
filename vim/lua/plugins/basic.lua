@@ -32,4 +32,9 @@ return {
       direction = 'horizontal',
     },
   },
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {}
+  }
 }
