@@ -165,3 +165,11 @@ vim.keymap.set('n', '<leader><space>', ':nohlsearch<cr>')
 vim.keymap.set('v', '<leader>s', ':sort<cr>')
 vim.keymap.set('x', 'p', 'pgvy')
 vim.keymap.set('x', '@', ':<C-u>call ExecuteMacroOverVisualRange()<CR>')
+
+local bg = require('base16-colorscheme').colors.base00
+local fg = require('base16-colorscheme').colors.base04
+vim.cmd('highlight TelescopePromptTitle guibg=' .. bg .. ' guifg=' .. fg)
+vim.cmd('highlight TelescopePreviewTitle guibg=' .. bg .. ' guifg=' .. fg)
+vim.cmd('highlight TelescopeResultsTitle guibg=' .. bg .. ' guifg=' .. fg)
+vim.cmd('highlight TelescopeBorder guifg=' .. fg)
+vim.cmd('highlight TelescopePromptBorder guifg=' .. fg .. ' guibg=' .. bg)

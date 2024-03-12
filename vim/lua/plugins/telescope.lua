@@ -4,7 +4,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.5',
-    dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' },
+    dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep', 'RRethy/base16-nvim' },
     config = function()
       local actions = require("telescope.actions")
       require("telescope").setup {
@@ -17,14 +17,15 @@ return {
           winblend = 5,
           mappings = {
             i = {
-              -- actions.which_key shows the mappings for your picker,
               ["<C-h>"] = "which_key",
               ["<esc>"] = actions.close,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
             },
           },
           border = true,
           borderchars = {
-            prompt = { "─", "│", "x", "│", "╭", "┬", "│", "│" },
+            prompt = { "─", "│", " ", "│", "╭", "┬", "│", "│" },
             results = { "─", "│", "─", "│", "├", "┤", "┴", "╰" },
             preview = { "─", "│", "─", " ", "─", "╮", "╯", "─" },
           },
@@ -34,10 +35,10 @@ return {
             fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
             override_file_sorter = true,    -- override the file sorter
-            case_mode = "ignore_case",       -- or "ignore_case" or "respect_case"
+            case_mode = "ignore_case",      -- or "ignore_case" or "respect_case"
           },
           ["ui-select"] = { require("telescope.themes").get_dropdown {} }
-        }
+        },
       }
 
       -- load_extension, somewhere after setup function:
@@ -46,22 +47,14 @@ return {
       require('telescope').load_extension('ui-select')
 
       local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>a', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>fl', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
-      vim.keymap.set('n', '<leader>ft', builtin.treesitter, {})
-
-      local borderColor = require('base16-colorscheme').colors.base01
-      local borderOpt = { fg = borderColor }
-      vim.api.nvim_set_hl(0, "TelescopePromptBorder", borderOpt)
-      vim.api.nvim_set_hl(0, "TelescopeResultsBorder", borderOpt)
-      vim.api.nvim_set_hl(0, "TelescopePreviewBorder", borderOpt)
-      vim.api.nvim_set_hl(0, "TelescopePromptTitle", { bg = require('base16-colorscheme').colors.base02 })
-      vim.api.nvim_set_hl(0, "TelescopeResultsTitle", { bg = require('base16-colorscheme').colors.base02 })
-      vim.api.nvim_set_hl(0, "TelescopePreviewTitle", { bg = require('base16-colorscheme').colors.base02 })
+      vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = "Find Files" })
+      vim.keymap.set('n', '<leader>a', builtin.live_grep, { desc = "Live Grep" })
+      vim.keymap.set('n', '<leader>cl', builtin.live_grep, { desc = "Live Grep" })
+      vim.keymap.set('n', '<leader>cf', builtin.find_files, { desc = "Find Files" })
+      vim.keymap.set('n', '<leader>cb', builtin.buffers, { desc = "Buffers" })
+      vim.keymap.set('n', '<leader>ch', builtin.help_tags, { desc = "Help Tags" })
+      vim.keymap.set('n', '<leader>ct', builtin.treesitter, { desc = "Treesitter" })
+      vim.keymap.set('n', '<leader>cc', builtin.commands, { desc = "Commands" })
     end,
   },
 }

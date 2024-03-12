@@ -120,7 +120,6 @@ local uiPlugins = {
       window = {
         border = "single",
         margin = { 0, 10, 10, 10 },
-        winblend = 50,
       },
     }
   },

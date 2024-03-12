@@ -22,4 +22,14 @@ return {
       require("scope").setup()
     end,
   },
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    opts = {
+      size = 20,
+      open_mapping = [[<c-\>]],
+      hide_numbers = true,
+      direction = 'horizontal',
+    },
+  },
 }
