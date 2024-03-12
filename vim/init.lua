@@ -17,9 +17,14 @@ vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 
 -- configure plugins
 local plugins = {}
-vim.list_extend(plugins, require("plugins/basic"))
-vim.list_extend(plugins, require("plugins/ui"))
-vim.list_extend(plugins, require('plugins/lsp'))
+local hpath = os.getenv("HOME")
+package.preload.basicPlugins=loadfile(hpath .. "/.dotfiles/vim/lua/plugins/basic.lua")
+package.preload.myesuiPlugins=loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
+package.preload.lspPlugins=loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.lua")
+package.preload.basicConf=loadfile(hpath .. "/.dotfiles/vim/lua/confs/basic.lua")
+vim.list_extend(plugins, require("basicPlugins"))
+vim.list_extend(plugins, require("myesuiPlugins"))
+vim.list_extend(plugins, require("lspPlugins"))
 
 local opts = {
   ui = {
@@ -29,4 +34,4 @@ local opts = {
 
 require("lazy").setup(plugins, opts)
 
-require("confs/basic")
+require("basicConf")

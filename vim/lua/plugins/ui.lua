@@ -1,51 +1,113 @@
-return {
+local uiPlugins = {
   {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
+    "nvim-tree/nvim-web-devicons",
+  },
+  { "rcarriga/nvim-notify" },
+  {
+    "folke/noice.nvim",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     config = function()
-      require 'nvim-treesitter.configs'.setup {
-        -- A list of parser names, or "all" (the five listed parsers should always be installed)
-        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
-        sync_install = false,
-        auto_install = true,
-        -- List of parsers to ignore installing (or "all")
-        ignore_install = { "javascript" },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false,
-        },
+      require("noice").setup {
       }
     end,
   },
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   {
-    'nvim-telescope/telescope.nvim',
-    tag = '0.1.5',
-    dependencies = { 'nvim-lua/plenary.nvim', 'BurntSushi/ripgrep' },
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
     config = function()
-      -- You dont need to set any of these options. These are the default ones. Only
-      -- the loading is important
-      require('telescope').setup {
-        extensions = {
-          fzf = {
-            fuzzy = true,                   -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true,    -- override the file sorter
-            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
-          }
-        }
-      }
-      -- To get fzf loaded and working with telescope, you need to call
-      -- load_extension, somewhere after setup function:
-      require('telescope').load_extension('fzf')
-
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<C-p>', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>a', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+      require("ibl").setup {}
     end,
+  },
+  {
+    "RRethy/base16-nvim",
+    config = function()
+      vim.opt.termguicolors = true
+
+      local function reload_colorscheme()
+        require('base16-colorscheme').load_from_shell()
+      end
+
+      local base16_theme_file = vim.env.BASE16_SHELL_COLORSCHEME_PATH
+
+      -- Create an autocommand group to watch for file changes
+      vim.api.nvim_create_augroup("Base16ThemeWatch", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        group = "Base16ThemeWatch",
+        pattern = base16_theme_file,
+        callback = reload_colorscheme,
+      })
+
+      require('base16-colorscheme').load_from_shell()
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup({
+        options = {
+          indicator = {
+            style = 'underline',
+          },
+          offsets = {
+            {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              text_align = "center",
+              separator = true,
+            }
+          },
+        },
+      })
+    end,
+  },
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require('lualine').setup({
+        options = {
+          disabled_filetypes = { "NvimTree" },
+        },
+      })
+    end,
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    init = function()
+      -- disable netrw at the very start of your init.lua
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+    end,
+    config = function()
+      require("nvim-tree").setup({
+        sort = {
+          sorter = "case_sensitive",
+        },
+        update_focused_file = {
+          enable = true,
+        },
+        view = {
+          width = 30,
+        },
+        renderer = {
+          group_empty = true,
+          highlight_opened_files = "name",
+          icons = {
+            git_placement = "signcolumn",
+          },
+        },
+        filters = {
+          dotfiles = true,
+        },
+      })
+    end,
+    keys = {
+      { "<C-n>",     "<cmd>NvimTreeToggle<cr>" },
+      { "<leader>f", "<cmd>NvimTreeFindFile<cr>" },
+    },
   },
   {
     "folke/which-key.nvim",
@@ -55,9 +117,16 @@ return {
       vim.o.timeoutlen = 300
     end,
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      window = {
+        border = "single",
+        margin = { 0, 10, 10, 10 },
+        winblend = 50,
+      },
     }
   },
+
 }
+package.preload.mytele = loadfile('/Users/es/.dotfiles/vim/lua/plugins/telescope.lua')
+vim.list_extend(uiPlugins, require("mytele"))
+
+return uiPlugins

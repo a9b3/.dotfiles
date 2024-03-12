@@ -1,5 +1,23 @@
 return {
   {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function()
+      require 'nvim-treesitter.configs'.setup {
+        -- A list of parser names, or "all" (the five listed parsers should always be installed)
+        ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+        sync_install = false,
+        auto_install = true,
+        -- List of parsers to ignore installing (or "all")
+        ignore_install = { "javascript" },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = true,
+        },
+      }
+    end,
+  },
+  {
     "github/copilot.vim",
   },
   "williamboman/mason.nvim",
@@ -10,7 +28,7 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup {
-        ensure_installed = { "lua_ls" },
+        ensure_installed = { "lua_ls", },
         automatic_installation = true,
       }
 
