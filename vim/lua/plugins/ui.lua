@@ -1,131 +1,129 @@
 local uiPlugins = {
-  {
-    "nvim-tree/nvim-web-devicons",
-  },
-  { "rcarriga/nvim-notify" },
-  {
-    "folke/noice.nvim",
-    opts = {},
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require("noice").setup {
-      }
-    end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    config = function()
-      require("ibl").setup {}
-    end,
-  },
-  {
-    "RRethy/base16-nvim",
-    config = function()
-      vim.opt.termguicolors = true
+	{
+		"nvim-tree/nvim-web-devicons",
+	},
+	{ "rcarriga/nvim-notify" },
+	{
+		"folke/noice.nvim",
+		opts = {},
+		dependencies = {
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
+		config = function()
+			require("noice").setup({})
+		end,
+	},
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		config = function()
+			require("ibl").setup({})
+		end,
+	},
+	{
+		"RRethy/base16-nvim",
+		config = function()
+			vim.opt.termguicolors = true
 
-      local function reload_colorscheme()
-        require('base16-colorscheme').load_from_shell()
-      end
+			local function reload_colorscheme()
+				require("base16-colorscheme").load_from_shell()
+			end
 
-      local base16_theme_file = vim.env.BASE16_SHELL_COLORSCHEME_PATH
+			local base16_theme_file = vim.env.BASE16_SHELL_COLORSCHEME_PATH
 
-      -- Create an autocommand group to watch for file changes
-      vim.api.nvim_create_augroup("Base16ThemeWatch", { clear = true })
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        group = "Base16ThemeWatch",
-        pattern = base16_theme_file,
-        callback = reload_colorscheme,
-      })
+			-- Create an autocommand group to watch for file changes
+			vim.api.nvim_create_augroup("Base16ThemeWatch", { clear = true })
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				group = "Base16ThemeWatch",
+				pattern = base16_theme_file,
+				callback = reload_colorscheme,
+			})
 
-      require('base16-colorscheme').load_from_shell()
-    end,
-  },
-  {
-    "akinsho/bufferline.nvim",
-    config = function()
-      require("bufferline").setup({
-        options = {
-          indicator = {
-            style = 'underline',
-          },
-          offsets = {
-            {
-              filetype = "NvimTree",
-              text = "File Explorer",
-              text_align = "center",
-              separator = true,
-            }
-          },
-        },
-      })
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require('lualine').setup({
-        options = {
-          disabled_filetypes = { "NvimTree" },
-        },
-      })
-    end,
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    init = function()
-      -- disable netrw at the very start of your init.lua
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-    end,
-    config = function()
-      require("nvim-tree").setup({
-        sort = {
-          sorter = "case_sensitive",
-        },
-        update_focused_file = {
-          enable = true,
-        },
-        view = {
-          width = 30,
-        },
-        renderer = {
-          group_empty = true,
-          highlight_opened_files = "name",
-          icons = {
-            git_placement = "signcolumn",
-          },
-        },
-        filters = {
-          dotfiles = true,
-        },
-      })
-    end,
-    keys = {
-      { "<C-n>",     "<cmd>NvimTreeToggle<cr>" },
-      { "<leader>f", "<cmd>NvimTreeFindFile<cr>" },
-    },
-  },
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    opts = {
-      window = {
-        border = "single",
-        margin = { 0, 10, 10, 10 },
-      },
-    }
-  },
-
+			require("base16-colorscheme").load_from_shell()
+		end,
+	},
+	{
+		"akinsho/bufferline.nvim",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					indicator = {
+						style = "underline",
+					},
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = "File Explorer",
+							text_align = "center",
+							separator = true,
+						},
+					},
+				},
+			})
+		end,
+	},
+	{
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("lualine").setup({
+				options = {
+					disabled_filetypes = { "NvimTree", "toggleterm" },
+				},
+			})
+		end,
+	},
+	{
+		"nvim-tree/nvim-tree.lua",
+		init = function()
+			-- disable netrw at the very start of your init.lua
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+		end,
+		config = function()
+			require("nvim-tree").setup({
+				sort = {
+					sorter = "case_sensitive",
+				},
+				update_focused_file = {
+					enable = true,
+				},
+				view = {
+					width = 30,
+				},
+				renderer = {
+					group_empty = true,
+					highlight_opened_files = "name",
+					icons = {
+						git_placement = "signcolumn",
+					},
+				},
+				filters = {
+					dotfiles = true,
+				},
+			})
+		end,
+		keys = {
+			{ "<C-n>", "<cmd>NvimTreeToggle<cr>" },
+			{ "<leader>f", "<cmd>NvimTreeFindFile<cr>" },
+		},
+	},
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {
+			window = {
+				border = "single",
+				margin = { 0, 10, 10, 10 },
+			},
+		},
+	},
 }
-package.preload.mytele = loadfile('/Users/es/.dotfiles/vim/lua/plugins/telescope.lua')
+package.preload.mytele = loadfile("/Users/es/.dotfiles/vim/lua/plugins/telescope.lua")
 vim.list_extend(uiPlugins, require("mytele"))
 
 return uiPlugins

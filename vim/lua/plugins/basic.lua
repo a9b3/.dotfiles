@@ -1,19 +1,31 @@
 return {
   {
-    'numToStr/Comment.nvim',
+    "echasnovski/mini.ai",
+    config = function()
+      require("mini.ai").setup()
+    end,
+  },
+  {
+    "echasnovski/mini.surround",
+    config = function()
+      require("mini.surround").setup()
+    end,
+  },
+  {
+    "numToStr/Comment.nvim",
     opts = {
       toggler = {
-        line = '<C-_>',
+        line = "<C-_>",
       },
       opleader = {
-        line = "<C-_>"
+        line = "<C-_>",
       },
     },
   },
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
-    config = true
+    config = true,
   },
   { "famiu/bufdelete.nvim" },
   {
@@ -23,18 +35,18 @@ return {
     end,
   },
   {
-    'akinsho/toggleterm.nvim',
+    "akinsho/toggleterm.nvim",
     version = "*",
     opts = {
       size = 20,
       open_mapping = [[<c-\>]],
       hide_numbers = true,
-      direction = 'horizontal',
+      direction = "horizontal",
     },
   },
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
-    opts = {}
-  }
+    opts = {},
+  },
 }

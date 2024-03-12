@@ -66,7 +66,7 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls" },
+				ensure_installed = { "lua_ls", "tsserver" },
 				automatic_installation = true,
 			})
 
@@ -80,6 +80,7 @@ return {
 					},
 				},
 			})
+			lspconfig.tsserver.setup({})
 
 			local key_opts = { remap = false }
 			vim.keymap.set("n", "[d", vim.diagnostic.goto_next, key_opts)
