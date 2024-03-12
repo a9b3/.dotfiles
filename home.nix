@@ -66,17 +66,20 @@
   home.homeDirectory = "/Users/es";
   home.stateVersion = "22.05";
 
+  xdg.configFile."nvim/init.lua".source = ./vim/init.lua;
+  xdg.configFile = {
+    "nvim/lua" = {
+      source = ./vim/lua;
+      recursive = true;
+    };
+  };
+
   home.file.".gitconfig".source = ./confs/gitconfig;
   home.file.".rgignore".source = ./confs/rgignore;
   home.file.".tmux.conf".source = ./confs/tmux.conf;
   home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
     url = "https://github.com/superbrothers/zsh-kubectl-prompt";
     rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
-  };
-  home.file.".config/nvim/coc-settings.json".source = ./vim/coc-settings.json;
-  home.file.".local/share/nvim/site/autoload/plug.vim".source = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim";
-    sha256 = "sha256-uXwLrsgan6PYYfxuddiYE+wrBAdZ3WFo/mUnjyxDne0=";
   };
   home.file.".config/base16-shell" = {
     recursive = true;
@@ -154,7 +157,6 @@
     withPython3 = true;
     extraPython3Packages = ps: with ps; [ black flake8 ];
     withRuby = true;
-    extraConfig = builtins.readFile ./vim/init.vim;
     extraPackages = with pkgs; [ fzf ];
   };
 }
