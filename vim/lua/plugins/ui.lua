@@ -68,7 +68,7 @@ local uiPlugins = {
 		config = function()
 			require("lualine").setup({
 				options = {
-					disabled_filetypes = { "NvimTree", "toggleterm" },
+					disabled_filetypes = { "NvimTree" },
 				},
 			})
 		end,

@@ -120,15 +120,17 @@ return {
 		config = function()
 			local cwd = vim.fn.getcwd():gsub("/", "%%")
 
-			require("possession").setup({
-				commands = {
-					save = "SSave",
-					load = "SLoad",
-					delete = "SDelete",
-					list = "SList",
-				},
-				autosave = { current = true, tmp = true, tmp_name = cwd, on_load = true, on_quit = true },
-			})
+			if not vim.opt.diff:get() then
+				require("possession").setup({
+					commands = {
+						save = "SSave",
+						load = "SLoad",
+						delete = "SDelete",
+						list = "SList",
+					},
+					autosave = { current = true, tmp = true, tmp_name = cwd, on_load = true, on_quit = true },
+				})
+			end
 		end,
 	},
 }
