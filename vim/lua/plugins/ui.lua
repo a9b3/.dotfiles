@@ -95,7 +95,7 @@ local uiPlugins = {
 					group_empty = true,
 					highlight_opened_files = "name",
 					icons = {
-						git_placement = "signcolumn",
+						git_placement = "after",
 					},
 				},
 				filters = {
