@@ -168,7 +168,7 @@ vim.cmd("highlight TelescopeResultsTitle guibg=" .. bg .. " guifg=" .. fg)
 vim.cmd("highlight TelescopeBorder guifg=" .. fg)
 vim.cmd("highlight TelescopePromptBorder guifg=" .. fg .. " guibg=" .. bg)
 
--- Set terminal keymaps
+-- Set toggleterm keymaps
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
 	vim.keymap.set("t", "<C-\\>", [[<Cmd>:ToggleTerm <CR>]], opts)
