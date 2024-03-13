@@ -116,9 +116,11 @@ local uiPlugins = {
 			vim.o.timeoutlen = 300
 		end,
 		opts = {
+			mode = { "n", "v" },
 			window = {
 				border = "single",
-				margin = { 0, 10, 10, 10 },
+				margin = { 0.5, 0.2, 0.5, 0.2 },
+				position = "top",
 			},
 		},
 	},
