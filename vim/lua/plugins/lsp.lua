@@ -83,14 +83,14 @@ return {
 			lspconfig.tsserver.setup({})
 
 			local key_opts = { remap = false }
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_next, key_opts)
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, key_opts)
+			vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { remap = false, desc = "[lsp] Next diagnostic" })
+			vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { remap = false, desc = "[lsp] Previous diagnostic" })
 			vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<cr>", key_opts)
 			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, key_opts)
 			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", key_opts)
 			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", key_opts)
 			vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", key_opts)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_actions, key_opts)
+			vim.keymap.set("n", "ga", vim.lsp.buf.code_actions, key_opts)
 		end,
 	},
 	{
