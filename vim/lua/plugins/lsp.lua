@@ -1,3 +1,28 @@
+local masonInstalls = {
+	"stylua",
+	"shfmt",
+	"eslint_d",
+	"prettierd",
+}
+
+local masonLspInstalls = {
+	"lua_ls",
+	"tsserver",
+}
+
+local on_attach_keybindings = function(_, _)
+	local key_opts = { remap = false }
+
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { remap = false, desc = "[lsp] Next diagnostic" })
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { remap = false, desc = "[lsp] Previous diagnostic" })
+	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { remap = false, desc = "[lsp] Declaration" })
+	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "[lsp] Code actions" })
+	vim.keymap.set("n", "<leader>lR", "<cmd>Telescope lsp_references<cr>", key_opts)
+	vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>", key_opts)
+	vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<cr>", key_opts)
+	vim.keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<cr>", key_opts)
+end
+
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -26,11 +51,7 @@ return {
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		build = ":MasonUpdate",
 		opts = {
-			ensure_installed = {
-				"stylua",
-				"shfmt",
-				-- "flake8",
-			},
+			ensure_installed = masonInstalls,
 		},
 		config = function(_, opts)
 			require("mason").setup(opts)
@@ -66,12 +87,13 @@ return {
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "tsserver" },
+				ensure_installed = masonLspInstalls,
 				automatic_installation = true,
 			})
 
 			local lspconfig = require("lspconfig")
 			lspconfig.lua_ls.setup({
+				on_attach = on_attach_keybindings,
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -80,17 +102,9 @@ return {
 					},
 				},
 			})
-			lspconfig.tsserver.setup({})
-
-			local key_opts = { remap = false }
-			vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { remap = false, desc = "[lsp] Next diagnostic" })
-			vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { remap = false, desc = "[lsp] Previous diagnostic" })
-			vim.keymap.set("n", "gR", "<cmd>Telescope lsp_references<cr>", key_opts)
-			vim.keymap.set("n", "gD", vim.lsp.buf.declaration, key_opts)
-			vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<cr>", key_opts)
-			vim.keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<cr>", key_opts)
-			vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<cr>", key_opts)
-			vim.keymap.set("n", "ga", vim.lsp.buf.code_actions, key_opts)
+			lspconfig.tsserver.setup({
+				on_attach = on_attach_keybindings,
+			})
 		end,
 	},
 	{
