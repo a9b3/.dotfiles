@@ -102,6 +102,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 	end,
 })
 
+-- Automatically reload files when changed
 vim.cmd([[
   augroup AutoReload
     autocmd!
@@ -109,6 +110,7 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Clear trailing spaces
 vim.cmd([[
   augroup ClearTrailingSpaces
     autocmd!
@@ -116,6 +118,7 @@ vim.cmd([[
   augroup END
 ]])
 
+-- Toggle whitespace
 vim.cmd([[
   if &diff
     set diffopt+=iwhite
@@ -130,44 +133,32 @@ vim.cmd([[
   endif
 ]])
 
+-- Set git diff options
 vim.opt.diffopt:append("internal,algorithm:patience")
-
-vim.cmd([[
-  function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-    execute ":'<,'>normal @".nr2char(getchar())
-  endfunction
-]])
 
 -- Keybindings
 vim.g.mapleader = ","
 vim.keymap.set("n", "<leader>w", ":w!<cr>")
 vim.keymap.set("n", "<leader>q", ":qa<cr>")
 vim.keymap.set("i", "jk", "<Esc>")
-vim.keymap.set("i", "<C-a>", "<esc>I")
-vim.keymap.set("i", "<C-e>", "<esc>A")
+-- Navigation
 vim.keymap.set("n", "<leader>[", ":bprevious<CR>")
 vim.keymap.set("n", "<leader>]", ":bnext<CR>")
 vim.keymap.set("n", "<leader>d", ":Bdelete<CR>")
 vim.keymap.set("n", "<leader>t", ":tabnew<CR>")
-vim.keymap.set("n", "<A-[>", ":tabnext<CR>")
-vim.keymap.set("n", "<A-]>", ":tabprevious<CR>")
-vim.keymap.set("n", "<C-w>", "<C-w>w")
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-vim.keymap.set("n", "<leader>r", ":%s/\\<<C-r><C-w>\\>//g<Left><Left>")
+vim.keymap.set("n", "[t", ":tabnext<CR>")
+vim.keymap.set("n", "]t", ":tabprevious<CR>")
+vim.keymap.set("n", "<C-w>", "<C-w>w") -- Move between windows
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set({ "n", "v" }, "H", "^")
 vim.keymap.set({ "n", "v" }, "L", "g_")
 vim.keymap.set({ "n", "v" }, "J", "6j")
 vim.keymap.set({ "n", "v" }, "K", "6k")
-vim.keymap.set("n", "<leader>1", ":%bd\\|e#<CR>")
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>")
-vim.keymap.set("v", "<leader>s", ":sort<cr>")
-vim.keymap.set("x", "p", "pgvy")
-vim.keymap.set("x", "@", ":<C-u>call ExecuteMacroOverVisualRange()<CR>")
+vim.keymap.set("x", "p", "pgvy") -- Paste over visual selection
 
+-- Set Telescope colors
 local bg = require("base16-colorscheme").colors.base00
 local fg = require("base16-colorscheme").colors.base04
 vim.cmd("highlight TelescopePromptTitle guibg=" .. bg .. " guifg=" .. fg)
@@ -178,6 +169,7 @@ vim.cmd("highlight TelescopePromptBorder guifg=" .. fg .. " guibg=" .. bg)
 
 vim.api.nvim_set_keymap("n", "<leader>ll", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
 
+-- Set terminal keymaps
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
 	vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
@@ -185,18 +177,18 @@ function _G.set_terminal_keymaps()
 	vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
 	vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
 	vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
-	vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]], opts)
 end
 
--- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 
+-- Set lsp keymaps
 local ls = require("luasnip")
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
 	ls.jump(1)
 end, { silent = true })
 
-vim.keymap.set("i", "<C-p>", 'copilot#Accept("\\<CR>")', {
+-- Set copilot keymaps
+vim.keymap.set("i", "<C-e>", 'copilot#Accept("")', {
 	expr = true,
 	replace_keycodes = false,
 })
