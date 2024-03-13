@@ -1,73 +1,54 @@
 snippet if
-if [[ $1 ]]; then
-	$0
-fi
-endsnippet
-
+	if [[ ${1} ]]; then
+		${0}
+	fi
 snippet func
-function $1() {
-	$0
-}
-endsnippet
-
+	function ${1}() {
+		${0}
+	}
 snippet print
-printf "$0\n"
-endsnippet
-
+	printf "${0}\n"
 snippet for
-for i in "${$1[@]}"
-do
-	$0
-done
-endsnippet
-
+	for i in "${${1}[@]}"
+	do
+		${0}
+	done
 snippet until
-until $1 >/dev/null 2>&1; do
-  $2
-  sleep 5
-done
-endsnippet
-
+	until ${1} >/dev/null 2>&1; do
+	  ${2}
+	  sleep 5
+	done
 snippet case
-case "$1" in
-	$2)
-		$0
-		;;
-esac
-endsnippet
-
+	case "${1}" in
+		${2})
+			${0}
+			;;
+	esac
 snippet flags
-# colon after a character indicates it's required
-while getopts 'c:' flag; do
-  case "${flag}" in
-    c) config="${OPTARG}" ;;
-  esac
-done
-endsnippet
-
+	# colon after a character indicates it's required
+	while getopts 'c:' flag; do
+	  case "${flag}" in
+	    c) config="${OPTARG}" ;;
+	  esac
+	done
 snippet getopts
-# get variables from command line flags
-while test $# -gt 0; do
-  case "\$1" in
-    --foo*)
-      shift
-      $0
-      shift
-      ;;
-    *)
-      break
-      ;;
-  esac
-done
-endsnippet
-
+	# get variables from command line flags
+	while test $# -gt 0; do
+	  case "\$1" in
+	    --foo*)
+	      shift
+	      ${0}
+	      shift
+	      ;;
+	    *)
+	      break
+	      ;;
+	  esac
+	done
 snippet fileexists
-if [[ -f "$1" ]]; then
-	$0
-fi
-endsnippet
-
+	if [[ -f "${1}" ]]; then
+		${0}
+	fi
 snippet init
-#!/bin/bash
-set -e
-endsnippet
+	#!/bin/bash
+	set -e

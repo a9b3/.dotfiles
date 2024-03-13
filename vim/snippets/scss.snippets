@@ -1,104 +1,61 @@
 snippet hr
-/******************************************************************************
- $1
- *****************************************************************************/
-endsnippet
-
+	/******************************************************************************
+	 ${1}
+	 *****************************************************************************/
 snippet box-shadow
-box-shadow: ${1:offset-x} ${2:offset-y} ${3:blur-radius} ${4:color};
-endsnippet
-
+	box-shadow: ${1:offset-x} ${2:offset-y} ${3:blur-radius} ${4:color};
 snippet gradient
-background: linear-gradient(${1:color} 10%, ${2:color} 100%);
-endsnippet
-
+	background: linear-gradient(${1:color} 10%, ${2:color} 100%);
 snippet importfont
-@import url(https://fonts.googleapis.com/css?family=$1:100,200,300,400,500,600,700,800);
-endsnippet
-
+	@import url(https://fonts.googleapis.com/css?family=${1}:100,200,300,400,500,600,700,800);
 snippet imp
-@import '$1';
-endsnippet
-
+	@import '${1}';
 snippet transition
-transition: $1 0.2s;
-endsnippet
-
+	transition: ${1} 0.2s;
 snippet flex
-flex: ${1:grow} ${2:shrink} ${3:auto};
-endsnippet
-
+	flex: ${1:grow} ${2:shrink} ${3:auto};
 snippet flexflow
-flex-flow: ${1:row} ${2:wrap};
-endsnippet
-
+	flex-flow: ${1:row} ${2:wrap};
 snippet animation
-animation: ${1:name} ${2:duration} $3;
-endsnippet
-
+	animation: ${1:name} ${2:duration} ${3};
 snippet timingfunc
-transition-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
-endsnippet
-
+	transition-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
 snippet ext
-@extend %$1;
-endsnippet
-
+	@extend %${1};
 snippet cubic
-animation-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
-endsnippet
-
+	animation-timing-function: cubic-bezier(.68, -.55, .265, 1.55);
 snippet key
-@keyframes :global($1) {
-	0% {
-		$0
-	}
-	100% {
+	@keyframes :global(${1}) {
+		0% {
+			${0}
+		}
+		100% {
 
+		}
 	}
-}
-endsnippet
-
 snippet com
-composes: $1;
-endsnippet
-
+	composes: ${1};
 snippet font-face
-@font-face {
-	font-family: '$1';
-	src: url($2);
-}
-endsnippet
-
+	@font-face {
+		font-family: '${1}';
+		src: url(${2});
+	}
 snippet mq
-@include mq($until: tablet) {
-	$0
-}
-endsnippet
-
+	@include mq($until: tablet) {
+		${0}
+	}
 snippet fl
-display: flex;
-flex-direction: $0;
-endsnippet
-
+	display: flex;
+	flex-direction: ${0};
 snippet esayemm
-@import '~esayemm-styles/variables';
-endsnippet
-
+	@import '~esayemm-styles/variables';
 snippet shared
-@import '~styles/shared';
-endsnippet
-
+	@import '~styles/shared';
 snippet mixin
-@mixin $1($2) {
-	$0
-}
-endsnippet
-
+	@mixin ${1}(${2}) {
+		${0}
+	}
 snippet headercomment
-/* -------------- $1 -------------- */
-endsnippet
-
+	/* -------------- ${1} -------------- */
 snippet v
-var(--$1)
-endsnippet
+	var(--${1})

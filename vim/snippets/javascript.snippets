@@ -1,678 +1,504 @@
 # GENERAL
 snippet class
-class $1 {
-	constructor() {
-		$0
-	}
-}
-endsnippet
-
-snippet while
-while($1) {
-	$0
-}
-endsnippet
-
-snippet map
-$1.map(($2) => {
-	$0
-})
-endsnippet
-
-snippet red
-$1.reduce((map, val) => {
-	$0
-	return map
-}, {})
-endsnippet
-
-snippet last
-$1[$1.length - 1]
-endsnippet
-
-snippet forEach
-$1.forEach(($2) => {
-	$0
-})
-endsnippet
-
-snippet iter
-$1.$2(($3) => {
-	$0
-})
-endsnippet
-
-snippet do
-do {
-	$0
-} while($1)
-endsnippet
-
-snippet cfun
-const $1 = ($2) => {
-	$0
-};
-endsnippet
-
-snippet pro
-new Promise((resolve, reject) => {
-	$0
-})
-endsnippet
-
-snippet require
-const $1 = require('$2')
-endsnippet
-
-snippet imp
-import { $1 } from '$2'
-endsnippet
-
-snippet print
-console.log(\`$1\`)
-endsnippet
-
-snippet error
-console.error(\`$1\`)
-endsnippet
-
-snippet nprint
-console.log('\n\n', $1, '\n\n');
-endsnippet
-
-snippet alog
-console.log.apply(console, $1.map($2 => $3));
-endsnippet
-
-snippet log
-console.log('[sam]', $0)
-endsnippet
-
-snippet fun
-function ${1:name}(${2:args}) {
-	${3:body}
-}
-endsnippet
-
-snippet as
-async function ${1:name}(${2:args}) {
-	${3:body}
-}
-endsnippet
-
-snippet if
-if ($1) {
-	$0
-}
-endsnippet
-
-snippet else
-else {
-	$0
-}
-endsnippet
-
-snippet elseif
-else if ($1) {
-	$0
-}
-endsnippet
-
-snippet for
-for (let $1 = 0; $1 < $2; $1 += 1) {
-	$0
-}
-endsnippet
-
-snippet refor
-for (let $1 = $2; $1 >= 0; $1 -= 1) {
-	$0
-}
-endsnippet
-
-snippet forin
-for (let $1 in $2) {
-	$3
-}
-endsnippet
-
-snippet forof
-for (let $1 of $2) {
-	$3
-}
-endsnippet
-
-snippet iife
-(function() {
-	$1
-})();
-endsnippet
-
-snippet try
-try {
-	$0
-} catch (err) {
-	console.error(err)
-}
-endsnippet
-
-snippet fn
-$1($2) {
-	$0
-}
-endsnippet
-
-snippet pfn
-$1.prototype.$2 = function($3) {
-	$0
-};
-endsnippet
-
-snippet extend
-$1.prototype = Object.create($2.prototype);
-$1.prototype.constructor = $1;
-endsnippet
-
-snippet then
-.then(($1) => {
-	$0
-})
-endsnippet
-
-snippet catch
-.catch(($1) => {
-	$0
-})
-endsnippet
-
-snippet switch
-switch($1) {
-	$0
-	default:
-		return
-}
-endsnippet
-
-snippet case
-case $1:
-	$0
-	break
-endsnippet
-
-snippet forEach
-$1.forEach(($2) => {
-	$0
-});
-endsnippet
-
-snippet assign
-Object.assign({}, $1, $2)
-endsnippet
-
-snippet timeout
-setTimeout(() => {
-	$0
-}, $1)
-endsnippet
-
-snippet arrow
-($1) => {
-	$0
-}
-endsnippet
-
-snippet interval
-setInterval(() => {
-	$0
-}, $1)
-endsnippet
-
-snippet raf
-window.requestAnimationFrame($1)
-endsnippet
-
-snippet lorem
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend
-velit id turpis fringilla volutpat. Nulla tristique sem ex, ac dignissim odio
-volutpat sit amet.
-endsnippet
-
-snippet param
-@param {$1} $2 - $3
-endsnippet
-
-snippet fcom
-/**
- * $0
- */
-endsnippet
-
-# JSDOC
-snippet typedef
-/**
- * $3
- *
- * @typedef {$1} $2
- * @property {}
- */
-endsnippet
-
-# Angular
-snippet module
-angular.module('$1', [$2]);
-endsnippet
-
-snippet run
-angular.module('$1')
-	.run([
-		$2Run
-	]);
-
-function $2Run() {
-	$0
-}
-endsnippet
-
-snippet controller
-angular.module('$1')
-.controller('$2', ($3) => {
-	$0
-});
-endsnippet
-
-snippet filter
-angular.module('$1')
-	.filter('$2', [
-		'$3',
-		$2Filter
-	]);
-
-function $2Filter($3) {
-	return function($3) {
-		$4
-	}
-}
-endsnippet
-
-snippet directive
-angular.module('$1')
-.directive('$2', () => {
-	return {
-		restrict: 'E',
-		link: ($scope) => {
-
+	class ${1} {
+		constructor() {
+			${0}
 		}
 	}
-});
-endsnippet
+snippet while
+	while(${1}) {
+		${0}
+	}
+snippet map
+	${1}.map((${2}) => {
+		${0}
+	})
+snippet red
+	${1}.reduce((map, val) => {
+		${0}
+		return map
+	}, {})
+snippet last
+	${1}[${1}.length - 1]
+snippet forEach
+	${1}.forEach((${2}) => {
+		${0}
+	})
+snippet iter
+	${1}.${2}((${3}) => {
+		${0}
+	})
+snippet do
+	do {
+		${0}
+	} while(${1})
+snippet cfun
+	const ${1} = (${2}) => {
+		${0}
+	};
+snippet pro
+	new Promise((resolve, reject) => {
+		${0}
+	})
+snippet require
+	const ${1} = require('${2}')
+snippet imp
+	import { ${1} } from '${2}'
+snippet print
+	console.log(\`${1}\`)
+snippet error
+	console.error(\`${1}\`)
+snippet nprint
+	console.log('\n\n', ${1}, '\n\n');
+snippet alog
+	console.log.apply(console, ${1}.map(${2} => ${3}));
+snippet log
+	console.log('[sam]', ${0})
+snippet fun
+	function ${1:name}(${2:args}) {
+		${3:body}
+	}
+snippet as
+	async function ${1:name}(${2:args}) {
+		${3:body}
+	}
+snippet if
+	if (${1}) {
+		${0}
+	}
+snippet else
+	else {
+		${0}
+	}
+snippet elseif
+	else if (${1}) {
+		${0}
+	}
+snippet for
+	for (let ${1} = 0; ${1} < ${2}; ${1} += 1) {
+		${0}
+	}
+snippet refor
+	for (let ${1} = ${2}; ${1} >= 0; ${1} -= 1) {
+		${0}
+	}
+snippet forin
+	for (let ${1} in ${2}) {
+		${3}
+	}
+snippet forof
+	for (let ${1} of ${2}) {
+		${3}
+	}
+snippet iife
+	(function() {
+		${1}
+	})();
+snippet try
+	try {
+		${0}
+	} catch (err) {
+		console.error(err)
+	}
+snippet fn
+	${1}(${2}) {
+		${0}
+	}
+snippet pfn
+	${1}.prototype.${2} = function(${3}) {
+		${0}
+	};
+snippet extend
+	${1}.prototype = Object.create(${2}.prototype);
+	${1}.prototype.constructor = ${1};
+snippet then
+	.then((${1}) => {
+		${0}
+	})
+snippet catch
+	.catch((${1}) => {
+		${0}
+	})
+snippet switch
+	switch(${1}) {
+		${0}
+		default:
+			return
+	}
+snippet case
+	case ${1}:
+		${0}
+		break
+snippet forEach
+	${1}.forEach((${2}) => {
+		${0}
+	});
+snippet assign
+	Object.assign({}, ${1}, ${2})
+snippet timeout
+	setTimeout(() => {
+		${0}
+	}, ${1})
+snippet arrow
+	(${1}) => {
+		${0}
+	}
+snippet interval
+	setInterval(() => {
+		${0}
+	}, ${1})
+snippet raf
+	window.requestAnimationFrame(${1})
+snippet lorem
+	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eleifend
+	velit id turpis fringilla volutpat. Nulla tristique sem ex, ac dignissim odio
+	volutpat sit amet.
+snippet param
+	@param {${1}} ${2} - ${3}
+snippet fcom
+	/**
+	 * ${0}
+	 */
+# JSDOC
+snippet typedef
+	/**
+	 * ${3}
+	 *
+	 * @typedef {${1}} ${2}
+	 * @property {}
+	 */
+# Angular
+snippet module
+	angular.module('${1}', [${2}]);
+snippet run
+	angular.module('${1}')
+		.run([
+			${2}Run
+		]);
 
+	function ${2}Run() {
+		${0}
+	}
+snippet controller
+	angular.module('${1}')
+	.controller('${2}', (${3}) => {
+		${0}
+	});
+snippet filter
+	angular.module('${1}')
+		.filter('${2}', [
+			'${3}',
+			${2}Filter
+		]);
+
+	function ${2}Filter(${3}) {
+		return function(${3}) {
+			${4}
+		}
+	}
+snippet directive
+	angular.module('${1}')
+	.directive('${2}', () => {
+		return {
+			restrict: 'E',
+			link: ($scope) => {
+
+			}
+		}
+	});
 snippet factory
-angular.module('$1')
-.factory('$2', function($3) {
+	angular.module('${1}')
+	.factory('${2}', function(${3}) {
 
-});
-endsnippet
-
+	});
 # React
 snippet component
-class $1 extends React.PureComponent {
-	render() {
+	class ${1} extends React.PureComponent {
+		render() {
+			return (
+				${0}
+			)
+		}
+	}
+snippet hoc
+	function ${1}(WrappedComponent) {
+	  class Wrapper extends React.Component {
+	    static displayName = \`${1}(${WrappedComponent.displayName || WrappedComponent.name})\`
+
+	    static propTypes = {}
+
+	    render() {
+	      return <WrappedComponent {...this.props} />
+	    }
+	  }
+
+	  return hoistNonReactStatics(Wrapper, WrappedComponent)
+	}
+snippet fcomponent
+	import React from 'react'
+	import PropTypes from 'prop-types'
+
+	export default function ${1}() {
 		return (
-			$0
+			<div>
+				hi
+			</div>
 		)
 	}
-}
-endsnippet
-
-snippet hoc
-function $1(WrappedComponent) {
-  class Wrapper extends React.Component {
-    static displayName = \`$1(${WrappedComponent.displayName || WrappedComponent.name})\`
-
-    static propTypes = {}
-
-    render() {
-      return <WrappedComponent {...this.props} />
-    }
-  }
-
-  return hoistNonReactStatics(Wrapper, WrappedComponent)
-}
-endsnippet
-
-snippet fcomponent
-import React from 'react'
-import PropTypes from 'prop-types'
-
-export default function $1() {
-	return (
-		<div>
-			hi
-		</div>
-	)
-}
-$1.propTypes = {$2}
-endsnippet
-
+	${1}.propTypes = {${2}}
 snippet iifejsx
-{(() => {
-	$0
-})()}
-endsnippet
-
+	{(() => {
+		${0}
+	})()}
 snippet cl
-className={$1}
-endsnippet
-
+	className={${1}}
 snippet link
-import { Link } from 'react-router';
-endsnippet
-
+	import { Link } from 'react-router';
 snippet connect
-import { connect } from 'react-redux'
+	import { connect } from 'react-redux'
 
-const mapStateToProps = (state, ownProps) => ({
-	...state,
-})
+	const mapStateToProps = (state, ownProps) => ({
+		...state,
+	})
 
-const mapDispatchToProps = {
+	const mapDispatchToProps = {
 
-}
+	}
 
-@connect(mapStateToProps, mapDispatchToProps)
-endsnippet
-
+	@connect(mapStateToProps, mapDispatchToProps)
 snippet Motion
-<Motion style={$1}>
-	{interpolatingStyle => {
-		return (
-			$0
-		);
-	}}
-</Motion>
-endsnippet
-
+	<Motion style={${1}}>
+		{interpolatingStyle => {
+			return (
+				${0}
+			);
+		}}
+	</Motion>
 # Redux
 snippet reducer
-function reducer(state$1, action) {
-	switch(action.type) {
-		$0
-		default:
-			break
+	function reducer(state${1}, action) {
+		switch(action.type) {
+			${0}
+			default:
+				break
+		}
+
+		return state
 	}
-
-	return state
-}
-endsnippet
-
 # Misc
 snippet gulptask
-gulp.task('$1', function(done) {
-	$0
-});
-endsnippet
-
+	gulp.task('${1}', function(done) {
+		${0}
+	});
 # Mocha
 snippet it
-it('$1', async () => {
-	$0
-})
-endsnippet
-
+	it('${1}', async () => {
+		${0}
+	})
 snippet describe
-describe('$1', () => {
-	$0
-})
-endsnippet
-
+	describe('${1}', () => {
+		${0}
+	})
 snippet ex
-expect($1).$2
-endsnippet
-
+	expect(${1}).${2}
 snippet disablelint
-/*eslint-disable*/
-$0
-/*eslint-enable*/
-endsnippet
-
+	/*eslint-disable*/
+	${0}
+	/*eslint-enable*/
 snippet inv
-invariant($1, '$2')
-endsnippet
-
+	invariant(${1}, '${2}')
 snippet co
-const {
-	$1
-} = $2
-endsnippet
-
+	const {
+		${1}
+	} = ${2}
 snippet bindthis
-this.$1 = this.$1.bind(this)
-endsnippet
-
+	this.${1} = this.${1}.bind(this)
 snippet exp
-export default $0
-endsnippet
-
+	export default ${0}
 snippet hr
-/*****************************************************************************
- * $0
- *****************************************************************************/
-endsnippet
-
+	/*****************************************************************************
+	 * ${0}
+	 *****************************************************************************/
 snippet ko
-async function $1(context, next) {
-	$0
-}
-endsnippet
-
+	async function ${1}(context, next) {
+		${0}
+	}
 snippet todo
-TODO(sam): $0
-endsnippet
-
+	TODO(sam): ${0}
 snippet mdcode
-\\\`\\\`\\\`
-$0
-\\\`\\\`\\\`
-endsnippet
-
+	\\\`\\\`\\\`
+	${0}
+	\\\`\\\`\\\`
 snippet inst
-$1 = ($2) => {
-	$0
-}
-endsnippet
-
+	${1} = (${2}) => {
+		${0}
+	}
 snippet clf
-$1($2) {
-	$0
-}
-endsnippet
-
+	${1}(${2}) {
+		${0}
+	}
 snippet printvar
-console.log('[sam]', '$1', $1)
-endsnippet
-
+	console.log('[sam]', '${1}', ${1})
 snippet invar
-invariant($1, \`'$1' must be provided$0\`)
-endsnippet
-
+	invariant(${1}, \`'${1}' must be provided${0}\`)
 snippet decorator
-function $1(target, key, descriptor) {
-	const fn = descriptor.value
-	const newFn = async(...args) => {
-		const res = await fn.call(target, ...args)
-		return res
+	function ${1}(target, key, descriptor) {
+		const fn = descriptor.value
+		const newFn = async(...args) => {
+			const res = await fn.call(target, ...args)
+			return res
+		}
+
+		descriptor.value = newFn
+		return descriptor
+	}
+snippet story
+	import {withKnobs, text} from '@storybook/addon-knobs'
+	import React       from 'react'
+	import {storiesOf}       from '@storybook/react'
+
+	import ${1}                from './index.js'
+
+	storiesOf('${1}', module)
+	  .addDecorator(withKnobs)
+	  .add('default', () => {
+	    return <${1} />
+	  })
+snippet flowHoc
+	<Com: ComponentType<*>>(
+	  Component: Com
+	) => ComponentType<
+	  $Diff<ElementConfig<Com> & EnhancedProps, EnhancedProps> & RequiredProps
+	>
+snippet test
+	test('${1}', assert => {
+		${0}
+	})
+snippet bp
+	// @flow
+
+	type Props = {}
+
+	export default class ${1} extends React.PureComponent<Props> {
+	  render() {
+	    return (
+	      ${0}
+	    )
+	  }
+	}
+snippet componentDidMount
+	componentDidMount() {
+		${0}
+	}
+snippet componentDidUpdate
+	componentDidUpdate() {
+		${0}
+	}
+snippet Fetch
+	// @flow
+
+	import { Layout, Text } from '@robinhood/prefab'
+	import { path } from 'ramda'
+
+	import AuthenticatedFetch from 'components/AuthenticatedFetch'
+	import FormikPagination from 'components/FormikPagination'
+	import { OAK_API_PATH } from 'utils'
+	import { extractErrorMsg } from 'utils/display/extractErrorMessage'
+	import { parseCursor } from 'utils/parseCursor'
+
+	export default function ${1:name}() {
+	  return (
+	    <AuthenticatedFetch path={\`${OAK_API_PATH}/${2:path}\`}>
+	      {({ isError, isFetching, response, refresh }) => {
+	        const results = path(['body', 'results'], response) || {}
+	        const next = parseCursor(path(['body', 'next'], response))
+	        const previous = parseCursor(path(['body', 'previous'], response))
+	        const errorMsg = extractErrorMsg(
+	          response,
+	          'There has been an error fetching ${3:err}.'
+	        )
+
+	        if (isError) {
+	          return (
+	            <Layout paddingY={36}>
+	              <Text color="red">{errorMsg}</Text>
+	            </Layout>
+	          )
+	        }
+	        if (isFetching) {
+	          return (
+	            <Layout paddingY={36}>
+	              <Text>Loading...</Text>
+	            </Layout>
+	          )
+	        }
+
+	        return (
+	          <div>
+	            <FormikPagination name="cursor" next={next} previous={previous} />
+	          </div>
+	        )
+	      }}
+	    </AuthenticatedFetch>
+	  )
+	}
+snippet ExpandableTable
+	// @flow
+
+	import { Layout, Text } from '@robinhood/prefab'
+
+	import ExpandableTable from 'components/ExpandableTable'
+
+	function OptionPositionsTable({
+	  results,
+	}: {
+	  results: Array<{ [string]: any }>,
+	}): React$Node {
+	  if (!results || results.length === 0) {
+	    return (
+	      <Layout paddingY={36}>
+	        <Text>No Results.</Text>
+	      </Layout>
+	    )
+	  }
+
+	  return (
+	    <ExpandableTable
+	      items={results}
+	      renderHeading={() => (
+	        <React.Fragment>
+	          <th>Col1</th>
+	        </React.Fragment>
+	      )}
+	      renderRow={({ item }) => (
+	        <React.Fragment>
+	          {item.isExpanded ? (
+	            <React.Fragment>
+								<td>Cell</td>
+	            </React.Fragment>
+	          ) : (
+	            <React.Fragment>
+								<td>Cell</td>
+	            </React.Fragment>
+	          )}
+	        </React.Fragment>
+	      )}
+	    />
+	  )
+	}
+snippet leetcode
+	function ${1}(${2}) {
+		${0}
 	}
 
-	descriptor.value = newFn
-	return descriptor
-}
-endsnippet
-
-snippet story
-import {withKnobs, text} from '@storybook/addon-knobs'
-import React       from 'react'
-import {storiesOf}       from '@storybook/react'
-
-import $1                from './index.js'
-
-storiesOf('$1', module)
-  .addDecorator(withKnobs)
-  .add('default', () => {
-    return <$1 />
-  })
-endsnippet
-
-snippet flowHoc
-<Com: ComponentType<*>>(
-  Component: Com
-) => ComponentType<
-  $Diff<ElementConfig<Com> & EnhancedProps, EnhancedProps> & RequiredProps
->
-endsnippet
-
-snippet test
-test('$1', assert => {
-	$0
-})
-endsnippet
-
-
-snippet bp
-// @flow
-
-type Props = {}
-
-export default class $1 extends React.PureComponent<Props> {
-  render() {
-    return (
-      $0
-    )
-  }
-}
-endsnippet
-
-snippet componentDidMount
-componentDidMount() {
-	$0
-}
-endsnippet
-
-snippet componentDidUpdate
-componentDidUpdate() {
-	$0
-}
-endsnippet
-
-snippet Fetch
-// @flow
-
-import { Layout, Text } from '@robinhood/prefab'
-import { path } from 'ramda'
-
-import AuthenticatedFetch from 'components/AuthenticatedFetch'
-import FormikPagination from 'components/FormikPagination'
-import { OAK_API_PATH } from 'utils'
-import { extractErrorMsg } from 'utils/display/extractErrorMessage'
-import { parseCursor } from 'utils/parseCursor'
-
-export default function ${1:name}() {
-  return (
-    <AuthenticatedFetch path={\`${OAK_API_PATH}/${2:path}\`}>
-      {({ isError, isFetching, response, refresh }) => {
-        const results = path(['body', 'results'], response) || {}
-        const next = parseCursor(path(['body', 'next'], response))
-        const previous = parseCursor(path(['body', 'previous'], response))
-        const errorMsg = extractErrorMsg(
-          response,
-          'There has been an error fetching ${3:err}.'
-        )
-
-        if (isError) {
-          return (
-            <Layout paddingY={36}>
-              <Text color="red">{errorMsg}</Text>
-            </Layout>
-          )
-        }
-        if (isFetching) {
-          return (
-            <Layout paddingY={36}>
-              <Text>Loading...</Text>
-            </Layout>
-          )
-        }
-
-        return (
-          <div>
-            <FormikPagination name="cursor" next={next} previous={previous} />
-          </div>
-        )
-      }}
-    </AuthenticatedFetch>
-  )
-}
-endsnippet
-
-snippet ExpandableTable
-// @flow
-
-import { Layout, Text } from '@robinhood/prefab'
-
-import ExpandableTable from 'components/ExpandableTable'
-
-function OptionPositionsTable({
-  results,
-}: {
-  results: Array<{ [string]: any }>,
-}): React$Node {
-  if (!results || results.length === 0) {
-    return (
-      <Layout paddingY={36}>
-        <Text>No Results.</Text>
-      </Layout>
-    )
-  }
-
-  return (
-    <ExpandableTable
-      items={results}
-      renderHeading={() => (
-        <React.Fragment>
-          <th>Col1</th>
-        </React.Fragment>
-      )}
-      renderRow={({ item }) => (
-        <React.Fragment>
-          {item.isExpanded ? (
-            <React.Fragment>
-							<td>Cell</td>
-            </React.Fragment>
-          ) : (
-            <React.Fragment>
-							<td>Cell</td>
-            </React.Fragment>
-          )}
-        </React.Fragment>
-      )}
-    />
-  )
-}
-endsnippet
-
-snippet leetcode
-function $1($2) {
-	$0
-}
-
-[
-  {
-    args: [],
-    expected: null,
-  },
-].map((testCase) => {
-  const result = $1(...testCase.args);
-  if (result !== testCase.expected) {
-    console.log(\`expected ${testCase.expected} but got ${result}\`);
-  }
-});
-endsnippet
+	[
+	  {
+	    args: [],
+	    expected: null,
+	  },
+	].map((testCase) => {
+	  const result = ${1}(...testCase.args);
+	  if (result !== testCase.expected) {
+	    console.log(\`expected ${testCase.expected} but got ${result}\`);
+	  }
+	});

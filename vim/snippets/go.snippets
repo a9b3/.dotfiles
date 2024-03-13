@@ -1,159 +1,116 @@
 snippet for
-for $1:=0; $1<$2; $1++ {
-	$0
-}
-endsnippet
-
+	for $1:=0; $1<$2; $1++ {
+		$0
+	}
 snippet forin
-for $1, $2 := range $3 {
-	$0
-}
-endsnippet
-
+	for $1, $2 := range $3 {
+		$0
+	}
 snippet range
-for ${1:_, val} := range $2 {
-	$0
-}
-endsnippet
-
+	for ${1:_, val} := range $2 {
+		$0
+	}
 snippet switch
-switch $1 {
+	switch $1 {
 
-}
-endsnippet
-
+	}
 snippet case
-case $1:
-	$0
-endsnippet
-
+	case ${1}:
+		${0}
 snippet if
-if $1 {
-	$0
-}
-endsnippet
-
+	if ${1} {
+		${0}
+	}
 snippet struct
-type $1 struct {
-	$0
-}
-endsnippet
-
+	type ${1} struct {
+		${0}
+	}
 snippet interface
-type $1 interface {
-	$0
-}
-endsnippet
-
+	type ${1} interface {
+		${0}
+	}
 snippet printf
-fmt.Printf("$1", $2)
-endsnippet
-
+	fmt.Printf("${1}", ${2})
 snippet print
-fmt.Println("$1")
-endsnippet
-
+	fmt.Println("${1}")
 snippet init
-package main
+	package main
 
-import (
-	$1
-)
+	import (
+		${1}
+	)
 
-func main() {
-	$2
-}
-endsnippet
-
+	func main() {
+		${2}
+	}
 snippet fun
-func ${2:name}(${3:args}) (${4:ret}) {
-	$0
-}
-endsnippet
-
+	func ${2:name}(${3:args}) (${4:ret}) {
+		${0}
+	}
 snippet rec "func (receiver) name(args) (ret) {}"
-func (${1:receiver}) ${2:name}(${3:args}) (${4:ret}) {
-	$0
-}
-endsnippet
-
+	func (${1:receiver}) ${2:name}(${3:args}) (${4:ret}) {
+		${0}
+	}
 snippet imp
-import (
-	$1
-)
-endsnippet
-
+	import (
+		${1}
+	)
 snippet err
-if err != nil {
-	log.Panic(${1:err})
-}
-endsnippet
-
+	if err != nil {
+		log.Panic(${1:err})
+	}
 snippet handler "func(w http.ResponseWriter, r *http.Request) {}"
-func(w http.ResponseWriter, r *http.Request) {
-	$0
-}
-endsnippet
-
+	func(w http.ResponseWriter, r *http.Request) {
+		${0}
+	}
 snippet httperror
-if err != nil {
-	http.Error(w, ${1:err.Error()}, ${2:http.StatusInternalServerError})
-	return
-}
-endsnippet
-
+	if err != nil {
+		http.Error(w, ${1:err.Error()}, ${2:http.StatusInternalServerError})
+		return
+	}
 snippet testinit
-package jwt
+	package jwt
 
-import (
-	"testing"
-)
+	import (
+		"testing"
+	)
 
-func Test$1(t *testing.T) {
-	type input struct {
-		$2
-	}
-	type expect struct {
-		$3
-	}
-	tests := []struct {
-		label    string
-		pass     bool
-		input    input
-		expected expect
-	}{
-		{}
-	}
+	func Test${1}(t *testing.T) {
+		type input struct {
+			${2}
+		}
+		type expect struct {
+			${3}
+		}
+		tests := []struct {
+			label    string
+			pass     bool
+			input    input
+			expected expect
+		}{
+			{}
+		}
 
-	for _, tc := range tests {
-		t.Run(tc.label, func(t *testing.T) {
-			// test assertions here
-		})
+		for _, tc := range tests {
+			t.Run(tc.label, func(t *testing.T) {
+				// test assertions here
+			})
+		}
 	}
-}
-endsnippet
-
 snippet decodejson
-var result map[string]interface{}
-json.NewDecoder(${1:io.Reader}).Decode(&result)
-endsnippet
-
+	var result map[string]interface{}
+	json.NewDecoder(${1:io.Reader}).Decode(&result)
 snippet fatal
-if err != nil {
-	t.Fatal(err)
-}
-endsnippet
-
+	if err != nil {
+		t.Fatal(err)
+	}
 snippet marshal
-jsonByte, err := json.Marshal(${1:struct})
-if err != nil {
-	panic(fmt.Errorf("fatal error: %s", err))
-}
-endsnippet
-
+	jsonByte, err := json.Marshal(${1:struct})
+	if err != nil {
+		panic(fmt.Errorf("fatal error: %s", err))
+	}
 snippet unmarshal
-err := json.Unmarshal(${1:[]byte}, ${2:&struct})
-if err != nil {
-	panic(fmt.Errorf("fatal error: %s", err))
-}
-endsnippet
+	err := json.Unmarshal(${1:[]byte}, ${2:&struct})
+	if err != nil {
+		panic(fmt.Errorf("fatal error: %s", err))
+	}

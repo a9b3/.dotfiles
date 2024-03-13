@@ -1,62 +1,39 @@
 snippet html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$1</title>
-</head>
-<body>
-    $2
-</body>
-</html>
-endsnippet
-
-
-
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>${1}</title>
+	</head>
+	<body>
+		${2}
+	</body>
+	</html>
 snippet script
-<script src="$1"></script>
-endsnippet
-
-
+	<script src="${1}"></script>
 snippet css
-<link rel="stylesheet" type="text/css" href="$1">
-endsnippet
-
-
-
+	<link rel="stylesheet" type="text/css" href="${1}">
 snippet ionview
-<ion-view title="$1">
-	<ion-content padding="true">
-		$0
-	</ion-content>
-</ion-view>
-endsnippet
-
-
-
+	<ion-view title="${1}">
+		<ion-content padding="true">
+			${0}
+		</ion-content>
+	</ion-view>
 snippet ionsidemenus
-<ion-side-menus>
-	<ion-side-menu side="$1">
-	</ion-side-menu>
+	<ion-side-menus>
+		<ion-side-menu side="${1}">
+		</ion-side-menu>
 
-	<ion-side-menu-content>
-		$0
-	</ion-side-menu-content>
-</ion-side-menus>
-endsnippet
-
-
-
+		<ion-side-menu-content>
+			${0}
+		</ion-side-menu-content>
+	</ion-side-menus>
 snippet color
-style="background-color: $1;"
-endsnippet
-
-
+	style="background-color: ${1};"
 snippet lorem
-lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.
-endsnippet
+	lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+	incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+	nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+	fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+	culpa qui officia deserunt mollit anim id est laborum.

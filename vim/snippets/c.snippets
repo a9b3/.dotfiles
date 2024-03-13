@@ -1,56 +1,39 @@
 snippet init
-#include <stdio.h>
+				#include <stdio.h>
 
-int main()
-{
-	$0
-	return 0;
-}
-endsnippet
-
+				int main()
+				{
+					$0
+					return 0;
+				}
 
 snippet main
-int main(int argc, char *argv[])
-{
-	$0
-	return 0;
-}
-endsnippet
-
-
+				int main(int argc, char *argv[])
+				{
+					$0
+					return 0;
+				}
 
 snippet func
-$1 $2($3)
-{
-	$4
-	return 0;
-}
-endsnippet
-
-
+				$1 $2($3)
+				{
+					$4
+					return 0;
+				}
 
 snippet print
-printf("$1\n", $2);
-endsnippet
-
-
+				printf("$1\n", $2);
+				endsnippet
 
 snippet for
-for(int i = 0; i < $1; i++) {
-	$0
-}
-endsnippet
-
-
+				for(int i = 0; i < $1; i++) {
+					$0
+				}
 
 snippet struct
-struct $1 {
-	$0
-};
-endsnippet
-
-
+				struct $1 {
+					$0
+				};
 
 snippet inc
-#include <$0>
-endsnippet
+				#include <$0>

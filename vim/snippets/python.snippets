@@ -1,65 +1,40 @@
 snippet def
-def ${1:name}(${2:args}):
-	$0
-endsnippet
-
+	def ${1:name}(${2:args}):
+		${0}
 snippet print
-print("$0")
-endsnippet
-
+	print("${0}")
 snippet log
-print "$0%s" % $1
-endsnippet
-
+	print "${0}%s" % ${1}
 snippet for
-for $1 in $2:
-	$0
-endsnippet
-
+	for ${1} in ${2}:
+		${0}
 snippet if
-if ($1):
-	$0
-endsnippet
-
+	if (${1}):
+		${0}
 snippet while
-while ($1):
-	$0
-endsnippet
-
+	while (${1}):
+		${0}
 snippet imp
-import $0
-endsnippet
-
+	import ${0}
 snippet from
-from $1 import $2
-endsnippet
-
+	from ${1} import ${2}
 snippet lambda
-lambda $1: $0
-endsnippet
-
+	lambda ${1}: ${0}
 snippet ipdb
-import ipdb; ipdb.set_trace()
-endsnippet
-
+	import ipdb; ipdb.set_trace()
 snippet middleware
-class $1:
-	def __init__(self, get_response):
-		self.get_response = get_response
+	class ${1}:
+		def __init__(self, get_response):
+			self.get_response = get_response
 
-	def __call__(self, request):
-		const result = self.get_response(request)
-		return result
-endsnippet
-
+		def __call__(self, request):
+			const result = self.get_response(request)
+			return result
 snippet try
-try:
-	$0
-except:
-	pass
-endsnippet
-
+	try:
+		${0}
+	except:
+		pass
 snippet class
-class $1():
-    $0
-endsnippet
+	class ${1}():
+		${0}
