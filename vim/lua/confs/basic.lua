@@ -167,8 +167,6 @@ vim.cmd("highlight TelescopeResultsTitle guibg=" .. bg .. " guifg=" .. fg)
 vim.cmd("highlight TelescopeBorder guifg=" .. fg)
 vim.cmd("highlight TelescopePromptBorder guifg=" .. fg .. " guibg=" .. bg)
 
-vim.api.nvim_set_keymap("n", "<leader>ll", [[<cmd>lua require("persistence").load({ last = true })<cr>]], {})
-
 -- Set terminal keymaps
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
