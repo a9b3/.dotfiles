@@ -194,4 +194,6 @@ vim.keymap.set("i", "<C-e>", 'copilot#Accept("")', {
 })
 vim.g.copilot_no_tab_map = true
 
-require("persistence").load()
+-- possession auto load
+local cwd = vim.fn.getcwd():gsub("/", "%%")
+vim.cmd("SLoad " .. cwd)
