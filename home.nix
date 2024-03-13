@@ -73,6 +73,12 @@
       recursive = true;
     };
   };
+  xdg.configFile = {
+    "nvim/snippets" = {
+      source = ./vim/snippets;
+      recursive = true;
+    };
+  };
 
   home.file.".gitconfig".source = ./confs/gitconfig;
   home.file.".rgignore".source = ./confs/rgignore;
