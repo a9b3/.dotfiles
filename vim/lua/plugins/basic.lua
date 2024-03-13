@@ -29,7 +29,7 @@ return {
 			require("gitsigns").setup({
 				signs = {
 					add = { text = "+" },
-					change = { text = "." },
+					change = { text = "~" },
 					delete = { text = "_" },
 					topdelete = { text = "‾" },
 					changedelete = { text = "~" },
@@ -110,7 +110,7 @@ return {
 		"akinsho/toggleterm.nvim",
 		version = "*",
 		opts = {
-			size = 26,
+			size = 20,
 			open_mapping = [[<c-\>]],
 			direction = "horizontal",
 		},
