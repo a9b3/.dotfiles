@@ -90,6 +90,7 @@ local uiPlugins = {
 				},
 				view = {
 					width = 30,
+					adapt_width = true,
 				},
 				renderer = {
 					group_empty = true,
