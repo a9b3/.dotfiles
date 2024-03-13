@@ -11,7 +11,9 @@ local uiPlugins = {
 			"rcarriga/nvim-notify",
 		},
 		config = function()
-			require("noice").setup({})
+			require("noice").setup({
+				max_width = 80,
+			})
 		end,
 	},
 	{
@@ -90,7 +92,6 @@ local uiPlugins = {
 				},
 				view = {
 					width = 30,
-					adapt_width = true,
 				},
 				renderer = {
 					group_empty = true,
