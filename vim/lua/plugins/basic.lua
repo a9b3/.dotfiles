@@ -117,6 +117,7 @@ return {
 	},
 	{
 		"jedrzejboczar/possession.nvim",
+		lazy = false,
 		config = function()
 			local cwd = vim.fn.getcwd():gsub("/", "%%")
 
