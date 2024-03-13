@@ -39,8 +39,8 @@ vim.o.autoindent = true -- Auto-indent new lines
 vim.o.smartindent = true -- Enable smart-indent
 vim.o.shiftwidth = 2 -- Tab space
 vim.o.tabstop = 2
-vim.o.expandtab = true
-vim.o.smarttab = true
+vim.o.expandtab = true -- Use spaces instead of tabs
+vim.o.smarttab = true -- Use shiftwidths for tab
 vim.o.wrap = true -- Wrap lines
 vim.o.copyindent = true -- Paste mode
 
@@ -85,6 +85,7 @@ vim.cmd([[
     autocmd BufRead,BufNewFile .bazelrc set filetype=conf
     autocmd BufRead,BufNewFile *.json set filetype=jsonc
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType snippets setlocal ts=4 sts=4 sw=4 expandtab=false
     autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
