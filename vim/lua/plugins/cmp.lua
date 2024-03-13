@@ -11,7 +11,6 @@ return {
 			"rafamadriz/friendly-snippets",
 		},
 		config = function()
-			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
 			require("luasnip/loaders/from_vscode").lazy_load()
@@ -29,10 +28,10 @@ return {
 				mapping = {
 					["<S-Tab>"] = require("cmp").mapping.select_prev_item(),
 					["<Tab>"] = require("cmp").mapping.select_next_item(),
-					["<C-d>"] = require("cmp").mapping.scroll_docs(-4),
-					["<C-f>"] = require("cmp").mapping.scroll_docs(4),
+					["<C-h>"] = require("cmp").mapping.scroll_docs(-4),
+					["<C-l>"] = require("cmp").mapping.scroll_docs(4),
 					["<C-Space>"] = require("cmp").mapping.complete(),
-					["<Esc>"] = require("cmp").mapping.close(),
+					["<C-d>"] = require("cmp").mapping.close(),
 					["<C-k>"] = require("cmp").mapping.confirm({
 						behavior = require("cmp").ConfirmBehavior.Insert,
 						select = true,
