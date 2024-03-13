@@ -149,6 +149,7 @@
     pkgs.go
     pkgs.fontconfig
     pkgs.proggyfonts
+    pkgs.findutils
     easy-move-resize
   ];
 
