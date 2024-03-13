@@ -55,6 +55,7 @@ return {
 			vim.keymap.set("n", "<leader>ch", builtin.help_tags, { desc = "Help Tags" })
 			vim.keymap.set("n", "<leader>ct", builtin.treesitter, { desc = "Treesitter" })
 			vim.keymap.set("n", "<leader>cc", builtin.commands, { desc = "Commands" })
+			vim.keymap.set("n", "<leader>ca", ":Telescope<cr>", { desc = "Telescope" })
 		end,
 	},
 }
