@@ -13,8 +13,8 @@ return {
 		config = function()
 			local luasnip = require("luasnip")
 
-			require("luasnip/loaders/from_vscode").lazy_load()
-			require("luasnip/loaders/from_snipmate").lazy_load({ path = { "./snippets" } })
+			require("luasnip/loaders/from_vscode").load()
+			require("luasnip/loaders/from_snipmate").load({ path = { "./snippets" } })
 
 			require("cmp").setup({
 				completion = {
@@ -48,6 +48,9 @@ return {
 					{ name = "path" },
 				},
 			})
+
+			-- setup filetype extends here
+			require("luasnip").filetype_extend("typescript", { "javascript" })
 		end,
 	},
 }
