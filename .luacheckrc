@@ -5,6 +5,9 @@ std = {
 		require = { other_fields = true },
 		ipairs = { other_fields = true },
 		type = { other_fields = true },
+		package = { other_fields = true },
+		loadfile = { other_fields = true },
+		table = { other_fields = true },
 	},
 	diagnostics = {
 		disable = { "lowercase-global" },
