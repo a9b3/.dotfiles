@@ -120,6 +120,7 @@ local uiPlugins = {
 				},
 				filters = {
 					dotfiles = true,
+					custom = { "node_modules" },
 				},
 			})
 		end,
