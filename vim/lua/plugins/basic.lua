@@ -116,7 +116,7 @@ return {
 		version = "*",
 		opts = {
 			size = 20,
-			open_mapping = [[<c-\>]],
+			open_mapping = [[<M-\>]],
 			direction = "horizontal",
 		},
 	},
