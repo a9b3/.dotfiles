@@ -99,7 +99,10 @@ vim.cmd([[
 vim.api.nvim_create_autocmd("VimResized", {
 	pattern = "*",
 	callback = function()
-		vim.cmd("normal! <c-w>=")
+		if vim.o.filetype == "toggleterm" then
+		else
+			vim.cmd("normal! <c-w>=")
+		end
 	end,
 })
 
