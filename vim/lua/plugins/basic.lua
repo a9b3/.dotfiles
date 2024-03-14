@@ -150,4 +150,41 @@ return {
 		config = true,
 		submodules = false,
 	},
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {},
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>TroubleToggle<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle",
+			},
+			{
+				"<leader>xw",
+				"<cmd>TroubleToggle workspace_diagnostics<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Workspace",
+			},
+			{
+				"<leader>xd",
+				"<cmd>TroubleToggle document_diagnostics<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Document",
+			},
+			{
+				"<leader>xl",
+				"<cmd>TroubleToggle loclist<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Loclist",
+			},
+			{
+				"<leader>xq",
+				"<cmd>TroubleToggle quickfix<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Quickfix",
+			},
+		},
+	},
 }
