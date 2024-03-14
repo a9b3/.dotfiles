@@ -39,6 +39,8 @@ local masonLspInstalls = {
 	{
 		"lua_ls",
 		setup = function()
+			require("neodev").setup()
+
 			require("lspconfig").lua_ls.setup({
 				on_attach = on_attach_keybindings,
 				settings = {
@@ -66,6 +68,7 @@ local masonLspInstalls = {
 }
 
 return {
+	{ "folke/neodev.nvim", opts = {} },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
