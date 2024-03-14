@@ -18,6 +18,7 @@ local on_attach_keybindings = function(_, _)
 	vim.keymap.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", { desc = "[lsp] Finder implementation" })
 	vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "[lsp] Peek type definition" })
 	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
+	vim.keymap.set("n", "<leader>lo", "<cmd>Lspsaga outline<cr>", { desc = "[lsp] Outline" })
 end
 
 -- check this for valid mason installs
