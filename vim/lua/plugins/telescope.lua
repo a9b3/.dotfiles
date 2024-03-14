@@ -56,6 +56,7 @@ return {
 			vim.keymap.set("n", "<leader>st", builtin.treesitter, { desc = "[Telescope] Treesitter" })
 			vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[Telescope] Commands" })
 			vim.keymap.set("n", "<leader>sa", ":Telescope<cr>", { desc = "[Telescope] Telescope" })
+			vim.keymap.set("n", "<leader>sn", ":Telescope notify<cr>", { desc = "[Telescope] Notify" })
 		end,
 	},
 }
