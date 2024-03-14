@@ -49,13 +49,13 @@ return {
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<C-p>", builtin.find_files, { desc = "[Telescope] Find Files" })
 			vim.keymap.set("n", "<leader>a", builtin.live_grep, { desc = "[Telescope] Live Grep" })
-			vim.keymap.set("n", "<leader>cl", builtin.live_grep, { desc = "[Telescope] Live Grep" })
-			vim.keymap.set("n", "<leader>cf", builtin.find_files, { desc = "[Telescope] Find Files" })
-			vim.keymap.set("n", "<leader>cb", builtin.buffers, { desc = "[Telescope] Buffers" })
-			vim.keymap.set("n", "<leader>ch", builtin.help_tags, { desc = "[Telescope] Help Tags" })
-			vim.keymap.set("n", "<leader>ct", builtin.treesitter, { desc = "[Telescope] Treesitter" })
-			vim.keymap.set("n", "<leader>cc", builtin.commands, { desc = "[Telescope] Commands" })
-			vim.keymap.set("n", "<leader>ca", ":Telescope<cr>", { desc = "[Telescope] Telescope" })
+			vim.keymap.set("n", "<leader>sl", builtin.live_grep, { desc = "[Telescope] Live Grep" })
+			vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[Telescope] Find Files" })
+			vim.keymap.set("n", "<leader>sb", builtin.buffers, { desc = "[Telescope] Buffers" })
+			vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[Telescope] Help Tags" })
+			vim.keymap.set("n", "<leader>st", builtin.treesitter, { desc = "[Telescope] Treesitter" })
+			vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[Telescope] Commands" })
+			vim.keymap.set("n", "<leader>sa", ":Telescope<cr>", { desc = "[Telescope] Telescope" })
 		end,
 	},
 }
