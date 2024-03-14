@@ -1,5 +1,11 @@
 local uiPlugins = {
 	{
+		"NvChad/nvim-colorizer.lua",
+		config = function()
+			require("colorizer").setup()
+		end,
+	},
+	{
 		"nvim-tree/nvim-web-devicons",
 	},
 	{ "rcarriga/nvim-notify" },
