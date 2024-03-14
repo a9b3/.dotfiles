@@ -88,10 +88,6 @@ return {
 					["<C-l>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-d>"] = cmp.mapping.close(),
-					["<C-k>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Insert,
-						select = true,
-					}),
 					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Insert,
 						select = true,
