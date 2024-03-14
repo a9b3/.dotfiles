@@ -1,14 +1,22 @@
 local on_attach_keybindings = function(_, _)
-	local key_opts = { remap = false }
-
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_next, { remap = false, desc = "[lsp] Next diagnostic" })
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, { remap = false, desc = "[lsp] Previous diagnostic" })
+	vim.keymap.set(
+		"n",
+		"[d",
+		"<cmd>Lspsaga diagnostic_jump_prev<cr>",
+		{ remap = false, desc = "[lsp] Next diagnostic" }
+	)
+	vim.keymap.set(
+		"n",
+		"]d",
+		"<cmd>Lspsaga diagnostic_jump_next<cr>",
+		{ remap = false, desc = "[lsp] Previous diagnostic" }
+	)
 	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { remap = false, desc = "[lsp] Declaration" })
-	vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "[lsp] Code actions" })
-	vim.keymap.set("n", "<leader>lR", "<cmd>Telescope lsp_references<cr>", key_opts)
-	vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>", key_opts)
-	vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<cr>", key_opts)
-	vim.keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<cr>", key_opts)
+	vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
+	vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
+	vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga peek_definition<cr>", { desc = "[lsp] Peek definition" })
+	vim.keymap.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", { desc = "[lsp] Finder implementation" })
+	vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "[lsp] Peek type definition" })
 	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
 end
 
