@@ -1,15 +1,3 @@
-local masonInstalls = {
-	"stylua",
-	"shfmt",
-	"eslint_d",
-	"prettierd",
-}
-
-local masonLspInstalls = {
-	"lua_ls",
-	"tsserver",
-}
-
 local on_attach_keybindings = function(_, _)
 	local key_opts = { remap = false }
 
@@ -21,7 +9,52 @@ local on_attach_keybindings = function(_, _)
 	vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>", key_opts)
 	vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<cr>", key_opts)
 	vim.keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<cr>", key_opts)
+	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
 end
+
+-- check this for valid mason installs
+-- https://mason-registry.dev/registry/list
+local masonInstalls = {
+	"stylua",
+	"shfmt",
+	"eslint_d",
+	"prettier",
+	"luacheck",
+	"json-lsp",
+}
+
+-- check this for valid server names
+-- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
+-- {string, [setup = function()]}
+local masonLspInstalls = {
+	{
+		"lua_ls",
+		setup = function()
+			require("lspconfig").lua_ls.setup({
+				on_attach = on_attach_keybindings,
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+						},
+					},
+				},
+			})
+		end,
+	},
+	{
+		"tsserver",
+		setup = function()
+			require("lspconfig").tsserver.setup({ on_attach = on_attach_keybindings })
+		end,
+	},
+	{
+		"jsonls",
+		setup = function()
+			require("lspconfig").jsonls.setup({ on_attach = on_attach_keybindings })
+		end,
+	},
+}
 
 return {
 	{
@@ -30,11 +63,9 @@ return {
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				-- A list of parser names, or "all" (the five listed parsers should always be installed)
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
 				sync_install = false,
 				auto_install = true,
-				-- List of parsers to ignore installing (or "all")
-				ignore_install = { "javascript" },
 				highlight = {
 					enable = true,
 					additional_vim_regex_highlighting = true,
@@ -44,6 +75,16 @@ return {
 	},
 	{
 		"github/copilot.vim",
+	},
+	{
+		"nvimdev/lspsaga.nvim",
+		config = function()
+			require("lspsaga").setup({})
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
 	},
 	{
 		"williamboman/mason.nvim",
@@ -85,26 +126,21 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
 		config = function()
+			local lspInstalls = vim.tbl_map(function(entry)
+				return type(entry) == "string" and entry or entry[1]
+			end, masonLspInstalls)
+
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = masonLspInstalls,
+				ensure_installed = lspInstalls,
 				automatic_installation = true,
 			})
 
-			local lspconfig = require("lspconfig")
-			lspconfig.lua_ls.setup({
-				on_attach = on_attach_keybindings,
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-					},
-				},
-			})
-			lspconfig.tsserver.setup({
-				on_attach = on_attach_keybindings,
-			})
+			for _, entry in ipairs(masonLspInstalls) do
+				if type(entry) == "table" and entry.setup then
+					entry.setup()
+				end
+			end
 		end,
 	},
 }

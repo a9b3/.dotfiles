@@ -1,32 +1,29 @@
 return {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"stevearc/conform.nvim",
+		tag = "v5.4.0",
 		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "mason.nvim" },
 		config = function()
-			local null_ls = require("null-ls")
-			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-			null_ls.setup({
-				root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-				sources = {
-					null_ls.builtins.formatting.stylua,
-					null_ls.builtins.formatting.prettierd,
-					null_ls.builtins.diagnostics.eslint_d,
-					null_ls.builtins.code_actions.eslint_d,
+			require("conform").setup({
+				format_on_save = {
+					timeout_ms = 1000,
+					async = false,
+					lsp_fallback = true,
 				},
-				on_attach = function(client, bufnr)
-					if client.name == "null-ls" and client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({ bufnr = bufnr })
-							end,
-						})
-					end
-				end,
+				formatters_by_ft = {
+					lua = { "stylua" },
+					javascript = { "prettier" },
+					typescript = { "prettier" },
+					javascriptreact = { "prettier" },
+					typescriptreact = { "prettier" },
+					svelte = { "prettier" },
+					css = { "prettier" },
+					html = { "prettier" },
+					json = { "prettier" },
+					yaml = { "prettier" },
+					markdown = { "prettier" },
+					graphql = { "prettier" },
+				},
 			})
 		end,
 	},

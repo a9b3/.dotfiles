@@ -24,11 +24,13 @@ package.preload.lspPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.l
 package.preload.basicConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/basic.lua")
 package.preload.cmpPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/cmp.lua")
 package.preload.formatterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/formatter.lua")
+package.preload.linterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/linter.lua")
 vim.list_extend(plugins, require("basicPlugins"))
 vim.list_extend(plugins, require("myesuiPlugins"))
 vim.list_extend(plugins, require("lspPlugins"))
 vim.list_extend(plugins, require("cmpPlugins"))
 vim.list_extend(plugins, require("formatterPlugins"))
+vim.list_extend(plugins, require("linterPlugins"))
 
 local opts = {
 	ui = {
