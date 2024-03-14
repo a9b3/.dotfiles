@@ -119,7 +119,10 @@
         cp -r . $out/Applications/Easy\ Move+Resize.app
       '';
     };
+  # search in
+  # https://search.nixos.org/packages
   in [
+    pkgs.luajitPackages.luarocks
     pkgs.htop
     pkgs.eza
     pkgs.fasd
