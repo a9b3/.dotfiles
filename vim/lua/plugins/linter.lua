@@ -1,6 +1,7 @@
 return {
 	{
 		"mfussenegger/nvim-lint",
+		dependencies = { "neovim/nvim-lspconfig" },
 		event = { "BufRead", "BufWritePre" },
 		config = function()
 			require("lint").linters_by_ft = {
@@ -15,14 +16,6 @@ return {
 				cmd = "eslint_d",
 				args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
 				stream = "stdout",
-				parser = require("lint.parser").from_json({
-					source = "source",
-					row = "line",
-					endRow = "endLine",
-					column = "column",
-					endColumn = "endColumn",
-					message = "${message} [${ruleId}]",
-				}),
 			}
 			require("lint").linters.luacheck = {
 				cmd = "luacheck",
@@ -42,7 +35,7 @@ return {
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
-					lint.try_lint()
+					require("lint").try_lint()
 				end,
 			})
 		end,
