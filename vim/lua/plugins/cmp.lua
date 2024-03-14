@@ -68,7 +68,6 @@ return {
 		config = function()
 			local luasnip = require("luasnip")
 			local cmp = require("cmp")
-			local lspkind = require("lspkind")
 
 			require("luasnip/loaders/from_vscode").load()
 			require("luasnip/loaders/from_snipmate").load({ path = { "./snippets" } })
