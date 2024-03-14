@@ -19,7 +19,7 @@ local masonInstalls = {
 	"shfmt",
 	"eslint_d",
 	"prettier",
-	"luacheck",
+	"luacheck", -- requires luarocks executable in runtimepath
 	"json-lsp",
 }
 
