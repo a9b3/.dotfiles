@@ -23,6 +23,7 @@ return {
 					yaml = { "prettier" },
 					markdown = { "prettier" },
 					graphql = { "prettier" },
+					go = { "goimports" },
 				},
 			})
 		end,

@@ -33,6 +33,8 @@ local masonInstalls = {
 	"luacheck", -- requires luarocks executable in runtimepath
 	"json-lsp",
 	"svelte-language-server",
+	"goimports",
+	"gopls",
 }
 
 -- check this for valid server names
@@ -72,6 +74,12 @@ local masonLspInstalls = {
 		"svelte",
 		setup = function()
 			require("lspconfig").svelte.setup({ on_attach = on_attach_keybindings })
+		end,
+	},
+	{
+		"gopls",
+		setup = function()
+			require("lspconfig").gopls.setup({ on_attach = on_attach_keybindings })
 		end,
 	},
 }
