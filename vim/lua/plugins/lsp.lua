@@ -89,6 +89,44 @@ return {
 		"github/copilot.vim",
 	},
 	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "canary",
+		dependencies = {
+			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+		},
+		opts = {
+			debug = true, -- Enable debugging
+			-- See Configuration section for rest
+		},
+		config = function(_, opts)
+			local chat = require("CopilotChat")
+			local select = require("CopilotChat.select")
+			-- Use unnamed register for the selection
+			opts.selection = select.unnamed
+
+			require("CopilotChat").setup(opts)
+
+			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
+				chat.ask(args.args, { selection = select.visual })
+			end, { nargs = "*", range = true })
+
+			-- Inline chat with Copilot
+			vim.api.nvim_create_user_command("CopilotChatInline", function(args)
+				chat.ask(args.args, {
+					selection = select.visual,
+					window = {
+						layout = "float",
+						relative = "cursor",
+						width = 1,
+						height = 0.4,
+						row = 1,
+					},
+				})
+			end, { nargs = "*", range = true })
+		end,
+	},
+	{
 		"nvimdev/lspsaga.nvim",
 		config = function()
 			require("lspsaga").setup({})
