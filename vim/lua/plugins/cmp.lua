@@ -128,6 +128,7 @@ return {
 
 			-- setup filetype extends here
 			luasnip.filetype_extend("typescript", { "javascript" })
+			luasnip.filetype_extend("svelte", { "javascript" })
 		end,
 	},
 }
