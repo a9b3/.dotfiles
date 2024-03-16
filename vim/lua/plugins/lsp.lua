@@ -33,6 +33,8 @@ local masonInstalls = {
 	"svelte-language-server",
 	"goimports",
 	"gopls",
+	"nil",
+	"nixpkgs-fmt",
 }
 
 -- check this for valid server names
@@ -89,6 +91,15 @@ local masonLspInstalls = {
 					},
 				},
 				root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
+			})
+		end,
+	},
+	{
+		"nil_ls",
+		setup = function()
+			require("lspconfig").nil_ls.setup({
+				on_attach = on_attach_keybindings,
+				root_dir = require("lspconfig").util.root_pattern("flake.nix", ".git"),
 			})
 		end,
 	},

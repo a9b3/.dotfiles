@@ -24,6 +24,7 @@ return {
 					markdown = { "prettier" },
 					graphql = { "prettier" },
 					go = { "goimports" },
+					nix = { "nixpkgs_fmt" },
 				},
 			})
 		end,
