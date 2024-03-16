@@ -114,11 +114,35 @@ return {
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
-		opts = {
-			size = 20,
-			open_mapping = [[<M-\>]],
-			direction = "horizontal",
-		},
+		config = function()
+			require("toggleterm").setup({
+				size = 20,
+				open_mapping = [[<M-\>]],
+				direction = "horizontal",
+			})
+
+			-- Set toggleterm keymaps
+			function _G.set_terminal_keymaps()
+				local opts = { buffer = 0 }
+				vim.keymap.set("t", "<M-\\>", [[<Cmd>:ToggleTerm <CR>]], opts)
+				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
+				vim.keymap.set("t", "jk", [[<C-\><C-n>]], opts)
+				vim.keymap.set("t", "<C-h>", [[<Cmd>wincmd h<CR>]], opts)
+				vim.keymap.set("t", "<C-j>", [[<Cmd>wincmd j<CR>]], opts)
+				vim.keymap.set("t", "<C-k>", [[<Cmd>wincmd k<CR>]], opts)
+			end
+
+			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
+
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*",
+				callback = function()
+					if vim.o.filetype == "toggleterm" then
+						vim.cmd("startinsert")
+					end
+				end,
+			})
+		end,
 	},
 	{
 		"jedrzejboczar/possession.nvim",
@@ -136,6 +160,9 @@ return {
 					},
 					autosave = { current = true, tmp = true, tmp_name = cwd, on_load = true, on_quit = true },
 				})
+
+				-- possession auto load
+				vim.cmd("SLoad " .. cwd)
 			end
 		end,
 	},

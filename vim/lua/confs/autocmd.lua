@@ -18,15 +18,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("BufEnter", {
-	pattern = "*",
-	callback = function()
-		if vim.o.filetype == "toggleterm" then
-			vim.cmd("startinsert")
-		end
-	end,
-})
-
 -- Automatically reload files when changed
 vim.cmd([[
   augroup AutoReload

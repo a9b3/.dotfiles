@@ -1,10 +1,15 @@
 return {
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-	{ "nvim-telescope/telescope-ui-select.nvim" },
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
-		dependencies = { "nvim-lua/plenary.nvim", "BurntSushi/ripgrep", "RRethy/base16-nvim" },
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"BurntSushi/ripgrep",
+			"RRethy/base16-nvim",
+			"nvim-telescope/telescope-ui-select.nvim",
+			"nvim-telescope/telescope-fzf-native.nvim",
+		},
 		config = function()
 			local actions = require("telescope.actions")
 			require("telescope").setup({
