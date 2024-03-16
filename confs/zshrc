@@ -1,7 +1,5 @@
 DISABLE_MAGIC_FUNCTIONS=true # disable magic functions
 fpath=(~/.zsh/completion $fpath) # add custom completions
-autoload -U +X compinit && compinit # load completions
-autoload -U +X bashcompinit && bashcompinit # load bash completions
 setopt histignorespace # ignore commands that start with a space
 set -o vi
 bindkey '^H' backward-kill-word # Ctrl + Backspace (delete word)

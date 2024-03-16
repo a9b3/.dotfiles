@@ -17,6 +17,7 @@
     initExtra = ''
       ${builtins.readFile ./scripts/git-prompt.sh}
       ${builtins.readFile ./confs/zshrc}
+      ${builtins.readFile ./confs/zsh_plugin_confs}
     '';
     sessionVariables = { EDITOR = "vim"; };
     oh-my-zsh = {
@@ -36,10 +37,11 @@
     plugins = [
       {
         name = "fzf-tab";
-        file = "fzf-tab.plugin.zsh";
-        src = builtins.fetchGit {
-          url = "https://github.com/Aloxaf/fzf-tab";
-          rev = "220bee396dd3c2024baa54015a928d5915e4f48f";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "bf3ef5588af6d3bf7cc60f2ad2c1c95bca216241";
+          sha256 = "sha256-0/YOL1/G2SWncbLNaclSYUz7VyfWu+OB8TYJYm4NYkM=";
         };
       }
       {
@@ -47,16 +49,17 @@
         src = pkgs.fetchFromGitHub {
           owner = "zsh-users";
           repo = "zsh-autosuggestions";
-          rev = "v0.4.0";
+          rev = "v0.7.0";
           sha256 = "0z6i9wjjklb4lvr7zjhbphibsyx51psv50gm07mbb0kj9058j6kc";
         };
       }
       {
         name = "zsh-syntax-highlighting";
-        file = "zsh-syntax-highlighting.zsh";
-        src = builtins.fetchGit {
-          url = "https://github.com/zsh-users/zsh-syntax-highlighting/";
-          rev = "932e29a0c75411cb618f02995b66c0a4a25699bc";
+        src = pkgs.fetchFromGitHub {
+          owner = "zsh-users";
+          repo = "zsh-syntax-highlighting";
+          rev = "0.8.0";
+          sha256 = "sha256-iJdWopZwHpSyYl5/FQXEW7gl/SrKaYDEtTH9cGP7iPo=";
         };
       }
     ];
@@ -106,54 +109,58 @@
     };
   };
 
-  home.packages = let
-    easy-move-resize = with pkgs; stdenv.mkDerivation rec {
-      pname = "easy-move-resize";
-      version = "1.4.2";
-      src = fetchzip {
-        url = "https://github.com/dmarcotte/easy-move-resize/releases/download/1.4.2/Easy.Move+Resize.app.zip";
-        sha256 = "03q7cdfihbmny6y89qb22cprgj7l8bmfgmyf3qi60lbyddsbilcy";
+  home.packages =
+    let
+      easy-move-resize = with pkgs; stdenv.mkDerivation rec {
+        pname = "easy-move-resize";
+        version = "1.4.2";
+        src = fetchzip {
+          url = "https://github.com/dmarcotte/easy-move-resize/releases/download/1.4.2/Easy.Move+Resize.app.zip";
+          sha256 = "03q7cdfihbmny6y89qb22cprgj7l8bmfgmyf3qi60lbyddsbilcy";
+        };
+        installPhase = ''
+          mkdir -p $out/Applications
+          cp -r . $out/Applications/Easy\ Move+Resize.app
+        '';
       };
-      installPhase = ''
-        mkdir -p $out/Applications
-        cp -r . $out/Applications/Easy\ Move+Resize.app
-      '';
-    };
-  # search in
-  # https://search.nixos.org/packages
-  in [
-    pkgs.luajitPackages.luarocks
-    pkgs.htop
-    pkgs.eza
-    pkgs.fasd
-    pkgs.ripgrep
-    pkgs.jq
-    pkgs.httpie
-    pkgs.fd
-    pkgs.diff-so-fancy
-    pkgs.git-lfs
-    pkgs.lsd
-    pkgs.delta
-    pkgs.duf
-    pkgs.choose
-    pkgs.sd
-    pkgs.gtop
-    pkgs.fzf
-    pkgs.wget
-    pkgs.bat
-    pkgs.tmux
-    pkgs.ffmpeg
-    pkgs.sops
-    pkgs.gnupg
-    pkgs.direnv
-    pkgs.protobuf
-    pkgs.nodejs
-    pkgs.yarn
-    pkgs.go
-    pkgs.fontconfig
-    pkgs.proggyfonts
-    easy-move-resize
-  ];
+      # search in
+      # https://search.nixos.org/packages
+    in
+    [
+      pkgs.luajitPackages.luarocks
+      pkgs.htop
+      pkgs.eza
+      pkgs.fasd
+      pkgs.ripgrep
+      pkgs.jq
+      pkgs.httpie
+      pkgs.fd
+      pkgs.diff-so-fancy
+      pkgs.git-lfs
+      pkgs.lsd
+      pkgs.delta
+      pkgs.duf
+      pkgs.choose
+      pkgs.sd
+      pkgs.gtop
+      pkgs.fzf
+      pkgs.wget
+      pkgs.bat
+      pkgs.tmux
+      pkgs.ffmpeg
+      pkgs.sops
+      pkgs.gnupg
+      pkgs.direnv
+      pkgs.protobuf
+      pkgs.nodejs
+      pkgs.yarn
+      pkgs.go
+      pkgs.fontconfig
+      pkgs.proggyfonts
+      pkgs.nil
+      pkgs.cargo
+      easy-move-resize
+    ];
 
   fonts.fontconfig.enable = true;
 
