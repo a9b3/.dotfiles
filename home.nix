@@ -15,9 +15,9 @@
     enableAutosuggestions = true;
     history.extended = true;
     initExtra = ''
-      ${builtins.readFile ./scripts/git-prompt.sh}
       ${builtins.readFile ./confs/zshrc}
       ${builtins.readFile ./confs/zsh_plugin_confs}
+      eval "$(starship init zsh)"
     '';
     sessionVariables = { EDITOR = "vim"; };
     oh-my-zsh = {
@@ -159,6 +159,7 @@
       pkgs.proggyfonts
       pkgs.nil
       pkgs.cargo
+      pkgs.starship
       easy-move-resize
     ];
 
