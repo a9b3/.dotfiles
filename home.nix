@@ -101,8 +101,8 @@
     source = pkgs.fetchFromGitHub {
       owner = "tmux-plugins";
       repo = "tpm";
-      rev = "b699a7e01c253ffb7818b02d62bce24190ec1019";
-      sha256 = "sha256-aGRy5ah1Dxb+94QoIkOy0nKlmAOFq2y5xnf2B852JY0";
+      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+      sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
     };
   };
 
