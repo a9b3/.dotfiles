@@ -70,17 +70,6 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         source "$BASE16_SHELL/profile_helper.sh"
 
-# This is sourced in home.nix
-# zsh prompt expansions
-# http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Prompt-Expansion
-#
-# %3c                 - 3 ancestors + cwd
-# $(__gitrps1)        - invoke output from ./git-prompt.sh, which should be sourced by zshrc before this file
-[[ -f "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh" ]] && source "$HOME/.bin/zsh-kubectl-prompt/kubectl.zsh"
-GIT_PS1_SHOWDIRTYSTATE=true
-PROMPT='%{$fg[magenta]%}%3c%{$fg[green]%} $(__git_ps1) (%{$fg[green]%}$ZSH_KUBECTL_PROMPT) %{$fg[magenta]%}
-$ %{$reset_color%}'
-
 [[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
 
 # NIX HOME MANAGER
