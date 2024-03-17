@@ -1,7 +1,51 @@
 { config, pkgs, ... }:
 
 {
+  home.username = "es";
+  home.homeDirectory = "/Users/es";
+  home.stateVersion = "22.05";
   programs.home-manager.enable = true;
+  fonts.fontconfig.enable = true;
+
+  home.file.".gitconfig".source = ./confs/gitconfig;
+  home.file.".rgignore".source = ./confs/rgignore;
+  home.file.".tmux.conf".source = ./confs/tmux.conf;
+  home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
+    url = "https://github.com/superbrothers/zsh-kubectl-prompt";
+    rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
+  };
+  home.file.".config/base16-shell" = {
+    recursive = true;
+    source = pkgs.fetchFromGitHub {
+      owner = "tinted-theming";
+      repo = "base16-shell";
+      rev = "bcd9960803c39eb7af30a2db80b57ebd74073bd5";
+      sha256 = "sha256-d5llHMl6qczxFodhjfBAkrJVYsurRVf1X1Ks5wFYxd8=";
+    };
+  };
+  home.file.".tmux/plugins/tpm" = {
+    recursive = true;
+    source = pkgs.fetchFromGitHub {
+      owner = "tmux-plugins";
+      repo = "tpm";
+      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+      sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    };
+  };
+
+  xdg.configFile."nvim/init.lua".source = ./vim/init.lua;
+  xdg.configFile = {
+    "nvim/lua" = {
+      source = ./vim/lua;
+      recursive = true;
+    };
+  };
+  xdg.configFile = {
+    "nvim/snippets" = {
+      source = ./vim/snippets;
+      recursive = true;
+    };
+  };
 
   programs.fzf = {
     enable = true;
@@ -65,53 +109,22 @@
     ];
   };
 
-  home.username = "es";
-  home.homeDirectory = "/Users/es";
-  home.stateVersion = "22.05";
-
-  xdg.configFile."nvim/init.lua".source = ./vim/init.lua;
-  xdg.configFile = {
-    "nvim/lua" = {
-      source = ./vim/lua;
-      recursive = true;
-    };
-  };
-  xdg.configFile = {
-    "nvim/snippets" = {
-      source = ./vim/snippets;
-      recursive = true;
-    };
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
+    extraPython3Packages = ps: with ps; [ black flake8 ];
+    withRuby = true;
+    extraPackages = with pkgs; [ fzf ];
   };
 
-  home.file.".gitconfig".source = ./confs/gitconfig;
-  home.file.".rgignore".source = ./confs/rgignore;
-  home.file.".tmux.conf".source = ./confs/tmux.conf;
-  home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
-    url = "https://github.com/superbrothers/zsh-kubectl-prompt";
-    rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
-  };
-  home.file.".config/base16-shell" = {
-    recursive = true;
-    source = pkgs.fetchFromGitHub {
-      owner = "tinted-theming";
-      repo = "base16-shell";
-      rev = "bcd9960803c39eb7af30a2db80b57ebd74073bd5";
-      sha256 = "sha256-d5llHMl6qczxFodhjfBAkrJVYsurRVf1X1Ks5wFYxd8=";
-    };
-  };
-  home.file.".tmux/plugins/tpm" = {
-    recursive = true;
-    source = pkgs.fetchFromGitHub {
-      owner = "tmux-plugins";
-      repo = "tpm";
-      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
-      sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
-    };
-  };
 
   home.packages =
     let
-      easy-move-resize = with pkgs; stdenv.mkDerivation rec {
+      easy-move-resize = with pkgs; stdenv.mkDerivation {
         pname = "easy-move-resize";
         version = "1.4.2";
         src = fetchzip {
@@ -156,24 +169,10 @@
       pkgs.yarn
       pkgs.go
       pkgs.fontconfig
-      pkgs.proggyfonts
+      (pkgs.nerdfonts.override { fonts = [ "ProggyClean" "Gohu" "JetBrainsMono" ]; })
       pkgs.nil
       pkgs.cargo
       pkgs.starship
       easy-move-resize
     ];
-
-  fonts.fontconfig.enable = true;
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
-    extraPython3Packages = ps: with ps; [ black flake8 ];
-    withRuby = true;
-    extraPackages = with pkgs; [ fzf ];
-  };
 }

@@ -3,9 +3,16 @@ fpath=(~/.zsh/completion $fpath) # add custom completions
 setopt histignorespace # ignore commands that start with a space
 set -o vi
 bindkey '^H' backward-kill-word # Ctrl + Backspace (delete word)
-bindkey '^[[1;5D' backward-word # Ctrl + Left Arrow (move word left)
-bindkey '^[[1;5C' forward-word # Ctrl + Right Arrow (move word right)
 bindkey -e # use emacs keybindings
+
+# history setup
+setopt SHARE_HISTORY
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt HIST_EXPIRE_DUPS_FIRST
+bindkey '^[OA' history-search-backward
+bindkey '^[OB' history-search-forward
 
 eval "$(fasd --init auto)" # init fasd
 
@@ -86,3 +93,8 @@ eval "$(direnv hook zsh)"
 if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
   tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
 fi
+
+# This has to be at the bottom for it to work need to figure out what is
+# overriding this if i put it in the start of the file
+bindkey '^[[1;2D' backward-word # Shift + Left Arrow (move word left)
+bindkey '^[[1;2C' forward-word # Shift + Right Arrow (move word right)
