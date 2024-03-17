@@ -214,4 +214,5 @@ return {
 			},
 		},
 	},
+	{ "simeji/winresizer" },
 }
