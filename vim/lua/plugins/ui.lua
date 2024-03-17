@@ -175,14 +175,25 @@ local uiPlugins = {
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		opts = {
-			mode = { "n", "v" },
-			window = {
-				border = "single",
-				margin = { 0.5, 0.2, 0.5, 0.2 },
-				position = "top",
-			},
-		},
+		config = function()
+			require("which-key").setup({
+				mode = { "n", "v" },
+				window = {
+					border = "single",
+					margin = { 0.5, 0.2, 0.5, 0.2 },
+					position = "top",
+				},
+			})
+			require("which-key").register({
+				["<leader>"] = {
+					g = { name = "Git" },
+					t = { name = "Tab" },
+					l = { name = "LSP" },
+					s = { name = "Telescope" },
+					x = { name = "Trouble" },
+				},
+			})
+		end,
 	},
 }
 package.preload.mytele = loadfile("/Users/es/.dotfiles/vim/lua/plugins/telescope.lua")
