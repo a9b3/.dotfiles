@@ -30,6 +30,7 @@ local masonInstalls = {
 	"prettier",
 	"luacheck", -- requires luarocks executable in runtimepath
 	"json-lsp",
+	"yaml-language-server",
 	"svelte-language-server",
 	"goimports",
 	"gopls",
@@ -67,7 +68,69 @@ local masonLspInstalls = {
 	{
 		"jsonls",
 		setup = function()
-			require("lspconfig").jsonls.setup({ on_attach = on_attach_keybindings })
+			require("lspconfig").jsonls.setup({
+				capabilities = {
+					textDocument = {
+						completion = {
+							completionItem = {
+								snippetSupport = true,
+							},
+						},
+					},
+				},
+				on_attach = on_attach_keybindings,
+				settings = {
+					json = {
+						validate = { enable = true },
+						schemaStore = {
+							enable = false,
+							url = "",
+						},
+						schemas = require("schemastore").json.schemas({
+							select = {
+								"package.json",
+								"tsconfig.json",
+								"jsconfig.json",
+								".eslintrc",
+								"prettierrc.json",
+							},
+						}),
+					},
+				},
+			})
+		end,
+	},
+	{
+		"yamlls",
+		setup = function()
+			require("lspconfig").yamlls.setup({
+				capabilities = {
+					textDocument = {
+						completion = {
+							completionItem = {
+								snippetSupport = true,
+							},
+						},
+					},
+				},
+				on_attach = on_attach_keybindings,
+				settings = {
+					yaml = {
+						validate = true,
+						schemaStore = {
+							enable = false,
+							url = "",
+						},
+						schemas = require("schemastore").yaml.schemas({
+							-- select subset from the JSON schema catalog
+							select = {
+								"kustomization.yaml",
+								"docker-compose.yml",
+							},
+						}),
+					},
+				},
+			})
 		end,
 	},
 	{
@@ -106,6 +169,7 @@ local masonLspInstalls = {
 }
 
 return {
+	{ "b0o/schemastore.nvim" },
 	{ "folke/neodev.nvim", opts = {} },
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -121,7 +185,7 @@ return {
 					additional_vim_regex_highlighting = true,
 				},
 			})
-			require("nvim-treesitter.configs").compilers = { "gcc" }
+			require("nvim-treesitter.install").compilers = { "gcc" }
 		end,
 	},
 	{
@@ -224,7 +288,7 @@ return {
 	"williamboman/mason-lspconfig.nvim",
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" },
+		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "b0o/schemastore.nvim" },
 		config = function()
 			local lspInstalls = vim.tbl_map(function(entry)
 				return type(entry) == "string" and entry or entry[1]
