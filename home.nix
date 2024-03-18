@@ -148,6 +148,8 @@
       pkgs.jq
       pkgs.httpie
       pkgs.fd
+      pkgs.pv
+      pkgs.tldr
       pkgs.diff-so-fancy
       pkgs.git-lfs
       pkgs.lsd
