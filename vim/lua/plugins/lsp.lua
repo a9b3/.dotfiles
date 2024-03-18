@@ -121,6 +121,7 @@ return {
 					additional_vim_regex_highlighting = true,
 				},
 			})
+			require("nvim-treesitter.configs").compilers = { "gcc" }
 		end,
 	},
 	{

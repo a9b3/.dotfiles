@@ -118,7 +118,7 @@
     withPython3 = true;
     extraPython3Packages = ps: with ps; [ black flake8 ];
     withRuby = true;
-    extraPackages = with pkgs; [ fzf ];
+    extraPackages = with pkgs; [ fzf gcc ];
   };
 
 
