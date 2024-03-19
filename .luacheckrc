@@ -9,6 +9,7 @@ std = {
 		package = { other_fields = true },
 		loadfile = { other_fields = true },
 		table = { other_fields = true },
+		_G = { other_fields = true },
 	},
 	diagnostics = {
 		disable = { "lowercase-global" },

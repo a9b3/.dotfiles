@@ -1,26 +1,3 @@
-local on_attach_keybindings = function(_, _)
-	vim.keymap.set(
-		"n",
-		"[d",
-		"<cmd>Lspsaga diagnostic_jump_prev<cr>",
-		{ remap = false, desc = "[lsp] Next diagnostic" }
-	)
-	vim.keymap.set(
-		"n",
-		"]d",
-		"<cmd>Lspsaga diagnostic_jump_next<cr>",
-		{ remap = false, desc = "[lsp] Previous diagnostic" }
-	)
-	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { remap = false, desc = "[lsp] Declaration" })
-	vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
-	vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
-	vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga peek_definition<cr>", { desc = "[lsp] Peek definition" })
-	vim.keymap.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", { desc = "[lsp] Finder implementation" })
-	vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "[lsp] Peek type definition" })
-	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
-	vim.keymap.set("n", "<leader>lo", "<cmd>Lspsaga outline<cr>", { desc = "[lsp] Outline" })
-end
-
 -- check this for valid mason installs
 -- https://mason-registry.dev/registry/list
 local masonInstalls = {
@@ -41,14 +18,13 @@ local masonInstalls = {
 -- check this for valid server names
 -- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
 -- {string, [setup = function()]}
-local masonLspInstalls = {
+local masonLspConfigs = {
 	{
 		"lua_ls",
-		setup = function()
-			require("neodev").setup()
+		setup = function(opts)
+			require("neodev").setup({})
 
-			require("lspconfig").lua_ls.setup({
-				on_attach = on_attach_keybindings,
+			require("lspconfig").lua_ls.setup(vim.tbl_extend("force", opts, {
 				settings = {
 					Lua = {
 						diagnostics = {
@@ -56,29 +32,21 @@ local masonLspInstalls = {
 						},
 					},
 				},
-			})
+			}))
+
+			vim.o.tabstop = 2
 		end,
 	},
 	{
 		"tsserver",
-		setup = function()
-			require("lspconfig").tsserver.setup({ on_attach = on_attach_keybindings })
+		setup = function(opts)
+			require("lspconfig").tsserver.setup(opts)
 		end,
 	},
 	{
 		"jsonls",
-		setup = function()
-			require("lspconfig").jsonls.setup({
-				capabilities = {
-					textDocument = {
-						completion = {
-							completionItem = {
-								snippetSupport = true,
-							},
-						},
-					},
-				},
-				on_attach = on_attach_keybindings,
+		setup = function(opts)
+			require("lspconfig").jsonls.setup(vim.tbl_extend("force", opts, {
 				settings = {
 					json = {
 						validate = { enable = true },
@@ -97,26 +65,17 @@ local masonLspInstalls = {
 						}),
 					},
 				},
-			})
+			}))
 		end,
 	},
 	{
 		"yamlls",
-		setup = function()
-			require("lspconfig").yamlls.setup({
-				capabilities = {
-					textDocument = {
-						completion = {
-							completionItem = {
-								snippetSupport = true,
-							},
-						},
-					},
-				},
-				on_attach = on_attach_keybindings,
+		setup = function(opts)
+			require("lspconfig").yamlls.setup(vim.tbl_extend("force", opts, {
 				settings = {
 					yaml = {
 						validate = true,
+
 						schemaStore = {
 							enable = false,
 							url = "",
@@ -130,20 +89,19 @@ local masonLspInstalls = {
 						}),
 					},
 				},
-			})
+			}))
 		end,
 	},
 	{
 		"svelte",
-		setup = function()
-			require("lspconfig").svelte.setup({ on_attach = on_attach_keybindings })
+		setup = function(opts)
+			require("lspconfig").svelte.setup(opts)
 		end,
 	},
 	{
 		"gopls",
-		setup = function()
-			require("lspconfig").gopls.setup({
-				on_attach = on_attach_keybindings,
+		setup = function(opts)
+			require("lspconfig").gopls.setup(vim.tbl_extend("force", opts, {
 				cmd = { "gopls", "serve" },
 				settings = {
 					gopls = {
@@ -154,21 +112,79 @@ local masonLspInstalls = {
 					},
 				},
 				root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
-			})
+			}))
 		end,
 	},
 	{
 		"nil_ls",
-		setup = function()
-			require("lspconfig").nil_ls.setup({
-				on_attach = on_attach_keybindings,
+		setup = function(opts)
+			require("lspconfig").nil_ls.setup(vim.tbl_extend("force", opts, {
 				root_dir = require("lspconfig").util.root_pattern("flake.nix", ".git"),
-			})
+			}))
 		end,
 	},
 }
 
+local on_attach_keybindings = function(_, _)
+	vim.keymap.set(
+		"n",
+		"[d",
+		"<cmd>Lspsaga diagnostic_jump_prev<cr>",
+		{ remap = false, desc = "[lsp] Next diagnostic" }
+	)
+	vim.keymap.set(
+		"n",
+		"]d",
+		"<cmd>Lspsaga diagnostic_jump_next<cr>",
+		{ remap = false, desc = "[lsp] Previous diagnostic" }
+	)
+	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { remap = false, desc = "[lsp] Declaration" })
+	vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
+	vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
+	vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga peek_definition<cr>", { desc = "[lsp] Peek definition" })
+	vim.keymap.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", { desc = "[lsp] Finder implementation" })
+	vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "[lsp] Peek type definition" })
+	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
+	vim.keymap.set("n", "<leader>lo", "<cmd>Outline<cr>", { desc = "[lsp] Outline" })
+end
+
 return {
+	{
+		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>TroubleToggle<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle",
+			},
+			{
+				"<leader>xw",
+				"<cmd>TroubleToggle workspace_diagnostics<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Workspace",
+			},
+			{
+				"<leader>xd",
+				"<cmd>TroubleToggle document_diagnostics<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Document",
+			},
+			{
+				"<leader>xl",
+				"<cmd>TroubleToggle loclist<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Loclist",
+			},
+			{
+				"<leader>xq",
+				"<cmd>TroubleToggle quickfix<cr>",
+				mode = { "n" },
+				desc = "[Trouble] Toggle Quickfix",
+			},
+		},
+	},
 	{ "b0o/schemastore.nvim" },
 	{ "folke/neodev.nvim", opts = {} },
 	{
@@ -241,6 +257,25 @@ return {
 		end,
 	},
 	{
+		"hedyhli/outline.nvim",
+		config = function()
+			require("outline").setup({
+				outline_window = {
+					position = "right",
+					symbols = {
+						icon_fetcher = function(k)
+							if k == "String" then
+								return ""
+							end
+							return false
+						end,
+						icon_source = "lspkind",
+					},
+				},
+			})
+		end,
+	},
+	{
 		"nvimdev/lspsaga.nvim",
 		config = function()
 			require("lspsaga").setup({})
@@ -288,21 +323,33 @@ return {
 	"williamboman/mason-lspconfig.nvim",
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "b0o/schemastore.nvim" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"b0o/schemastore.nvim",
+			"hrsh7th/nvim-cmp",
+		},
 		config = function()
-			local lspInstalls = vim.tbl_map(function(entry)
+			local extractedKeys = vim.tbl_map(function(entry)
 				return type(entry) == "string" and entry or entry[1]
-			end, masonLspInstalls)
+			end, masonLspConfigs)
+
+			print("HIHIHIHI")
 
 			require("mason").setup()
 			require("mason-lspconfig").setup({
-				ensure_installed = lspInstalls,
+				ensure_installed = extractedKeys,
 				automatic_installation = true,
 			})
 
-			for _, entry in ipairs(masonLspInstalls) do
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			for _, entry in ipairs(masonLspConfigs) do
 				if type(entry) == "table" and entry.setup then
-					entry.setup()
+					entry.setup({
+						capabilities = capabilities,
+						on_attach = on_attach_keybindings,
+					})
 				end
 			end
 		end,

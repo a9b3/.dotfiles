@@ -1,5 +1,4 @@
 return {
-	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.5",
@@ -8,7 +7,7 @@ return {
 			"BurntSushi/ripgrep",
 			"RRethy/base16-nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
-			"nvim-telescope/telescope-fzf-native.nvim",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
 			local actions = require("telescope.actions")

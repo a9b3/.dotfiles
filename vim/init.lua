@@ -14,15 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = "," -- Make sure to set `mapleader` before lazy so your mappings are correct
 vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
+vim.opt.sessionoptions = { "buffers", "tabpages", "globals" } -- used by scope.nvim needs to happen before plugin loads
 
 -- configure plugins
 local plugins = {}
 local hpath = os.getenv("HOME")
 
-package.preload.basicPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/basic.lua")
-vim.list_extend(plugins, require("basicPlugins"))
-package.preload.myesuiPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
-vim.list_extend(plugins, require("myesuiPlugins"))
+package.preload.navPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/nav.lua")
+vim.list_extend(plugins, require("navPlugins"))
+package.preload.editingPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/editing.lua")
+vim.list_extend(plugins, require("editingPlugins"))
+package.preload.uiPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
+vim.list_extend(plugins, require("uiPlugins"))
+package.preload.telescopePlugins = loadfile("/Users/es/.dotfiles/vim/lua/plugins/telescope.lua")
+vim.list_extend(plugins, require("telescopePlugins"))
 package.preload.lspPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.lua")
 vim.list_extend(plugins, require("lspPlugins"))
 package.preload.cmpPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/cmp.lua")

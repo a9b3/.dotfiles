@@ -1,41 +1,34 @@
-local uiPlugins = {
+return {
 	{
-		"NvChad/nvim-colorizer.lua",
-		config = function()
-			require("colorizer").setup()
-		end,
+		"rcarriga/nvim-notify",
+		opts = {
+			max_width = 80,
+			level = vim.log.levels.WARN,
+		},
+		config = true,
 	},
-	{
-		"nvim-tree/nvim-web-devicons",
-	},
-	{ "rcarriga/nvim-notify" },
 	{
 		"folke/noice.nvim",
-		opts = {},
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
 		},
-		config = function()
-			require("noice").setup({
-				max_width = 80,
-			})
-		end,
+		config = true,
 	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
-		config = function()
-			require("ibl").setup({
-				indent = {
-					char = "╎",
-				},
-				scope = {
-					enabled = true,
-					show_start = false,
-				},
-			})
-		end,
+		event = "BufReadPre",
+		opts = {
+			indent = {
+				char = "╎",
+			},
+			scope = {
+				enabled = true,
+				show_start = false,
+			},
+		},
+		config = true,
 	},
 	{
 		"RRethy/base16-nvim",
@@ -71,48 +64,64 @@ local uiPlugins = {
 	},
 	{
 		"akinsho/bufferline.nvim",
-		config = function()
-			require("bufferline").setup({
-				options = {
-					indicator = {
-						style = "underline",
-					},
-					offsets = {
-						{
-							filetype = "NvimTree",
-							text = "File Explorer",
-							text_align = "center",
-							separator = true,
-						},
+		opts = {
+			options = {
+				indicator = {
+					style = "underline",
+				},
+				offsets = {
+					{
+						filetype = "NvimTree",
+						text = "File Explorer",
+						text_align = "center",
+						separator = true,
 					},
 				},
-			})
-		end,
+			},
+		},
+		config = true,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				sections = {
-					lualine_x = {
-						function()
-							local lint_progress = function()
-								local linters = require("lint").get_running()
-								if #linters == 0 then
-									return "󰦕"
-								end
-								return "󱉶 " .. table.concat(linters, ", ")
-							end
+		dependencies = {
+			"arkav/lualine-lsp-progress",
+		},
+		opts = {
+			sections = {
+				lualine_x = {
+					function()
+						local active_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+						local client_names = {}
 
-							return lint_progress()
-						end,
-						"encoding",
-						"fileformat",
-						"filetype",
+						for _, client in ipairs(active_clients) do
+							table.insert(client_names, client.name)
+						end
+
+						return table.concat(client_names, ", ")
+					end,
+					{
+						"lsp_progress",
+						display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
+						timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+						spinner_symbols = { "🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 " },
 					},
+					function()
+						local lint_progress = function()
+							local linters = require("lint").get_running()
+							if #linters == 0 then
+								return "󰦕"
+							end
+							return "󱉶 " .. table.concat(linters, ", ")
+						end
+
+						return lint_progress()
+					end,
+					"encoding",
+					"filetype",
 				},
-			})
-		end,
+			},
+		},
+		config = true,
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -121,52 +130,51 @@ local uiPlugins = {
 			vim.g.loaded_netrw = 1
 			vim.g.loaded_netrwPlugin = 1
 		end,
-		config = function()
-			require("nvim-tree").setup({
-				on_attach = function(bufnr)
-					local api = require("nvim-tree.api")
-					local function opts(desc)
-						return {
-							desc = "nvim-tree: " .. desc,
-							buffer = bufnr,
-							noremap = true,
-							silent = true,
-							nowait = true,
-						}
-					end
-
-					-- default mappings
-					api.config.mappings.default_on_attach(bufnr)
-
-					-- custom mappings
-					vim.keymap.set("n", "p", api.node.navigate.parent, opts("Go to parent"))
-				end,
-				sort = {
-					sorter = "case_sensitive",
-				},
-				update_focused_file = {
-					enable = true,
-				},
-				view = {
-					width = 30,
-				},
-				renderer = {
-					group_empty = true,
-					highlight_opened_files = "name",
-					icons = {
-						git_placement = "after",
-					},
-				},
-				filters = {
-					dotfiles = true,
-					custom = { "node_modules" },
-				},
-			})
-		end,
 		keys = {
 			{ "<C-n>", "<cmd>NvimTreeToggle<cr>" },
 			{ "<leader>f", "<cmd>NvimTreeFindFile<cr>" },
 		},
+		opts = {
+			on_attach = function(bufnr)
+				local api = require("nvim-tree.api")
+				local function opts(desc)
+					return {
+						desc = "nvim-tree: " .. desc,
+						buffer = bufnr,
+						noremap = true,
+						silent = true,
+						nowait = true,
+					}
+				end
+
+				-- default mappings
+				api.config.mappings.default_on_attach(bufnr)
+
+				-- custom mappings
+				vim.keymap.set("n", "p", api.node.navigate.parent, opts("Go to parent"))
+			end,
+			sort = {
+				sorter = "case_sensitive",
+			},
+			update_focused_file = {
+				enable = true,
+			},
+			view = {
+				width = 30,
+			},
+			renderer = {
+				group_empty = true,
+				highlight_opened_files = "name",
+				icons = {
+					git_placement = "after",
+				},
+			},
+			filters = {
+				dotfiles = true,
+				custom = { "node_modules" },
+			},
+		},
+		config = true,
 	},
 	{
 		"folke/which-key.nvim",
@@ -196,7 +204,3 @@ local uiPlugins = {
 		end,
 	},
 }
-package.preload.mytele = loadfile("/Users/es/.dotfiles/vim/lua/plugins/telescope.lua")
-vim.list_extend(uiPlugins, require("mytele"))
-
-return uiPlugins

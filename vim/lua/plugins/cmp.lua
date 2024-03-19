@@ -82,7 +82,7 @@ return {
 					end,
 				},
 				preselect = cmp.PreselectMode.None,
-				mapping = {
+				mapping = cmp.mapping.preset.insert({
 					["<C-j>"] = cmp.mapping.select_next_item(),
 					["<C-k>"] = cmp.mapping.select_prev_item(),
 					["<C-h>"] = cmp.mapping.scroll_docs(-4),
@@ -93,13 +93,15 @@ return {
 						behavior = cmp.ConfirmBehavior.Insert,
 						select = true,
 					}),
-				},
-				sources = {
+				}),
+				sources = cmp.config.sources({
 					{ name = "luasnip" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "path" },
-				},
+				}, {
+					{ name = "buffer" },
+				}),
 
 				window = {
 					completion = {
