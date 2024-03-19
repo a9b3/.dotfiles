@@ -199,6 +199,7 @@ return {
 					l = { name = "LSP" },
 					s = { name = "Telescope" },
 					x = { name = "Trouble" },
+					n = { name = "Navigation" },
 				},
 			})
 		end,

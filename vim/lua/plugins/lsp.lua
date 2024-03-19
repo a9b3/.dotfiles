@@ -33,8 +33,6 @@ local masonLspConfigs = {
 					},
 				},
 			}))
-
-			vim.o.tabstop = 2
 		end,
 	},
 	{
