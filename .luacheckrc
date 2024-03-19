@@ -1,5 +1,6 @@
 std = {
 	globals = {
+		os = { other_fields = true },
 		std = { other_fields = true },
 		vim = { other_fields = true },
 		require = { other_fields = true },
