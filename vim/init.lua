@@ -18,32 +18,33 @@ vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 -- configure plugins
 local plugins = {}
 local hpath = os.getenv("HOME")
-package.preload.basicPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/basic.lua")
-package.preload.myesuiPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
-package.preload.lspPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.lua")
-package.preload.cmpPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/cmp.lua")
-package.preload.formatterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/formatter.lua")
-package.preload.linterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/linter.lua")
-vim.list_extend(plugins, require("basicPlugins"))
-vim.list_extend(plugins, require("myesuiPlugins"))
-vim.list_extend(plugins, require("lspPlugins"))
-vim.list_extend(plugins, require("cmpPlugins"))
-vim.list_extend(plugins, require("formatterPlugins"))
-vim.list_extend(plugins, require("linterPlugins"))
 
-local opts = {
+package.preload.basicPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/basic.lua")
+vim.list_extend(plugins, require("basicPlugins"))
+package.preload.myesuiPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
+vim.list_extend(plugins, require("myesuiPlugins"))
+package.preload.lspPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.lua")
+vim.list_extend(plugins, require("lspPlugins"))
+package.preload.cmpPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/cmp.lua")
+vim.list_extend(plugins, require("cmpPlugins"))
+package.preload.formatterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/formatter.lua")
+vim.list_extend(plugins, require("formatterPlugins"))
+package.preload.linterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/linter.lua")
+vim.list_extend(plugins, require("linterPlugins"))
+package.preload.gitPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/git.lua")
+vim.list_extend(plugins, require("gitPlugins"))
+
+require("lazy").setup(plugins, {
 	ui = {
 		border = "single",
 	},
-}
-
-require("lazy").setup(plugins, opts)
+})
 
 package.preload.basicConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/basic.lua")
-package.preload.autocmdConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/autocmd.lua")
-package.preload.pluginsConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/plugins.lua")
-package.preload.keymapsConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/keymaps.lua")
 require("basicConf")
+package.preload.autocmdConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/autocmd.lua")
 require("autocmdConf")
+package.preload.pluginsConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/plugins.lua")
 require("pluginsConf")
+package.preload.keymapsConf = loadfile(hpath .. "/.dotfiles/vim/lua/confs/keymaps.lua")
 require("keymapsConf")
