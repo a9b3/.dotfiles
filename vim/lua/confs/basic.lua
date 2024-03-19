@@ -30,7 +30,6 @@ vim.o.signcolumn = "yes"
 vim.o.conceallevel = 2 -- For markdown
 
 -- Colors and highlighting
-vim.o.t_Co = 256 -- 256 colors in vim
 vim.o.background = "dark" -- Set dark background
 vim.cmd("syntax enable")
 
