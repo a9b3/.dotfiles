@@ -16,7 +16,7 @@ return {
 		version = "*",
 		config = function()
 			require("toggleterm").setup({
-				size = 20,
+				size = 25,
 				open_mapping = [[<M-\>]],
 				direction = "horizontal",
 			})
