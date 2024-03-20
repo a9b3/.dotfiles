@@ -13,6 +13,7 @@ local masonInstalls = {
 	"gopls",
 	"nil",
 	"nixpkgs-fmt",
+	"buildifier",
 }
 
 -- check this for valid server names

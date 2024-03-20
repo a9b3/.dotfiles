@@ -25,6 +25,7 @@ return {
 					graphql = { "prettier" },
 					go = { "goimports" },
 					nix = { "nixpkgs_fmt" },
+					bzl = { "buildifier" },
 				},
 			})
 		end,

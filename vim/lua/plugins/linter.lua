@@ -5,6 +5,7 @@ local linters_by_ft = {
 	typescriptreact = { "eslint_d" },
 	svelte = { "eslint_d" },
 	lua = { "luacheck" },
+	bzl = { "buildifier" },
 }
 
 return {
