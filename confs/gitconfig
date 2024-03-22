@@ -65,17 +65,20 @@
 [credential]
 	helper = osxkeychain
 [diff]
-	tool = vimdiff
+	tool = difftastic
 [difftool]
 	prompt = false
 [difftool "vimdiff"]
 	cmd = nvim -d $BASE $LOCAL
+[difftool "difftastic"]
+  cmd = difft "$LOCAL" "$REMOTE"
 [mergetool]
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [pager]
 	branch = false
+	difftool = true
 [diff "sopsdiffer"]
 	textconv = sops -d
 [filter "lfs"]

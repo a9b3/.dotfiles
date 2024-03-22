@@ -164,6 +164,7 @@
       pkgs.pv
       pkgs.tldr
       pkgs.diff-so-fancy
+      pkgs.difftastic
       pkgs.git-lfs
       pkgs.lsd
       pkgs.delta
