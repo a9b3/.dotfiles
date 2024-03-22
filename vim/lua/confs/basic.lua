@@ -86,6 +86,7 @@ vim.cmd([[
     autocmd BufRead,BufNewFile *.Dockerfile set filetype=dockerfile
     autocmd BufRead,BufNewFile .bazelrc set filetype=conf
     autocmd BufRead,BufNewFile *.json set filetype=jsonc
+    autocmd BufRead,BufNewFile .swcrc set filetype=jsonc
     autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType snippets setlocal ts=4 sts=4 sw=4 expandtab=false
     autocmd FileType scss.css set omnifunc=csscomplete#CompleteCSS
