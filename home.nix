@@ -50,7 +50,8 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    fileWidgetCommand = "fd --type f";
+    fileWidgetCommand = "fd --type f -E=node_modules";
+    changeDirWidgetCommand = "fd --type d -E=node_modules";
   };
 
   programs.zsh = {

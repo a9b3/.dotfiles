@@ -11,7 +11,7 @@ vim.keymap.set("n", "<leader>tn", ":tabnew<CR>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "Close tab" })
 vim.keymap.set("n", "[t", ":tabnext<CR>", { desc = "Next tab" })
 vim.keymap.set("n", "]t", ":tabprevious<CR>", { desc = "Previous tab" })
-vim.keymap.set("n", "<C-w>", "<C-w>w") -- Move between windows
+-- vim.keymap.set("n", "<C-w>", "<C-w>w") -- Move between windows
 vim.keymap.set("n", "j", "gj")
 vim.keymap.set("n", "k", "gk")
 vim.keymap.set({ "n", "v" }, "H", "^")
@@ -20,3 +20,5 @@ vim.keymap.set({ "n", "v" }, "J", "6j")
 vim.keymap.set({ "n", "v" }, "K", "6k")
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>", { desc = "Clear search" })
 vim.keymap.set("x", "p", "pgvy") -- Paste over visual selection
+-- Buffers
+vim.keymap.set("n", "<C-b>o", ":%bdelete|edit#|bdelete#<CR>", { desc = "Close all other buffers" })
