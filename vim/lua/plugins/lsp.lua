@@ -94,7 +94,17 @@ local masonLspConfigs = {
 	{
 		"svelte",
 		setup = function(opts)
-			require("lspconfig").svelte.setup(opts)
+			require("lspconfig").svelte.setup(vim.tbl_extend("force", opts, {
+				settings = {
+					svelte = {
+						plugin = {
+							svelte = {
+								compilerWarnings = {},
+							},
+						},
+					},
+				},
+			}))
 		end,
 	},
 	{
@@ -333,8 +343,6 @@ return {
 			local extractedKeys = vim.tbl_map(function(entry)
 				return type(entry) == "string" and entry or entry[1]
 			end, masonLspConfigs)
-
-			print("HIHIHIHI")
 
 			require("mason").setup()
 			require("mason-lspconfig").setup({

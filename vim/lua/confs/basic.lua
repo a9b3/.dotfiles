@@ -72,6 +72,13 @@ vim.opt.diffopt:append("internal,algorithm:patience")
 -- File types and syntax highlighting
 vim.cmd("filetype plugin indent on")
 
+vim.diagnostic.config({
+	underline = true,
+	signs = true,
+	update_in_insert = false,
+	virtual_text = false,
+})
+
 vim.cmd([[
   augroup FileTypes
     autocmd!

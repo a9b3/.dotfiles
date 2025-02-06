@@ -3,6 +3,7 @@ return {
 		"famiu/bufdelete.nvim",
 		event = "BufEnter",
 	},
+	-- scoped buffers to tabs
 	{
 		"tiagovla/scope.nvim",
 		config = true,
