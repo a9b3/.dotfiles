@@ -20,27 +20,17 @@ vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 vim.opt.sessionoptions = { "buffers", "tabpages", "globals" } -- used by scope.nvim needs to happen before plugin loads
 
 -- configure plugins
-local plugins = {}
-local hpath = os.getenv("HOME")
-
-package.preload.navPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/nav.lua")
-vim.list_extend(plugins, require("navPlugins"))
-package.preload.editingPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/editing.lua")
-vim.list_extend(plugins, require("editingPlugins"))
-package.preload.uiPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/ui.lua")
-vim.list_extend(plugins, require("uiPlugins"))
-package.preload.telescopePlugins = loadfile("/Users/es/.dotfiles/vim/lua/plugins/telescope.lua")
-vim.list_extend(plugins, require("telescopePlugins"))
-package.preload.lspPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/lsp.lua")
-vim.list_extend(plugins, require("lspPlugins"))
-package.preload.cmpPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/cmp.lua")
-vim.list_extend(plugins, require("cmpPlugins"))
-package.preload.formatterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/formatter.lua")
-vim.list_extend(plugins, require("formatterPlugins"))
-package.preload.linterPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/linter.lua")
-vim.list_extend(plugins, require("linterPlugins"))
-package.preload.gitPlugins = loadfile(hpath .. "/.dotfiles/vim/lua/plugins/git.lua")
-vim.list_extend(plugins, require("gitPlugins"))
+local plugins = {
+	require("plugins.nav"),
+	require("plugins.editing"),
+	require("plugins.ui"),
+	require("plugins.telescope"),
+	require("plugins.lsp"),
+	require("plugins.cmp"),
+	require("plugins.formatter"),
+	require("plugins.linter"),
+	require("plugins.git"),
+}
 
 require("lazy").setup(plugins, {
 	ui = {
