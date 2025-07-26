@@ -5,7 +5,6 @@ return {
 			max_width = 80,
 			level = vim.log.levels.WARN,
 		},
-		config = true,
 	},
 	{
 		"folke/noice.nvim",
@@ -28,7 +27,6 @@ return {
 				show_start = false,
 			},
 		},
-		config = true,
 	},
 	{
 		"RRethy/base16-nvim",
@@ -56,7 +54,6 @@ return {
 				},
 			},
 		},
-		config = true,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -98,7 +95,6 @@ return {
 				},
 			},
 		},
-		config = true,
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -151,7 +147,6 @@ return {
 				custom = { "node_modules" },
 			},
 		},
-		config = true,
 	},
 	{
 		"folke/which-key.nvim",
