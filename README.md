@@ -51,7 +51,13 @@ make
 
 ## Upgrading System Packages
 
-Everything is managed by home-manager.
+Everything is managed by home-manager. Nix is used to manage system packages,
+nix manages dependencies as a snapshot of the entire universe of packages,
+as an intended effect it is not encouraged to upgrade any individual package
+instead you should upgrade the entire system. However it is still possible.
+Flakes and the generated lock file are used to pin the nix versions, you can use
+flake overlays to update individual packages by providing a new nix repository for
+the package individually.
 
 **AdHoc**
 
