@@ -105,6 +105,7 @@ end
 -- mason-lspconfig bridges mason.nvim and nvim-lspconfig mapping server names and setup
 -- nvim-lspconfig supplies community defaults for lsp servers
 return {
+	{ "b0o/schemastore.nvim" },
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
