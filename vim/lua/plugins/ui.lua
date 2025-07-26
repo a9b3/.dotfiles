@@ -35,21 +35,8 @@ return {
 		config = function()
 			vim.opt.termguicolors = true
 
-			local function reload_colorscheme()
-				require("base16-colorscheme").load_from_shell()
-			end
-
-			local base16_theme_file = vim.env.BASE16_SHELL_COLORSCHEME_PATH
-
-			-- Create an autocommand group to watch for file changes
-			vim.api.nvim_create_augroup("Base16ThemeWatch", { clear = true })
-			vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-				group = "Base16ThemeWatch",
-				pattern = base16_theme_file,
-				callback = reload_colorscheme,
-			})
-
-			require("base16-colorscheme").load_from_shell()
+			local scheme = vim.env.BASE16_THEME
+			vim.cmd("colorscheme base16-" .. scheme)
 		end,
 	},
 	{
