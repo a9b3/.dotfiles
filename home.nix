@@ -175,6 +175,9 @@
       pkgs.go
       pkgs.fontconfig
       pkgs.nerd-fonts.proggy-clean-tt
+      pkgs.cmake
+      pkgs.ninja
+      pkgs.gcc
       pkgs.nil
       pkgs.cargo
       pkgs.starship
