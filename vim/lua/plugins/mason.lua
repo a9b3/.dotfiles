@@ -1,13 +1,3 @@
-local masonInstalls = {
-	"lua_ls",
-	"ts_ls",
-	"jsonls",
-	"yamlls",
-	"svelte",
-	"gopls",
-	"nil_ls",
-}
-
 -- https://neovim.io/doc/user/lsp.html
 local lspConfigs = {
 	{
@@ -76,6 +66,11 @@ local lspConfigs = {
 		end,
 	},
 }
+
+local masonInstalls = {}
+for _, confs in ipairs(lspConfigs) do
+	masonInstalls[#masonInstalls + 1] = confs.name
+end
 
 local on_attach_keybindings = function(_, _)
 	vim.keymap.set(
