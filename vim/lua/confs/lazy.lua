@@ -26,6 +26,7 @@ local plugins = {
 	require("plugins.ui"),
 	require("plugins.telescope"),
 	require("plugins.lsp"),
+	require("plugins.mason"),
 	require("plugins.cmp"),
 	require("plugins.formatter"),
 	require("plugins.linter"),
