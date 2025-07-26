@@ -36,7 +36,6 @@ return {
 		},
 	},
 	{ "b0o/schemastore.nvim" },
-	{ "folke/neodev.nvim", opts = {} },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",

@@ -1,116 +1,59 @@
--- check this for valid mason installs
--- https://mason-registry.dev/registry/list
 local masonInstalls = {
-	"stylua",
-	"shfmt",
-	"eslint_d",
-	"prettier",
-	"luacheck", -- requires luarocks executable in runtimepath
-	"json-lsp",
-	"yaml-language-server",
-	"svelte-language-server",
-	"goimports",
+	"lua_ls",
+	"ts_ls",
+	"jsonls",
+	"yamlls",
+	"svelte",
 	"gopls",
-	"nil",
-	"nixpkgs-fmt",
-	"buildifier",
+	"nil_ls",
 }
 
--- check this for valid server names
--- https://github.com/williamboman/mason-lspconfig.nvim/blob/main/doc/server-mapping.md
--- {string, [setup = function()]}
-local masonLspConfigs = {
+-- https://neovim.io/doc/user/lsp.html
+local lspConfigs = {
 	{
-		"lua_ls",
-		setup = function(opts)
-			require("neodev").setup({})
-
-			require("lspconfig").lua_ls.setup(vim.tbl_extend("force", opts, {
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
+		name = "lua_ls",
+		override = {
+			settings = {
+				Lua = {
+					diagnostics = {
+						globals = { "vim" },
 					},
 				},
-			}))
-		end,
+			},
+		},
 	},
+	{ name = "ts_ls", override = {} },
 	{
-		"tsserver",
-		setup = function(opts)
-			require("lspconfig").tsserver.setup(opts)
-		end,
-	},
-	{
-		"jsonls",
-		setup = function(opts)
-			require("lspconfig").jsonls.setup(vim.tbl_extend("force", opts, {
+		name = "jsonls",
+		override = function()
+			return {
 				settings = {
 					json = {
 						validate = { enable = true },
-						schemaStore = {
-							enable = false,
-							url = "",
-						},
-						schemas = require("schemastore").json.schemas({
-							select = {
-								"package.json",
-								"tsconfig.json",
-								"jsconfig.json",
-								".eslintrc",
-								"prettierrc.json",
-							},
-						}),
+						schemas = require("schemastore").json.schemas(),
 					},
 				},
-			}))
+			}
 		end,
 	},
 	{
-		"yamlls",
-		setup = function(opts)
-			require("lspconfig").yamlls.setup(vim.tbl_extend("force", opts, {
+		name = "yamlls",
+		override = function()
+			return {
 				settings = {
 					yaml = {
 						validate = true,
-
-						schemaStore = {
-							enable = false,
-							url = "",
-						},
-						schemas = require("schemastore").yaml.schemas({
-							-- select subset from the JSON schema catalog
-							select = {
-								"kustomization.yaml",
-								"docker-compose.yml",
-							},
-						}),
+						schemas = require("schemastore").yaml.schemas(),
 					},
 				},
-			}))
+			}
 		end,
 	},
+	{ name = "svelte", override = { settings = { svelte = { plugin = { svelte = { compilerWarnings = {} } } } } } },
 	{
-		"svelte",
-		setup = function(opts)
-			require("lspconfig").svelte.setup(vim.tbl_extend("force", opts, {
-				settings = {
-					svelte = {
-						plugin = {
-							svelte = {
-								compilerWarnings = {},
-							},
-						},
-					},
-				},
-			}))
-		end,
-	},
-	{
-		"gopls",
-		setup = function(opts)
-			require("lspconfig").gopls.setup(vim.tbl_extend("force", opts, {
+		name = "gopls",
+		override = function()
+			return {
 				cmd = { "gopls", "serve" },
 				settings = {
 					gopls = {
@@ -121,15 +64,15 @@ local masonLspConfigs = {
 					},
 				},
 				root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
-			}))
+			}
 		end,
 	},
 	{
-		"nil_ls",
-		setup = function(opts)
-			require("lspconfig").nil_ls.setup(vim.tbl_extend("force", opts, {
+		name = "nil_ls",
+		override = function()
+			return {
 				root_dir = require("lspconfig").util.root_pattern("flake.nix", ".git"),
-			}))
+			}
 		end,
 	},
 }
@@ -158,72 +101,42 @@ local on_attach_keybindings = function(_, _)
 	vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "[lsp] Rename" })
 end
 
+-- mason installs LSP servers, linters, formatters
+-- mason-lspconfig bridges mason.nvim and nvim-lspconfig mapping server names and setup
+-- nvim-lspconfig supplies community defaults for lsp servers
 return {
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		keys = { { "<leader>m", "<cmd>Mason<cr>", desc = "Mason" } },
-		build = ":MasonUpdate",
-		opts = {
-			ensure_installed = masonInstalls,
-		},
-		config = function(_, opts)
-			require("mason").setup(opts)
-			local mr = require("mason-registry")
-			mr:on("package:install:success", function()
-				vim.defer_fn(function()
-					-- trigger FileType event to possibly load this newly installed LSP server
-					require("lazy.core.handler.event").trigger({
-						event = "FileType",
-						buf = vim.api.nvim_get_current_buf(),
-					})
-				end, 100)
-			end)
-			local function ensure_installed()
-				for _, tool in ipairs(opts.ensure_installed) do
-					local p = mr.get_package(tool)
-					if not p:is_installed() then
-						p:install()
-					end
-				end
-			end
-			if mr.refresh then
-				mr.refresh(ensure_installed)
-			else
-				ensure_installed()
-			end
-		end,
-	},
-	"williamboman/mason-lspconfig.nvim",
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
 			"b0o/schemastore.nvim",
 			"hrsh7th/nvim-cmp",
 		},
 		config = function()
-			local extractedKeys = vim.tbl_map(function(entry)
-				return type(entry) == "string" and entry or entry[1]
-			end, masonLspConfigs)
-
-			require("mason").setup()
-			require("mason-lspconfig").setup({
-				ensure_installed = extractedKeys,
-				automatic_installation = true,
-			})
-
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			for _, entry in ipairs(masonLspConfigs) do
-				if type(entry) == "table" and entry.setup then
-					entry.setup({
+			for _, confs in ipairs(lspConfigs) do
+				local override = (type(confs.override) == "function") and confs.override() or confs.override or {}
+				vim.lsp.config(
+					confs.name,
+					vim.tbl_extend("force", override, {
 						capabilities = capabilities,
 						on_attach = on_attach_keybindings,
 					})
-				end
+				)
+				vim.lsp.enable(confs.name)
 			end
 		end,
+	},
+	{
+		"williamboman/mason.nvim",
+		opts = {},
+	},
+	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			ensure_installed = masonInstalls,
+			automatic_installation = true,
+		},
+		dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
 	},
 }

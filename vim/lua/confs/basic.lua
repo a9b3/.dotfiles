@@ -7,7 +7,6 @@ vim.o.history = 1000 -- Sets how many lines of history VIM has to remember
 vim.o.backspace = "eol,start,indent" -- Configure backspace so it acts as it should act
 vim.o.fileformats = "unix,dos,mac" -- Use Unix as the standard file type
 vim.opt.iskeyword:append("-") -- Treat dash as word
-
 -- User interface
 vim.o.number = true -- Show line number in left margin
 vim.o.numberwidth = 2
@@ -70,7 +69,6 @@ vim.o.splitright = true -- Vertical splits will automatically be to the right
 vim.opt.diffopt:append("internal,algorithm:patience")
 
 -- File types and syntax highlighting
-vim.cmd("filetype plugin indent on")
 
 vim.diagnostic.config({
 	underline = true,
