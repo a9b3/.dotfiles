@@ -1,8 +1,8 @@
-# dotfiles
+# Dotfiles
 
-For personal use.
+## Installation
 
-## Setup
+On new system.
 
 1. Create github ssh key
 
@@ -26,17 +26,14 @@ content of public key here.
 
 3. Install nix
 
-```
-curl -L https://nixos.org/nix/install | sh
-```
+[https://docs.determinate.systems/](https://docs.determinate.systems/)
 
 4. Install home-manager
 
 ```
-nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
-nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-25.05.tar.gz home-manager
 nix-channel --update
-NIXPKGS_ALLOW_INSECURE=1 nix-shell '<home-manager>' -A install
+nix-shell '<home-manager>' -A install
 ```
 
 5. Symlink home.nix
@@ -49,13 +46,42 @@ ln -s $HOME/.dotfiles/home.nix $HOME/.config/nixpkgs/home.nix
 6. Activate home-manager
 
 ```
-home-manager switch
+make
 ```
 
-7. Install vim plugs
+## Upgrading System Packages
+
+Everything is managed by home-manager.
+
+**AdHoc**
 
 ```
-vim
-# inside vim
-:PlugInstall
+nix-shell -p nixpkgs#neovim
+```
+
+**Flake Overlays**
+
+To update the Neovim package in your Nix flake, you can modify the `flake.nix`
+file to point to a newer commit of the `nixpkgs` repository. Replace
+`<new_commit>` with the actual commit hash you want to use.
+
+```
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    neovim-unstable.url = "github:NixOS/nixpkgs?rev=<new_commit>";
+  };
+
+  outputs = { self, nixpkgs, neovim-unstable, ... }:
+  let
+    pkgs = import nixpkgs { system = "aarch64-darwin"; overlays = [
+      (final: prev: {
+        neovim = neovim-unstable.legacyPackages.aarch64-darwin.neovim;
+      })
+    ]; };
+  in
+  {
+    homeConfigurations.es = ...;
+  };
+}
 ```

@@ -57,9 +57,11 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    enableAutosuggestions = true;
+    autosuggestion = {
+      enable = true;
+    };
     history.extended = true;
-    initExtra = ''
+    initContent = ''
       ${builtins.readFile ./confs/zshrc}
       ${builtins.readFile ./confs/zsh_plugin_confs}
       eval "$(starship init zsh)"
@@ -110,30 +112,17 @@
     ];
   };
 
-  programs.neovim =
-    let
-      neovim-nightly = pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: {
-        version = "nightly";
-        src = pkgs.fetchFromGitHub {
-          owner = "neovim";
-          repo = "neovim";
-          rev = "nightly";
-          sha256 = "sha256-Pe3nviwnhmN5Rw9p8SDmPI8UuOH++d5kK4fId4ViUMo=";
-        };
-      });
-    in
-    {
-      package = neovim-nightly;
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      withNodeJs = true;
-      withPython3 = true;
-      extraPython3Packages = ps: with ps; [ black flake8 ];
-      withRuby = true;
-      extraPackages = with pkgs; [ fzf gcc ];
-    };
+  programs.neovim = {
+    enable = true;
+    viAlias = true;
+    vimAlias = true;
+    vimdiffAlias = true;
+    withNodeJs = true;
+    withPython3 = true;
+    extraPython3Packages = ps: with ps; [ black flake8 ];
+    withRuby = true;
+    extraPackages = with pkgs; [ fzf gcc ];
+  };
 
 
   home.packages =
@@ -186,7 +175,7 @@
       pkgs.yarn
       pkgs.go
       pkgs.fontconfig
-      (pkgs.nerdfonts.override { fonts = [ "ProggyClean" "Gohu" "JetBrainsMono" ]; })
+      pkgs.nerd-fonts.proggy-clean-tt
       pkgs.nil
       pkgs.cargo
       pkgs.starship

@@ -1,2 +1,2 @@
 switch:
-	NIXPKGS_ALLOW_INSECURE=1 NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1 home-manager switch -b backup
+	home-manager switch -b backup --flake .
