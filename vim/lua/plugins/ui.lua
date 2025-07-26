@@ -1,4 +1,5 @@
 return {
+	-- "rcarriga/nvim-notify" provides a notification system
 	{
 		"rcarriga/nvim-notify",
 		opts = {
@@ -6,6 +7,8 @@ return {
 			level = vim.log.levels.WARN,
 		},
 	},
+	-- "folke/noice.nvim" provides a better UI for messages, cmdline, and
+	-- notifications
 	{
 		"folke/noice.nvim",
 		dependencies = {
@@ -31,12 +34,11 @@ return {
 	{
 		"RRethy/base16-nvim",
 		config = function()
-			vim.opt.termguicolors = true
-
 			local scheme = vim.env.BASE16_THEME
 			vim.cmd("colorscheme base16-" .. scheme)
 		end,
 	},
+	-- "akinsho/bufferline.nvim" provides a tab-like interface for buffers
 	{
 		"akinsho/bufferline.nvim",
 		opts = {
@@ -55,6 +57,8 @@ return {
 			},
 		},
 	},
+	-- "nvim-lualine/lualine.nvim" provides a status line at the bottom of the
+	-- screen
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
@@ -63,33 +67,8 @@ return {
 		opts = {
 			sections = {
 				lualine_x = {
-					function()
-						local active_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
-						local client_names = {}
-
-						for _, client in ipairs(active_clients) do
-							table.insert(client_names, client.name)
-						end
-
-						return table.concat(client_names, ", ")
-					end,
-					{
-						"lsp_progress",
-						display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
-						timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
-						spinner_symbols = { "🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 " },
-					},
-					function()
-						local lint_progress = function()
-							local linters = require("lint").get_running()
-							if #linters == 0 then
-								return "󰦕"
-							end
-							return "󱉶 " .. table.concat(linters, ", ")
-						end
-
-						return lint_progress()
-					end,
+					require("plugins.utils.getActiveLspClients"),
+					require("plugins.utils.activeLinters"),
 					"encoding",
 					"filetype",
 				},
@@ -155,25 +134,20 @@ return {
 			vim.o.timeout = true
 			vim.o.timeoutlen = 300
 		end,
-		config = function()
-			require("which-key").setup({
-				mode = { "n", "v" },
-				window = {
-					border = "single",
-					margin = { 0.5, 0.2, 0.5, 0.2 },
-					position = "top",
-				},
-			})
-			require("which-key").register({
-				["<leader>"] = {
-					g = { name = "Git" },
-					t = { name = "Tab" },
-					l = { name = "LSP" },
-					s = { name = "Telescope" },
-					x = { name = "Trouble" },
-					n = { name = "Navigation" },
-				},
-			})
-		end,
+		opts = {
+			preset = "modern",
+			layout = {
+				height = { min = 4, max = 10 },
+			},
+			icons = { mappings = false },
+			spec = {
+				{ "<leader>g", name = "Git" },
+				{ "<leader>t", name = "Tab" },
+				{ "<leader>l", name = "LSP" },
+				{ "<leader>s", name = "Telescope" },
+				{ "<leader>x", name = "Trouble" },
+				{ "<leader>n", name = "Navigation" },
+			},
+		},
 	},
 }
