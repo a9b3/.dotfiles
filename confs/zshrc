@@ -76,6 +76,10 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
 
 if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+# TODO within tmux the PATH is being configured twice by something else, I tried
+# removing all contents from zshrc and tmux.conf and it still happens. So this
+# is a workaround to fix the PATH in tmux sessions
+export PATH="$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$PATH" # added by Nix installer
 eval "$(direnv hook zsh)"
 
 # tmux ssh session
