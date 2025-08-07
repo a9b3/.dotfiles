@@ -48,3 +48,5 @@ vim.cmd([[
     endfunction
   endif
 ]])
+
+vim.cmd("filetype plugin indent on")
