@@ -55,15 +55,21 @@ return {
 		end,
 	},
 	{
-		"github/copilot.vim",
-		init = function()
-			-- Set copilot keymaps
-			vim.keymap.set("i", "<C-e>", 'copilot#Accept("")', {
-				expr = true,
-				replace_keycodes = false,
-			})
-			vim.g.copilot_no_tab_map = true
-		end,
+		"zbirenbaum/copilot.lua",
+		event = "InsertEnter",
+		opts = {
+			suggestion = { enabled = false }, -- turn off inline ghost text
+			panel = { enabled = false }, -- optional
+		},
+	},
+	{
+		{
+			"zbirenbaum/copilot-cmp",
+			dependencies = { "zbirenbaum/copilot.lua" },
+			config = function()
+				require("copilot_cmp").setup()
+			end,
+		},
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",

@@ -87,8 +87,8 @@ return {
 				},
 				preselect = cmp.PreselectMode.None,
 				mapping = cmp.mapping.preset.insert({
-					["<C-j>"] = cmp.mapping.select_next_item(),
-					["<C-k>"] = cmp.mapping.select_prev_item(),
+					["<Tab>"] = cmp.mapping.select_next_item(),
+					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 					["<C-h>"] = cmp.mapping.scroll_docs(-4),
 					["<C-l>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
@@ -99,14 +99,12 @@ return {
 					}),
 				}),
 				sources = cmp.config.sources({
-					{ name = "luasnip" },
-					{ name = "nvim_lsp" },
-					{ name = "buffer" },
-					{ name = "path" },
-				}, {
-					{ name = "buffer" },
+					{ name = "copilot", group_index = 1 },
+					{ name = "nvim_lsp", group_index = 1 },
+					{ name = "luasnip", group_index = 1 },
+					{ name = "path", group_index = 2 },
+					{ name = "buffer", group_index = 2 },
 				}),
-
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
 					format = function(entry, vim_item)
@@ -124,6 +122,10 @@ return {
 			-- setup filetype extends here
 			-- Set lsp keymaps
 			local ls = require("luasnip")
+			ls.config.set_config({
+				history = true,
+				updateevents = "TextChanged,TextChangedI",
+			})
 			vim.keymap.set({ "i", "s" }, "<C-k>", function()
 				ls.jump(1)
 			end, { silent = true })
