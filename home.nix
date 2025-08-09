@@ -177,6 +177,7 @@
       pkgs.nerd-fonts.proggy-clean-tt
       pkgs.cmake
       pkgs.ninja
+      pkgs.xcodes
       pkgs.gcc
       pkgs.nil
       pkgs.cargo
