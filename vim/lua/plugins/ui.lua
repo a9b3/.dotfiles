@@ -17,6 +17,11 @@ return {
 		},
 		config = true,
 	},
+	-- "folke/twilight.nvim" dims inactive portions of the code to reduce
+	{
+		"folke/twilight.nvim",
+		opts = {},
+	},
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
