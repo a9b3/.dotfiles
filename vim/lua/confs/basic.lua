@@ -102,3 +102,19 @@ vim.cmd([[
     autocmd FileType json syntax match Comment +\/\/.\+$+
   augroup END
 ]])
+
+vim.o.termguicolors = true
+
+-- Treesitter captures
+vim.api.nvim_set_hl(0, "@function", { bold = true }) -- definitions
+vim.api.nvim_set_hl(0, "@function.call", { underline = true }) -- call sites
+vim.api.nvim_set_hl(0, "@method", { italic = true, bold = true })
+vim.api.nvim_set_hl(0, "@constructor", { reverse = true }) -- new Foo()
+vim.api.nvim_set_hl(0, "@parameter", { fg = "#bbbbbb" }) -- subtler params
+
+-- LSP semantic tokens (Neovim 0.9/0.10)
+vim.api.nvim_set_hl(0, "@lsp.type.function", { bold = true })
+vim.api.nvim_set_hl(0, "@lsp.typemod.function.declaration", { bold = true })
+vim.api.nvim_set_hl(0, "@lsp.typemod.function.defaultLibrary", { italic = true })
+vim.api.nvim_set_hl(0, "@lsp.type.method", { italic = true })
+vim.api.nvim_set_hl(0, "@lsp.type.parameter", { fg = "#bbbbbb" })
