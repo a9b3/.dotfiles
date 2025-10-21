@@ -21,4 +21,4 @@ vim.keymap.set({ "n", "v" }, "K", "6k")
 vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>", { desc = "Clear search" })
 vim.keymap.set("x", "p", "pgvy") -- Paste over visual selection
 -- Buffers
-vim.keymap.set("n", "<C-b>o", ":%bdelete|edit#|bdelete#<CR>", { desc = "Close all other buffers" })
+vim.keymap.set("n", "<leader>to", ":%bdelete|edit#|bdelete#<CR>", { desc = "Close all other buffers" })
