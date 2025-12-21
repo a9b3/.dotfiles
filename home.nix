@@ -142,6 +142,7 @@
       # https://search.nixos.org/packages
     in
     [
+      pkgs.bash
       pkgs.luajitPackages.luarocks
       pkgs.htop
       pkgs.eza
