@@ -6,6 +6,7 @@
   home.stateVersion = "24.05";
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
+
   home.file.".gitconfig".source = ./confs/gitconfig;
   home.file.".rgignore".source = ./confs/rgignore;
   home.file.".tmux.conf".source = ./confs/tmux.conf;
