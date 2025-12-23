@@ -45,3 +45,9 @@ flake.lock will pin the specific version.
 
 There is no way to upgrade a single package, you must update nixpkgs as a whole
 which will in turn update all packages.
+
+```
+nix flake lock --update-input nixpkgs
+# or
+nix flake lock --update-input nixpkgs-unstable
+```

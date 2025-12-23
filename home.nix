@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, pkgsUnstable, ... }:
 
 {
   home.username = "es";
@@ -185,5 +185,7 @@
       pkgs.cargo
       pkgs.starship
       easy-move-resize
-    ];
+    ] ++ (with pkgsUnstable; [
+      # add packages from unstable here
+    ]);
 }
