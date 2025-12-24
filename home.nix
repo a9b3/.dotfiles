@@ -184,6 +184,7 @@
       pkgs.nil
       pkgs.cargo
       pkgs.starship
+      pkgs.yazi
       easy-move-resize
     ] ++ (with pkgsUnstable; [
       # add packages from unstable here
