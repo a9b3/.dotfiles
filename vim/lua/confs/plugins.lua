@@ -441,6 +441,10 @@ return {
 			"nvim-tree/nvim-tree.lua",
 		},
 	},
+	{ -- dev helper for lazy.nvim
+		"folke/lazydev.nvim",
+		ft = "lua",
+	},
 
 	-- ----------------------------------------------------------------------------
 	-- Copilot
@@ -464,31 +468,23 @@ return {
 		dependencies = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
 		opts = function()
 			local select = require("CopilotChat.select")
-			return {
-				debug = true,
-				selection = select.unnamed,
-			}
+			return { selection = select.unnamed }
 		end,
-		keys = {
-			{ "<leader>lp", "<cmd>CopilotChat<cr>", mode = "n", desc = "Copilot Chat" },
-			{ "<leader>lp", "<cmd>CopilotChatVisual<cr>", mode = "v", desc = "Copilot Chat (visual)" },
-		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 			local select = require("CopilotChat.select")
-
 			chat.setup(opts)
 
-			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
-				chat.ask(args.args, { selection = select.visual })
-			end, { nargs = "*", range = true })
+			-- Visual selection → prompt
+			vim.keymap.set("v", "<leader>cc", function()
+				local prompt = vim.fn.input("CopilotChat: ")
+				if prompt ~= "" then
+					chat.ask(prompt, { selection = select.visual })
+				end
+			end, { desc = "CopilotChat (visual selection)" })
 
-			vim.api.nvim_create_user_command("CopilotChatInline", function(args)
-				chat.ask(args.args, {
-					selection = select.visual,
-					window = { layout = "float", relative = "cursor", width = 1, height = 0.4, row = 1 },
-				})
-			end, { nargs = "*", range = true })
+			-- Normal mode chat (no forced selection)
+			vim.keymap.set("n", "<leader>cc", "<cmd>CopilotChatToggle<cr>", { desc = "CopilotChat" })
 		end,
 	},
 
@@ -591,10 +587,6 @@ return {
 		end,
 	},
 	{
-		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
@@ -686,32 +678,30 @@ return {
 		"stevearc/conform.nvim",
 		tag = "v5.4.0",
 		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("conform").setup({
-				format_on_save = {
-					timeout_ms = 1000,
-					async = false,
-					lsp_fallback = true,
-				},
-				formatters_by_ft = {
-					lua = { "stylua" },
-					javascript = { "eslint_d", "prettier" },
-					typescript = { "prettier" },
-					javascriptreact = { "prettier" },
-					typescriptreact = { "prettier" },
-					svelte = { "prettier" },
-					css = { "prettier" },
-					html = { "prettier" },
-					json = { "prettier" },
-					yaml = { "prettier" },
-					markdown = { "prettier" },
-					graphql = { "prettier" },
-					go = { "goimports" },
-					nix = { "nixpkgs_fmt" },
-					bzl = { "buildifier" },
-				},
-			})
-		end,
+		opts = {
+			format_on_save = {
+				timeout_ms = 1000,
+				async = false,
+				lsp_fallback = true,
+			},
+			formatters_by_ft = {
+				lua = { "stylua" },
+				javascript = { "eslint_d", "prettier" },
+				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
+				svelte = { "prettier" },
+				css = { "prettier" },
+				html = { "prettier" },
+				json = { "prettier" },
+				yaml = { "prettier" },
+				markdown = { "prettier" },
+				graphql = { "prettier" },
+				go = { "goimports" },
+				nix = { "nixpkgs_fmt" },
+				bzl = { "buildifier" },
+			},
+		},
 	},
 
 	-- ----------------------------------------------------------------------------
@@ -741,79 +731,58 @@ return {
 
 	{
 		"lewis6991/gitsigns.nvim",
-		config = function()
-			-- use nerdfonts icons
-			require("gitsigns").setup({
-				signs = {
-					add = { text = "+" },
-					change = { text = "~" },
-					delete = { text = "_" },
-					topdelete = { text = "‾" },
-					changedelete = { text = "~" },
-					untracked = { text = "┆" },
-				},
-				on_attach = function(bufnr)
-					local gs = package.loaded.gitsigns
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+				untracked = { text = "┆" },
+			},
+			on_attach = function(bufnr)
+				local gs = require("gitsigns")
 
-					local function map(mode, l, r, opts)
-						opts = opts or {}
-						opts.buffer = bufnr
-						vim.keymap.set(mode, l, r, opts)
-					end
+				local map = function(mode, lhs, rhs, desc)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+				end
 
-					-- Navigation
-					map("n", "]c", function()
-						if vim.wo.diff then
-							return "]c"
-						end
-						vim.schedule(function()
-							gs.next_hunk()
-						end)
-						return "<Ignore>"
-					end, { expr = true, desc = "[Git] next hunk" })
+				-- Navigation (respects diff mode)
+				map("n", "]c", function()
+					gs.nav_hunk("next")
+				end, "Git: next hunk")
+				map("n", "[c", function()
+					gs.nav_hunk("prev")
+				end, "Git: prev hunk")
 
-					map("n", "[c", function()
-						if vim.wo.diff then
-							return "[c"
-						end
-						vim.schedule(function()
-							gs.prev_hunk()
-						end)
-						return "<Ignore>"
-					end, { expr = true, desc = "[Git] previous hunk" })
+				-- Actions
+				map("n", "<leader>gs", gs.stage_hunk, "Git: stage hunk")
+				map("n", "<leader>gr", gs.reset_hunk, "Git: reset hunk")
+				map("n", "<leader>gS", gs.stage_buffer, "Git: stage buffer")
+				map("n", "<leader>gu", gs.undo_stage_hunk, "Git: undo stage hunk")
+				map("n", "<leader>gR", gs.reset_buffer, "Git: reset buffer")
+				map("n", "<leader>gp", gs.preview_hunk, "Git: preview hunk")
+				map("n", "<leader>gb", function()
+					gs.blame_line({ full = true })
+				end, "Git: blame line")
+				map("n", "<leader>gtb", gs.toggle_current_line_blame, "Git: toggle line blame")
+				map("n", "<leader>gd", gs.diffthis, "Git: diff this")
+				map("n", "<leader>gD", function()
+					gs.diffthis("~")
+				end, "Git: diff vs base")
+				map("n", "<leader>gtd", gs.toggle_deleted, "Git: toggle deleted")
 
-					-- Actions
-					map("n", "<leader>gs", gs.stage_hunk, { desc = "[gitsigns] stage hunk" })
-					map("n", "<leader>gr", gs.reset_hunk, { desc = "[gitsigns] reset hunk" })
-					map("v", "<leader>gs", function()
-						gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end, { desc = "[gitsigns] stage hunk" })
-					map("v", "<leader>hr", function()
-						gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-					end, { desc = "[gitsigns] reset hunk" })
-					map("n", "<leader>gS", gs.stage_buffer, { desc = "[gitsigns] stage buffer" })
-					map("n", "<leader>gu", gs.undo_stage_hunk, { desc = "[gitsigns] undo stage hunk" })
-					map("n", "<leader>gR", gs.reset_buffer, { desc = "[gitsigns] reset buffer" })
-					map("n", "<leader>gp", gs.preview_hunk, { desc = "[gitsigns] preview hunk" })
-					map("n", "<leader>gb", function()
-						gs.blame_line({ full = true })
-					end, { desc = "[gitsigns] blame line" })
-					map(
-						"n",
-						"<leader>gtb",
-						gs.toggle_current_line_blame,
-						{ desc = "[gitsigns] toggle current line blame" }
-					)
-					map("n", "<leader>gd", gs.diffthis, { desc = "[gitsigns] diff this" })
-					map("n", "<leader>gD", function()
-						gs.diffthis("~")
-					end, { desc = "[gitsigns] diff this (base)" })
-					map("n", "<leader>gtd", gs.toggle_deleted, { desc = "[gitsigns] toggle deleted" })
+				-- Visual stage/reset (range)
+				map("v", "<leader>gs", function()
+					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Git: stage hunk")
+				map("v", "<leader>gr", function()
+					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Git: reset hunk")
 
-					-- Text object
-					map({ "o", "x" }, "<leader>gh", ":<C-U>Gitsigns select_hunk<CR>")
-				end,
-			})
-		end,
+				-- Textobject (hunk)
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Git: select hunk")
+			end,
+		},
 	},
 }
