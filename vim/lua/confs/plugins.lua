@@ -138,87 +138,35 @@ return {
 	-- ----------------------------------------------------------------------------
 	-- Nav
 	-- ----------------------------------------------------------------------------
+
 	{ "famiu/bufdelete.nvim" },
 	{ "tiagovla/scope.nvim", config = true }, -- scoped buffers to tabs
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			require("toggleterm").setup({
-				size = 50,
-				open_mapping = [[<M-\>]],
-				direction = "horizontal",
-			})
-
-			-- Set toggleterm keymaps
-			function _G.set_terminal_keymaps()
-				local opts = { buffer = 0 }
-				vim.keymap.set("t", "<M-\\>", [[<Cmd>:ToggleTerm <CR>]], opts)
-				vim.keymap.set("t", "<esc>", [[<C-\><C-n>]], opts)
-			end
-
-			vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
-
-			vim.api.nvim_create_autocmd("BufEnter", {
-				pattern = "*",
-				callback = function()
-					if vim.o.filetype == "toggleterm" then
-						vim.cmd("startinsert")
-					end
-				end,
-			})
-		end,
-	},
-	{
-		"chrishrb/gx.nvim",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
-		cmd = { "Browse" },
-		init = function()
-			vim.g.netrw_nogx = 1 -- disable netrw gx
-		end,
-		config = true,
-		submodules = false,
-	},
 
 	-- ----------------------------------------------------------------------------
 	-- Editing
 	-- ----------------------------------------------------------------------------
 
-	{
-		"echasnovski/mini.ai",
-		event = "BufRead",
-		config = true,
-	},
-	{
-		"echasnovski/mini.surround",
-		event = "BufRead",
-		config = true,
-	},
+	{ "echasnovski/mini.ai" }, -- ex. change in (
+	{ "echasnovski/mini.surround" }, -- ex. change surrounding quotes
 	{
 		"numToStr/Comment.nvim",
 		event = "BufRead",
 		opts = {
-			toggler = {
-				line = "<C-_>",
-			},
-			opleader = {
-				line = "<C-_>",
-			},
+			-- for keycodes sent within tmux
+			toggler = { line = "<C-_>" },
+			opleader = { line = "<C-_>" },
 		},
-		config = function(_, opts)
-			require("Comment").setup(opts)
-			-- Neovim outside of tmux is getting <C-/> while inside tmux it gets <C-_>
-			vim.keymap.set("n", "<C-/>", "<Plug>(comment_toggle_linewise_current)", { noremap = false, silent = true })
-			vim.keymap.set("x", "<C-/>", "<Plug>(comment_toggle_linewise_visual)", { noremap = false, silent = true })
-		end,
+		keys = {
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_current)", mode = "n", remap = true, silent = true },
+			{ "<C-/>", "<Plug>(comment_toggle_linewise_visual)", mode = "x", remap = true, silent = true },
+		},
 	},
-	{
+	{ -- automatically close brackets, quotes, etc.
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		config = true,
 	},
-	{
+	{ -- Ctrl-d to select multiple like in VSCode
 		"mg979/vim-visual-multi",
 		init = function()
 			vim.g.VM_maps = {
@@ -231,17 +179,14 @@ return {
 	-- UI
 	-- ----------------------------------------------------------------------------
 
-	-- "rcarriga/nvim-notify" provides a notification system
-	{
+	{ -- pop up notifications
 		"rcarriga/nvim-notify",
 		opts = {
 			max_width = 80,
 			level = vim.log.levels.WARN,
 		},
 	},
-	-- "folke/noice.nvim" provides a better UI for messages, cmdline, and
-	-- notifications
-	{
+	{ -- enhanced UI for messages and cmdline
 		"folke/noice.nvim",
 		dependencies = {
 			"MunifTanjim/nui.nvim",
@@ -249,7 +194,7 @@ return {
 		},
 		config = true,
 	},
-	{
+	{ -- show indentation levels with thin lines
 		"lukas-reineke/indent-blankline.nvim",
 		main = "ibl",
 		event = "BufReadPre",
@@ -263,15 +208,14 @@ return {
 			},
 		},
 	},
-	{
+	{ -- base16 color schemes
 		"RRethy/base16-nvim",
 		config = function()
 			local scheme = vim.env.BASE16_THEME
 			vim.cmd("colorscheme base16-" .. scheme)
 		end,
 	},
-	-- "akinsho/bufferline.nvim" provides a tab-like interface for buffers
-	{
+	{ -- buffer line
 		"akinsho/bufferline.nvim",
 		opts = {
 			options = {
@@ -289,9 +233,7 @@ return {
 			},
 		},
 	},
-	-- "nvim-lualine/lualine.nvim" provides a status line at the bottom of the
-	-- screen
-	{
+	{ -- status line at the bottom
 		"nvim-lualine/lualine.nvim",
 		dependencies = {
 			"arkav/lualine-lsp-progress",
@@ -310,7 +252,7 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 		init = function()
-			-- disable netrw at the very start of your init.lua
+			-- disable netrw
 			vim.g.loaded_netrw = 1
 			vim.g.loaded_netrwPlugin = 1
 		end,
@@ -321,42 +263,24 @@ return {
 		opts = {
 			on_attach = function(bufnr)
 				local api = require("nvim-tree.api")
-				local function opts(desc)
-					return {
-						desc = "nvim-tree: " .. desc,
-						buffer = bufnr,
-						noremap = true,
-						silent = true,
-						nowait = true,
-					}
-				end
-
-				-- default mappings
 				api.config.mappings.default_on_attach(bufnr)
-
-				-- custom mappings
-				vim.keymap.set("n", "p", api.node.navigate.parent, opts("Go to parent"))
+				vim.keymap.set("n", "p", api.node.navigate.parent, {
+					desc = "Up",
+					buffer = bufnr,
+					noremap = true,
+					silent = true,
+					nowait = true,
+				})
 			end,
-			sort = {
-				sorter = "case_sensitive",
-			},
-			update_focused_file = {
-				enable = true,
-			},
-			view = {
-				width = 40,
-			},
+			sort = { sorter = "case_sensitive" },
+			update_focused_file = { enable = true },
+			view = { width = 40 },
 			renderer = {
 				group_empty = true,
 				highlight_opened_files = "name",
-				icons = {
-					git_placement = "after",
-				},
+				icons = { git_placement = "before" },
 			},
-			filters = {
-				dotfiles = true,
-				custom = { "node_modules" },
-			},
+			filters = { dotfiles = true, custom = { "node_modules" } },
 		},
 	},
 	{
@@ -379,19 +303,6 @@ return {
 				{ "<leader>s", name = "Telescope" },
 				{ "<leader>x", name = "Trouble" },
 				{ "<leader>n", name = "Navigation" },
-			},
-		},
-	},
-	{
-		"folke/zen-mode.nvim",
-		opts = {},
-		keys = {
-			{
-				"<leader>z",
-				function()
-					require("zen-mode").toggle()
-				end,
-				desc = "Toggle Zen Mode",
 			},
 		},
 	},
