@@ -53,7 +53,7 @@ local lspConfigs = {
 						staticcheck = true,
 					},
 				},
-				root_dir = require("lspconfig").util.root_pattern(".git", "go.mod"),
+				root_dir = require("lspconfig").util.root_pattern("go.work", "go.mod", ".git"),
 			}
 		end,
 	},

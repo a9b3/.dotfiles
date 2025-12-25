@@ -133,4 +133,11 @@ return {
 			luasnip.filetype_extend("svelte", { "javascript" })
 		end,
 	},
+	{
+		"chrisgrieser/nvim-scissors",
+		dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
+		opts = {
+			snippetDir = "path/to/your/snippetFolder",
+		},
+	},
 }
