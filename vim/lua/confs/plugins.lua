@@ -308,11 +308,12 @@ return {
 	},
 
 	-- ----------------------------------------------------------------------------
-	-- Telescope
+	-- Telescope - fuzzy finder
 	-- ----------------------------------------------------------------------------
+
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.5",
+		tag = "v0.2.0",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"BurntSushi/ripgrep",
@@ -374,7 +375,7 @@ return {
 	-- LSP
 	-- ----------------------------------------------------------------------------
 
-	{
+	{ -- show diagnostics, references, etc. in a pretty list
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
@@ -412,23 +413,39 @@ return {
 			},
 		},
 	},
-	{
+	{ -- language aware syntax highlighting
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				-- A list of parser names, or "all" (the five listed parsers should always be installed)
-				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
-				sync_install = false,
-				auto_install = true,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = false,
-				},
-			})
+		init = function()
 			require("nvim-treesitter.install").compilers = { "gcc" }
 		end,
+		opts = {
+			auto_install = true,
+			highlight = { enable = true },
+		},
 	},
+	{
+		"nvimdev/lspsaga.nvim",
+		opts = {
+			lightbulb = { enable = false },
+		},
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
+	{ -- file operations from the lsp server
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-tree.lua",
+		},
+	},
+
+	-- ----------------------------------------------------------------------------
+	-- Copilot
+	-- ----------------------------------------------------------------------------
+
 	{
 		"zbirenbaum/copilot.lua",
 		event = "InsertEnter",
@@ -438,93 +455,40 @@ return {
 		},
 	},
 	{
-		{
-			"zbirenbaum/copilot-cmp",
-			dependencies = { "zbirenbaum/copilot.lua" },
-			config = function()
-				require("copilot_cmp").setup()
-			end,
-		},
+		"zbirenbaum/copilot-cmp",
+		dependencies = { "zbirenbaum/copilot.lua" },
+		opts = {},
 	},
 	{
 		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		opts = {
-			debug = true, -- Enable debugging
-			-- See Configuration section for rest
+		dependencies = { "zbirenbaum/copilot.lua", "nvim-lua/plenary.nvim" },
+		opts = function()
+			local select = require("CopilotChat.select")
+			return {
+				debug = true,
+				selection = select.unnamed,
+			}
+		end,
+		keys = {
+			{ "<leader>lp", "<cmd>CopilotChat<cr>", mode = "n", desc = "Copilot Chat" },
+			{ "<leader>lp", "<cmd>CopilotChatVisual<cr>", mode = "v", desc = "Copilot Chat (visual)" },
 		},
 		config = function(_, opts)
 			local chat = require("CopilotChat")
 			local select = require("CopilotChat.select")
-			-- Use unnamed register for the selection
-			opts.selection = select.unnamed
 
-			require("CopilotChat").setup(opts)
+			chat.setup(opts)
 
 			vim.api.nvim_create_user_command("CopilotChatVisual", function(args)
 				chat.ask(args.args, { selection = select.visual })
 			end, { nargs = "*", range = true })
 
-			-- Inline chat with Copilot
 			vim.api.nvim_create_user_command("CopilotChatInline", function(args)
 				chat.ask(args.args, {
 					selection = select.visual,
-					window = {
-						layout = "float",
-						relative = "cursor",
-						width = 1,
-						height = 0.4,
-						row = 1,
-					},
+					window = { layout = "float", relative = "cursor", width = 1, height = 0.4, row = 1 },
 				})
 			end, { nargs = "*", range = true })
-
-			vim.keymap.set("n", "<leader>lp", "<cmd>CopilotChat<cr>", { desc = "[lsp] Copilot" })
-			vim.keymap.set("v", "<leader>lp", "<cmd>CopilotChatVisual<cr>", { desc = "[lsp] Copilot Visual" })
-		end,
-	},
-	{
-		"hedyhli/outline.nvim",
-		config = function()
-			require("outline").setup({
-				outline_window = {
-					position = "right",
-					symbols = {
-						icon_fetcher = function(k)
-							if k == "String" then
-								return ""
-							end
-							return false
-						end,
-						icon_source = "lspkind",
-					},
-				},
-			})
-		end,
-	},
-	{
-		"nvimdev/lspsaga.nvim",
-		config = function()
-			require("lspsaga").setup({
-				lightbulb = { enable = false },
-			})
-		end,
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
-	},
-	{
-		"antosha417/nvim-lsp-file-operations",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-tree.lua",
-		},
-		config = function()
-			require("lsp-file-operations").setup()
 		end,
 	},
 
@@ -532,7 +496,7 @@ return {
 	-- Mason
 	-- ----------------------------------------------------------------------------
 
-	{ "b0o/schemastore.nvim" },
+	{ "b0o/schemastore.nvim" }, -- JSON/YAML schema store
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
