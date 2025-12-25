@@ -20,18 +20,7 @@ vim.g.maplocalleader = "\\" -- Same for `maplocalleader`
 vim.opt.sessionoptions = { "buffers", "tabpages", "globals" } -- used by scope.nvim needs to happen before plugin loads
 
 -- configure plugins
-local plugins = {
-	require("plugins.nav"),
-	require("plugins.editing"),
-	require("plugins.ui"),
-	require("plugins.telescope"),
-	require("plugins.lsp"),
-	require("plugins.mason"),
-	require("plugins.cmp"),
-	require("plugins.formatter"),
-	require("plugins.linter"),
-	require("plugins.git"),
-}
+local plugins = require("confs.plugins")
 
 require("lazy").setup(plugins, {
 	ui = {

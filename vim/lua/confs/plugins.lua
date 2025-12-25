@@ -106,6 +106,33 @@ local linters_by_ft = {
 	bzl = { "buildifier" },
 }
 
+-- This function retrieves the names of all active LSP clients for the current
+-- buffer
+local function getActiveLspClients()
+	local active_clients = vim.lsp.get_clients({ bufnr = vim.api.nvim_get_current_buf() })
+	local client_names = {}
+
+	for _, client in ipairs(active_clients) do
+		table.insert(client_names, client.name)
+	end
+
+	return "󰧑 " .. table.concat(client_names, ", ")
+end
+
+-- This module provides a function to display the current active linters in
+-- Neovim.
+local function activeLinters()
+	local lint_progress = function()
+		local linters = require("lint").get_running()
+		if #linters == 0 then
+			return "󰿞"
+		end
+		return "󰿞 " .. table.concat(linters, ", ")
+	end
+
+	return lint_progress()
+end
+
 return {
 
 	-- ----------------------------------------------------------------------------
@@ -113,7 +140,6 @@ return {
 	-- ----------------------------------------------------------------------------
 	{ "famiu/bufdelete.nvim" },
 	{ "tiagovla/scope.nvim", config = true }, -- scoped buffers to tabs
-	{ "simeji/winresizer", event = "WinEnter" },
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
@@ -273,8 +299,8 @@ return {
 		opts = {
 			sections = {
 				lualine_x = {
-					require("plugins.utils.getActiveLspClients"),
-					require("plugins.utils.activeLinters"),
+					getActiveLspClients,
+					activeLinters,
 					"encoding",
 					"filetype",
 				},
