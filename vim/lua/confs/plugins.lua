@@ -72,30 +72,6 @@ for _, confs in ipairs(lspConfigs) do
 	masonInstalls[#masonInstalls + 1] = confs.name
 end
 
-local on_attach_keybindings = function(_, _)
-	vim.keymap.set(
-		"n",
-		"[d",
-		"<cmd>Lspsaga diagnostic_jump_prev<cr>",
-		{ remap = false, desc = "[lsp] Next diagnostic" }
-	)
-	vim.keymap.set(
-		"n",
-		"]d",
-		"<cmd>Lspsaga diagnostic_jump_next<cr>",
-		{ remap = false, desc = "[lsp] Previous diagnostic" }
-	)
-	vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { remap = false, desc = "[lsp] Declaration" })
-	vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
-	vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
-	vim.keymap.set("n", "<leader>ld", "<cmd>Lspsaga peek_definition<cr>", { desc = "[lsp] Peek definition" })
-	vim.keymap.set("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", { desc = "[lsp] Finder implementation" })
-	vim.keymap.set("n", "<leader>lt", "<cmd>Lspsaga peek_type_definition<cr>", { desc = "[lsp] Peek type definition" })
-	vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
-	vim.keymap.set("n", "<leader>lo", "<cmd>Outline<cr>", { desc = "[lsp] Outline" })
-	vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "[lsp] Rename" })
-end
-
 local linters_by_ft = {
 	javascript = { "eslint_d" },
 	typescript = { "eslint_d" },
@@ -372,6 +348,67 @@ return {
 	},
 
 	-- ----------------------------------------------------------------------------
+	-- git
+	-- ----------------------------------------------------------------------------
+
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+				untracked = { text = "┆" },
+			},
+			on_attach = function(bufnr)
+				local gs = require("gitsigns")
+
+				local map = function(mode, lhs, rhs, desc)
+					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
+				end
+
+				-- Navigation (respects diff mode)
+				map("n", "]c", function()
+					gs.nav_hunk("next")
+				end, "Git: next hunk")
+				map("n", "[c", function()
+					gs.nav_hunk("prev")
+				end, "Git: prev hunk")
+
+				-- Actions
+				map("n", "<leader>gs", gs.stage_hunk, "Git: stage hunk")
+				map("n", "<leader>gr", gs.reset_hunk, "Git: reset hunk")
+				map("n", "<leader>gS", gs.stage_buffer, "Git: stage buffer")
+				map("n", "<leader>gu", gs.undo_stage_hunk, "Git: undo stage hunk")
+				map("n", "<leader>gR", gs.reset_buffer, "Git: reset buffer")
+				map("n", "<leader>gp", gs.preview_hunk, "Git: preview hunk")
+				map("n", "<leader>gb", function()
+					gs.blame_line({ full = true })
+				end, "Git: blame line")
+				map("n", "<leader>gtb", gs.toggle_current_line_blame, "Git: toggle line blame")
+				map("n", "<leader>gd", gs.diffthis, "Git: diff this")
+				map("n", "<leader>gD", function()
+					gs.diffthis("~")
+				end, "Git: diff vs base")
+				map("n", "<leader>gtd", gs.toggle_deleted, "Git: toggle deleted")
+
+				-- Visual stage/reset (range)
+				map("v", "<leader>gs", function()
+					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Git: stage hunk")
+				map("v", "<leader>gr", function()
+					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Git: reset hunk")
+
+				-- Textobject (hunk)
+				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Git: select hunk")
+			end,
+		},
+	},
+
+	-- ----------------------------------------------------------------------------
 	-- LSP
 	-- ----------------------------------------------------------------------------
 
@@ -445,6 +482,39 @@ return {
 		"folke/lazydev.nvim",
 		ft = "lua",
 	},
+	{ -- pictograms for lsp completion items
+		"onsails/lspkind.nvim",
+		opts = {
+			mode = "symbol_text",
+			symbol_map = {
+				Text = "󰉿",
+				Method = "󰆧",
+				Function = "󰊕",
+				Constructor = "",
+				Field = "󰜢",
+				Variable = "󰀫",
+				Class = "󰠱",
+				Interface = "",
+				Module = "",
+				Property = "󰜢",
+				Unit = "󰑭",
+				Value = "󰎠",
+				Enum = "",
+				Keyword = "󰌋",
+				Snippet = "",
+				Color = "󰏘",
+				File = "󰈙",
+				Reference = "󰈇",
+				Folder = "󰉋",
+				EnumMember = "",
+				Constant = "󰏿",
+				Struct = "󰙅",
+				Event = "",
+				Operator = "󰆕",
+				TypeParameter = "",
+			},
+		},
+	},
 
 	-- ----------------------------------------------------------------------------
 	-- Copilot
@@ -490,16 +560,84 @@ return {
 
 	-- ----------------------------------------------------------------------------
 	-- Mason
+	-- mason.nvim - downloads binaries (servers, linters, formatters)
+	-- mason-lspconfig.nvim - maps binaries to lspconfig registry id
+	-- nvim-lspconfig - registry of lsp server definitions (id → filetype, how to
+	-- start, etc.) attaches to neovim lsp
 	-- ----------------------------------------------------------------------------
 
 	{ "b0o/schemastore.nvim" }, -- JSON/YAML schema store
+	{ "williamboman/mason.nvim", opts = {} },
+	{
+		"williamboman/mason-lspconfig.nvim",
+		opts = {
+			-- https://mason-registry.dev/registry/list
+			ensure_installed = {
+				"lua_ls",
+				"ts_ls",
+				"svelte",
+				"gopls",
+				"nil_ls",
+				"jsonls",
+				"yamlls",
+			},
+			automatic_installation = true,
+		},
+		dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
+	},
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
 			"b0o/schemastore.nvim",
 			"hrsh7th/nvim-cmp",
+			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
+			local on_attach_keybindings = function(_, _)
+				vim.keymap.set(
+					"n",
+					"[d",
+					"<cmd>Lspsaga diagnostic_jump_prev<cr>",
+					{ remap = false, desc = "[lsp] Next diagnostic" }
+				)
+				vim.keymap.set(
+					"n",
+					"]d",
+					"<cmd>Lspsaga diagnostic_jump_next<cr>",
+					{ remap = false, desc = "[lsp] Previous diagnostic" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>lD",
+					vim.lsp.buf.declaration,
+					{ remap = false, desc = "[lsp] Declaration" }
+				)
+				vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
+				vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
+				vim.keymap.set(
+					"n",
+					"<leader>ld",
+					"<cmd>Lspsaga peek_definition<cr>",
+					{ desc = "[lsp] Peek definition" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>li",
+					"<cmd>Lspsaga finder imp<cr>",
+					{ desc = "[lsp] Finder implementation" }
+				)
+				vim.keymap.set(
+					"n",
+					"<leader>lt",
+					"<cmd>Lspsaga peek_type_definition<cr>",
+					{ desc = "[lsp] Peek type definition" }
+				)
+				vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
+				vim.keymap.set("n", "<leader>lo", "<cmd>Outline<cr>", { desc = "[lsp] Outline" })
+				vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "[lsp] Rename" })
+			end
+
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			for _, confs in ipairs(lspConfigs) do
@@ -515,77 +653,10 @@ return {
 			end
 		end,
 	},
-	{
-		"williamboman/mason.nvim",
-		opts = {},
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		opts = {
-			ensure_installed = masonInstalls,
-			automatic_installation = true,
-		},
-		dependencies = { "mason.nvim", "neovim/nvim-lspconfig" },
-	},
 
 	-- ----------------------------------------------------------------------------
 	-- cmp
 	-- ----------------------------------------------------------------------------
-
-	{
-		"onsails/lspkind.nvim",
-		config = function()
-			require("lspkind").init({
-				-- DEPRECATED (use mode instead): enables text annotations
-				--
-				-- default: true
-				-- with_text = true,
-
-				-- defines how annotations are shown
-				-- default: symbol
-				-- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
-				mode = "symbol_text",
-
-				-- default symbol map
-				-- can be either 'default' (requires nerd-fonts font) or
-				-- 'codicons' for codicon preset (requires vscode-codicons font)
-				--
-				-- default: 'default'
-				preset = "default",
-
-				-- override preset symbols
-				--
-				-- default: {}
-				symbol_map = {
-					Text = "󰉿",
-					Method = "󰆧",
-					Function = "󰊕",
-					Constructor = "",
-					Field = "󰜢",
-					Variable = "󰀫",
-					Class = "󰠱",
-					Interface = "",
-					Module = "",
-					Property = "󰜢",
-					Unit = "󰑭",
-					Value = "󰎠",
-					Enum = "",
-					Keyword = "󰌋",
-					Snippet = "",
-					Color = "󰏘",
-					File = "󰈙",
-					Reference = "󰈇",
-					Folder = "󰉋",
-					EnumMember = "",
-					Constant = "󰏿",
-					Struct = "󰙅",
-					Event = "",
-					Operator = "󰆕",
-					TypeParameter = "",
-				},
-			})
-		end,
-	},
 	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
@@ -723,66 +794,5 @@ return {
 				end,
 			})
 		end,
-	},
-
-	-- ----------------------------------------------------------------------------
-	-- git
-	-- ----------------------------------------------------------------------------
-
-	{
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			signs = {
-				add = { text = "+" },
-				change = { text = "~" },
-				delete = { text = "_" },
-				topdelete = { text = "‾" },
-				changedelete = { text = "~" },
-				untracked = { text = "┆" },
-			},
-			on_attach = function(bufnr)
-				local gs = require("gitsigns")
-
-				local map = function(mode, lhs, rhs, desc)
-					vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
-				end
-
-				-- Navigation (respects diff mode)
-				map("n", "]c", function()
-					gs.nav_hunk("next")
-				end, "Git: next hunk")
-				map("n", "[c", function()
-					gs.nav_hunk("prev")
-				end, "Git: prev hunk")
-
-				-- Actions
-				map("n", "<leader>gs", gs.stage_hunk, "Git: stage hunk")
-				map("n", "<leader>gr", gs.reset_hunk, "Git: reset hunk")
-				map("n", "<leader>gS", gs.stage_buffer, "Git: stage buffer")
-				map("n", "<leader>gu", gs.undo_stage_hunk, "Git: undo stage hunk")
-				map("n", "<leader>gR", gs.reset_buffer, "Git: reset buffer")
-				map("n", "<leader>gp", gs.preview_hunk, "Git: preview hunk")
-				map("n", "<leader>gb", function()
-					gs.blame_line({ full = true })
-				end, "Git: blame line")
-				map("n", "<leader>gtb", gs.toggle_current_line_blame, "Git: toggle line blame")
-				map("n", "<leader>gd", gs.diffthis, "Git: diff this")
-				map("n", "<leader>gD", function()
-					gs.diffthis("~")
-				end, "Git: diff vs base")
-				map("n", "<leader>gtd", gs.toggle_deleted, "Git: toggle deleted")
-
-				-- Visual stage/reset (range)
-				map("v", "<leader>gs", function()
-					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end, "Git: stage hunk")
-				map("v", "<leader>gr", function()
-					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-				end, "Git: reset hunk")
-
-				-- Textobject (hunk)
-				map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "Git: select hunk")
-			end,
-		},
 	},
 }
