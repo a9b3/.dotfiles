@@ -1,13 +1,3 @@
-local linters_by_ft = {
-	javascript = { "eslint_d" },
-	typescript = { "eslint_d" },
-	javascriptreact = { "eslint_d" },
-	typescriptreact = { "eslint_d" },
-	svelte = { "eslint_d" },
-	lua = { "luacheck" },
-	bzl = { "buildifier" },
-}
-
 -- This function retrieves the names of all active LSP clients for the current
 -- buffer
 local function getActiveLspClients()
@@ -386,6 +376,10 @@ return {
 			auto_install = true,
 			highlight = { enable = true },
 		},
+		-- NOTE: need this to trigger enable so svelte files have highlighting
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
 	{
 		"nvimdev/lspsaga.nvim",
@@ -413,6 +407,7 @@ return {
 		opts = {
 			mode = "symbol_text",
 			symbol_map = {
+				Copilot = "󰚩",
 				Text = "󰉿",
 				Method = "󰆧",
 				Function = "󰊕",
@@ -422,6 +417,7 @@ return {
 				Class = "󰠱",
 				Interface = "",
 				Module = "",
+				Macro = "󰅴",
 				Property = "󰜢",
 				Unit = "󰑭",
 				Value = "󰎠",
@@ -553,6 +549,7 @@ return {
 				},
 			})
 			vim.lsp.config("ts_ls", { capabilities = capabilities })
+			vim.lsp.config("eslint", { capabilities = capabilities })
 			vim.lsp.config("svelte", { capabilities = capabilities })
 
 			vim.lsp.config("gopls", {
@@ -591,6 +588,7 @@ return {
 			for _, name in ipairs({
 				"lua_ls",
 				"tsserver",
+				"eslint",
 				"svelte",
 				"gopls",
 				"nil_ls",
@@ -606,45 +604,69 @@ return {
 	-- cmp
 	-- ----------------------------------------------------------------------------
 	{
+		"L3MON4D3/LuaSnip",
+		dependencies = { "rafamadriz/friendly-snippets" },
+		build = "make install_jsregexp",
+		config = function()
+			local ls = require("luasnip")
+
+			ls.config.set_config({
+				history = true,
+				updateevents = "TextChanged,TextChangedI",
+			})
+
+			require("luasnip.loaders.from_vscode").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+			require("luasnip.loaders.from_snipmate").lazy_load({ paths = { vim.fn.stdpath("config") .. "/snippets" } })
+
+			vim.keymap.set({ "i", "s" }, "<C-k>", function()
+				ls.jump(1)
+			end, { silent = true, desc = "Snippet jump" })
+			vim.keymap.set({ "i", "s" }, "<C-j>", function()
+				ls.jump(-1)
+			end, { silent = true, desc = "Snippet jump back" })
+
+			ls.filetype_extend("typescript", { "javascript" })
+			ls.filetype_extend("svelte", { "javascript" })
+		end,
+	},
+	{
+		"chrisgrieser/nvim-scissors",
+		dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
+		opts = {
+			snippetDir = vim.fn.stdpath("config") .. "/snippets",
+		},
+	},
+	{
 		"hrsh7th/nvim-cmp",
 		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-buffer",
 			"hrsh7th/cmp-path",
-			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
+			"zbirenbaum/copilot-cmp",
 			"onsails/lspkind.nvim",
 		},
-		config = function()
-			local luasnip = require("luasnip")
+		opts = function()
 			local cmp = require("cmp")
+			local ls = require("luasnip")
 
-			require("luasnip/loaders/from_vscode").load()
-			require("luasnip/loaders/from_snipmate").load({ path = { "./snippets" } })
-
-			cmp.setup({
-				completion = {
-					completeopt = "menu,menuone,noselect",
-				},
+			return {
+				preselect = cmp.PreselectMode.None,
+				completion = { completeopt = "menu,menuone,noselect" },
 				snippet = {
 					expand = function(args)
-						luasnip.lsp_expand(args.body)
+						ls.lsp_expand(args.body)
 					end,
 				},
-				preselect = cmp.PreselectMode.None,
 				mapping = cmp.mapping.preset.insert({
 					["<Tab>"] = cmp.mapping.select_next_item(),
 					["<S-Tab>"] = cmp.mapping.select_prev_item(),
 					["<C-h>"] = cmp.mapping.scroll_docs(-4),
 					["<C-l>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-d>"] = cmp.mapping.close(),
-					["<C-e>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Insert,
-						select = true,
-					}),
+					["<C-d>"] = cmp.mapping.abort(),
+					["<C-e>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "copilot", group_index = 1 },
@@ -659,34 +681,18 @@ return {
 						local kind =
 							require("lspkind").cmp_format({ mode = "symbol_text", maxwidth = 50 })(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
-						kind.kind = " " .. (strings[1] or "") .. " "
+						kind.kind = "" .. (strings[1] or "") .. " "
 						kind.menu = "    (" .. (strings[2] or "") .. ")"
 
 						return kind
 					end,
 				},
-			})
-
-			-- setup filetype extends here
-			-- Set lsp keymaps
-			local ls = require("luasnip")
-			ls.config.set_config({
-				history = true,
-				updateevents = "TextChanged,TextChangedI",
-			})
-			vim.keymap.set({ "i", "s" }, "<C-k>", function()
-				ls.jump(1)
-			end, { silent = true })
-			luasnip.filetype_extend("typescript", { "javascript" })
-			luasnip.filetype_extend("svelte", { "javascript" })
+				window = {
+					completion = cmp.config.window.bordered(),
+					documentation = cmp.config.window.bordered(),
+				},
+			}
 		end,
-	},
-	{
-		"chrisgrieser/nvim-scissors",
-		dependencies = "nvim-telescope/telescope.nvim", -- if using telescope
-		opts = {
-			snippetDir = "path/to/your/snippetFolder",
-		},
 	},
 
 	-- ----------------------------------------------------------------------------
@@ -695,7 +701,6 @@ return {
 
 	{
 		"stevearc/conform.nvim",
-		tag = "v5.4.0",
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			format_on_save = {
@@ -705,7 +710,7 @@ return {
 			},
 			formatters_by_ft = {
 				lua = { "stylua" },
-				javascript = { "eslint_d", "prettier" },
+				javascript = { "prettier" },
 				typescript = { "prettier" },
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
@@ -733,7 +738,10 @@ return {
 		"mfussenegger/nvim-lint",
 		event = { "BufRead", "BufWritePre" },
 		config = function()
-			require("lint").linters_by_ft = linters_by_ft
+			require("lint").linters_by_ft = {
+				lua = { "luacheck" },
+				bzl = { "buildifier" },
+			}
 
 			vim.api.nvim_create_autocmd({ "BufWritePost", "InsertLeave" }, {
 				group = vim.api.nvim_create_augroup("lint", { clear = true }),
