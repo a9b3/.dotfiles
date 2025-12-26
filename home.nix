@@ -180,11 +180,12 @@
       pkgs.cmake
       pkgs.ninja
       pkgs.xcodes
-      pkgs.gcc
       pkgs.nil
       pkgs.cargo
       pkgs.starship
       pkgs.yazi
+      pkgs.yq
+      pkgs.libiconv
       easy-move-resize
     ] ++ (with pkgsUnstable; [
       # add packages from unstable here
