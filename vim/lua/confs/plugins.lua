@@ -1,77 +1,3 @@
--- https://neovim.io/doc/user/lsp.html
-local lspConfigs = {
-	{
-		name = "lua_ls",
-		override = {
-			settings = {
-				Lua = {
-					diagnostics = {
-						globals = { "vim" },
-					},
-				},
-			},
-		},
-	},
-	{ name = "ts_ls", override = {} },
-	{
-		name = "jsonls",
-		override = function()
-			return {
-				settings = {
-					json = {
-						validate = { enable = true },
-						schemas = require("schemastore").json.schemas(),
-					},
-				},
-			}
-		end,
-	},
-	{
-		name = "yamlls",
-		override = function()
-			return {
-				settings = {
-					yaml = {
-						validate = true,
-						schemas = require("schemastore").yaml.schemas(),
-					},
-				},
-			}
-		end,
-	},
-	{ name = "svelte", override = { settings = { svelte = { plugin = { svelte = { compilerWarnings = {} } } } } } },
-	{
-		name = "gopls",
-		override = function()
-			return {
-				cmd = { "gopls", "serve" },
-				settings = {
-					gopls = {
-						analyses = {
-							unusedparams = true,
-						},
-						staticcheck = true,
-					},
-				},
-				root_dir = require("lspconfig").util.root_pattern("go.work", "go.mod", ".git"),
-			}
-		end,
-	},
-	{
-		name = "nil_ls",
-		override = function()
-			return {
-				root_dir = require("lspconfig").util.root_pattern("flake.nix", ".git"),
-			}
-		end,
-	},
-}
-
-local masonInstalls = {}
-for _, confs in ipairs(lspConfigs) do
-	masonInstalls[#masonInstalls + 1] = confs.name
-end
-
 local linters_by_ft = {
 	javascript = { "eslint_d" },
 	typescript = { "eslint_d" },
@@ -594,62 +520,84 @@ return {
 			"williamboman/mason-lspconfig.nvim",
 		},
 		config = function()
-			local on_attach_keybindings = function(_, _)
-				vim.keymap.set(
-					"n",
-					"[d",
-					"<cmd>Lspsaga diagnostic_jump_prev<cr>",
-					{ remap = false, desc = "[lsp] Next diagnostic" }
-				)
-				vim.keymap.set(
-					"n",
-					"]d",
-					"<cmd>Lspsaga diagnostic_jump_next<cr>",
-					{ remap = false, desc = "[lsp] Previous diagnostic" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>lD",
-					vim.lsp.buf.declaration,
-					{ remap = false, desc = "[lsp] Declaration" }
-				)
-				vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", { desc = "[lsp] Code actions" })
-				vim.keymap.set("n", "<leader>lR", "<cmd>Lspsaga finder<cr>", { desc = "[lsp] Finder" })
-				vim.keymap.set(
-					"n",
-					"<leader>ld",
-					"<cmd>Lspsaga peek_definition<cr>",
-					{ desc = "[lsp] Peek definition" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>li",
-					"<cmd>Lspsaga finder imp<cr>",
-					{ desc = "[lsp] Finder implementation" }
-				)
-				vim.keymap.set(
-					"n",
-					"<leader>lt",
-					"<cmd>Lspsaga peek_type_definition<cr>",
-					{ desc = "[lsp] Peek type definition" }
-				)
-				vim.keymap.set("n", "<leader>lc", "<cmd>Lspsaga hover_doc<cr>", { desc = "[lsp] Hover doc" })
-				vim.keymap.set("n", "<leader>lo", "<cmd>Outline<cr>", { desc = "[lsp] Outline" })
-				vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", { desc = "[lsp] Rename" })
-			end
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(ev)
+					local map = function(mode, lhs, rhs, desc)
+						vim.keymap.set(mode, lhs, rhs, { buffer = ev.buf, desc = desc })
+					end
+
+					map("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", "[lsp] Prev diagnostic")
+					map("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<cr>", "[lsp] Next diagnostic")
+					map("n", "<leader>ld", "<cmd>Lspsaga peek_definition<cr>", "[lsp] Go to definition")
+					map("n", "<leader>lD", vim.lsp.buf.declaration, "[lsp] Go to declaration")
+					map("n", "<leader>lr", "<cmd>Lspsaga finder<cr>", "[lsp] References")
+					map("n", "<leader>li", "<cmd>Lspsaga finder imp<cr>", "[lsp] Implementation")
+					map("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", "[lsp] Code actions")
+					map("n", "<leader>lC", "<cmd>Lspsaga hover_doc<cr>", "[lsp] LSP hover")
+					map("n", "<leader>lR", "<cmd>Lspsaga rename<cr>", "[lsp] Rename")
+				end,
+			})
 
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-			for _, confs in ipairs(lspConfigs) do
-				local override = (type(confs.override) == "function") and confs.override() or confs.override or {}
-				vim.lsp.config(
-					confs.name,
-					vim.tbl_extend("force", override, {
-						capabilities = capabilities,
-						on_attach = on_attach_keybindings,
-					})
-				)
-				vim.lsp.enable(confs.name)
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						diagnostics = {
+							globals = { "vim" },
+							workspace = { checkThirdParty = false },
+							telemetry = { enable = false },
+						},
+					},
+				},
+			})
+			vim.lsp.config("ts_ls", { capabilities = capabilities })
+			vim.lsp.config("svelte", { capabilities = capabilities })
+
+			vim.lsp.config("gopls", {
+				capabilities = capabilities,
+				settings = {
+					gopls = {
+						gofumpt = true,
+						staticcheck = true,
+					},
+				},
+			})
+
+			-- nix
+			vim.lsp.config("nil_ls", { capabilities = capabilities })
+
+			vim.lsp.config("jsonls", {
+				capabilities = capabilities,
+				settings = {
+					json = {
+						validate = { enable = true },
+						schemas = require("schemastore").json.schemas(),
+					},
+				},
+			})
+			vim.lsp.config("yamlls", {
+				capabilities = capabilities,
+				settings = {
+					yaml = {
+						validate = true,
+						schemas = require("schemastore").yaml.schemas(),
+					},
+				},
+			})
+
+			-- Enable
+			for _, name in ipairs({
+				"lua_ls",
+				"tsserver",
+				"svelte",
+				"gopls",
+				"nil_ls",
+				"jsonls",
+				"yamlls",
+			}) do
+				vim.lsp.enable(name)
 			end
 		end,
 	},
