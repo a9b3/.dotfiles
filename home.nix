@@ -7,44 +7,44 @@
   programs.home-manager.enable = true;
   fonts.fontconfig.enable = true;
 
-  home.file.".gitconfig".source = ./confs/gitconfig;
-  home.file.".rgignore".source = ./confs/rgignore;
-  home.file.".tmux.conf".source = ./confs/tmux.conf;
-  home.file.".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
-    url = "https://github.com/superbrothers/zsh-kubectl-prompt";
-    rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
-  };
-  home.file.".config/base16-shell" = {
-    recursive = true;
-    source = pkgs.fetchFromGitHub {
-      owner = "tinted-theming";
-      repo = "base16-shell";
-      rev = "bcd9960803c39eb7af30a2db80b57ebd74073bd5";
-      sha256 = "sha256-d5llHMl6qczxFodhjfBAkrJVYsurRVf1X1Ks5wFYxd8=";
+  home.file = {
+    ".gitconfig".source = ./confs/gitconfig;
+    ".rgignore".source = ./confs/rgignore;
+    ".tmux.conf".source = ./confs/tmux.conf;
+
+    ".bin/zsh-kubectl-prompt".source = builtins.fetchGit {
+      url = "https://github.com/superbrothers/zsh-kubectl-prompt";
+      rev = "eb31775d6196d008ba2a34e5d99fb981b5b3092d";
     };
-  };
-  home.file.".tmux/plugins/tpm" = {
-    recursive = true;
-    source = pkgs.fetchFromGitHub {
-      owner = "tmux-plugins";
-      repo = "tpm";
-      rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
-      sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+    ".config/base16-shell" = {
+      recursive = true;
+      source = pkgs.fetchFromGitHub {
+        owner = "tinted-theming";
+        repo = "base16-shell";
+        rev = "bcd9960803c39eb7af30a2db80b57ebd74073bd5";
+        sha256 = "sha256-d5llHMl6qczxFodhjfBAkrJVYsurRVf1X1Ks5wFYxd8=";
+      };
+    };
+    ".tmux/plugins/tpm" = {
+      recursive = true;
+      source = pkgs.fetchFromGitHub {
+        owner = "tmux-plugins";
+        repo = "tpm";
+        rev = "99469c4a9b1ccf77fade25842dc7bafbc8ce9946";
+        sha256 = "sha256-hW8mfwB8F9ZkTQ72WQp/1fy8KL1IIYMZBtZYIwZdMQc=";
+      };
     };
   };
 
-  xdg.configFile."nvim/init.lua".source = ./vim/init.lua;
   xdg.configFile = {
+    "nvim/init.lua".source = ./vim/init.lua;
     "nvim/lua" = {
       source = ./vim/lua;
       recursive = true;
     };
-  };
-  xdg.configFile = {
-    "nvim/snippets" = {
-      source = ./vim/snippets;
-      recursive = true;
-    };
+    "nvim/snippets".source =
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.dotfiles/vim/snippets";
+
   };
 
   programs.fzf = {
@@ -123,7 +123,6 @@
     withRuby = true;
     extraPackages = with pkgs; [ fzf gcc ];
   };
-
 
   home.packages =
     let
