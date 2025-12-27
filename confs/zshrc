@@ -1,93 +1,115 @@
-DISABLE_MAGIC_FUNCTIONS=true # disable magic functions
-fpath=(~/.zsh/completion $fpath) # add custom completions
-setopt histignorespace # ignore commands that start with a space
-set -o vi
-bindkey '^H' backward-kill-word # Ctrl + Backspace (delete word)
-bindkey -e # use emacs keybindings
+DISABLE_MAGIC_FUNCTIONS=true
 
-# history setup
-setopt SHARE_HISTORY
+[[ -o interactive ]] || return
+
+# If inside tmux, import BASE16_THEME from tmux's global environment
+if [[ -n "$TMUX" ]]; then
+  local line
+  line="$(tmux show-environment -g BASE16_THEME 2>/dev/null)" || true
+  if [[ "$line" == BASE16_THEME=* ]]; then
+    export BASE16_THEME="${line#BASE16_THEME=}"
+  fi
+fi
+
+fpath=($HOME/.zsh/completion $fpath)
+
+# history
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
-HISTSIZE=999
-setopt HIST_EXPIRE_DUPS_FIRST
+HISTSIZE=1000
+setopt SHARE_HISTORY INC_APPEND_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST HIST_IGNORE_ALL_DUPS HIST_REDUCE_BLANKS
+setopt HIST_IGNORE_SPACE
+
+# keybinds
+bindkey '^[[3;5~' backward-kill-word # Ctrl+Backspace
 bindkey '^[OA' history-search-backward
 bindkey '^[OB' history-search-forward
+bindkey '^[[1;2D' backward-word
+bindkey '^[[1;2C' forward-word
 
-eval "$(fasd --init auto)" # init fasd
+# tools (guarded)
+command -v fasd >/dev/null && eval "$(fasd --init auto)"
+command -v direnv >/dev/null && eval "$(direnv hook zsh)"
 
+# aliases
 alias ls="eza -l --group-directories-first -s type --git --git-ignore"
-alias r='cd $(git rev-parse --show-toplevel)' # go to git root
+alias r='cd $(git rev-parse --show-toplevel)'
 alias g='git'
 alias k='kubectl'
-alias cat='bat'
 alias rg="rg --hidden"
 alias yt="youtube-dl"
 
-# fd is fdfind in linux `apt install fd-find`
-if [[ `uname` == "Linux" ]]; then
+if [[ "$(uname)" == "Linux" ]]; then
   alias fd='fdfind'
 fi
 
-# make dir and enter it
-function mkc() {
-  mkdir -p "$@" && cd "$@"
-}
+mkc() { mkdir -p -- "$1" && cd -- "$1"; }
 
-# fasd & fzf change directory - jump using `fasd` if given argument, filter output of `fasd` using `fzf` else
-function z() {
+zf() {
   local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+  dir="$(fasd -Rdl -- "${1-}" | fzf -1 -0 --no-sort +m)" || return 1
+  cd -- "$dir"
 }
 
-export MANPATH="/usr/local/man:$MANPATH"
-export EDITOR=$(which nvim)
+# env
+export EDITOR=nvim
 export DOCKER_BUILDKIT=1
 export GOPATH=$HOME/go
-# export FZF_DEFAULT_COMMAND="fd --type d"
-# export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export GPG_TTY=$(tty)
-export PATH=$PATH:/usr/local/go/bin # ubuntu go installation
-export PATH=$PATH:~/.local/bin # windows custom bin path
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/n/bin:$PATH"
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
-export PATH=$PATH:/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin
-export PATH="/usr/local/Cellar/gnu-getopt/1.1.6/bin":$PATH # Use gnu getopts
-export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH # nix HOME MANAGER
-export DIRENV_LOG_FORMAT="" # disable direnv logging
+export DIRENV_LOG_FORMAT=""
 
-[[ -e ~/.ssh/github_rsa ]] && ssh-add ~/.ssh/github_rsa # automatically add non default ssh keys
+typeset -U path PATH
+path=(
+  $HOME/.nix-profile/bin
+  $HOME/.nix-profile/sbin
+  $HOME/.local/bin
+  $HOME/go/bin
+  $HOME/.yarn/bin
+  $HOME/n/bin
+  $PYENV_ROOT/bin
+  $path
+)
+export PATH
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-        source "$BASE16_SHELL/profile_helper.sh"
-
+# secrets
 [[ -f ~/.dotfiles/secrets/env ]] && source ~/.dotfiles/secrets/env
 
-# NIX HOME MANAGER
-source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+# nix
+[[ -r "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]] && source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+[[ -r "$HOME/.nix-profile/etc/profile.d/nix.sh" ]] && source "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
-if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then . $HOME/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-# TODO within tmux the PATH is being configured twice by something else, I tried
-# removing all contents from zshrc and tmux.conf and it still happens. So this
-# is a workaround to fix the PATH in tmux sessions
-export PATH="$HOME/.nix-profile/bin:$HOME/.nix-profile/sbin:$PATH" # added by Nix installer
-eval "$(direnv hook zsh)"
-
-# tmux ssh session
-if [[ -n "$PS1" ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_CONNECTION" ]]; then
-  tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+# ssh-add (quiet)
+if [[ -S "$SSH_AUTH_SOCK" && -r ~/.ssh/github_rsa ]]; then
+  ssh-add ~/.ssh/github_rsa >/dev/null 2>&1
 fi
 
-# This has to be at the bottom for it to work need to figure out what is
-# overriding this if i put it in the start of the file
-bindkey '^[[1;2D' backward-word # Shift + Left Arrow (move word left)
-bindkey '^[[1;2C' forward-word # Shift + Right Arrow (move word right)
+# tmux auto-attach on SSH
+if [[ -z "$TMUX" && -n "$SSH_CONNECTION" ]]; then
+  tmux attach -t ssh_tmux || tmux new -s ssh_tmux
+fi
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell"
+if [[ -n "$PS1" && -s "$BASE16_SHELL/profile_helper.sh" ]]; then
+  source "$BASE16_SHELL/profile_helper.sh"
+fi
+
+# -- -base16-shell wrapper: export + tmux-wide refresh + refresh vim/nvim panes ---
+if typeset -f set_theme >/dev/null; then
+  functions[__base16_set_theme_orig]=$functions[set_theme]
+
+  set_theme() {
+    __base16_set_theme_orig "$@" || return $?
+
+    local theme_name="${1:-${BASE16_THEME_DEFAULT:-}}"
+    [[ -z "$theme_name" ]] && return 0
+
+    export BASE16_THEME="$theme_name"
+
+    [[ -n "$TMUX" ]] || return 0
+
+    tmux set-environment -g BASE16_THEME "$theme_name" >/dev/null 2>&1
+  }
+fi
