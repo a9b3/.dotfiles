@@ -50,4 +50,6 @@ which will in turn update all packages.
 nix flake lock --update-input nixpkgs
 # or
 nix flake lock --update-input nixpkgs-unstable
+# or
+make upgrade
 ```
