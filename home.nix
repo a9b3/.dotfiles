@@ -66,6 +66,14 @@
       ${builtins.readFile ./confs/zsh_plugin_confs}
       eval "$(starship init zsh)"
     '';
+
+    initExtra = ''
+      # Add custom completion directory and reinitialize
+      fpath=($HOME/.zsh/completion $fpath)
+      autoload -Uz compinit
+      compinit
+    '';
+
     sessionVariables = { EDITOR = "vim"; };
     oh-my-zsh = {
       enable = true;
@@ -185,6 +193,8 @@
       pkgs.yazi
       pkgs.yq
       pkgs.libiconv
+      pkgs.delta # git diff viewer
+      pkgs.tree
       easy-move-resize
     ] ++ (with pkgsUnstable; [
       # add packages from unstable here

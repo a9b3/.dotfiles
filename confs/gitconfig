@@ -28,7 +28,7 @@
   ignorecase = false
 	editor = nvim
 	excludesfile = /Users/sam/.gitignore_global
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta
 [alias]
 	co = checkout
 	st = status
@@ -41,7 +41,7 @@
   a = add
   ps = push
   r = remote -v
-	d = difftool
+	d = diff
   rim = rebase -i master
   up = !git pull --rebase --prune $@
   wip = !git fetch origin master:master && git rebase master
@@ -60,6 +60,8 @@
 	required = true
 	clean = git media clean %f
 	smudge = git media smudge %f
+[interactive]
+  diffFilter = delta --color-only
 [push]
 	default = simple
 [credential]
@@ -99,3 +101,8 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[delta]
+  navigate = true
+  side-by-side = true
+[merge]
+  conflictStyle = zdiff3
