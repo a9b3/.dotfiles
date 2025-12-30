@@ -65,9 +65,7 @@
       ${builtins.readFile ./confs/zshrc}
       ${builtins.readFile ./confs/zsh_plugin_confs}
       eval "$(starship init zsh)"
-    '';
 
-    initExtra = ''
       # Add custom completion directory and reinitialize
       fpath=($HOME/.zsh/completion $fpath)
       autoload -Uz compinit
@@ -86,7 +84,6 @@
         "node"
         "npm"
         "kubectl"
-        "bazel"
       ];
     };
     plugins = [
