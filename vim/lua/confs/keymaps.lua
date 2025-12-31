@@ -22,3 +22,13 @@ vim.keymap.set("n", "<leader><space>", ":nohlsearch<cr>", { desc = "Clear search
 vim.keymap.set("x", "p", "pgvy") -- Paste over visual selection
 -- Buffers
 vim.keymap.set("n", "<leader>to", ":%bdelete|edit#|bdelete#<CR>", { desc = "Close all other buffers" })
+
+-- Delete all buffers except current one
+vim.keymap.set("n", "<leader>bo", function()
+	local current = vim.api.nvim_get_current_buf()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if buf ~= current and vim.api.nvim_buf_is_loaded(buf) then
+			vim.api.nvim_buf_delete(buf, { force = false })
+		end
+	end
+end, { desc = "Delete other buffers" })
